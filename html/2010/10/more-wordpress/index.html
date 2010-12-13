@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"  
+    xml:lang="en" lang="en">
+  <head>
+    <title>More on Wordpress</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="content-language" content="en" />
+    <link rel="stylesheet" href="/css/1140.css" type="text/css" media="screen" />
+		<!--[if lte IE 9]>
+		<link rel="stylesheet" href="/css/ie.css" type="text/css" media="screen" />
+		<![endif]-->
+		<link rel="stylesheet" href="/css/typeimg.css" type="text/css" media="screen" />
+		<link rel="stylesheet" href="/css/smallerscreen.css" media="only screen and (max-width: 1023px)" />
+		<link rel="stylesheet" href="/css/mobile.css" media="handheld, only screen and (max-width: 767px)" />
+		<link rel="stylesheet" href="/css/layout.css" type="text/css" media="screen" />
+  </head>
+  <body>
+    <div class="container">
+			<div class="row">
+				<a href="/"><h1 class="logo">Ignored By Dinosaurs</h1></a>
+      	  <div class="post ninecol">
+  <h2>More on Wordpress</h2>
+  <p>Posted: <time>01 Oct 2010</time></p>
+  <p>This one is for my buddy, Bob.  Bob is an old school developer who has recently been baptized by the cooling waters of the web.  He's building a site in Wordpress, so I thought I'd post a few relevant pieces of info up here for him, and those of his ilk.</p><p>First of all, realize that Posts and Pages are almost the exact same thing.  The key difference between the two as far as I can tell is not that Pages are easier to add to the top-level navigation, but that Posts allow you to classify them with "Categories".  This allows Wordpress to work it's relational database magic, and in the hands of a skilled template author you can really take a very simple system and make it produce just about any listing of content that you want.  When in the early stages of developing a site, it's better to take what you'd think of as top-level content items and see if there's any way that you can make it a listing of Posts in a certain Category, rather than just dumping related info on one Page.  The chief advantages of working this way are maintenance and search-ability.</p><p>The <a href='http://codex.wordpress.org/'>Wordpress Codex</a> is a wonderfully organized place to learn a lot about authoring templates.  Most of the Wordpress core is basically just a large group of functions for talking to a database, and much of the magic of pulling the info back out in the way that you want it is in the template layer.  Thus, the <a href='http://codex.wordpress.org/Developer_Documentation'>Theme Development</a> section of the Codex is the place to spend a couple of days getting used to the way Wordpress works.</p><p>I'd suggest downloading my very <a href='http://github.com/JGrubb/Base-WP-theme'>bare bones base theme</a> and stepping through some of the template files while browsing the <a href='http://codex.wordpress.org/Template_Tags'>Template Tags function reference</a>.  It may not make sense immediately, but it won't take long.</p>
+</div>
+
+<div class="threecol last">
+	<div class="others">
+		
+	    <a href="/2010/09/my-little-ponys-first-shell-script" title="My little pony's first shell script">&larr; Previous</a>
+	  
+	  
+	    <a href="/2010/10/slightly-more-depth-wordpress" title="Slightly more in depth with Wordpress">Newer &rarr;</a>
+	  
+	</div>
+</div>
+	<div id="disqus_thread" class="sixcol"></div>
+	<script type="text/javascript">
+	    var disqus_shortname = 'ignoredbydinosaurs'; // required: replace example with your forum shortname
+
+	    // The following are highly recommended additional parameters. Remove the slashes in front to use.
+	    var disqus_identifier = '/:year/:month/:title';
+	    // var disqus_url = 'http://example.com/permalink-to-page.html';
+
+	    /* * * DON'T EDIT BELOW THIS LINE * * */
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+			</div>
+    </div>
+  </body>
+</html>
