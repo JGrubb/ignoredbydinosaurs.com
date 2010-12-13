@@ -1,0 +1,12 @@
+---
+layout: default
+title: Ignored By Dinosaurs
+description: This is my website.  Read it and weep.
+---
+
+{% for post in site.posts %}
+	<div class="post ninecol">
+		<h2><a href="{{ post.url  }}" title="Permalink">{{ post.title }}</a></h2>
+		{{ post.content }}
+	</div>
+{% endfor %}
