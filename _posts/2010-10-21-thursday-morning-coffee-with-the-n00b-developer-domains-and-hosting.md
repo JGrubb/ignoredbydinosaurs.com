@@ -3,6 +3,7 @@ layout: post
 title: Thursday morning coffee with the n00b developer - domains and hosting
 created: 1287664919
 permalink: /2010/10/thursday-morning-coffee-n00b-developer-domains-and-hosting
+disqus_id: 186617925
 ---
 <p>Welcome back to another installment of the newby web developer series.  This morning's entry comes once again from our buddy Jimmy, who the two of you reading might know as the highly technically inclined CT robo-teacher.  He'll probably be reforming the state of education in your state soon.  </p>
 

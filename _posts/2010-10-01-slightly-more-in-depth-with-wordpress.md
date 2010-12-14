@@ -4,17 +4,17 @@ title: Slightly more in depth with Wordpress
 created: 1285979149
 permalink: /2010/10/slightly-more-depth-wordpress
 ---
-<blockquote>I am having a blast.  I found a nice photo gallery Gen Next - has lots of cool features; still working on it.
+<blockquote>I am having a blast.  I found a nice photo gallery Gen Next - has lots of cool features; still working on it.<br />
 
-I do need some help:
+I do need some help:<br />
 
-1) how do I keep the 'home' page of the WP site clear of posts?  I just want to put some html text and links.  It seems to always show the latest posts.  I need to understand what is going on with that page.
+1) how do I keep the 'home' page of the WP site clear of posts?  I just want to put some html text and links.  It seems to always show the latest posts.  I need to understand what is going on with that page.<br />
 
-2) How can I order the posts within a category.  example:  For Lyrics I have category per album with a post for each song.  I need to order them in track order, it seems to always put the newest post first.  Ordering by permalink would work since I put the track number as the 1st part of the name.
+2) How can I order the posts within a category.  example:  For Lyrics I have category per album with a post for each song.  I need to order them in track order, it seems to always put the newest post first.  Ordering by permalink would work since I put the track number as the 1st part of the name.<br />
 
-3) Gotta turn off the right nav stuff - not needed.
+3) Gotta turn off the right nav stuff - not needed.<br />
 
-I tried creating a category called Lyrics and then adding sub-categories for each album.  That created the Lyrics page with all songs listed, I wanted just links to the sub-categories; plus it made the menu real ugly with all the albums listed below main menu.  I resolved this by making Lyrics a page and putting links to the 'album' categories in the html.  It seems to work fine but I am not sure if I could have done this another way.
+I tried creating a category called Lyrics and then adding sub-categories for each album.  That created the Lyrics page with all songs listed, I wanted just links to the sub-categories; plus it made the menu real ugly with all the albums listed below main menu.  I resolved this by making Lyrics a page and putting links to the 'album' categories in the html.  It seems to work fine but I am not sure if I could have done this another way.<br />
 
 also:  where do I comment out the 'add comments' stuff?
 </blockquote>

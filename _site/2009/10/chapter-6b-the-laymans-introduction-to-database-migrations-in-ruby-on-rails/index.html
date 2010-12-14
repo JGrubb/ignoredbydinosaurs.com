@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"  
+    xml:lang="en" lang="en">
+  <head>
+    <title>Chapter 6b - the layman's introduction to database migrations in Ruby on Rails | IgnoredByDinosaurs</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="content-language" content="en" />
+		<meta name="google-site-verification" content="ZW3GBpFJ0aC-Xr6n__YokO1Yy_Mba3osaM0bOfGhGVI" />
+    <link rel="stylesheet" href="/css/1140.css" type="text/css" media="screen" />
+		<!--[if lte IE 9]>
+		<link rel="stylesheet" href="/css/ie.css" type="text/css" media="screen" />
+		<![endif]-->
+		<link rel="stylesheet" href="/css/typeimg.css" type="text/css" media="screen" />
+		<link rel="stylesheet" href="/css/smallerscreen.css" media="only screen and (max-width: 1023px)" />
+		<link rel="stylesheet" href="/css/mobile.css" media="handheld, only screen and (max-width: 767px)" />
+		<link rel="stylesheet" href="/css/layout.css" type="text/css" media="screen" />
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+		<script type="text/javascript" src="http://use.typekit.com/dqg8end.js"></script>
+		<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+  <body>
+    <div class="container">
+			<div class="row">
+				<a href="/"><h1 class="logo">Ignored By Dinosaurs</h1></a>
+      		<!-- TODO
+<ul class="nav">
+	<li><a href="/about-ibd">About iBD</a></li>
+	<li><a href="/about-me">Me</a></li>
+</ul>
+-->
+  <div class="post ninecol">
+  <h2 class="post-title">Chapter 6b - the layman's introduction to database migrations in Ruby on Rails</h2>
+  <p><time>14 Oct 2009</time></p>
+  <p>This is not for programmers.  This is for myself, because when I first started poking at Rails 6 months ago, I didn't have any idea why I needed to edit a migration file, much less what a migration was, except that it must have something to do with a database.  I only knew that because of the command </p><code>$>rake db:migrate</code><pre class='markdown-html-error' style='border: solid 3px red; background-color: pink'>REXML could not parse this XML/HTML: 
+&lt;p&gt; that I was told to perform and the fact that it had the letters &quot;db&quot; in it.&lt;p&gt;
+&lt;p&gt;So here&apos;s the deal.  This morning I talked about &lt;a href=&quot;http://ignoredByDinosaurs.com/2009/10/chapter-6a-version-control/&quot;&gt;version control&lt;/a&gt; and it&apos;s place in the life cycle of your application.  What version control does is keep track of the changes that you make to your applications source code from start to finish (whenever that is).  The only problem with this is that a big chunk of the data &lt;em&gt;and&lt;/em&gt; functionality of a modern web application doesn&apos;t reside in the app&apos;s source code, it resides in the database, and nobody has invented an efficient version control system for a database yet.  Some friends of mine have tipped me off to different methods that they&apos;ve used - mostly around writing down DB schema changes into a text file that then gets placed under version control with the rest of the source.  That&apos;s not entirely efficient, though, is it?&lt;/p&gt;
+
+&lt;p&gt;Ruby on Rails has come up with a system called &quot;migrations&quot;.  Actually, someone surely came up with this way before Rails was invented, but I&apos;m new here, so feel free to correct me in the comments section down there.  Let&apos;s say you create a new rails app (This is directly from the awesome book &quot;&lt;a href=&quot;http://www.amazon.com/Agile-Web-Development-Rails-Third/dp/1934356166/ref=sr_1_1?ie=UTF8&amp;s=books&amp;qid=1255546866&amp;sr=8-1&quot;&gt;Agile Web Development with Rails&lt;/a&gt;&quot; by a bunch of smart folks, and this example is the beginning of building a shopping cart system) :&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;$&gt;rails newapp&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;This generates a load of boilerplate code which makes up the bones of any Rails app.  That means that instead of spending the first week of the development cycle sitting there writing low-level code that provides primordial programmatic structure, you can spend it writing code that actually does something that you (or your client) can interact with.  Let&apos;s keep it as simple as possible and say that you are going to have three fields that will be stored in the database to start. Rails let&apos;s you run this scaffold generating command:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;$&gt;ruby script/generate scaffold product title:string description:text image_url:string&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;This command runs a ruby script that builds a LOT of code for you, so much that you&apos;re only minutes away from tinkering around and you only started a few minutes before that.    This command creates the &quot;products model&quot;, which is how a programmer says that they are going to start by creating some place for the admin to store the products that they want to sell online.  The fields that were initially created were for the name of the product, the description, and the URL where you&apos;re storing the picture of the product.  Don&apos;t worry about it too much, but take a look at the command up there, it&apos;ll make sense if you know what a string is.  Just know that the data entered into these fields is going to get stored in a database.  Wait, how are we gonna store this stuff in our database?  Have we even created the tables for the database yet?  No.  Rails does it for us.  Here&apos;s how.&lt;/p&gt;
+
+&lt;p&gt;One of the files that is created when we run that scaffold generator is called a &quot;migration file&quot;.  This migration file is what actually creates the tables in the database, the columns in the tables, and can even populate the tables with data (used for testing), depending on what you do to the migration file.  There is a command (or method if you&apos;re OOP savvy) created when the scaffold is run called the &quot;up method&quot;.  That&apos;s the one that changes your database.  There is also a &quot;down method&quot;, which is what undoes the changes to your database.  When you run the good old &lt;code&gt;rake db:migrate&lt;/code&gt; command Rails goes applies the appropriate changes to your database for you, and provides a way to undo them later.  So, your client comes in and wants to add a Price column to the store.  In the old days, you&apos;d execute this SQL statement :&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;ALTER TABLE products ADD column price DECIMAL (8,2) NOT NULL;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Now, what if you wanted to undo that?  That&apos;s a command you ran there, not some source code that you can save and delete later if you change a few things.  You can&apos;t place SQL statements under version control.  You&apos;d have to go and type that statement into the text file that was under version control, and then hope that you could effectively backtrack to it later if you wanted.  If your application and it&apos;s database have come a ways since that command you&apos;re going to have a good time figuring out how to undo it.  Rails doesn&apos;t make you do that.  In fact, you almost never are going to talk directly to your database in Rails.  Instead, you go to the most recent migration file (which &lt;em&gt;is&lt;/em&gt; source code and thus under version control) and alter a line to look like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;add_column :products, :price, :decimal,
+:precision =&gt; 8, :scale =&gt; 2, :default =&gt; 0&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Then you run a script that alters the database for you.  Below this add column instruction, or &quot;up method&quot;, you add the remove column instruction, or &quot;down method&quot;:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;remove_column :products, :price&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;This is the undo button for your database and any schema changes along the way.  Since this command is under version control, and since you&apos;re not directly interacting with your database, and since Rails knows how and which migrations to apply and in what order if you ever want to go back to a previous version, you&apos;ve just made your life a LOT easier.  Now if you only understood what the hell you were talking about!!&lt;/p&gt;
+
+&lt;p&gt;For a vastly better explanation, &lt;a href=&quot;http://guides.rubyonrails.org/migrations.html&quot;&gt;try here&lt;/a&gt;.  Good luck.&lt;/p&gt;</pre>
+</div>
+
+<div class="threecol last">
+	<div class="others">
+		
+	    <a href="/2009/10/attention-potential-future-bloggers-world" title="Attention -  potential future bloggers of the world">Newer &rarr;</a>
+	  
+		
+	    <a href="/2009/10/chapter-6a-version-control" title="Chapter 6a - Version Control">&larr; Previous</a>
+	  
+	</div>
+</div>
+	<div id="disqus_thread" class="sixcol"></div>
+	<script type="text/javascript">
+	    var disqus_shortname = 'ignoredbydinosaurs'; // required: replace example with your forum shortname
+
+	    // The following are highly recommended additional parameters. Remove the slashes in front to use.
+	    // var disqus_identifier = '';
+	    // var disqus_url = 'http://ignoredbydinosaurs.com/2009/10/chapter-6b-the-laymans-introduction-to-database-migrations-in-ruby-on-rails';
+
+	    /* * * DON'T EDIT BELOW THIS LINE * * */
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+	<div class="tweet sixcol last"></div>
+			</div>
+    </div>
+		<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-8646459-1']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+		    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+		</script>
+  </body>
+</html>

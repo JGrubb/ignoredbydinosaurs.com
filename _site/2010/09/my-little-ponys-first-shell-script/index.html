@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"  
+    xml:lang="en" lang="en">
+  <head>
+    <title>My little pony's first shell script | IgnoredByDinosaurs</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="content-language" content="en" />
+		<meta name="google-site-verification" content="ZW3GBpFJ0aC-Xr6n__YokO1Yy_Mba3osaM0bOfGhGVI" />
+    <link rel="stylesheet" href="/css/1140.css" type="text/css" media="screen" />
+		<!--[if lte IE 9]>
+		<link rel="stylesheet" href="/css/ie.css" type="text/css" media="screen" />
+		<![endif]-->
+		<link rel="stylesheet" href="/css/typeimg.css" type="text/css" media="screen" />
+		<link rel="stylesheet" href="/css/smallerscreen.css" media="only screen and (max-width: 1023px)" />
+		<link rel="stylesheet" href="/css/mobile.css" media="handheld, only screen and (max-width: 767px)" />
+		<link rel="stylesheet" href="/css/layout.css" type="text/css" media="screen" />
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+		<script type="text/javascript" src="http://use.typekit.com/dqg8end.js"></script>
+		<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+  <body>
+    <div class="container">
+			<div class="row">
+				<a href="/"><h1 class="logo">Ignored By Dinosaurs</h1></a>
+      		<!-- TODO
+<ul class="nav">
+	<li><a href="/about-ibd">About iBD</a></li>
+	<li><a href="/about-me">Me</a></li>
+</ul>
+-->
+  <div class="post ninecol">
+  <h2 class="post-title">My little pony's first shell script</h2>
+  <p><time>29 Sep 2010</time></p>
+  <p>So I've been doing a lot of CMS work lately, both Drupal and Wordpress.  The Wordpress gigs seem to come and go within a week, and are mostly just banging together a theme with varying amounts of complexity.  I'm a recent convert to the 960.gs CSS framework, which makes the absolute quickest work of laying out a website.  It's a thing of beauty and I've actually <a href='http://github.com/JGrubb/Base-WP-theme'>created my own base theme</a> to make the work even quicker, but that's for another post.</p><p>Every one of these gigs requires the exact same setup - downloading various bits of software from all over the internet and copying them to specific places on my hard drive and then wiring them all together.  It's a time consuming and utterly repetitive process, which makes it perfect for a computer to do.  Even more perfect is that I'm already on a computer when I'm doing it!  Wow...</p><p>I'd already taken to doing much of this work from the "command line", and it only occurred to me yesterday that if I were doing the exact same series of commands from the command line every time I set one of these things up, isn't that something I could write a "script" to do for me?  For those of you - a "script" is exactly what it sounds like.  In the most basic sense all computer programs are scripts, be they <a href='http://ignoredbydinosaurs.com/2009/03/chapter1b'>compiled scripts or interpreted scripts</a>.  You must tell the computer what to do in no uncertain terms at all times for all possible scenarios.  Failure to do so is a Bad Thing.  So in this sense, I'm writing a series of terminal commands in the same order every time.  I had no idea until yesterday that it was as simple as saving those commands into a file and running that file to get what I want done.</p><p>So, about 20-30 minutes worth of downloading, copying, and renaming has been reduced to about 20-30 seconds, depending on bandwidth.  Here's the script, in case you're curious --</p><code>
+#!/bin/sh
+
+wget http://wordpress.org/latest.tar.gz<br />
+tar xzvf latest.tar.gz<br />
+rm latest.tar.gz<br />
+echo "Name of directory?"<br />
+read directory<br />
+mv wordpress $directory<br />
+cd $directory/wp-content/themes<br />
+wget http://github.com/JGrubb/Base-WP-theme/tarball/master<br />
+tar xzvf JGrubb-Base-WP-theme-0efd724.tar.gz<br />
+rm JGrubb-Base-WP-theme-0efd724.tar.gz<br />
+mv JGrubb-Base-WP-theme-0efd724 ibd<br />
+
+</code><p>Now I'm off to write a script to do the same thing for me for Drupal...</p>
+</div>
+
+<div class="threecol last">
+	<div class="others">
+		
+	    <a href="/2010/10/more-wordpress" title="More on Wordpress">Newer &rarr;</a>
+	  
+		
+	    <a href="/2010/09/keeping-it" title="Keeping it up">&larr; Previous</a>
+	  
+	</div>
+</div>
+	<div id="disqus_thread" class="sixcol"></div>
+	<script type="text/javascript">
+	    var disqus_shortname = 'ignoredbydinosaurs'; // required: replace example with your forum shortname
+
+	    // The following are highly recommended additional parameters. Remove the slashes in front to use.
+	    // var disqus_identifier = '';
+	    // var disqus_url = 'http://ignoredbydinosaurs.com/2010/09/my-little-ponys-first-shell-script';
+
+	    /* * * DON'T EDIT BELOW THIS LINE * * */
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+	<div class="tweet sixcol last"></div>
+			</div>
+    </div>
+		<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-8646459-1']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+		    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+		</script>
+  </body>
+</html>

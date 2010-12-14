@@ -2,18 +2,18 @@
 layout: default
 ---
 <div class="post ninecol">
-  <h2>{{ page.title }}</h2>
-  <p>Posted: <time>{{ page.date | date_to_string }}</time></p>
+  <h2 class="post-title">{{ page.title }}</h2>
+  <p><time>{{ page.date | date_to_string }}</time></p>
   {{ content }}
 </div>
 
 <div class="threecol last">
 	<div class="others">
+		{% if page.next %}
+	    <a href="{{ page.next.url }}" title="{{ page.next.title }}">Newer &rarr;</a>
+	  {% endif %}
 		{% if page.previous %}
 	    <a href="{{ page.previous.url }}" title="{{ page.previous.title }}">&larr; Previous</a>
-	  {% endif %}
-	  {% if page.next %}
-	    <a href="{{ page.next.url }}" title="{{ page.next.title }}">Newer &rarr;</a>
 	  {% endif %}
 	</div>
 </div>
@@ -22,8 +22,8 @@ layout: default
 	    var disqus_shortname = 'ignoredbydinosaurs'; // required: replace example with your forum shortname
 
 	    // The following are highly recommended additional parameters. Remove the slashes in front to use.
-	    var disqus_identifier = '{{ site.permalink }}';
-	    // var disqus_url = 'http://example.com/permalink-to-page.html';
+	    // var disqus_identifier = '{{ page.disqus_id }}';
+	    // var disqus_url = 'http://ignoredbydinosaurs.com{{ page.url }}';
 
 	    /* * * DON'T EDIT BELOW THIS LINE * * */
 	    (function() {
@@ -33,3 +33,4 @@ layout: default
 	    })();
 	</script>
 	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+	<div class="tweet sixcol last"></div>
