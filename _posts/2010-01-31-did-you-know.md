@@ -11,5 +11,3 @@ created: 1264955362
 
 <p>I might as well have voted for Palin...</p>
 
-<a href="http://flickr.com/photos/51035555243@N01/130601011" title="45 Fremont, #4"><img src="/sites/default/files/images/130601011_0bde5fc972.jpg" float="left" /></a>
-

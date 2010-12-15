@@ -6,7 +6,7 @@ permalink: /2009/04/stanford-iphone-class
 ---
 This was left for us earlier today in the comments:
 
-<em>You may or may not know this but Apple and Stanford are offering free iPhone development courses online</em>
+<blockquote>You may or may not know this but Apple and Stanford are offering free iPhone development courses online</blockquote>
 
 <a rel="nofollow" href="http://www.engadget.com/2009/04/03/apple-and-stanford-to-offer-free-iphone-development-courses-onli/">http://www.engadget.com/2009/04/03/apple-and-stanford-to-offer-free-iphone-development-courses-onli/</a>
 

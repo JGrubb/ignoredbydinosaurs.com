@@ -8,4 +8,4 @@ This one comes from a marketing blog called Outspoken Media.  It's a little over
 
 The spark was with the "United Breaks Guitars" tune that's been stuck in my head all day.  I'll ruin the surprise and tell you - she's not that impressed.  She has some interesting reasons why =>
 
-<p><a href="http://outspokenmedia.com/social-media/when-social-media-becomes-a-weapon/#comments">When Social Media Becomes A Weapon</a>
+<a href="http://outspokenmedia.com/social-media/when-social-media-becomes-a-weapon/#comments">When Social Media Becomes A Weapon</a>

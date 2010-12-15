@@ -7,4 +7,4 @@ permalink: /2009/11/truly-fascinating
 A glimpse into design and corporate culture, and where the two often clash.  
 
 
-<p><a href="http://dustincurtis.com/dear_american_airlines.html">Dear American Airlines | Dustin Curtis</a>
+<a href="http://dustincurtis.com/dear_american_airlines.html">Dear American Airlines | Dustin Curtis</a>

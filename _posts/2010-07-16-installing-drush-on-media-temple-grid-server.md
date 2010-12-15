@@ -11,7 +11,6 @@ created: 1279291850
 
 <p>I haven't even used it yet, but I spent the last two days figuring our how to install it, and found the answer scattered over 3 or 4 different places.  Maybe I'm the only one, but I figured I'd make it a little easier for the next guy.</p>
 
-<ol>
 <li>Make sure you <a href="http://kb.mediatemple.net/questions/16/Connecting+via+SSH+to+your+(gs)+Grid-Service">know how to use SSH</a> on your grid server account, and log in.</li>
 <li>You will now be at the command line.  You want to make sure you are in the home directory, so type:<br />
 <code>cd ~/</code></li>
@@ -40,8 +39,6 @@ Note that everything before <code>bin</code> can be replaced with <code>~/</code
 <code>alias drush='/usr/bin/php5 ~/bin/drush/drush.php'</code></li>
 <li><code>source .bash_profile</code> to reload the <code>.bash_profile</code> file.</li>
 <li>God willing, if you type in <code>drush</code> at this point you are going to get a long list of newly available commands.</li>
-
-</ol>
 
 <p>Note that this took me over a month of poking and prodding to get working correctly.  Specifically, in contrast to all the Drush installation tutorials I found out there, I had to specifically direct it to the <code>drush.php</code> file, rather than the generic <code>drush</code> wrapper file that the tutorials directed me to use when aliasing the Drush command.  As usually YMMV.</p>
 

@@ -18,7 +18,4 @@ When the day comes that someone gets the ecosystem right - meaning the proper co
 
 The record business vein is pretty well played out by many measures, but that's the nature of evolution.  I think this little announcement by Verizon is actually big news...
 
-
-
-
-<p><a href="http://feedproxy.google.com/~r/typepad/alleyinsider/silicon_alley_insider/~3/n2q4d4vQkns/fios-20-verizon-embraces-the-internet-to-push-its-tv-service-2009-8">Verizon's FiOS Stays Ahead Of Cable With More Internet Features</a>
+<a href="http://feedproxy.google.com/~r/typepad/alleyinsider/silicon_alley_insider/~3/n2q4d4vQkns/fios-20-verizon-embraces-the-internet-to-push-its-tv-service-2009-8">Verizon's FiOS Stays Ahead Of Cable With More Internet Features</a>

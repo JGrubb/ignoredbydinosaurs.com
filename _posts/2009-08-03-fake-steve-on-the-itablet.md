@@ -8,5 +8,4 @@ permalink: /2009/08/fake-steve-itablet
 
 This guy is too much.  Seriously.  Read this...
 
-
-<p><a href="http://feedproxy.google.com/~r/TheSecretDiaryOfSteveJobs/~3/1URP2VRV_Yo/itablet-my-heros-journey.html">iTablet: My hero's journey</a>
+<a href="http://feedproxy.google.com/~r/TheSecretDiaryOfSteveJobs/~3/1URP2VRV_Yo/itablet-my-heros-journey.html">iTablet: My hero's journey</a>

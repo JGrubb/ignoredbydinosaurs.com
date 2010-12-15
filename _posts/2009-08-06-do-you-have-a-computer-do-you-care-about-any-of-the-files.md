@@ -3,7 +3,7 @@ layout: post
 title: Do you have a computer?  Do you care about any of the files...
 created: 1249567241
 ---
-<p><a href="http://www.marco.org/157203227">Do you have a computer?
+<a href="http://www.marco.org/157203227">Do you have a computer?
 
 Do you care about any of the files...</a>
 

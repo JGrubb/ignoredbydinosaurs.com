@@ -12,5 +12,5 @@ In case you don't follow the tech press as closely as I do, Apple will be releas
 
 This sounds like what the iPhone's promise of a music player has been all along - crazy amounts of interaction with the content you've bought - but artists (save perhaps Trent Reznor) have been slow to get on board with realizing the potential.  Let's hope this will stir things up a bit.
 
-<p><a href="http://www.businessinsider.com/apples-cocktail-to-offer-interactive-music-albums-2009-7">Apple, Labels Aim To Save The Album With "Cocktail" Project (AAPL)</a>
+<a href="http://www.businessinsider.com/apples-cocktail-to-offer-interactive-music-albums-2009-7">Apple, Labels Aim To Save The Album With "Cocktail" Project (AAPL)</a>
 
