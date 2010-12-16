@@ -1,12 +1,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml"  
-    xml:lang="en" lang="en">
-  <head>
+<html xmlns="http://www.w3.org/1999/xhtml"  xml:lang="en" lang="en">
+<head>
     <title>This blog | IgnoredByDinosaurs</title>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <meta http-equiv="content-language" content="en" />
+		<meta name="description" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		<meta name="google-site-verification" content="ZW3GBpFJ0aC-Xr6n__YokO1Yy_Mba3osaM0bOfGhGVI" />
     <link rel="stylesheet" href="/css/1140.css" type="text/css" media="screen" />
@@ -20,12 +20,13 @@
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
 		<script type="text/javascript" src="http://use.typekit.com/dqg8end.js"></script>
 		<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-
-  <body>
-    <div class="container">
-			<div class="row">
-				<a href="/"><div class="logo">ignored By Dinosaurs</div></a>
-      			<ul class="nav twocol">
+</head>
+  <div class="container">
+	<div class="row">
+		<div class="logo">
+			<a href="/">ignored By Dinosaurs</a>
+		</div>
+			<ul class="nav twocol">
 		<li><a href="/about-ibd">About iBD</a></li>
 		<li><a href="/about-me">Me</a></li>
 		<li><a href="/archive">Archive</a></li>
@@ -35,7 +36,8 @@
 <div class="post eightcol">
   <h2 class="post-title">This blog</h2>
   <p><time>14 May 2009</time></p>
-  <p>It&#8217;s kinda difficult.  I feel bad for not really having much to say, but I&#8217;ve been pondering (probably excessively) over what direction it should really take.</p>
+	<div class="text">
+  	<p>It&#8217;s kinda difficult.  I feel bad for not really having much to say, but I&#8217;ve been pondering (probably excessively) over what direction it should really take.</p>
 
 <p>My good buddy Anders, of Greensky fame and fortune, let me know that he checks it out from time to time.  &#8221;Some of it&#8217;s really technical&#8221;, he says.  Stacy says the same thing. &#8220;but then occasionally you&#8217;ll write something&#8221; pertinent.  So, I&#8217;ve been pondering how to take it and relate it maybe to something else that makes the dryness of database theory a bit more palatable.</p>
 
@@ -44,20 +46,8 @@
 <p>A development platform, and choosing one to develop on, is sort of like deciding what style of music you want to play.  If you really like the blues, you don&#8217;t have to invent the blues.  Someone already did that and all you need to do is write some lyrics for your song, because the same 12 bar form has been there for decades now.  That could be iPhone development.  You want to build cool websites?  The AABA form has been used to great effect to write countless jazz tunes since the 20s.  All you need to do is pick a key and make up a progression.  May I suggest rhythm changes?  Ruby on Rails, well that&#8217;d probably be the blues since there&#8217;s the least amount of configuring to do before you get to the creative part.</p>
 
 <p>Make more sense?  My other buddy Jay (of Donna the Buffalo fame and fortune)  has a great analogy for database theory that I&#8217;ll get to when I have a chance.  I have way more free time on the road than at home these days.  See y&#8217;all later&#8230;</p>
-</div>
-
-<div class="twocol last">
-	<div class="others">
-		
-	    <a href="/2009/05/on-miles" title="On Miles">Newer &rarr;</a>
-	  
-		
-	    <a href="/2009/04/chapter-4-api" title="Chapter 4 - The API">&larr; Previous</a>
-	  
 	</div>
-</div>
-<a name="comments"></a>
-	<div id="disqus_thread" class="sixcol"></div>
+	<div id="disqus_thread"></div>
 	<script type="text/javascript">
 	    var disqus_shortname = 'ignoredbydinosaurs'; // required: replace example with your forum shortname
 
@@ -73,21 +63,34 @@
 	    })();
 	</script>
 	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-	<div class="tweet sixcol last"></div>
-			</div>
-    </div>
-		<script type="text/javascript">
+</div>
 
-		  var _gaq = _gaq || [];
-		  _gaq.push(['_setAccount', 'UA-8646459-1']);
-		  _gaq.push(['_trackPageview']);
+<div class="twocol last">
+	<div class="others">
+		
+	    <a href="/2009/05/on-miles" title="On Miles">Newer &rarr;</a>
+	  
+		
+	    <a href="/2009/04/chapter-4-api" title="Chapter 4 - The API">&larr; Previous</a>
+	  
+	</div>
+</div>
+		<div class="footer">
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
 
-		  (function() {
-		    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		  })();
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-8646459-1']);
+_gaq.push(['_trackPageview']);
 
-		</script>
-  </body>
+(function() {
+var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+</script>
+
 </html>

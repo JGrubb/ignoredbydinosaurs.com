@@ -1,12 +1,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml"  
-    xml:lang="en" lang="en">
-  <head>
+<html xmlns="http://www.w3.org/1999/xhtml"  xml:lang="en" lang="en">
+<head>
     <title>Chapter 6b - the layman's introduction to database migrations in Ruby on Rails | IgnoredByDinosaurs</title>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <meta http-equiv="content-language" content="en" />
+		<meta name="description" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		<meta name="google-site-verification" content="ZW3GBpFJ0aC-Xr6n__YokO1Yy_Mba3osaM0bOfGhGVI" />
     <link rel="stylesheet" href="/css/1140.css" type="text/css" media="screen" />
@@ -20,12 +20,13 @@
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
 		<script type="text/javascript" src="http://use.typekit.com/dqg8end.js"></script>
 		<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-
-  <body>
-    <div class="container">
-			<div class="row">
-				<a href="/"><div class="logo">ignored By Dinosaurs</div></a>
-      			<ul class="nav twocol">
+</head>
+  <div class="container">
+	<div class="row">
+		<div class="logo">
+			<a href="/">ignored By Dinosaurs</a>
+		</div>
+			<ul class="nav twocol">
 		<li><a href="/about-ibd">About iBD</a></li>
 		<li><a href="/about-me">Me</a></li>
 		<li><a href="/archive">Archive</a></li>
@@ -35,7 +36,8 @@
 <div class="post eightcol">
   <h2 class="post-title">Chapter 6b - the layman's introduction to database migrations in Ruby on Rails</h2>
   <p><time>14 Oct 2009</time></p>
-  <p>This is not for programmers. This is for myself, because when I first started poking at Rails 6 months ago, I didn&#8217;t have any idea why I needed to edit a migration file, much less what a migration was, except that it must have something to do with a database. I only knew that because of the command</p>
+	<div class="text">
+  	<p>This is not for programmers. This is for myself, because when I first started poking at Rails 6 months ago, I didn&#8217;t have any idea why I needed to edit a migration file, much less what a migration was, except that it must have something to do with a database. I only knew that because of the command</p>
 <code>$>rake db:migrate</code>
 <p>that I was told to perform and the fact that it had the letters &#8220;db&#8221; in it.</p>
 
@@ -59,20 +61,8 @@
 <p>For a vastly better explanation, <a href='http://guides.rubyonrails.org/migrations.html'>try here</a>.</p>
 
 <p>Good luck.</p>
-</div>
-
-<div class="twocol last">
-	<div class="others">
-		
-	    <a href="/2009/10/attention-potential-future-bloggers-world" title="Attention -  potential future bloggers of the world">Newer &rarr;</a>
-	  
-		
-	    <a href="/2009/10/chapter-6a-version-control" title="Chapter 6a - Version Control">&larr; Previous</a>
-	  
 	</div>
-</div>
-<a name="comments"></a>
-	<div id="disqus_thread" class="sixcol"></div>
+	<div id="disqus_thread"></div>
 	<script type="text/javascript">
 	    var disqus_shortname = 'ignoredbydinosaurs'; // required: replace example with your forum shortname
 
@@ -88,21 +78,34 @@
 	    })();
 	</script>
 	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-	<div class="tweet sixcol last"></div>
-			</div>
-    </div>
-		<script type="text/javascript">
+</div>
 
-		  var _gaq = _gaq || [];
-		  _gaq.push(['_setAccount', 'UA-8646459-1']);
-		  _gaq.push(['_trackPageview']);
+<div class="twocol last">
+	<div class="others">
+		
+	    <a href="/2009/10/attention-potential-future-bloggers-world" title="Attention -  potential future bloggers of the world">Newer &rarr;</a>
+	  
+		
+	    <a href="/2009/10/chapter-6a-version-control" title="Chapter 6a - Version Control">&larr; Previous</a>
+	  
+	</div>
+</div>
+		<div class="footer">
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
 
-		  (function() {
-		    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		  })();
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-8646459-1']);
+_gaq.push(['_trackPageview']);
 
-		</script>
-  </body>
+(function() {
+var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+</script>
+
 </html>

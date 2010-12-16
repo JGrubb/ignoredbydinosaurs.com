@@ -6,3 +6,5 @@ Wed Dec 15 07:46:23 EST 2010 --    **added rss feed**
 
 Thu Dec 16 08:45:28 EST 2010 --    **added robots and sitemap**
 
+Thu Dec 16 11:41:21 EST 2010 --    **bit o style**
+

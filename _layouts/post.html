@@ -4,21 +4,10 @@ layout: default
 <div class="post eightcol">
   <h2 class="post-title">{{ page.title }}</h2>
   <p><time>{{ page.date | date_to_string }}</time></p>
-  {{ content }}
-</div>
-
-<div class="twocol last">
-	<div class="others">
-		{% if page.next %}
-	    <a href="{{ page.next.url }}" title="{{ page.next.title }}">Newer &rarr;</a>
-	  {% endif %}
-		{% if page.previous %}
-	    <a href="{{ page.previous.url }}" title="{{ page.previous.title }}">&larr; Previous</a>
-	  {% endif %}
+	<div class="text">
+  	{{ content }}
 	</div>
-</div>
-<a name="comments"></a>
-	<div id="disqus_thread" class="sixcol"></div>
+	<div id="disqus_thread"></div>
 	<script type="text/javascript">
 	    var disqus_shortname = 'ignoredbydinosaurs'; // required: replace example with your forum shortname
 
@@ -34,4 +23,15 @@ layout: default
 	    })();
 	</script>
 	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-	<div class="tweet sixcol last"></div>
+</div>
+
+<div class="twocol last">
+	<div class="others">
+		{% if page.next %}
+	    <a href="{{ page.next.url }}" title="{{ page.next.title }}">Newer &rarr;</a>
+	  {% endif %}
+		{% if page.previous %}
+	    <a href="{{ page.previous.url }}" title="{{ page.previous.title }}">&larr; Previous</a>
+	  {% endif %}
+	</div>
+</div>

@@ -9,6 +9,11 @@ body {
 
 a {
 	border-bottom: none;
+	color: #88961E;
+}
+
+a:hover {
+	color:#7FAF1B;
 }
 
 time {
@@ -32,7 +37,6 @@ time {
 }
 
 .nav li a {
-	font-weight:normal;
 	display:block;
 	margin-right:5px;
 	padding:3px 5px;
@@ -56,6 +60,25 @@ time {
 
 .post-title a {
 	font-weight:normal;
+}
+
+a.morelink {
+	display:block;
+	width: 100px;
+	margin-right:5px;
+	margin-top:10px;
+	padding:3px 5px;
+	background:#eee;
+	background: -webkit-gradient(linear, left top, left bottom, from(#eee), to(#fff));
+	background: -moz-linear-gradient(top, #eee, #fff);
+	border:1px solid #ccc;
+	text-shadow: 0 1px 1px rgba(0,0,0,.3);
+		-webkit-border-radius: 3px;
+		-moz-border-radius: 3px;
+	border-radius: 3px;
+		-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+		-moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	box-shadow: 0 1px 2px rgba(0,0,0,.2);
 }
 
 .row {
@@ -84,7 +107,8 @@ code {
 	margin-bottom:30px;
 }
 
-.page .text{
+.page .text,
+.index .post .text{
 	-moz-column-count: 2;
 	-moz-column-gap: 30px;
 	-webkit-column-count: 2;
@@ -117,7 +141,8 @@ code {
 	line-height:1em;
 }
 
-.page .text {
+.page .text,
+.index .post .text {
 	-moz-column-count:1;
 	-webkit-column-count:1;
 	column-count:1;
