@@ -7,6 +7,7 @@
     <title>homebase | IgnoredByDinosaurs</title>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <meta http-equiv="content-language" content="en" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		<meta name="google-site-verification" content="ZW3GBpFJ0aC-Xr6n__YokO1Yy_Mba3osaM0bOfGhGVI" />
     <link rel="stylesheet" href="/css/1140.css" type="text/css" media="screen" />
 		<!--[if lte IE 9]>
@@ -14,7 +15,7 @@
 		<![endif]-->
 		<link rel="stylesheet" href="/css/typeimg.css" type="text/css" media="screen" />
 		<link rel="stylesheet" href="/css/smallerscreen.css" media="only screen and (max-width: 1023px)" />
-		<link rel="stylesheet" href="/css/mobile.css" media="handheld, only screen and (max-width: 767px)" />
+		<link rel="stylesheet" href="/css/mobile.css" type="text/css" media="handheld, only screen and (max-width: 767px)" />
 		<link rel="stylesheet" href="/css/layout.css" type="text/css" media="screen" />
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
 		<script type="text/javascript" src="http://use.typekit.com/dqg8end.js"></script>
@@ -23,19 +24,55 @@
   <body>
     <div class="container">
 			<div class="row">
-				<a href="/"><h1 class="logo">ignored By Dinosaurs</h1></a>
-      		<!-- TODO
-<ul class="nav">
-	<li><a href="/about-ibd">About iBD</a></li>
-	<li><a href="/about-me">Me</a></li>
-</ul>
--->
-  	
-		<div class="index-post post ninecol">
+				<a href="/"><div class="logo">ignored By Dinosaurs</div></a>
+      			<ul class="nav twocol">
+		<li><a href="/about-ibd">About iBD</a></li>
+		<li><a href="/about-me">Me</a></li>
+		<li><a href="/archive">Archive</a></li>
+		<li><a href="mailto:therealjohnnygrubb@gmail.com">Contact</a></li>
+	</ul>
+	
+<div class="ninecol">
+	
+		<div class="index-post post">
+			<h2 class="post-title"><a href="/2010/12/migrating-drupal-jekyll" title="Permalink">Migrating the blog from Drupal to Jekyll</a></h2>
+			<h2 id='reasons_for_leaving_drupal_a_preamble'>Reasons for leaving Drupal, a preamble</h2>
+
+<p>I&#8217;d had this website on Drupal since some time in July. If you look through the <a href='http://ignoredbydinosaurs.com/archive/'>archives</a>, you&#8217;ll notice a relative dearth of posts from this time period. Drupal just has a way of sucking all the fun out of blogging. It&#8217;s very, very slow for one thing. I had a lot of trouble integrating the site with the Disqus comment system that handled all of my Wordpress comments before I made the move so I was forced to use Drupal&#8217;s comment system. I&#8217;d written a couple of posts in the &#8220;didn&#8217;t find much in Google about it, so I decided to become the authoritative voice on it&#8221; vein, and had a ton of comments on one of them. Those comments appear to be gone now, even though I devoted an entire day to exporting them out of Drupal into Disqus with a <a href='http://drupal.org/node/269010' title='Migrate from Drupal comment.module to Disqus comments | drupal.org'>solution that someone came up with</a>.</p>
+
+<p>Basically, Drupal is a beast. If you have a project that you are trying to build that involves users with accounts, and different levels of access to the content based on those roles, go with Drupal. For anything else, anything simpler, stay away. Drupal gives the impression of being somehow more user friendly since you can configure these massively complex sites without actually coding much of anything, but is that really a good thing?? Drupal&#8217;s inherent dependence on <a href='http://developmentseed.org/blog/2009/jul/09/development-staging-production-workflow-problem-drupal' title='The Development -&amp;gt; Staging -&amp;gt; Production Workflow Problem in Drupal | Development Seed'>stashing so much configuration in the database</a> will be the death of the project if it&#8217;s not figured out, and I personally don&#8217;t think anything short of a MAJOR rewrite is going to sort it out. The major Drupal rewrite that&#8217;s about to drop on the world some time has taken 2 years to get even close to the door, and a rewrite that would effectively fix this particular issue would also effectively rewrite the entire philosophy of being able to build a site in the browser, arguably the whole reason for Drupal existence in the first place.</p>
+
+<p>I haven&#8217;t even gotten to the part about moving Drupal to Git. Why not put the whole thing up in GitHub? Have you heard of Rails? It&#8217;s doing pretty well, and I&#8217;d wager that a large part of the reason for that is how easy it is to dive in and contribute to open source on GitHub. I&#8217;ve never once seen it even mentioned to move Drupal to GitHub.</p>
+
+<p>anyway&#8230;</p>
+
+<h2 id='reasons_for_migrating_to_jekyll_regular_ramble'>Reasons for migrating to Jekyll, regular ramble</h2>
+
+<p>First off, it really wasn&#8217;t that hard, so skip ahead if you wish. I spent a good several hours on Github researching other sites that people had going on the platform out there. I&#8217;ve been studying a whole lot of Ruby lately, so it was down to Jekyll or a few other simple solutions. I started building a solution out of Sinatra, but decided that deployment was probably going to be more of a headache than I felt like dealing with.</p>
+
+<p>I loved the idea of a static HTML site since one of my main gripes about Drupal was how many times I could count the little page load indicator going around on Chrome. This site is blazing fast now, so yay for that.</p>
+
+<p>I love the idea that there are no security updates, no databases to backup, no crufty markup that comes from where exactly? Basically, there&#8217;s very little tradeoff. It&#8217;s mostly win. So, on to the show.</p>
+
+<h2 id='migrating_from_drupal_to_jekyll_the_meat'>Migrating from Drupal to Jekyll, the meat</h2>
+
+<p>One of the things that I didn&#8217;t understand about Jekyll was that it doesn&#8217;t really generate a site template for you (you get used to that when dealing with Ruby). You have to build that part or Jekyll won&#8217;t do anything at all. It&#8217;s easy enough to get started though, just Google or <a href='https://github.com/mojombo/jekyll/wiki/Sites'>borrow from other GitHubbers</a>. The tricky part was liberating my posts from Drupal, which was made vastly easier by <a href='https://github.com/mattdipasquale/jekyll/blob/master/lib/jekyll/migrators/drupal.rb'>this fellow having written a Drupal migrator</a> only a few weeks ago.</p>
+
+<p>I followed all of the instructions on <a href='https://github.com/mojombo/jekyll/wiki/Blog-Migrations'>this page</a> for getting the migrators to work, but kept getting an error message that ruby couldn&#8217;t find the specified file or something like that. So an hour or two of fiddling around with the migrator file in my Jekyll directory and finally changing the command to something like this -</p>
+<code>ruby -r '~/PLAY/jekyll/_import/drupal' -e 'Jekyll::Drupal.process( "#{ENV["DB"]}", "#{ENV["USER"]}", "#{ENV["PASS"]}")'</code>
+<p>where <code>~/PLAY/jekyll</code> is the root of my jekyll install in order to get ruby to read the migrator file that was there instead of trying to find one that wasn&#8217;t. I&#8217;m sure the instructions will work fine for someone who knows more than me, but hey it worked.</p>
+
+<h2 id='to_give_back_unto_the_community'>to give back unto the community&#8230;</h2>
+
+<p>TODO - add a bit into the Drupal migrator that also liberates the URL aliases from the DB, as the author of the current migrator apparently used the stock Drupal URL scheme (node/*). Jekyll has an easy facility for setting the permalinks for your posts, but going through every post to make sure they were right was needlessly tedious in hindsight.</p>
+			<a href="/2010/12/migrating-drupal-jekyll">Comments? &rarr;</a>
+		</div>
+	
+		<div class="index-post post">
 			<h2 class="post-title"><a href="/2010/12/ibd-version-5-and-the-countdown" title="Permalink">ibd Version 5.0, and top 5 bass influences.</a></h2>
 			<p>Well, here we are. It was a tortuous migration, but IgnoredByDinosaurs (the blog) has reached version 5. I think it&#8217;s version 5, let&#8217;s see there was Blogger, then WP, then Drupal, then back to WP, then back to Drupal, and now this bad boy, so I guess you would call this one 6.0.</p>
 
-<p>This blog is now run by a system called <a href='https://github.com/mojombo/jekyll'>Jekyll</a>, a &#8220;site generator&#8221; that&#8217;s written in Ruby. What it does is take a bunch of text posts and runs them through a couple of different templates and spits out a full site of static HTML, since that&#8217;s mostly what a blog is anyway. It&#8217;s a <a href='/2009/03/chapter1b/'>compiler</a> for your website. No webforms, no databases, no security updates. Just plain old HTML, like back in the good old days, but less hassle and more fun! I would have stayed with Drupal but honestly, it was just way too slow. This being just HMTL, without 119 database tables being joined by 200 different queries to display a blog post will be about a thousand times faster (literally).</p>
+<p>This blog is now run by a system called <a href='https://github.com/mojombo/jekyll'>Jekyll</a>, a &#8220;site generator&#8221; that&#8217;s written in Ruby. What it does is take a bunch of text posts and runs them through a couple of different templates and spits out a full site of static HTML, since that&#8217;s mostly what a blog is anyway. It&#8217;s a <a href='http://ignoredbydinosaurs.com/2009/03/chapter1b/'>compiler</a> for your website. No webforms, no databases, no security updates. Just plain old HTML, like back in the good old days, but less hassle and more fun! I would have stayed with Drupal but honestly, it was just way too slow. This being just HMTL, without 119 database tables being joined by 200 different queries to display a blog post will be about a thousand times faster (literally).</p>
 
 <p>So anyway&#8230;</p>
 
@@ -53,22 +90,22 @@
 
 <p>It&#8217;s so nice to write. Thanks for reading.</p>
 <object height='505' width='640'><param name='movie' value='http://www.youtube.com/v/6O9zMnwD65Q?fs=1&amp;hl=en_US' /><param name='allowFullScreen' value='true' /><param name='allowscriptaccess' value='always' /><embed src='http://www.youtube.com/v/6O9zMnwD65Q?fs=1&amp;hl=en_US' allowfullscreen='true' type='application/x-shockwave-flash' allowscriptaccess='always' height='505' width='640' /></object>
-			<a href="/2010/12/ibd-version-5-and-the-countdown#comments">Comments? &rarr;</a>
+			<a href="/2010/12/ibd-version-5-and-the-countdown">Comments? &rarr;</a>
 		</div>
 	
-		<div class="index-post post ninecol">
+		<div class="index-post post">
 			<h2 class="post-title"><a href="/2010/11/step-1-text-editor" title="Permalink">Step 1 - text editor</a></h2>
 			<p>May I suggest you download this book -- <a href='http://learnpythonthehardway.com/index'>Learn Python the Hard Way</a>?  It's got instructions in the very first bit about getting a decent, free text editor installed.  TextEdit that comes with the Mac leaves quite a bit to be desired, and though I haven't personally checked out <a href='http://projects.gnome.org/gedit/'>GEdit</a>, I'm sure it's a step up.  Of course if you think you might want to get serious about this, or if you get serious about this down the line, may I suggest dropping $60 on <a href='http://macromates.com/'>TextMate</a>?  I know it's kind of a lot of money, but if you get into this stuff, it's worth it.</p><p>May I also suggest that you go through the first few exercises?  It's fun to make your computer do things, however rudimentary, and doing them in the babystep fashion that this has you do eases you into programming geekery like the command line.  It trains your fingers, it trains your eyes.  It's like that part in Rocky 4 where he goes to Siberia to toughen up against Drago.</p><p>Back soon.  Cheers.</p>
-			<a href="/2010/11/step-1-text-editor#comments">Comments? &rarr;</a>
+			<a href="/2010/11/step-1-text-editor">Comments? &rarr;</a>
 		</div>
 	
-		<div class="index-post post ninecol">
+		<div class="index-post post">
 			<h2 class="post-title"><a href="/2010/11/lets-try-something" title="Permalink">Let's try something.</a></h2>
 			<p>Does anybody here want to build something?  My buddy Jimmy of This Blog fame laid an idea on me the other night.  He's a teacher, and a fairly progressive, observant one at that.  I believe him when he says that there's nothing out there like this kinda simple, cool idea that he had.  I think it must exist somewhere but it's not being properly promoted if it does.  So, I thought maybe it'd be a cool idea to try and teach him a little something about web development, and teach myself a lot in the process.  There's no way that this idea of his is currently within my grasp since a big part of the concept is an iOS app, but I don't think the overall idea is really that far outside the realm of possibility.  It's going to need a web backend to it, anyway.  So let's see.  Where to start?</p><p>I think we'll build it in Rails since I've learned enough about programming to know that I prefer Ruby as a language to PHP.  I think this idea could easily be done in Drupal (a large, flexible content management system that's built in PHP) as well, but for some reason the aesthetic of building the solution you need and no more is really appealing to me.  Drupal takes care of a LOT of the stuff that we're going to need to do upfront, things like user authentication (accounts) and interacting with a variety of different protocols - essential if the app phase is ever going to work.  Drupal and Rails are both just pieces of software that run databases for you, but the difference is sorta like the difference between buying a really good loaf of bread and baking a really good loaf of bread.  It doesn't make you any less of a chef to serve the store bought loaf to your guests, but if you have the time and you know how to bake a good loaf (or if it's just something you want to get good at), you're going to prefer that route.</p><p>Step one is getting Rails installed on your computer which, if you bought a Mac is made significantly easier.  We'll do that next.</p>
-			<a href="/2010/11/lets-try-something#comments">Comments? &rarr;</a>
+			<a href="/2010/11/lets-try-something">Comments? &rarr;</a>
 		</div>
 	
-		<div class="index-post post ninecol">
+		<div class="index-post post">
 			<h2 class="post-title"><a href="/2010/10/thursday-morning-coffee-n00b-developer-domains-and-hosting" title="Permalink">Thursday morning coffee with the n00b developer - domains and hosting</a></h2>
 			<p>Welcome back to another installment of the newby web developer series.  This morning's entry comes once again from our buddy Jimmy, who the two of you reading might know as the highly technically inclined CT robo-teacher.  He'll probably be reforming the state of education in your state soon.  </p><blockquote>What's up fool.
 
@@ -78,15 +115,10 @@ My question is, once I build the site using MAMP, and get everything upload to o
 
 Thanks,
 Jimmy</blockquote><p>Calling me a fool is his way of showing affection.  So, the answer is that "it depends".  If your buddy went the "get your domain free with a year's webhosting" route that many larger webhosts encourage you to do, then you don't have to do anything.  If your buddy bought the domain on the open market through a registrar such as GoDaddy, you have to dive into the scary, subterranean world of DNS.</p><p>DNS stands for Domain Name System.  A perhaps less-than-100%-accurate description --</p><p>When you buy a domain name, it's sort of like buying a spot in the world's internet phone book.  That is to say that the address <a href='http://johnnygrubb.com/'>http://johnnygrubb.com</a> is actually an "abstraction" of the information that a computer needs to complete your browser's request to get my webpage to come up.  What my computer needs to know is the IP address of the server where http://johnnygrubb.com lives.  The Domain Name System does that for you.</p><p>If you need to look up the phone number of Newtown Chinese Restaurant in Newton, you go to the phone book, look for Newtown Chinese Restaurant and move your eye to the right to get the phone number.  If you want to go to any website, you enter the address in your browser, which takes the request and hits the nearest DNS server to find the actual IP address of the webhost so the requested page can be grabbed.  It's the job of the owner of the domain name to make sure that the "phone number" or IP address is correct.</p><p>If you've bought your domain name as part of a package, then you don't need to do anything.  The webhost actually owns the domain name and is letting you use it.  This has pros and cons obviously, the pros being that they handle all of this DNS stuff for you.</p><p>If you've bought the domain name separately, you need to give that name a "phone number" so that DNS knows who to call when you request a page from that site.  That's done by getting deep into your Domain Control Panel (or something like depending on the registrar) and and finding the "Nameserver" controls.  This is where you give your domain name an address.  It's usually in an english readable form, for instance, one of the nameservers for my hosting account is <code>ns1.mediatemple.com</code>.  That means that when a request is made for a page on this site, DNS says "don't look at me, go talk to Media Temple's nameservers.  They know where to find that page."  Once the request gets to Media Temple, their nameservers say "the page you seek is at 64.207.129.18", which is the IP address of the actual server on which this site is plopped.</p><p>So, to extend the analogy a little further, a DNS lookup is actually more like that movie where the kids are trying to find the super-cool party, only to get to the party they have to drive all over town from one destination to the next before they are finally given the actual address.  For real fun, type this is your Terminal --</p><code>traceroute http://ignoredbydinosaurs.com</code><p>This command will show you all of the different "nodes" out there on the web that your request hits before it actually arrives at it's destination, my webhost.</p><p>So, the tl;dr is that if he bought the domain name through a webhost as part of a hosting package, you don't need to do anything.  If he bought the domain name on it's own, you need to go to the Domain Control Panel or the Domain Manager or whatever it's called where it was registered.  In there somewhere is a setting for the nameservers.  On the webhost's end, you'll find what their nameservers are (usually something like ns1.awesomewebhost.com and ns2.awesomewebhost.com) and put that information into the proper fields on the registrar end.  There's always at least 2 nameservers at every host because like all servers, they can go down and if they both go down your site will be unavailable.  It happens.</p><p>Changing nameserver information is like firing an MX missile.  There is no "undo".  There is no recalling the missile.  Once you push the button to change the nameservers, that change of address starts filtering out to the rest of the world's DNS servers so that the request can be sent to the proper IP address.  This filtering-out process can take anywhere from a few hours to a few days, depending.  Once it's done, the whole world will be pointed to the party on your server.</p>
-			<a href="/2010/10/thursday-morning-coffee-n00b-developer-domains-and-hosting#comments">Comments? &rarr;</a>
+			<a href="/2010/10/thursday-morning-coffee-n00b-developer-domains-and-hosting">Comments? &rarr;</a>
 		</div>
 	
-		<div class="index-post post ninecol">
-			<h2 class="post-title"><a href="/2010/10/random-idea" title="Permalink">Random idea</a></h2>
-			<p>My vet just recently joined the 21st century and moved all of their records from big, brown paper files to a computer system.  Her husband is an IT guy so he did the research and picked out all the computers, networked them together and set up this software system for the office.  It looked like a pretty big job to migrate all of their client records to a computer system, but hey, the avoided it long enough, right?</p><p>I don't know why I just thought of this, but about a web app that manages all of that stuff?  Clients, their pets, their pets' histories, etc.  Then I thought, well, that's kinda ballsy for a vet's office to let a web service store data like that, and what if you want to move, etc.  Well, okay, how about some kind of export API etc.  Then I thought, well what about hosting the database at the client end...</p><p>Would this be a case for something like CouchDB or MongoDB?  A local datastore, and I would provide the processing and the upkeep?  I dunno.  I'm gonna sleep on it.  Sounds like a fun little project in any case...</p>
-			<a href="/2010/10/random-idea#comments">Comments? &rarr;</a>
-		</div>
-	
+</div>
 			</div>
     </div>
 		<script type="text/javascript">

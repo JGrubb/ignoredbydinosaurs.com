@@ -1,13 +1,13 @@
 ---
 layout: default
 ---
-<div class="post ninecol">
+<div class="post eightcol">
   <h2 class="post-title">{{ page.title }}</h2>
   <p><time>{{ page.date | date_to_string }}</time></p>
   {{ content }}
 </div>
 
-<div class="threecol last">
+<div class="twocol last">
 	<div class="others">
 		{% if page.next %}
 	    <a href="{{ page.next.url }}" title="{{ page.next.title }}">Newer &rarr;</a>

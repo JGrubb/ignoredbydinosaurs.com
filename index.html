@@ -4,10 +4,12 @@ title: homebase
 description: This is my website.  Read it and weep.
 ---
 
+<div class="ninecol">
 	{% for post in site.posts limit:5 %}
-		<div class="index-post post ninecol">
+		<div class="index-post post">
 			<h2 class="post-title"><a href="{{ post.url  }}" title="Permalink">{{ post.title }}</a></h2>
 			{{ post.content }}
-			<a href="{{ post.url }}#comments">Comments? &rarr;</a>
+			<a href="{{ post.url }}">Comments? &rarr;</a>
 		</div>
 	{% endfor %}
+</div>

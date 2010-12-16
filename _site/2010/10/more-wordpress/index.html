@@ -7,6 +7,7 @@
     <title>More on Wordpress | IgnoredByDinosaurs</title>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <meta http-equiv="content-language" content="en" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		<meta name="google-site-verification" content="ZW3GBpFJ0aC-Xr6n__YokO1Yy_Mba3osaM0bOfGhGVI" />
     <link rel="stylesheet" href="/css/1140.css" type="text/css" media="screen" />
 		<!--[if lte IE 9]>
@@ -14,7 +15,7 @@
 		<![endif]-->
 		<link rel="stylesheet" href="/css/typeimg.css" type="text/css" media="screen" />
 		<link rel="stylesheet" href="/css/smallerscreen.css" media="only screen and (max-width: 1023px)" />
-		<link rel="stylesheet" href="/css/mobile.css" media="handheld, only screen and (max-width: 767px)" />
+		<link rel="stylesheet" href="/css/mobile.css" type="text/css" media="handheld, only screen and (max-width: 767px)" />
 		<link rel="stylesheet" href="/css/layout.css" type="text/css" media="screen" />
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
 		<script type="text/javascript" src="http://use.typekit.com/dqg8end.js"></script>
@@ -23,20 +24,21 @@
   <body>
     <div class="container">
 			<div class="row">
-				<a href="/"><h1 class="logo">ignored By Dinosaurs</h1></a>
-      		<!-- TODO
-<ul class="nav">
-	<li><a href="/about-ibd">About iBD</a></li>
-	<li><a href="/about-me">Me</a></li>
-</ul>
--->
-  <div class="post ninecol">
+				<a href="/"><div class="logo">ignored By Dinosaurs</div></a>
+      			<ul class="nav twocol">
+		<li><a href="/about-ibd">About iBD</a></li>
+		<li><a href="/about-me">Me</a></li>
+		<li><a href="/archive">Archive</a></li>
+		<li><a href="mailto:therealjohnnygrubb@gmail.com">Contact</a></li>
+	</ul>
+	
+<div class="post eightcol">
   <h2 class="post-title">More on Wordpress</h2>
   <p><time>01 Oct 2010</time></p>
   <p>This one is for my buddy, Bob.  Bob is an old school developer who has recently been baptized by the cooling waters of the web.  He's building a site in Wordpress, so I thought I'd post a few relevant pieces of info up here for him, and those of his ilk.</p><p>First of all, realize that Posts and Pages are almost the exact same thing.  The key difference between the two as far as I can tell is not that Pages are easier to add to the top-level navigation, but that Posts allow you to classify them with "Categories".  This allows Wordpress to work it's relational database magic, and in the hands of a skilled template author you can really take a very simple system and make it produce just about any listing of content that you want.  When in the early stages of developing a site, it's better to take what you'd think of as top-level content items and see if there's any way that you can make it a listing of Posts in a certain Category, rather than just dumping related info on one Page.  The chief advantages of working this way are maintenance and search-ability.</p><p>The <a href='http://codex.wordpress.org/'>Wordpress Codex</a> is a wonderfully organized place to learn a lot about authoring templates.  Most of the Wordpress core is basically just a large group of functions for talking to a database, and much of the magic of pulling the info back out in the way that you want it is in the template layer.  Thus, the <a href='http://codex.wordpress.org/Developer_Documentation'>Theme Development</a> section of the Codex is the place to spend a couple of days getting used to the way Wordpress works.</p><p>I'd suggest downloading my very <a href='http://github.com/JGrubb/Base-WP-theme'>bare bones base theme</a> and stepping through some of the template files while browsing the <a href='http://codex.wordpress.org/Template_Tags'>Template Tags function reference</a>.  It may not make sense immediately, but it won't take long.</p>
 </div>
 
-<div class="threecol last">
+<div class="twocol last">
 	<div class="others">
 		
 	    <a href="/2010/10/slightly-more-depth-wordpress" title="Slightly more in depth with Wordpress">Newer &rarr;</a>
