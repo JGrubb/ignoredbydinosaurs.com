@@ -3,7 +3,7 @@ layout: post
 title: Apparent risk and actual risk
 created: 1255361094
 ---
-<p><a href="http://feedproxy.google.com/~r/typepad/sethsmainblog/~3/wc4LJQkWDWA/apparent-risk-and-actual-risk.html">Apparent risk and actual risk</a>: "There are people who I will never encounter in a restaurant.
+<a href="http://feedproxy.google.com/~r/typepad/sethsmainblog/~3/wc4LJQkWDWA/apparent-risk-and-actual-risk.html">Apparent risk and actual risk</a>: "There are people who I will never encounter in a restaurant.
 
 That's because when these people go out for dinner, they go to chain restaurants. These are the tourists in New York who seek out the familiar Olive Garden instead of walking down the street to Pure.
 
@@ -19,6 +19,6 @@ Apparent risk is what gets someone who is afraid of plane crashes to drive, even
 
 Apparent risk is avoiding the chance that people will laugh at you and instead backing yourself into the very real possibility that you're going to become obsolete or irrelevant.
 
-When things get interesting is when the apparently risky is demonstrably safer than the actually risky. That's when we sometimes become uncomfortable enough with our reliance on the apparent to focus on the actual. Think about that the next time they make you take off your shoes at the airport."</p>
+When things get interesting is when the apparently risky is demonstrably safer than the actually risky. That's when we sometimes become uncomfortable enough with our reliance on the apparent to focus on the actual. Think about that the next time they make you take off your shoes at the airport."
 
-<p>(Via <a href="http://sethgodin.typepad.com/seths_blog/">Seth's Blog</a>.)</p>
+(Via <a href="http://sethgodin.typepad.com/seths_blog/">Seth's Blog</a>.)

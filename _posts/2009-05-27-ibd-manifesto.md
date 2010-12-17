@@ -3,10 +3,10 @@ layout: post
 title: ibD Manifesto
 created: 1243422824
 ---
-<p class="note">Disclaimer(s) : I will me using the terms "we" and "us" and "our" to refer alternately to my band <a href="railroadearth.com">Railroad Earth</a>, and to my colleagues in the jamband scene without differentiating every time which I'm talking about. You'll just have to figure it out. Hope it's not too confusing.</p>
+<p class="note">Disclaimer(s) : I will me using the terms "we" and "us" and "our" to refer alternately to my band <a href="railroadearth.com">Railroad Earth</a>, and to my colleagues in the jamband scene without differentiating every time which I'm talking about. You'll just have to figure it out. Hope it's not too confusing.
 
 This began as an email to a Rails developer that I'd been conversing with. He brought up the Digg Trent Reznor interview. After the first bit my response became more like a blog post. So I'm posting.
-<p style="text-align: center;">----------------------------</p>
+<p style="text-align: center;">----------------------------
 
 <span class="drop_cap">I</span> think the deal is that noone has come up with a solution that actually benefits the artist that the fans actually appreciate enough to pay for. Trent failed because everyone assumes he's already rich, so why bother. Plus he's trying to sell new music, which people just don't want to pay for anymore. Every record label is failing because nobody trusts record label executives and the stuff they're selling sucks anyway. It's scientifically designed to be disposable, so who's gonna pay for it? The only way forward is to start some kind of populist movement, but most semi-successful musicians just don't have the network or the wherewithal or the motivation or the ideas. I actually <a href="http://ignoredbydinosaurs.com/?p=147">linked to that Trent interview</a> when it came out, because I do think he's way ahead of alot of other people that high up in the biz, but he's just trying to sell music with nothing else attached to it. Yeah, the iPhone app is cool, but it still feels kinda piecemeal to me, since he's basically working a brand that's already 20 years old and trying to adapt.
 

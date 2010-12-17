@@ -8,3 +8,5 @@ Thu Dec 16 08:45:28 EST 2010 --    **added robots and sitemap**
 
 Thu Dec 16 11:41:21 EST 2010 --    **bit o style**
 
+Fri Dec 17 11:42:53 EST 2010 --    **adding html directory.  trying git deploy**
+

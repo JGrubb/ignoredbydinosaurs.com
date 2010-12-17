@@ -124,4 +124,4 @@ Jason
 
 
 
-<p>(Via <a href="http://calacanis.com">The Jason Calacanis Weblog</a>.)</p>
+(Via <a href="http://calacanis.com">The Jason Calacanis Weblog</a>.)

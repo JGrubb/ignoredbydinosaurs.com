@@ -16,4 +16,4 @@ from "<a href="http://gettingreal.37signals.com/ch06_Race_to_Running_Software.ph
 -via <a href="http://www.37signals.com/">37 Signals</a>
 <br />
 
-<p>And on that note, this blog is going away soon.  I'm going to be needing this space for something else.</p>
+And on that note, this blog is going away soon.  I'm going to be needing this space for something else.

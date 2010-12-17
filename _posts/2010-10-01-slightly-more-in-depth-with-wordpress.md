@@ -19,7 +19,7 @@ I tried creating a category called Lyrics and then adding sub-categories for eac
 also:  where do I comment out the 'add comments' stuff?
 </blockquote>
 
-<p>Alright, in order --</p>
+Alright, in order --
 
 <ol>
 <li>Go to Settings -> Reading and set the top option to display a static page as the home page.  You'll have a list of options for which static page you want.</li>

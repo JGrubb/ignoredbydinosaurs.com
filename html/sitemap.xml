@@ -11,6 +11,13 @@
 	</url>
 	
 	<url>
+		<loc>http://ignoredbydinosaurs.com/2010/12/bass-countdown-number-4</loc>
+		<lastmod>2010-12-17</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+	
+	<url>
 		<loc>http://ignoredbydinosaurs.com/2010/12/migrating-drupal-jekyll</loc>
 		<lastmod>2010-12-15</lastmod>
 		<changefreq>monthly</changefreq>
