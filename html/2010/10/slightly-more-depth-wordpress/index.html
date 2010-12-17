@@ -1,39 +1,53 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml"  
-    xml:lang="en" lang="en">
-  <head>
-    <title>Slightly more in depth with Wordpress</title>
+<html xmlns="http://www.w3.org/1999/xhtml"  xml:lang="en" lang="en">
+<head>
+    <title>Slightly more in depth with Wordpress | IgnoredByDinosaurs</title>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <meta http-equiv="content-language" content="en" />
+		<meta name="description" content="" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<meta name="google-site-verification" content="ZW3GBpFJ0aC-Xr6n__YokO1Yy_Mba3osaM0bOfGhGVI" />
     <link rel="stylesheet" href="/css/1140.css" type="text/css" media="screen" />
 		<!--[if lte IE 9]>
 		<link rel="stylesheet" href="/css/ie.css" type="text/css" media="screen" />
 		<![endif]-->
 		<link rel="stylesheet" href="/css/typeimg.css" type="text/css" media="screen" />
 		<link rel="stylesheet" href="/css/smallerscreen.css" media="only screen and (max-width: 1023px)" />
-		<link rel="stylesheet" href="/css/mobile.css" media="handheld, only screen and (max-width: 767px)" />
+		<link rel="stylesheet" href="/css/mobile.css" type="text/css" media="handheld, only screen and (max-width: 767px)" />
 		<link rel="stylesheet" href="/css/layout.css" type="text/css" media="screen" />
-  </head>
-  <body>
-    <div class="container">
-			<div class="row">
-				<a href="/"><h1 class="logo">Ignored By Dinosaurs</h1></a>
-      	  <div class="post ninecol">
-  <h2>Slightly more in depth with Wordpress</h2>
-  <p>Posted: <time>01 Oct 2010</time></p>
-  <blockquote>I am having a blast.  I found a nice photo gallery Gen Next - has lots of cool features; still working on it.
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+		<script type="text/javascript" src="http://use.typekit.com/dqg8end.js"></script>
+		<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+</head>
+  <div class="container">
+	<div class="row">
+		<div class="logo">
+			<a href="/">ignored By Dinosaurs</a>
+		</div>
+			<ul class="nav twocol">
+		<li><a href="/about-ibd">About iBD</a></li>
+		<li><a href="/about-me">Me</a></li>
+		<li><a href="/archive">Archive</a></li>
+		<li><a href="mailto:therealjohnnygrubb@gmail.com">Contact</a></li>
+	</ul>
+	
+<div class="post eightcol">
+  <h2 class="post-title">Slightly more in depth with Wordpress</h2>
+  <p><time>01 Oct 2010</time></p>
+	<div class="text">
+  	<blockquote>I am having a blast.  I found a nice photo gallery Gen Next - has lots of cool features; still working on it.<br />
 
-I do need some help:
+I do need some help:<br />
 
-1) how do I keep the 'home' page of the WP site clear of posts?  I just want to put some html text and links.  It seems to always show the latest posts.  I need to understand what is going on with that page.
+1) how do I keep the 'home' page of the WP site clear of posts?  I just want to put some html text and links.  It seems to always show the latest posts.  I need to understand what is going on with that page.<br />
 
-2) How can I order the posts within a category.  example:  For Lyrics I have category per album with a post for each song.  I need to order them in track order, it seems to always put the newest post first.  Ordering by permalink would work since I put the track number as the 1st part of the name.
+2) How can I order the posts within a category.  example:  For Lyrics I have category per album with a post for each song.  I need to order them in track order, it seems to always put the newest post first.  Ordering by permalink would work since I put the track number as the 1st part of the name.<br />
 
-3) Gotta turn off the right nav stuff - not needed.
+3) Gotta turn off the right nav stuff - not needed.<br />
 
-I tried creating a category called Lyrics and then adding sub-categories for each album.  That created the Lyrics page with all songs listed, I wanted just links to the sub-categories; plus it made the menu real ugly with all the albums listed below main menu.  I resolved this by making Lyrics a page and putting links to the 'album' categories in the html.  It seems to work fine but I am not sure if I could have done this another way.
+I tried creating a category called Lyrics and then adding sub-categories for each album.  That created the Lyrics page with all songs listed, I wanted just links to the sub-categories; plus it made the menu real ugly with all the albums listed below main menu.  I resolved this by making Lyrics a page and putting links to the 'album' categories in the html.  It seems to work fine but I am not sure if I could have done this another way.<br />
 
 also:  where do I comment out the 'add comments' stuff?
 </blockquote><p>Alright, in order --</p><ol>
@@ -53,25 +67,14 @@ also:  where do I comment out the 'add comments' stuff?
 <code>&lt;?php //comments_template( '', true ); ?&gt;</code><br />
 and your comments will be gone.</li>
 </ol>
-</div>
-
-<div class="threecol last">
-	<div class="others">
-		
-	    <a href="/2010/10/more-wordpress" title="More on Wordpress">&larr; Previous</a>
-	  
-	  
-	    <a href="/2010/10/random-idea" title="Random idea">Newer &rarr;</a>
-	  
 	</div>
-</div>
-	<div id="disqus_thread" class="sixcol"></div>
+	<div id="disqus_thread"></div>
 	<script type="text/javascript">
 	    var disqus_shortname = 'ignoredbydinosaurs'; // required: replace example with your forum shortname
 
 	    // The following are highly recommended additional parameters. Remove the slashes in front to use.
-	    var disqus_identifier = '/:year/:month/:title';
-	    // var disqus_url = 'http://example.com/permalink-to-page.html';
+	    // var disqus_identifier = '';
+	    // var disqus_url = 'http://ignoredbydinosaurs.com/2010/10/slightly-more-depth-wordpress';
 
 	    /* * * DON'T EDIT BELOW THIS LINE * * */
 	    (function() {
@@ -81,8 +84,34 @@ and your comments will be gone.</li>
 	    })();
 	</script>
 	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
 
-			</div>
-    </div>
-  </body>
+<div class="twocol last">
+	<div class="others">
+		
+	    <a href="/2010/10/random-idea" title="Random idea">Newer &rarr;</a>
+	  
+		
+	    <a href="/2010/10/more-wordpress" title="More on Wordpress">&larr; Previous</a>
+	  
+	</div>
+</div>
+		<div class="footer">
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-8646459-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+</script>
+
 </html>

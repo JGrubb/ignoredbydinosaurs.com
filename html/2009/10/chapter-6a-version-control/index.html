@@ -1,48 +1,51 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml"  
-    xml:lang="en" lang="en">
-  <head>
-    <title>Chapter 6a - Version Control</title>
+<html xmlns="http://www.w3.org/1999/xhtml"  xml:lang="en" lang="en">
+<head>
+    <title>Chapter 6a - Version Control | IgnoredByDinosaurs</title>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <meta http-equiv="content-language" content="en" />
+		<meta name="description" content="" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<meta name="google-site-verification" content="ZW3GBpFJ0aC-Xr6n__YokO1Yy_Mba3osaM0bOfGhGVI" />
     <link rel="stylesheet" href="/css/1140.css" type="text/css" media="screen" />
 		<!--[if lte IE 9]>
 		<link rel="stylesheet" href="/css/ie.css" type="text/css" media="screen" />
 		<![endif]-->
 		<link rel="stylesheet" href="/css/typeimg.css" type="text/css" media="screen" />
 		<link rel="stylesheet" href="/css/smallerscreen.css" media="only screen and (max-width: 1023px)" />
-		<link rel="stylesheet" href="/css/mobile.css" media="handheld, only screen and (max-width: 767px)" />
+		<link rel="stylesheet" href="/css/mobile.css" type="text/css" media="handheld, only screen and (max-width: 767px)" />
 		<link rel="stylesheet" href="/css/layout.css" type="text/css" media="screen" />
-  </head>
-  <body>
-    <div class="container">
-			<div class="row">
-				<a href="/"><h1 class="logo">Ignored By Dinosaurs</h1></a>
-      	  <div class="post ninecol">
-  <h2>Chapter 6a - Version Control</h2>
-  <p>Posted: <time>14 Oct 2009</time></p>
-  <p>So it's been a while, eh?  Not too much in the mood to write about what I've learned when most of what I've learned is how much I have to learn, y'know?  Anyway, I've been back into Ruby on Rails lately, since Ruby has got to be the dead simplest real programming language out there.  Oh yeah, and I have a major project cooking on Rails, but I'll elaborate later.  Let's talk about version control...</p><p>Let's pretend you're typing that last term paper in college.  This is the modern era, so we're using a word processing program.  That program has eaten a few of our papers over the course of our college career, so we know to save our paper often.  This is a huge paper, so we've also decided that it'd be prudent to save it under different names as it progresses so that we can go back in time to an earlier version with no hassle, y'know just in case we stray too far from the objective in the future.  This is basically the same idea behind version control.</p><p>When dudes or dudettes are sitting at their text editors coding away at whatever they're coding, in whatever language, they're typing characters into a keyboard, just like I am now.  The difference with software is that there are usually numerous files that all relate to each other in some way, and a change in any one of those files will impact the entire application.   So say you make one little change here and another little change there, and then you skip over to another file and make a change there, and then you skip over to another file and make a couple of changes there.  How the hell are you supposed to keep track of all that?  Version control.</p><p>Whatever the flavor - <a href='http://www.nongnu.org/cvs/'>CVS</a>, <a href='http://subversion.tigris.org/'>Subversion</a>, <a href='http://git-scm.com/'>Git</a> - all version control systems track changes made to the files in your fledging (or production) application.  The manner in which they do this varies from system to system, and they all have their proponents and detractors, but that you have GOT to be familiar with at least one of them is beyond dispute.  These will give you the ability to hack around all you want in the comfort of knowing that you can roll these changes back if you're not getting anywhere.</p><p>Now, the only problem with all of these version control systems is that they don't track changes to databases.  The reason that this is a big deal is that the vast majority of large, modern, dynamic websites store a lot of data in their database.  Some content management systems like Drupal actually store templates that determine how the website gets rendered to your browser in their database by default.  You can change this if you know what you're doing, and that assumes a lot.  Nothing is going to change the fact that many database powered websites have to occasionally make changes to the layout (schema) of their database to incorporate new features and the like.  The new Like feature on that site probably has it's value stored in a column somewhere in a database.  What if that feature sucks or is buggy?  How can you roll back a database to an earlier state without using up your quota of blood pressure meds too soon?  Under traditional version control systems, you can't.</p><p>Luckily, someone has figured this out for us.  It's called a "migration".  I'll be back.  I promise...</p>
-</div>
-
-<div class="threecol last">
-	<div class="others">
-		
-	    <a href="/2009/10/finding-your-co-founders" title="Finding Your Co-Founders">&larr; Previous</a>
-	  
-	  
-	    <a href="/2009/10/chapter-6b-the-laymans-introduction-to-database-migrations-in-ruby-on-rails" title="Chapter 6b - the layman's introduction to database migrations in Ruby on Rails">Newer &rarr;</a>
-	  
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+		<script type="text/javascript" src="http://use.typekit.com/dqg8end.js"></script>
+		<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+</head>
+  <div class="container">
+	<div class="row">
+		<div class="logo">
+			<a href="/">ignored By Dinosaurs</a>
+		</div>
+			<ul class="nav twocol">
+		<li><a href="/about-ibd">About iBD</a></li>
+		<li><a href="/about-me">Me</a></li>
+		<li><a href="/archive">Archive</a></li>
+		<li><a href="mailto:therealjohnnygrubb@gmail.com">Contact</a></li>
+	</ul>
+	
+<div class="post eightcol">
+  <h2 class="post-title">Chapter 6a - Version Control</h2>
+  <p><time>14 Oct 2009</time></p>
+	<div class="text">
+  	<p>So it's been a while, eh?  Not too much in the mood to write about what I've learned when most of what I've learned is how much I have to learn, y'know?  Anyway, I've been back into Ruby on Rails lately, since Ruby has got to be the dead simplest real programming language out there.  Oh yeah, and I have a major project cooking on Rails, but I'll elaborate later.  Let's talk about version control...</p><p>Let's pretend you're typing that last term paper in college.  This is the modern era, so we're using a word processing program.  That program has eaten a few of our papers over the course of our college career, so we know to save our paper often.  This is a huge paper, so we've also decided that it'd be prudent to save it under different names as it progresses so that we can go back in time to an earlier version with no hassle, y'know just in case we stray too far from the objective in the future.  This is basically the same idea behind version control.</p><p>When dudes or dudettes are sitting at their text editors coding away at whatever they're coding, in whatever language, they're typing characters into a keyboard, just like I am now.  The difference with software is that there are usually numerous files that all relate to each other in some way, and a change in any one of those files will impact the entire application.   So say you make one little change here and another little change there, and then you skip over to another file and make a change there, and then you skip over to another file and make a couple of changes there.  How the hell are you supposed to keep track of all that?  Version control.</p><p>Whatever the flavor - <a href='http://www.nongnu.org/cvs/'>CVS</a>, <a href='http://subversion.tigris.org/'>Subversion</a>, <a href='http://git-scm.com/'>Git</a> - all version control systems track changes made to the files in your fledging (or production) application.  The manner in which they do this varies from system to system, and they all have their proponents and detractors, but that you have GOT to be familiar with at least one of them is beyond dispute.  These will give you the ability to hack around all you want in the comfort of knowing that you can roll these changes back if you're not getting anywhere.</p><p>Now, the only problem with all of these version control systems is that they don't track changes to databases.  The reason that this is a big deal is that the vast majority of large, modern, dynamic websites store a lot of data in their database.  Some content management systems like Drupal actually store templates that determine how the website gets rendered to your browser in their database by default.  You can change this if you know what you're doing, and that assumes a lot.  Nothing is going to change the fact that many database powered websites have to occasionally make changes to the layout (schema) of their database to incorporate new features and the like.  The new Like feature on that site probably has it's value stored in a column somewhere in a database.  What if that feature sucks or is buggy?  How can you roll back a database to an earlier state without using up your quota of blood pressure meds too soon?  Under traditional version control systems, you can't.</p><p>Luckily, someone has figured this out for us.  It's called a "migration".  I'll be back.  I promise...</p>
 	</div>
-</div>
-	<div id="disqus_thread" class="sixcol"></div>
+	<div id="disqus_thread"></div>
 	<script type="text/javascript">
 	    var disqus_shortname = 'ignoredbydinosaurs'; // required: replace example with your forum shortname
 
 	    // The following are highly recommended additional parameters. Remove the slashes in front to use.
-	    var disqus_identifier = '/:year/:month/:title';
-	    // var disqus_url = 'http://example.com/permalink-to-page.html';
+	    // var disqus_identifier = '';
+	    // var disqus_url = 'http://ignoredbydinosaurs.com/2009/10/chapter-6a-version-control';
 
 	    /* * * DON'T EDIT BELOW THIS LINE * * */
 	    (function() {
@@ -52,8 +55,34 @@
 	    })();
 	</script>
 	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
 
-			</div>
-    </div>
-  </body>
+<div class="twocol last">
+	<div class="others">
+		
+	    <a href="/2009/10/chapter-6b-the-laymans-introduction-to-database-migrations-in-ruby-on-rails" title="Chapter 6b - the layman's introduction to database migrations in Ruby on Rails">Newer &rarr;</a>
+	  
+		
+	    <a href="/2009/10/finding-your-co-founders" title="Finding Your Co-Founders">&larr; Previous</a>
+	  
+	</div>
+</div>
+		<div class="footer">
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-8646459-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+</script>
+
 </html>

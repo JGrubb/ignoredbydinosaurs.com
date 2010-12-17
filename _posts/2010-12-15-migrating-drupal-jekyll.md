@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Migrating the blog from Drupal to Jekyll
+meta_desc: The not altogether tortuous process of extracting my content from Drupal and migrating it to Jekyll, the static site generator.
 ---
 ##Reasons for leaving Drupal, a preamble
 

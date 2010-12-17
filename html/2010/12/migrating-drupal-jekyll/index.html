@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"  xml:lang="en" lang="en">
+<head>
+    <title>Migrating the blog from Drupal to Jekyll | IgnoredByDinosaurs</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="content-language" content="en" />
+		<meta name="description" content="The not altogether tortuous process of extracting my content from Drupal and migrating it to Jekyll, the static site generator." />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<meta name="google-site-verification" content="ZW3GBpFJ0aC-Xr6n__YokO1Yy_Mba3osaM0bOfGhGVI" />
+    <link rel="stylesheet" href="/css/1140.css" type="text/css" media="screen" />
+		<!--[if lte IE 9]>
+		<link rel="stylesheet" href="/css/ie.css" type="text/css" media="screen" />
+		<![endif]-->
+		<link rel="stylesheet" href="/css/typeimg.css" type="text/css" media="screen" />
+		<link rel="stylesheet" href="/css/smallerscreen.css" media="only screen and (max-width: 1023px)" />
+		<link rel="stylesheet" href="/css/mobile.css" type="text/css" media="handheld, only screen and (max-width: 767px)" />
+		<link rel="stylesheet" href="/css/layout.css" type="text/css" media="screen" />
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+		<script type="text/javascript" src="http://use.typekit.com/dqg8end.js"></script>
+		<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+</head>
+  <div class="container">
+	<div class="row">
+		<div class="logo">
+			<a href="/">ignored By Dinosaurs</a>
+		</div>
+			<ul class="nav twocol">
+		<li><a href="/about-ibd">About iBD</a></li>
+		<li><a href="/about-me">Me</a></li>
+		<li><a href="/archive">Archive</a></li>
+		<li><a href="mailto:therealjohnnygrubb@gmail.com">Contact</a></li>
+	</ul>
+	
+<div class="post eightcol">
+  <h2 class="post-title">Migrating the blog from Drupal to Jekyll</h2>
+  <p><time>15 Dec 2010</time></p>
+	<div class="text">
+  	<h2 id='reasons_for_leaving_drupal_a_preamble'>Reasons for leaving Drupal, a preamble</h2>
+
+<p>I&#8217;d had this website on Drupal since some time in July. If you look through the <a href='http://ignoredbydinosaurs.com/archive/'>archives</a>, you&#8217;ll notice a relative dearth of posts from this time period. Drupal just has a way of sucking all the fun out of blogging. It&#8217;s very, very slow for one thing. I had a lot of trouble integrating the site with the Disqus comment system that handled all of my Wordpress comments before I made the move so I was forced to use Drupal&#8217;s comment system. I&#8217;d written a couple of posts in the &#8220;didn&#8217;t find much in Google about it, so I decided to become the authoritative voice on it&#8221; vein, and had a ton of comments on one of them. Those comments appear to be gone now, even though I devoted an entire day to exporting them out of Drupal into Disqus with a <a href='http://drupal.org/node/269010' title='Migrate from Drupal comment.module to Disqus comments | drupal.org'>solution that someone came up with</a>.</p>
+
+<p>Basically, Drupal is a beast. If you have a project that you are trying to build that involves users with accounts, and different levels of access to the content based on those roles, go with Drupal. For anything else, anything simpler, stay away. Drupal gives the impression of being somehow more user friendly since you can configure these massively complex sites without actually coding much of anything, but is that really a good thing?? Drupal&#8217;s inherent dependence on <a href='http://developmentseed.org/blog/2009/jul/09/development-staging-production-workflow-problem-drupal' title='The Development -&amp;gt; Staging -&amp;gt; Production Workflow Problem in Drupal | Development Seed'>stashing so much configuration in the database</a> will be the death of the project if it&#8217;s not figured out, and I personally don&#8217;t think anything short of a MAJOR rewrite is going to sort it out. The major Drupal rewrite that&#8217;s about to drop on the world some time has taken 2 years to get even close to the door, and a rewrite that would effectively fix this particular issue would also effectively rewrite the entire philosophy of being able to build a site in the browser, arguably the whole reason for Drupal existence in the first place.</p>
+
+<p>I haven&#8217;t even gotten to the part about moving Drupal to Git. Why not put the whole thing up in GitHub? Have you heard of Rails? It&#8217;s doing pretty well, and I&#8217;d wager that a large part of the reason for that is how easy it is to dive in and contribute to open source on GitHub. I&#8217;ve never once seen it even mentioned to move Drupal to GitHub.</p>
+
+<p>anyway&#8230;</p>
+
+<h2 id='reasons_for_migrating_to_jekyll_regular_ramble'>Reasons for migrating to Jekyll, regular ramble</h2>
+
+<p>First off, it really wasn&#8217;t that hard, so skip ahead if you wish. I spent a good several hours on Github researching other sites that people had going on the platform out there. I&#8217;ve been studying a whole lot of Ruby lately, so it was down to Jekyll or a few other simple solutions. I started building a solution out of Sinatra, but decided that deployment was probably going to be more of a headache than I felt like dealing with.</p>
+
+<p>I loved the idea of a static HTML site since one of my main gripes about Drupal was how many times I could count the little page load indicator going around on Chrome. This site is blazing fast now, so yay for that.</p>
+
+<p>I love the idea that there are no security updates, no databases to backup, no crufty markup that comes from where exactly? Basically, there&#8217;s very little tradeoff. It&#8217;s mostly win. So, on to the show.</p>
+
+<h2 id='migrating_from_drupal_to_jekyll_the_meat'>Migrating from Drupal to Jekyll, the meat</h2>
+
+<p>One of the things that I didn&#8217;t understand about Jekyll was that it doesn&#8217;t really generate a site template for you (you get used to that when dealing with Ruby). You have to build that part or Jekyll won&#8217;t do anything at all. It&#8217;s easy enough to get started though, just Google or <a href='https://github.com/mojombo/jekyll/wiki/Sites'>borrow from other GitHubbers</a>. The tricky part was liberating my posts from Drupal, which was made vastly easier by <a href='https://github.com/mattdipasquale/jekyll/blob/master/lib/jekyll/migrators/drupal.rb'>this fellow having written a Drupal migrator</a> only a few weeks ago.</p>
+
+<p>I followed all of the instructions on <a href='https://github.com/mojombo/jekyll/wiki/Blog-Migrations'>this page</a> for getting the migrators to work, but kept getting an error message that ruby couldn&#8217;t find the specified file or something like that. So an hour or two of fiddling around with the migrator file in my Jekyll directory and finally changing the command to something like this -</p>
+<code>ruby -r '~/PLAY/jekyll/_import/drupal' -e 'Jekyll::Drupal.process( "#{ENV["DB"]}", "#{ENV["USER"]}", "#{ENV["PASS"]}")'</code>
+<p>where <code>~/PLAY/jekyll</code> is the root of my jekyll install in order to get ruby to read the migrator file that was there instead of trying to find one that wasn&#8217;t. I&#8217;m sure the instructions will work fine for someone who knows more than me, but hey it worked.</p>
+
+<h2 id='to_give_back_unto_the_community'>to give back unto the community&#8230;</h2>
+
+<p>TODO - add a bit into the Drupal migrator that also liberates the URL aliases from the DB, as the author of the current migrator apparently used the stock Drupal URL scheme (node/*). Jekyll has an easy facility for setting the permalinks for your posts, but going through every post to make sure they were right was needlessly tedious in hindsight.</p>
+	</div>
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+	    var disqus_shortname = 'ignoredbydinosaurs'; // required: replace example with your forum shortname
+
+	    // The following are highly recommended additional parameters. Remove the slashes in front to use.
+	    // var disqus_identifier = '';
+	    // var disqus_url = 'http://ignoredbydinosaurs.com/2010/12/migrating-drupal-jekyll';
+
+	    /* * * DON'T EDIT BELOW THIS LINE * * */
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+<div class="twocol last">
+	<div class="others">
+		
+		
+	    <a href="/2010/12/ibd-version-5-and-the-countdown" title="ibd Version 5.0, and top 5 bass influences.">&larr; Previous</a>
+	  
+	</div>
+</div>
+		<div class="footer">
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-8646459-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+</script>
+
+</html>
