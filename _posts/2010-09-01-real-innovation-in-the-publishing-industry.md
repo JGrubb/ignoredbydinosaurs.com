@@ -12,10 +12,10 @@ I finally experimented today with a service that I signed up for several months 
 
 There's a fundamental issue when you're building a website that most people probably aren't aware of at all.  The issue is the limited number of fonts that you can reliably use to set the type on said website.  The vast majority of the world is browsing your site on a Windows computer with a standard set of fonts installed on it. Yes, fonts are installed on your computer.  It's a weird concept.  When you browse to a website, that website tells your browser what font it would prefer to have used when the browser shows you that webpage.  It's not at all uncommon for the designer to want to use a font that's not installed on that computer.  There are only about a dozen or so "<a href="http://www.ampsoft.net/webdesign-l/WindowsMacFonts.html">web-safe fonts</a>" that you can rely on, and it gets old really fast using those same fonts over and over and over.  If the designer wants to work outside that box a little he may ask the browser to call a more exotic font, but he'll also specify what he wants used if that font doesn't exist on the user's computer.  Confused yet?  An example perhaps...
 
-<p style="font-family:arial">This is a sentence set in Arial.
-<p style="font-family:'lucida grande'">This is a sentence set in Lucida Grande
-<p style="font-family:georgia">This is a sentence set in Georgia
-<p style="font-family:'courier new'">This is a sentence set in Courier New
+<p style="font-family:arial">This is a sentence set in Arial.</p>
+<p style="font-family:'lucida grande'">This is a sentence set in Lucida Grande</p>
+<p style="font-family:georgia">This is a sentence set in Georgia</p>
+<p style="font-family:'courier new'">This is a sentence set in Courier New</p>
 
 That's all cool, but what if you want to use something more exotic to give the name of the site <a href="http://twitter.com/">a bit more branded flair</a>?  Well, in the case of Twitter and most every other website on Earth that means firing up Photoshop and making it there.  You get many more fonts to choose from and you can always make your own if you want.  Photoshop then spits out your cool text as an image.  Yes, that Twitter logo is an image, not HTML text.  That means that every browser renders it just like you want it, but it also means that it's a relative pain to change and that search engines can't tell what it says unless you fill in a bunch of info about it.  HTML is preferable for anything that's meant to be read, but then you only get those dozen fonts.  Double rainbow of a bummer.
 
