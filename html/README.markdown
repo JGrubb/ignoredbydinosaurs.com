@@ -12,3 +12,5 @@ Fri Dec 17 11:42:53 EST 2010 --    **adding html directory.  trying git deploy**
 
 Fri Dec 17 12:03:36 EST 2010 --    **removing markup cruft**
 
+Fri Dec 17 12:07:24 EST 2010 --    **removing more cruft**
+

@@ -14,3 +14,5 @@ Fri Dec 17 12:03:36 EST 2010 --    **removing markup cruft**
 
 Fri Dec 17 12:07:24 EST 2010 --    **removing more cruft**
 
+Fri Dec 17 12:12:29 EST 2010 --    **decrufting**
+

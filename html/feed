@@ -4,7 +4,7 @@
  <title>Ignored By Dinosaurs</title>
  <link href="http://ignoredbydinosaurs.com/feed" rel="self"/>
  <link href="http://ignoredbydinosaurs.com/"/>
- <updated>2010-12-17T12:06:28-05:00</updated>
+ <updated>2010-12-17T12:12:15-05:00</updated>
  <id>http://ignoredbydinosaurs.com/</id>
  <author>
    <name>J Grubb</name>
@@ -323,11 +323,14 @@ We just need to choose not to discriminate on the web and thereby maintain the w
    <link href="http://ignoredbydinosaurs.com/2010/07/installing-drush-on-media-temple-grid-server"/>
    <pubDate>2010-07-16T00:00:00-04:00</pubDate>
    <id>http://ignoredbydinosaurs.com/2010/07/installing-drush-on-media-temple-grid-server</id>
-   <content type="html">&lt;a href='http://drupal.org/project/drush'&gt;Drush&lt;/a&gt;&lt;span class='highlight'&gt;What all that means is that Drupal is a pain in the ass to maintain&lt;/span&gt;
+   <content type="html">&lt;p&gt;&lt;a href='http://drupal.org/project/drush' title='Drush | drupal.org'&gt;Drush&lt;/a&gt; is a tool for working on Drupal websites. It&amp;#8217;s technically filed away on Drupal.org as a &amp;#8220;module&amp;#8221;, but it&amp;#8217;s not exactly a module. It&amp;#8217;s more like an add-on for your webserver setup, either &lt;a href='http://ignoredbydinosaurs.com/2010/01/newby-web-programmer-episode-1'&gt;development&lt;/a&gt; or production, that adds some really useful tools for managing your Drupal website. For instance, those of you familiar with Wordpress might be surprised to know that Drupal has no built in facility for updating either the core Drupal code or any of the add-ons (which go by the name &amp;#8220;Plug-ins&amp;#8221; in Wordpress and &amp;#8220;Modules&amp;#8221; in Drupal). I don&amp;#8217;t have any statistics to back this up, but I think the average Drupal site is built with many more of these open-source-and-constantly-shifting contributions than the typical Wordpress site.&lt;/p&gt;
+
+&lt;p&gt;What all that means is that Drupal is a pain in the ass to maintain. When one of your modules has an update, you get a message that tells you so. These messages come all the time. They never stop, actually. And there&amp;#8217;s no way to make them go away except to go and download the latest version(s) and upload it/them to the server over FTP, hope nothing went wrong with the transfer, and then go and update your DB, more or less manually. Over time, slackness can set in.&lt;/p&gt;
+
 &lt;p&gt;I&amp;#8217;ve been reading about it for several weeks because the most interesting thing it does (to me now) is take care of updating your stuff. The downside for some is that it&amp;#8217;s a command line tool. However, if you like the command line because it makes you feel like a real programmer, you&amp;#8217;re in luck! &lt;code&gt;drush up&lt;/code&gt; updates your site, modules and all by downloading them straight from the Drupal CVS repository, and then running any DB updates for you. &amp;#8220;Magic&amp;#8221;, you might say had you been deprived of this after having tasted Wordpress&amp;#8217; sweet waters.&lt;/p&gt;
 
 &lt;p&gt;I haven&amp;#8217;t even used it yet, but I spent the last two days figuring our how to install it, and found the answer scattered over 3 or 4 different places. Maybe I&amp;#8217;m the only one, but I figured I&amp;#8217;d make it a little easier for the next guy.&lt;/p&gt;
-&lt;li&gt;Make sure you &lt;a href='http://kb.mediatemple.net/questions/16/Connecting+via+SSH+to+your+(gs)+Grid-Service'&gt;know how to use SSH&lt;/a&gt; on your grid server account, and log in.&lt;/li&gt;&lt;li&gt;You will now be at the command line.  You want to make sure you are in the home directory, so type:&lt;br /&gt;
+&lt;li&gt;[Make sure you know how to use SSH](http://kb.mediatemple.net/questions/16/Connecting+via+SSH+to+your+(gs)+Grid-Service &quot;Connecting via SSH to your (gs) Grid-Service&quot;) on your grid server account, and log in.&lt;/li&gt;&lt;li&gt;You will now be at the command line.  You want to make sure you are in the home directory, so type:&lt;br /&gt;
 &lt;code&gt;cd ~/&lt;/code&gt;&lt;/li&gt;&lt;li&gt;At this point you'll create a folder for stuff that you install to live in.  Type:&lt;br /&gt;
 &lt;code&gt;mkdir bin&lt;/code&gt;, and then switch into that directory:&lt;br /&gt;
 &lt;code&gt;cd bin&lt;/code&gt;&lt;/li&gt;&lt;li&gt;This command fetches it from drupal.org for you:&lt;br /&gt;
