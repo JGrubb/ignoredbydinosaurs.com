@@ -62,7 +62,7 @@
 README.txt   drush     drush.bat      drush.php   example.drush.inc     includes
 </code></li>
 
-<li>Note the path to that folder by typing: <code>pwd</code>. <br /> You&#8217;ll get something back like: <code>/home/70298/users/.home/bin/drush</code>.<br /> The drush command is at the end of that path, and you have to let the server know that now.<br /> Note that everything before <code>bin</code> can be replaced with <code>~/</code>.</li>
+<li>Note the path to that folder by typing: <code>pwd</code>. <br /> You&#8217;ll get something back like: <code>/home/XXXXX/users/.home/bin/drush</code>.<br /> The drush command is at the end of that path, and you have to let the server know that now.<br /> Note that everything before <code>bin</code> can be replaced with <code>~/</code>.</li>
 
 <li>Switch back to your FTP client and root around in your server for the &#8220;home&#8221; folder. It&#8217;s going to be back toward the root:<br /><code>cd ~/users</code></li>
 
@@ -71,9 +71,9 @@ README.txt   drush     drush.bat      drush.php   example.drush.inc     includes
 <li>MT runs PHP4 on the command line by default. You have to specifically tell it to run Drush with PHP5. Thus, paste this into the file you just created (<code>.bash_profile</code>).<br /> <code>alias drush=&#39;/usr/bin/php5 ~/bin/drush/drush.php&#39;</code></li>
 
 <li><code>source .bash_profile</code> to reload the <code>.bash_profile</code> file.</li>
-
-<li>God willing, if you type in <code>drush</code> at this point you are going to get a long list of newly available commands.</li>
 </ul>
+
+<p>God willing, if you type in <code>drush</code> at this point you are going to get a long list of newly available commands.</p>
 
 <p>Note that this took me over a month of poking and prodding to get working correctly. Specifically, in contrast to all the Drush installation tutorials I found out there, I had to specifically direct it to the <code>drush.php</code> file, rather than the generic <code>drush</code> wrapper file that the tutorials directed me to use when aliasing the Drush command. As usually YMMV.</p>
 

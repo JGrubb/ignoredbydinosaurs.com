@@ -30,7 +30,7 @@ README.txt   drush     drush.bat      drush.php   example.drush.inc     includes
 `
 * Note the path to that folder by typing:
 `pwd`.  <br />
-You'll get something back like: `/home/70298/users/.home/bin/drush`.<br />
+You'll get something back like: `/home/XXXXX/users/.home/bin/drush`.<br />
 The drush command is at the end of that path, and you have to let the server know that now.<br />
 Note that everything before `bin` can be replaced with `~/`.
 * Switch back to your FTP client and root around in your server for the "home" folder.  It's going to be back toward the root:<br />`cd ~/users`
@@ -38,7 +38,8 @@ Note that everything before `bin` can be replaced with `~/`.
 * MT runs PHP4 on the command line by default.  You have to specifically tell it to run Drush with PHP5.  Thus, paste this into the file you just created (`.bash_profile`).<br />
 `alias drush='/usr/bin/php5 ~/bin/drush/drush.php'`
 * `source .bash_profile` to reload the `.bash_profile` file.
-* God willing, if you type in `drush` at this point you are going to get a long list of newly available commands.
+
+God willing, if you type in `drush` at this point you are going to get a long list of newly available commands.
 
 Note that this took me over a month of poking and prodding to get working correctly.  Specifically, in contrast to all the Drush installation tutorials I found out there, I had to specifically direct it to the `drush.php` file, rather than the generic `drush` wrapper file that the tutorials directed me to use when aliasing the Drush command.  As usually YMMV.
 

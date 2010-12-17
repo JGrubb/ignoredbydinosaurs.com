@@ -4,7 +4,7 @@
  <title>Ignored By Dinosaurs</title>
  <link href="http://ignoredbydinosaurs.com/feed" rel="self"/>
  <link href="http://ignoredbydinosaurs.com/"/>
- <updated>2010-12-17T12:20:35-05:00</updated>
+ <updated>2010-12-17T12:22:15-05:00</updated>
  <id>http://ignoredbydinosaurs.com/</id>
  <author>
    <name>J Grubb</name>
@@ -349,7 +349,7 @@ We just need to choose not to discriminate on the web and thereby maintain the w
 README.txt   drush     drush.bat      drush.php   example.drush.inc     includes
 &lt;/code&gt;&lt;/li&gt;
 
-&lt;li&gt;Note the path to that folder by typing: &lt;code&gt;pwd&lt;/code&gt;. &lt;br /&gt; You&amp;#8217;ll get something back like: &lt;code&gt;/home/70298/users/.home/bin/drush&lt;/code&gt;.&lt;br /&gt; The drush command is at the end of that path, and you have to let the server know that now.&lt;br /&gt; Note that everything before &lt;code&gt;bin&lt;/code&gt; can be replaced with &lt;code&gt;~/&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Note the path to that folder by typing: &lt;code&gt;pwd&lt;/code&gt;. &lt;br /&gt; You&amp;#8217;ll get something back like: &lt;code&gt;/home/XXXXX/users/.home/bin/drush&lt;/code&gt;.&lt;br /&gt; The drush command is at the end of that path, and you have to let the server know that now.&lt;br /&gt; Note that everything before &lt;code&gt;bin&lt;/code&gt; can be replaced with &lt;code&gt;~/&lt;/code&gt;.&lt;/li&gt;
 
 &lt;li&gt;Switch back to your FTP client and root around in your server for the &amp;#8220;home&amp;#8221; folder. It&amp;#8217;s going to be back toward the root:&lt;br /&gt;&lt;code&gt;cd ~/users&lt;/code&gt;&lt;/li&gt;
 
@@ -358,9 +358,9 @@ README.txt   drush     drush.bat      drush.php   example.drush.inc     includes
 &lt;li&gt;MT runs PHP4 on the command line by default. You have to specifically tell it to run Drush with PHP5. Thus, paste this into the file you just created (&lt;code&gt;.bash_profile&lt;/code&gt;).&lt;br /&gt; &lt;code&gt;alias drush=&amp;#39;/usr/bin/php5 ~/bin/drush/drush.php&amp;#39;&lt;/code&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;code&gt;source .bash_profile&lt;/code&gt; to reload the &lt;code&gt;.bash_profile&lt;/code&gt; file.&lt;/li&gt;
-
-&lt;li&gt;God willing, if you type in &lt;code&gt;drush&lt;/code&gt; at this point you are going to get a long list of newly available commands.&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;p&gt;God willing, if you type in &lt;code&gt;drush&lt;/code&gt; at this point you are going to get a long list of newly available commands.&lt;/p&gt;
 
 &lt;p&gt;Note that this took me over a month of poking and prodding to get working correctly. Specifically, in contrast to all the Drush installation tutorials I found out there, I had to specifically direct it to the &lt;code&gt;drush.php&lt;/code&gt; file, rather than the generic &lt;code&gt;drush&lt;/code&gt; wrapper file that the tutorials directed me to use when aliasing the Drush command. As usually YMMV.&lt;/p&gt;
 
