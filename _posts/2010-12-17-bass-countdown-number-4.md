@@ -22,4 +22,6 @@ I'd attribute most of my love for music that "jams" to the crop of progressive h
 
 I learned two things from DJing - how to build a set over the course of a night and a metronomic sense of time and tempo.  The whole idea of mixing two records together without anyone else even noticing it's happening is something that really appealed to me, and requires a hell of a lot of skill to do well.  Your sense of time has to be perfect, you have to listen harder than almost any live musician has to (just realized that while writing this) in order to achieve the right blend and keep your records together, and you have a to have a good ear for pitch so that you don't clash two records together that are a minor second apart.  There's also quite a lot of acoustic theory to delve into on your mixer so that your two kick drums don't cancel each other out.  Good times.  So help me, some day I'm going to get back over that way musically.  
 
+Other notable prog house influences - Steve Lawler, Dave Seaman, Danny Tenaglia, G Pal, Gui Boratto, Deep Dish, Sasha of course...
+
 God, this blogging shit takes forever.  No wonder I've been so off this year.  Later y'all.  Thanks for reading...
