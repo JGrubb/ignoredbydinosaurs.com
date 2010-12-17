@@ -11,34 +11,34 @@ I've been reading about it for several weeks because the most interesting thing 
 
 I haven't even used it yet, but I spent the last two days figuring our how to install it, and found the answer scattered over 3 or 4 different places.  Maybe I'm the only one, but I figured I'd make it a little easier for the next guy.
 
-<li>[Make sure you know how to use SSH](http://kb.mediatemple.net/questions/16/Connecting+via+SSH+to+your+(gs)+Grid-Service "Connecting via SSH to your (gs) Grid-Service") on your grid server account, and log in.</li>
-<li>You will now be at the command line.  You want to make sure you are in the home directory, so type:<br />
-<code>cd ~/</code></li>
-<li>At this point you'll create a folder for stuff that you install to live in.  Type:<br />
+* [Make sure you know how to use SSH](http://kb.mediatemple.net/questions/16/Connecting+via+SSH+to+your+(gs)+Grid-Service "Connecting via SSH to your (gs) Grid-Service") on your grid server account, and log in.
+* You will now be at the command line.  You want to make sure you are in the home directory, so type:<br />
+<code>cd ~/</code>
+* At this point you'll create a folder for stuff that you install to live in.  Type:<br />
 <code>mkdir bin</code>, and then switch into that directory:<br />
-<code>cd bin</code></li>
-<li>This command fetches it from drupal.org for you:<br />
+<code>cd bin</code>
+* This command fetches it from drupal.org for you:<br />
 <code>wget http://ftp.drupal.org/files/projects/drush-All-versions-3.0-beta1.tar.gz</code><br />
-in tarball form.</li>
-<li>Untar:<br />
-<code>tar xzvf drush-All-versions-3.0-beta1.tar.gz</code></li>
-<li>Switch into the new <code>drush</code> folder:<br />
-<code>cd drush</code></li>
-<li>Take a look at the contents of that folder by typing <code>ls</code> and make sure everything looks like this:
+in tarball form.
+* Untar:
+<code>tar xzvf drush-All-versions-3.0-beta1.tar.gz</code>
+* Switch into the new <code>drush</code> folder:<br />
+<code>cd drush</code>
+* Take a look at the contents of that folder by typing <code>ls</code> and make sure everything looks like this:
 <code>LICENSE.txt  commands  drush.api.php  drush.info  drush_logo-black.png  example.drushrc.php
 README.txt   drush     drush.bat      drush.php   example.drush.inc     includes
-</code></li>
-<li>Note the path to that folder by typing:
+</code>
+* Note the path to that folder by typing:
 <code>pwd</code>.  <br />
 You'll get something back like: <code>/home/70298/users/.home/bin/drush</code>.<br />
 The drush command is at the end of that path, and you have to let the server know that now.<br />
-Note that everything before <code>bin</code> can be replaced with <code>~/</code>.</li>
-<li>Switch back to your FTP client and root around in your server for the "home" folder.  It's going to be back toward the root:<br /><code>cd ~/users</code></li>
-<li>You may or may not see a file named <code>.bash_profile</code>.  Note that it might be hidden depending on your FTP client.  If you are sure that it's not there, create a file and give it that name.</li>
-<li>MT runs PHP4 on the command line by default.  You have to specifically tell it to run Drush with PHP5.  Thus, paste this into the file you just created (<code>.bash_profile</code>).<br />
-<code>alias drush='/usr/bin/php5 ~/bin/drush/drush.php'</code></li>
-<li><code>source .bash_profile</code> to reload the <code>.bash_profile</code> file.</li>
-<li>God willing, if you type in <code>drush</code> at this point you are going to get a long list of newly available commands.</li>
+Note that everything before <code>bin</code> can be replaced with <code>~/</code>.
+* Switch back to your FTP client and root around in your server for the "home" folder.  It's going to be back toward the root:<br /><code>cd ~/users</code>
+* You may or may not see a file named <code>.bash_profile</code>.  Note that it might be hidden depending on your FTP client.  If you are sure that it's not there, create a file and give it that name.
+* MT runs PHP4 on the command line by default.  You have to specifically tell it to run Drush with PHP5.  Thus, paste this into the file you just created (<code>.bash_profile</code>).<br />
+`alias drush='/usr/bin/php5 ~/bin/drush/drush.php'`
+* <code>source .bash_profile</code> to reload the <code>.bash_profile</code> file.
+* God willing, if you type in <code>drush</code> at this point you are going to get a long list of newly available commands.
 
 Note that this took me over a month of poking and prodding to get working correctly.  Specifically, in contrast to all the Drush installation tutorials I found out there, I had to specifically direct it to the <code>drush.php</code> file, rather than the generic <code>drush</code> wrapper file that the tutorials directed me to use when aliasing the Drush command.  As usually YMMV.
 

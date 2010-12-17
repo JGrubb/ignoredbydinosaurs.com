@@ -4,7 +4,7 @@
  <title>Ignored By Dinosaurs</title>
  <link href="http://ignoredbydinosaurs.com/feed" rel="self"/>
  <link href="http://ignoredbydinosaurs.com/"/>
- <updated>2010-12-17T12:12:15-05:00</updated>
+ <updated>2010-12-17T12:18:51-05:00</updated>
  <id>http://ignoredbydinosaurs.com/</id>
  <author>
    <name>J Grubb</name>
@@ -330,22 +330,37 @@ We just need to choose not to discriminate on the web and thereby maintain the w
 &lt;p&gt;I&amp;#8217;ve been reading about it for several weeks because the most interesting thing it does (to me now) is take care of updating your stuff. The downside for some is that it&amp;#8217;s a command line tool. However, if you like the command line because it makes you feel like a real programmer, you&amp;#8217;re in luck! &lt;code&gt;drush up&lt;/code&gt; updates your site, modules and all by downloading them straight from the Drupal CVS repository, and then running any DB updates for you. &amp;#8220;Magic&amp;#8221;, you might say had you been deprived of this after having tasted Wordpress&amp;#8217; sweet waters.&lt;/p&gt;
 
 &lt;p&gt;I haven&amp;#8217;t even used it yet, but I spent the last two days figuring our how to install it, and found the answer scattered over 3 or 4 different places. Maybe I&amp;#8217;m the only one, but I figured I&amp;#8217;d make it a little easier for the next guy.&lt;/p&gt;
-&lt;li&gt;[Make sure you know how to use SSH](http://kb.mediatemple.net/questions/16/Connecting+via+SSH+to+your+(gs)+Grid-Service &quot;Connecting via SSH to your (gs) Grid-Service&quot;) on your grid server account, and log in.&lt;/li&gt;&lt;li&gt;You will now be at the command line.  You want to make sure you are in the home directory, so type:&lt;br /&gt;
-&lt;code&gt;cd ~/&lt;/code&gt;&lt;/li&gt;&lt;li&gt;At this point you'll create a folder for stuff that you install to live in.  Type:&lt;br /&gt;
-&lt;code&gt;mkdir bin&lt;/code&gt;, and then switch into that directory:&lt;br /&gt;
-&lt;code&gt;cd bin&lt;/code&gt;&lt;/li&gt;&lt;li&gt;This command fetches it from drupal.org for you:&lt;br /&gt;
-&lt;code&gt;wget http://ftp.drupal.org/files/projects/drush-All-versions-3.0-beta1.tar.gz&lt;/code&gt;&lt;br /&gt;
-in tarball form.&lt;/li&gt;&lt;li&gt;Untar:&lt;br /&gt;
-&lt;code&gt;tar xzvf drush-All-versions-3.0-beta1.tar.gz&lt;/code&gt;&lt;/li&gt;&lt;li&gt;Switch into the new &lt;code&gt;drush&lt;/code&gt; folder:&lt;br /&gt;
-&lt;code&gt;cd drush&lt;/code&gt;&lt;/li&gt;&lt;li&gt;Take a look at the contents of that folder by typing &lt;code&gt;ls&lt;/code&gt; and make sure everything looks like this:
-&lt;code&gt;LICENSE.txt  commands  drush.api.php  drush.info  drush_logo-black.png  example.drushrc.php
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href='http://kb.mediatemple.net/questions/16/Connecting+via+SSH+to+your+(gs'&gt;Make sure you know how to use SSH&lt;/a&gt;+Grid-Service &amp;#8220;Connecting via SSH to your (gs) Grid-Service&amp;#8221;) on your grid server account, and log in.&lt;/li&gt;
+
+&lt;li&gt;You will now be at the command line. You want to make sure you are in the home directory, so type:&lt;br /&gt; &lt;code&gt;cd ~/&lt;/code&gt;&lt;/li&gt;
+
+&lt;li&gt;At this point you&amp;#8217;ll create a folder for stuff that you install to live in. Type:&lt;br /&gt; &lt;code&gt;mkdir bin&lt;/code&gt;, and then switch into that directory:&lt;br /&gt; &lt;code&gt;cd bin&lt;/code&gt;&lt;/li&gt;
+
+&lt;li&gt;This command fetches it from drupal.org for you:&lt;br /&gt; &lt;code&gt;wget http://ftp.drupal.org/files/projects/drush-All-versions-3.0-beta1.tar.gz&lt;/code&gt;&lt;br /&gt; in tarball form.&lt;/li&gt;
+
+&lt;li&gt;Untar: &lt;code&gt;tar xzvf drush-All-versions-3.0-beta1.tar.gz&lt;/code&gt;&lt;/li&gt;
+
+&lt;li&gt;Switch into the new &lt;code&gt;drush&lt;/code&gt; folder:&lt;br /&gt; &lt;code&gt;cd drush&lt;/code&gt;&lt;/li&gt;
+
+&lt;li&gt;Take a look at the contents of that folder by typing &lt;code&gt;ls&lt;/code&gt; and make sure everything looks like this: &lt;code&gt;LICENSE.txt  commands  drush.api.php  drush.info  drush_logo-black.png  example.drushrc.php
 README.txt   drush     drush.bat      drush.php   example.drush.inc     includes
-&lt;/code&gt;&lt;/li&gt;&lt;li&gt;Note the path to that folder by typing:
-&lt;code&gt;pwd&lt;/code&gt;.  &lt;br /&gt;
-You'll get something back like: &lt;code&gt;/home/70298/users/.home/bin/drush&lt;/code&gt;.&lt;br /&gt;
-The drush command is at the end of that path, and you have to let the server know that now.&lt;br /&gt;
-Note that everything before &lt;code&gt;bin&lt;/code&gt; can be replaced with &lt;code&gt;~/&lt;/code&gt;.&lt;/li&gt;&lt;li&gt;Switch back to your FTP client and root around in your server for the &quot;home&quot; folder.  It's going to be back toward the root:&lt;br /&gt;&lt;code&gt;cd ~/users&lt;/code&gt;&lt;/li&gt;&lt;li&gt;You may or may not see a file named &lt;code&gt;.bash_profile&lt;/code&gt;.  Note that it might be hidden depending on your FTP client.  If you are sure that it's not there, create a file and give it that name.&lt;/li&gt;&lt;li&gt;MT runs PHP4 on the command line by default.  You have to specifically tell it to run Drush with PHP5.  Thus, paste this into the file you just created (&lt;code&gt;.bash_profile&lt;/code&gt;).&lt;br /&gt;
-&lt;code&gt;alias drush='/usr/bin/php5 ~/bin/drush/drush.php'&lt;/code&gt;&lt;/li&gt;&lt;li&gt;&lt;code&gt;source .bash_profile&lt;/code&gt; to reload the &lt;code&gt;.bash_profile&lt;/code&gt; file.&lt;/li&gt;&lt;li&gt;God willing, if you type in &lt;code&gt;drush&lt;/code&gt; at this point you are going to get a long list of newly available commands.&lt;/li&gt;
+&lt;/code&gt;&lt;/li&gt;
+
+&lt;li&gt;Note the path to that folder by typing: &lt;code&gt;pwd&lt;/code&gt;. &lt;br /&gt; You&amp;#8217;ll get something back like: &lt;code&gt;/home/70298/users/.home/bin/drush&lt;/code&gt;.&lt;br /&gt; The drush command is at the end of that path, and you have to let the server know that now.&lt;br /&gt; Note that everything before &lt;code&gt;bin&lt;/code&gt; can be replaced with &lt;code&gt;~/&lt;/code&gt;.&lt;/li&gt;
+
+&lt;li&gt;Switch back to your FTP client and root around in your server for the &amp;#8220;home&amp;#8221; folder. It&amp;#8217;s going to be back toward the root:&lt;br /&gt;&lt;code&gt;cd ~/users&lt;/code&gt;&lt;/li&gt;
+
+&lt;li&gt;You may or may not see a file named &lt;code&gt;.bash_profile&lt;/code&gt;. Note that it might be hidden depending on your FTP client. If you are sure that it&amp;#8217;s not there, create a file and give it that name.&lt;/li&gt;
+
+&lt;li&gt;MT runs PHP4 on the command line by default. You have to specifically tell it to run Drush with PHP5. Thus, paste this into the file you just created (&lt;code&gt;.bash_profile&lt;/code&gt;).&lt;br /&gt; &lt;code&gt;alias drush=&amp;#39;/usr/bin/php5 ~/bin/drush/drush.php&amp;#39;&lt;/code&gt;&lt;/li&gt;
+
+&lt;li /&gt;
+
+&lt;li&gt;God willing, if you type in &lt;code&gt;drush&lt;/code&gt; at this point you are going to get a long list of newly available commands.&lt;/li&gt;
+&lt;/ul&gt;
+
 &lt;p&gt;Note that this took me over a month of poking and prodding to get working correctly. Specifically, in contrast to all the Drush installation tutorials I found out there, I had to specifically direct it to the &lt;code&gt;drush.php&lt;/code&gt; file, rather than the generic &lt;code&gt;drush&lt;/code&gt; wrapper file that the tutorials directed me to use when aliasing the Drush command. As usually YMMV.&lt;/p&gt;
 
 &lt;p&gt;Good luck!&lt;/p&gt;
