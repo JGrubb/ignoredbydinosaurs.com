@@ -26,11 +26,11 @@ If you need to look up the phone number of Newtown Chinese Restaurant in Newton,
 
 If you've bought your domain name as part of a package, then you don't need to do anything.  The webhost actually owns the domain name and is letting you use it.  This has pros and cons obviously, the pros being that they handle all of this DNS stuff for you.  
 
-If you've bought the domain name separately, you need to give that name a "phone number" so that DNS knows who to call when you request a page from that site.  That's done by getting deep into your Domain Control Panel (or something like depending on the registrar) and and finding the "Nameserver" controls.  This is where you give your domain name an address.  It's usually in an english readable form, for instance, one of the nameservers for my hosting account is <code>ns1.mediatemple.com</code>.  That means that when a request is made for a page on this site, DNS says "don't look at me, go talk to Media Temple's nameservers.  They know where to find that page."  Once the request gets to Media Temple, their nameservers say "the page you seek is at 64.207.129.18", which is the IP address of the actual server on which this site is plopped.
+If you've bought the domain name separately, you need to give that name a "phone number" so that DNS knows who to call when you request a page from that site.  That's done by getting deep into your Domain Control Panel (or something like depending on the registrar) and and finding the "Nameserver" controls.  This is where you give your domain name an address.  It's usually in an english readable form, for instance, one of the nameservers for my hosting account is `ns1.mediatemple.com`.  That means that when a request is made for a page on this site, DNS says "don't look at me, go talk to Media Temple's nameservers.  They know where to find that page."  Once the request gets to Media Temple, their nameservers say "the page you seek is at 64.207.129.18", which is the IP address of the actual server on which this site is plopped.
 
 So, to extend the analogy a little further, a DNS lookup is actually more like that movie where the kids are trying to find the super-cool party, only to get to the party they have to drive all over town from one destination to the next before they are finally given the actual address.  For real fun, type this is your Terminal --
 
-<code>traceroute http://ignoredbydinosaurs.com</code>
+`traceroute http://ignoredbydinosaurs.com`
 
 This command will show you all of the different "nodes" out there on the web that your request hits before it actually arrives at it's destination, my webhost.
 

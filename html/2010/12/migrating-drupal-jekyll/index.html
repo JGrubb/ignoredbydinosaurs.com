@@ -60,7 +60,9 @@
 <p>One of the things that I didn&#8217;t understand about Jekyll was that it doesn&#8217;t really generate a site template for you (you get used to that when dealing with Ruby). You have to build that part or Jekyll won&#8217;t do anything at all. It&#8217;s easy enough to get started though, just Google or <a href='https://github.com/mojombo/jekyll/wiki/Sites'>borrow from other GitHubbers</a>. The tricky part was liberating my posts from Drupal, which was made vastly easier by <a href='https://github.com/mattdipasquale/jekyll/blob/master/lib/jekyll/migrators/drupal.rb'>this fellow having written a Drupal migrator</a> only a few weeks ago.</p>
 
 <p>I followed all of the instructions on <a href='https://github.com/mojombo/jekyll/wiki/Blog-Migrations'>this page</a> for getting the migrators to work, but kept getting an error message that ruby couldn&#8217;t find the specified file or something like that. So an hour or two of fiddling around with the migrator file in my Jekyll directory and finally changing the command to something like this -</p>
-<code>ruby -r '~/PLAY/jekyll/_import/drupal' -e 'Jekyll::Drupal.process( "#{ENV["DB"]}", "#{ENV["USER"]}", "#{ENV["PASS"]}")'</code>
+
+<p><code>ruby -r &#39;~/PLAY/jekyll/_import/drupal&#39; -e &#39;Jekyll::Drupal.process( &quot;#{ENV[&quot;DB&quot;]}&quot;, &quot;#{ENV[&quot;USER&quot;]}&quot;, &quot;#{ENV[&quot;PASS&quot;]}&quot;)&#39;</code></p>
+
 <p>where <code>~/PLAY/jekyll</code> is the root of my jekyll install in order to get ruby to read the migrator file that was there instead of trying to find one that wasn&#8217;t. I&#8217;m sure the instructions will work fine for someone who knows more than me, but hey it worked.</p>
 
 <h2 id='to_give_back_unto_the_community'>to give back unto the community&#8230;</h2>

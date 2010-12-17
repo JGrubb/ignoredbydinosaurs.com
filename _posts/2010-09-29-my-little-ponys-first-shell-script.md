@@ -11,7 +11,7 @@ I'd already taken to doing much of this work from the "command line", and it onl
 
 So, about 20-30 minutes worth of downloading, copying, and renaming has been reduced to about 20-30 seconds, depending on bandwidth.  Here's the script, in case you're curious --
 
-<code>
+`
 #!/bin/sh
 
 wget http://wordpress.org/latest.tar.gz<br />
@@ -26,6 +26,6 @@ tar xzvf JGrubb-Base-WP-theme-0efd724.tar.gz<br />
 rm JGrubb-Base-WP-theme-0efd724.tar.gz<br />
 mv JGrubb-Base-WP-theme-0efd724 ibd<br />
 
-</code>
+`
 
 Now I'm off to write a script to do the same thing for me for Drupal...

@@ -27,10 +27,10 @@ One of the things that I didn't understand about Jekyll was that it doesn't real
 
 I followed all of the instructions on [this page](https://github.com/mojombo/jekyll/wiki/Blog-Migrations) for getting the migrators to work, but kept getting an error message that ruby couldn't find the specified file or something like that.  So an hour or two of fiddling around with the migrator file in my Jekyll directory and finally changing the command to something like this -
 
-<code>ruby -r '~/PLAY/jekyll/_import/drupal' -e 'Jekyll::Drupal.process( "#{ENV["DB"]}", "#{ENV["USER"]}", "#{ENV["PASS"]}")'</code>
+`ruby -r '~/PLAY/jekyll/_import/drupal' -e 'Jekyll::Drupal.process( "#{ENV["DB"]}", "#{ENV["USER"]}", "#{ENV["PASS"]}")'`
 
 
-where <code>~/PLAY/jekyll</code> is the root of my jekyll install in order to get ruby to read the migrator file that was there instead of trying to find one that wasn't.  I'm sure the instructions will work fine for someone who knows more than me, but hey it worked.
+where `~/PLAY/jekyll` is the root of my jekyll install in order to get ruby to read the migrator file that was there instead of trying to find one that wasn't.  I'm sure the instructions will work fine for someone who knows more than me, but hey it worked.
 
 ##to give back unto the community...
 

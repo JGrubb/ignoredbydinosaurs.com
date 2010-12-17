@@ -9,19 +9,19 @@ You're probably on a Macintosh and noticed it hanging momentarily every ten seco
 
 Here's the error -
 
-<code>3/19/10 12:10:10 PM	com.apple.launchd.peruser.501[398] (com.akamai.client.plist[606]) Bug: launchd_core_logic.c:4103 (23932):13 <br />
+`3/19/10 12:10:10 PM	com.apple.launchd.peruser.501[398] (com.akamai.client.plist[606]) Bug: launchd_core_logic.c:4103 (23932):13 <br />
 3/19/10 12:10:10 PM	com.apple.launchd.peruser.501[398] (com.akamai.client.plist[606]) posix_spawn("/Applications/Akamai/loader.pl", ...): No such file or directory<br />
 3/19/10 12:10:10 PM	com.apple.launchd.peruser.501[398] (com.akamai.client.plist[606]) Exited with exit code: 1<br />
 3/19/10 12:10:10 PM	com.apple.launchd.peruser.501[398] (com.akamai.client.plist) Throttling respawn: Will start in 10 seconds
-</code>
+`
 
-Well, thanks a lot.  You check out your Library folders and can't find a plist item for Akamai.  You can't find anything for <code>com.apple.launchd</code>.  Spotlight doesn't find anything for Akamai.  Spotlight doesn't find anything for <code>com.apple.launched.peruser</code>.  The trail is going cold.  This is why you hate "download managers".  Aren't you capable of managing your own downloads?  
+Well, thanks a lot.  You check out your Library folders and can't find a plist item for Akamai.  You can't find anything for `com.apple.launchd`.  Spotlight doesn't find anything for Akamai.  Spotlight doesn't find anything for `com.apple.launched.peruser`.  The trail is going cold.  This is why you hate "download managers".  Aren't you capable of managing your own downloads?  
 
 Well, the sad news is that since you're a conscientious, but perhaps not completely and utterly thorough computer user, you didn't dive deep into the README that was provided in the Akamai folder.  There was actually some useful info buried in there.  Here's the fix.
 
 First, you have to go back to Adobe and pick out any trial product to use (again).  This will cause the Akamai thing to be reinstalled on your system, which is all you're after.  It'll download that goofy Akamai thing again to a disk image which you then install.  It will then start downloading the Adobe whatever.  You can stop the download at that point.  Now open up the Terminal and paste this command -
 
-<code>/Applications/Akamai/admintool uninstall -force</code>
+`/Applications/Akamai/admintool uninstall -force`
 
 This is the only proper way to uninstall that stupid thing that you didn't want on your computer in the first place and for which they don't even provide an uninstaller, just a little hint in a README buried in the Akamai folder.  Restart your computer and hope it forgets all about it.  Carry on...
 

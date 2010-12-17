@@ -44,22 +44,15 @@
 <p>I&#8217;d already taken to doing much of this work from the &#8220;command line&#8221;, and it only occurred to me yesterday that if I were doing the exact same series of commands from the command line every time I set one of these things up, isn&#8217;t that something I could write a &#8220;script&#8221; to do for me? For those of you - a &#8220;script&#8221; is exactly what it sounds like. In the most basic sense all computer programs are scripts, be they <a href='http://ignoredbydinosaurs.com/2009/03/chapter1b'>compiled scripts or interpreted scripts</a>. You must tell the computer what to do in no uncertain terms at all times for all possible scenarios. Failure to do so is a Bad Thing. So in this sense, I&#8217;m writing a series of terminal commands in the same order every time. I had no idea until yesterday that it was as simple as saving those commands into a file and running that file to get what I want done.</p>
 
 <p>So, about 20-30 minutes worth of downloading, copying, and renaming has been reduced to about 20-30 seconds, depending on bandwidth. Here&#8217;s the script, in case you&#8217;re curious &#8211;</p>
-<code>
-#!/bin/sh
 
-wget http://wordpress.org/latest.tar.gz<br />
-tar xzvf latest.tar.gz<br />
-rm latest.tar.gz<br />
-echo "Name of directory?"<br />
-read directory<br />
-mv wordpress $directory<br />
-cd $directory/wp-content/themes<br />
-wget http://github.com/JGrubb/Base-WP-theme/tarball/master<br />
-tar xzvf JGrubb-Base-WP-theme-0efd724.tar.gz<br />
-rm JGrubb-Base-WP-theme-0efd724.tar.gz<br />
-mv JGrubb-Base-WP-theme-0efd724 ibd<br />
+<p><code></code></p>
 
-</code>
+<h1 id='binsh'>!/bin/sh</h1>
+
+<p>wget http://wordpress.org/latest.tar.gz<br /> tar xzvf latest.tar.gz<br /> rm latest.tar.gz<br /> echo &#8220;Name of directory?&#8221;<br /> read directory<br /> mv wordpress $directory<br /> cd $directory/wp-content/themes<br /> wget http://github.com/JGrubb/Base-WP-theme/tarball/master<br /> tar xzvf JGrubb-Base-WP-theme-0efd724.tar.gz<br /> rm JGrubb-Base-WP-theme-0efd724.tar.gz<br /> mv JGrubb-Base-WP-theme-0efd724 ibd<br /></p>
+
+<p><code></code></p>
+
 <p>Now I&#8217;m off to write a script to do the same thing for me for Drupal&#8230;</p>
 	</div>
 	<div id="disqus_thread"></div>

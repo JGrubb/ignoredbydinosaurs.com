@@ -57,7 +57,7 @@ also:  where do I comment out the 'add comments' stuff?
 <li>As with almost any programming challenge, there are a couple of ways to go about it.  I'm not exactly sure how you want them to display in every situation, but I'll take a beginning guess.
 <ol>
 <li>The easiest, and in this case probably best way to go is to just make sure you enter the lyrics for the songs in the reverse order than how you want them to appear.  If you've already entered some of them in, you can alter the "published date" on the edit screen of each lyric page.  I'd just edit that have them line up in the order that you want.</li>
-<li>The more stylish option would be to write a function in your theme's <code>functions.php</code> file.  To make this work correctly you'd have to make use of the "custom fields" feature.  I'm a tiny bit rusty on the exact way to go about this, but basically "custom fields" are extra bits of metadata that you can add to any page or post in WP.  For instance, you could create one custom field with a key called "track number" and use the value of that field to define the track number.  You'd then figure out the correct function to call with the correct arguments to make it show up in the right order when someone came to the lyrics section of the site.</li>
+<li>The more stylish option would be to write a function in your theme's `functions.php` file.  To make this work correctly you'd have to make use of the "custom fields" feature.  I'm a tiny bit rusty on the exact way to go about this, but basically "custom fields" are extra bits of metadata that you can add to any page or post in WP.  For instance, you could create one custom field with a key called "track number" and use the value of that field to define the track number.  You'd then figure out the correct function to call with the correct arguments to make it show up in the right order when someone came to the lyrics section of the site.</li>
 <li>Doing the same thing from the theme template would also be an option, and probably a little more realistic since you'd be able to have the correct template called by following the naming convention for a given category.  <a href='http://codex.wordpress.org/Template_Hierarchy'>This page</a> will tell you how.</li>
 <li>Slightly off-topic, but there's also the option of creating a blanket "Lyrics" category, and then creating a post for each album that simply lists the songs in the running order, and then links the song titles to another post that contains the lyrics for that song.  This option might give you the most control for the least effort.</li>
 </ol>
@@ -66,7 +66,7 @@ also:  where do I comment out the 'add comments' stuff?
 <li>Right, yeah I would ditch the sub-categories for the albums, and probably go with option 4 above.</li>
 <li>If you look at <a href='http://github.com/JGrubb/Base-WP-theme/blob/master//page.php'>line 29 on the page.php</a> file and <a href='http://github.com/JGrubb/Base-WP-theme/blob/master//single.php'>line 39 on the single.php</a> file, you'll see the comment function.  I'd just comment it out so it reads -
 
-<code>&lt;?php //comments_template( '', true ); ?&gt;</code><br />
+`&lt;?php //comments_template( '', true ); ?&gt;`<br />
 and your comments will be gone.</li>
 </ol>
 	</div>

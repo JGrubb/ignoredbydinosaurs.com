@@ -16,3 +16,5 @@ Fri Dec 17 12:07:24 EST 2010 --    **removing more cruft**
 
 Fri Dec 17 12:12:29 EST 2010 --    **decrufting**
 
+Fri Dec 17 12:19:09 EST 2010 --    **code and list cruft**
+

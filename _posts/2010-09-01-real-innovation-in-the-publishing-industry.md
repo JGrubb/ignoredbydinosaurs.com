@@ -8,7 +8,7 @@ And I'm not talking about the iPad.  The iPad is so cool I still haven't had the
 
 I finally experimented today with a service that I signed up for several months ago but never spent the 45 minutes to learn how to get it going.  It's called <a href="http://typekit.com/">Typekit</a>.  The idea is <em>so</em> simple and <em>so</em> brilliant.  Allow me...
 
-<code>&lt;geek content &lt;!--feel free to skip ahead--&gt; &gt;</code>
+`&lt;geek content &lt;!--feel free to skip ahead--&gt; &gt;`
 
 There's a fundamental issue when you're building a website that most people probably aren't aware of at all.  The issue is the limited number of fonts that you can reliably use to set the type on said website.  The vast majority of the world is browsing your site on a Windows computer with a standard set of fonts installed on it. Yes, fonts are installed on your computer.  It's a weird concept.  When you browse to a website, that website tells your browser what font it would prefer to have used when the browser shows you that webpage.  It's not at all uncommon for the designer to want to use a font that's not installed on that computer.  There are only about a dozen or so "<a href="http://www.ampsoft.net/webdesign-l/WindowsMacFonts.html">web-safe fonts</a>" that you can rely on, and it gets old really fast using those same fonts over and over and over.  If the designer wants to work outside that box a little he may ask the browser to call a more exotic font, but he'll also specify what he wants used if that font doesn't exist on the user's computer.  Confused yet?  An example perhaps...
 
@@ -23,7 +23,7 @@ So Typekit has a service that lets you use a whole bunch of different fonts, ser
 
 Not exactly what the designer used, but vastly more stylish than Myriad.
 
-<code>&lt;/geek content&gt;</code>
+`&lt;/geek content&gt;`
 
 Now, here's why this is cool for all of us.  Services like this are actually starting to focus on the "production" end of the content business.  That's a very good thing for all of us.  That means that the web is finally hitting puberty as a publishing medium.  <a href="http://takeoutphoto.blogspot.com/2008/09/psychology-of-typeface.html">There's a reason that there are a million different fonts in the world</a>, because an all Courier world would be very boring indeed.  It's a terrible thing that most websites only get a choice of a dozen different fonts, but it's a wonderful thing that someone is putting their head toward solving this problem for us all.  I personally think that this is a BIG market waiting to happen.  Get in now.
 
