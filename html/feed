@@ -4,13 +4,47 @@
  <title>Ignored By Dinosaurs</title>
  <link href="http://ignoredbydinosaurs.com/feed" rel="self"/>
  <link href="http://ignoredbydinosaurs.com/"/>
- <updated>2010-12-20T08:59:24-05:00</updated>
+ <updated>2010-12-20T13:05:06-05:00</updated>
  <id>http://ignoredbydinosaurs.com/</id>
  <author>
    <name>J Grubb</name>
    <email>therealjohnnygrubb@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Facebook may rule the world, but you still need your own website.</title>
+   <link href="http://ignoredbydinosaurs.com/2010/12/why-you-still-need-a-website"/>
+   <pubDate>2010-12-20T00:00:00-05:00</pubDate>
+   <id>http://ignoredbydinosaurs.com/2010/12/why-you-still-need-a-website</id>
+   <content type="html">&lt;h2 id='i_was_having_this_conversation_on_saturday'&gt;I was having this conversation on Saturday&amp;#8230;&lt;/h2&gt;
+
+&lt;p&gt;I&amp;#8217;m hanging with my new musical buddy George Kilby. He&amp;#8217;s decided to upgrade his website so we&amp;#8217;re doing a consult to get a feel for what direction we&amp;#8217;re going to move him in (pardon my grammar). He said something at one point about a friend of his who&amp;#8217;d decided to totally forgo having their own website in favor of just managing their presence through Facebook and a couple of other social sites.&lt;/p&gt;
+
+&lt;p&gt;I&amp;#8217;m kicking myself for not having a canned response as to why I think that&amp;#8217;s a bad idea, but I guess i hadn&amp;#8217;t really thought about it too much in a while.&lt;/p&gt;
+
+&lt;h2 id='in_my_humble_opinion'&gt;In my humble opinion&amp;#8230;&lt;/h2&gt;
+
+&lt;p&gt;I can totally understand why an artist would do that. It&amp;#8217;s a hassle to manage your own website. There&amp;#8217;s tons of traffic already happening for free over on Facebook, they already have most of the goodies that a band website needs to have built for you, and you&amp;#8217;ve got to spend half your life posting all this crap there &lt;em&gt;again&lt;/em&gt; anyway. Why not just skip the middle man?&lt;/p&gt;
+
+&lt;p&gt;To me it&amp;#8217;s two things - branding and informational liberty.&lt;/p&gt;
+
+&lt;h3 id='branding'&gt;Branding&lt;/h3&gt;
+
+&lt;p&gt;If you fold up your own website and just manage your presence through mySpace or Facebook or Reverb Nation, you&amp;#8217;re effectively subordinating your brand to theirs. I don&amp;#8217;t mean to suggest that you are bigger than Facebook, but to me it almost implies that Facebook or MySpace owns you if you send your potential fans there instead of a property of your own. Would a &amp;#8220;normal&amp;#8221; business send people to MySpace instead of having their own site? No! They want to &lt;em&gt;make&lt;/em&gt; money&amp;#8230;&lt;/p&gt;
+
+&lt;h3 id='informational_liberty'&gt;Informational liberty&lt;/h3&gt;
+
+&lt;p&gt;I have some friends in a band. They&amp;#8217;ve moved their main website onto a platform called Ning. Ning is a well funded company that aims to make the process of building a &amp;#8220;social network&amp;#8221; something that anyone can do. It&amp;#8217;s sort of like the old days of having your own message board on your site, except with the features one would expect of a modern social network. They have a pretty decent system for listing their tour dates, and maintaining the info is pretty easy. It doesn&amp;#8217;t cost that much and it works well, so what&amp;#8217;s the problem?&lt;/p&gt;
+
+&lt;p&gt;What if they every want to do something different? What happens when the day comes that they want to do something that Ning won&amp;#8217;t let them do (or won&amp;#8217;t let them do at a price they can afford), like maybe host and sell their own digital downloads or build a design template that&amp;#8217;s outside the parameters of what Ning allows?&lt;/p&gt;
+
+&lt;p&gt;They&amp;#8217;re faced with a tough decision. On the one hand they don&amp;#8217;t have access to tools that they&amp;#8217;d like to use to promote their band. On the other hand they shutter a social network that they&amp;#8217;ve asked their fans to join and be a part of, one that has been a definite success so far. Maybe it&amp;#8217;s not an issue right now and maybe it won&amp;#8217;t be that big of one ever, but by inviting their fans to create a community around them using proprietary software that they&amp;#8217;ll never fully control they&amp;#8217;re rolling the dice that Ning (or whoever ultimately buys Ning) will continue to do them and their fans right.&lt;/p&gt;
+
+&lt;h2 id='in_summary'&gt;In summary&lt;/h2&gt;
+
+&lt;p&gt;Better to build your own site and use that as the hub around which you organize the rest of your social accessories.&lt;/p&gt;</content>
+ </entry>
  
  <entry>
    <title>The Bass influence countdown, number 4</title>
@@ -460,21 +494,6 @@ README.txt   drush     drush.bat      drush.php   example.drush.inc     includes
 &lt;p&gt;I don&amp;#8217;t know if you&amp;#8217;ve noticed, but the guys who made up OA and PressFlow and OpenPublish are making a damn decent business as consultants for their product. I don&amp;#8217;t know if there&amp;#8217;s any money to be made here or not, but this market has been waiting for this idea. Hell, &lt;a href='http://groups.drupal.org/node/1041'&gt;Drupal has been waiting for this idea&lt;/a&gt;. I know a &lt;em&gt;lot&lt;/em&gt; of people in the music biz that would probably be delighted to help us out. We can get press and we can get traction. Anybody wanna help out?&lt;/p&gt;
 
 &lt;p&gt;Edit: &lt;a href='http://acquia.com/blog/business-models-drupal-distributions'&gt;the post that put the last piece of this idea into place&lt;/a&gt;. Thanks, Dries!&lt;/p&gt;</content>
- </entry>
- 
- <entry>
-   <title>Ignored by dinosaurs - part 2</title>
-   <link href="http://ignoredbydinosaurs.com/2010/05/ignored-by-dinosaurs-part-2"/>
-   <pubDate>2010-05-31T00:00:00-04:00</pubDate>
-   <id>http://ignoredbydinosaurs.com/2010/05/ignored-by-dinosaurs-part-2</id>
-   <content type="html">&lt;blockquote&gt;I realized about a year ago that nobody anywhere even had a clue, never mind a plan that saved what was worth saving about the music industry – the music part.&lt;/blockquote&gt;
-&lt;p&gt;Guilty. Most of us reading this are. There were several entire generations that went by where it was a perfectly logical thing to associate money and music as somehow being comfortable companions if not downright synonymous. It was BIG business - not in the way that defense contracting is, but it was perfectly logical for a certain subset of money and attention seeking individuals to get into the music business. And you didn&amp;#8217;t even have to have musical talent! In fact, there was more money in it for those who didn&amp;#8217;t! Word eventually got around and by the late 80s most labels heads weren&amp;#8217;t music lovers but lawyers. The snake started eating its tail sometime around then. Nirvana was arguably the last great, game-changing band that came out of that entire era.&lt;/p&gt;
-
-&lt;p&gt;I don&amp;#8217;t &lt;em&gt;mean&lt;/em&gt; to sound like one of those bloviating music biz pundits. So anyway -&amp;gt; &lt;!--break--&gt; I&amp;#8217;ve held a simple and obvious belief for a few years now while transitioning from a musician into a programmer/musician. If the internet tore down the old edifice, the internet will build the new one. There are any number of eCommerce solutions out there for bands to &lt;a href='http://www.cdbaby.com/'&gt;sell their stuff&lt;/a&gt; online. There are any number of solutions out there to make &lt;a href='http://bandzoogle.com/'&gt;building your band's website&lt;/a&gt; an easy and code-free endeavor. There are any number of solutions out there to make it easier to &lt;a href='http://www.artistdata.com/us/'&gt;spread your word&lt;/a&gt;. These ideas are good ones, but still missing the target (in my humblest of opinions). &lt;span class='highlight'&gt;The basic problem with all of these ideas is that they are still trying to monetize someone else's music.&lt;/span&gt; That scheme is the most fundamental cornerstone of the edifice that just fell. Any successful new paradigm &lt;em&gt;must&lt;/em&gt; throw it away.&lt;/p&gt;
-
-&lt;p&gt;Admittedly, it&amp;#8217;s the most difficult one to throw away. However, imagine if a community emerged in pursuit of throwing this stone away. Not just a programmer or a company trying to reinvent the wheel and somehow still feed themselves, but an ecosystem of people who did it for the good of music itself in their free time, without the pressures of business and investors and expectations on them.&lt;/p&gt;
-
-&lt;p&gt;Sorta like an open source project, I guess&amp;#8230;&lt;/p&gt;</content>
  </entry>
  
  
