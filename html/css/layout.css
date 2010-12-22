@@ -38,6 +38,7 @@ time {
 
 .nav li a {
 	display:block;
+	font-weight: normal;
 	margin-right:5px;
 	padding:3px 5px;
 	background:#eee;
