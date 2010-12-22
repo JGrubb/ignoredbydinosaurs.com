@@ -57,14 +57,14 @@ font-weight: lighter;
 }
 
 h2 {
-font-size: 20px;
+font-size: 22px;
 margin-bottom: 24px;	/* Changing this will break the baseline grid. */
 font-family: Georgia, serif;
 font-weight: lighter;
 }
 
 h3 {
-font-size: 16px;
+font-size: 20px;
 margin-bottom: 24px;	/* Changing this will break the baseline grid. */
 font-family: Georgia, serif;
 font-weight: lighter;
