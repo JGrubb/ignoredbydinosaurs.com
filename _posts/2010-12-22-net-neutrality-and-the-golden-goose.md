@@ -20,7 +20,7 @@ This utility and others like it have become the center of American innovation, a
 
 ------
 
-> But Chile is trying a radical new experiment that I helped conceive, to short-circuit this process. It is importing entrepreneurs from all over the world, by offering them $40,000 to bootstrap in Chile. They get a visa; free office space; assistance with networking, mentoring, fundraising, and connecting to potential customers and partners. All the entrepreneurs have to do, in return, is commit to working hard and live in one of the most beautiful places on this planet.
+> But Chile is trying a radical new experiment. ... It is importing entrepreneurs from all over the world, by offering them $40,000 to bootstrap in Chile. They get a visa; free office space; assistance with networking, mentoring, fundraising, and connecting to potential customers and partners. All the entrepreneurs have to do, in return, is commit to working hard and live in one of the most beautiful places on this planet.
 
 ~From a [Techcrunch article](http://techcrunch.com/2010/12/18/chile%E2%80%99s-grand-innovation-experiment/ "Chile’s Grand Innovation Experiment") a few days ago.
 
