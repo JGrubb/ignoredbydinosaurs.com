@@ -4,13 +4,45 @@
  <title>Ignored By Dinosaurs</title>
  <link href="http://ignoredbydinosaurs.com/feed" rel="self"/>
  <link href="http://ignoredbydinosaurs.com/"/>
- <updated>2010-12-22T10:40:57-05:00</updated>
+ <updated>2010-12-24T08:40:36-05:00</updated>
  <id>http://ignoredbydinosaurs.com/</id>
  <author>
    <name>J Grubb</name>
    <email>therealjohnnygrubb@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Top 3 albums of the year</title>
+   <link href="http://ignoredbydinosaurs.com/2010/12/albums-of-the-year"/>
+   <pubDate>2010-12-24T00:00:00-05:00</pubDate>
+   <id>http://ignoredbydinosaurs.com/2010/12/albums-of-the-year</id>
+   <content type="html">&lt;h2 id='3_arcade_fire__the_suburbs'&gt;#3 Arcade Fire - The Suburbs&lt;/h2&gt;
+
+&lt;p&gt;I&amp;#8217;ve never listened to these guys before. I&amp;#8217;d been getting my indie rock fix from Death Cab and the Decemberists for the last couple of years and had never felt the urge to get any of their previous albums, but when their &lt;a href='http://www.thewildernessdowntown.com/' title='The Wilderness Downtown'&gt;web video for &amp;#8220;We Used To Wait&amp;#8221;&lt;/a&gt; came out I couldn&amp;#8217;t stop watching it. It&amp;#8217;s one of the most amazing things I&amp;#8217;ve seen done with the internet so far, and the tune behind the video was really good, too.&lt;/p&gt;
+
+&lt;p&gt;After a couple of weeks I bought the whole album, listened to it a few times and put it away. It&amp;#8217;s only been over the last 6 weeks or so that I put it on repeat, and this is a fantastic record. It&amp;#8217;s got the right mix of tunes that get you immediately and tunes that take a while to realize that you love (like every great album). &lt;a href='http://www.youtube.com/watch?v=KNqnvaWZ-JA' title='YouTube - Arcade Fire - Month Of May'&gt;The Month of May&lt;/a&gt; in particular is custom made for setting record times on your jog&amp;#8230;&lt;/p&gt;
+
+&lt;h2 id='2_infamous_stringdusters__things_that_fly'&gt;#2 Infamous Stringdusters - Things That Fly&lt;/h2&gt;
+
+&lt;p&gt;After I quit my last gig, I was feeling a little burned out on acoustic music. I didn&amp;#8217;t listen to much besides hip hop and dance music for the first several months of this year, but then a strange thing started happening. Larry Keel would end up on repeat for several listens through his whole catalog. I started going through Tony Rice&amp;#8217;s records, Bill Monroe&amp;#8217;s records.. I was having an urge I&amp;#8217;d never felt before - an urge to listen to and (gasp) play bluegrass.&lt;/p&gt;
+
+&lt;p&gt;I&amp;#8217;d gotten the Stringduster&amp;#8217;s latest record and listened to it a few times while planting the garden, but at the time it was too produced for me. It occurs to me now that maybe they&amp;#8217;re just too good and that&amp;#8217;s what I didn&amp;#8217;t really like at the time.&lt;/p&gt;
+
+&lt;p&gt;I&amp;#8217;ve had this record on repeat for the last 4 months straight, and haven&amp;#8217;t gotten even close to burned out on it.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href='http://www.youtube.com/watch?v=eQ2bgU-X_tE' title='YouTube - The Infamous Stringdusters -- It&amp;apos;ll Be Alright'&gt;It&amp;#8217;ll Be Alright&lt;/a&gt; from the Beachland Ballroom. I love how these guys stalk the stage when somebody&amp;#8217;s soloing. That&amp;#8217;d be so fun, but I&amp;#8217;ll never get to do it. sigh&amp;#8230;&lt;/p&gt;
+
+&lt;h2 id='1_big_boi__sir_lucious_left_foot_the_son_of_chico_dusty'&gt;#1 Big Boi - Sir Lucious Left Foot: The Son of Chico Dusty&lt;/h2&gt;
+
+&lt;p&gt;Going back and listening to some old Outkast I&amp;#8217;ve think I&amp;#8217;ve figured out that this is some sort of alter ego that he has in his tunes. I never really got into Outkast except for a few tunes here and there, the big ones. Hell, I probably only buy a hip hop record about once a year or so, so this is this year&amp;#8217;s entry.&lt;/p&gt;
+
+&lt;p&gt;I first heard about this album on the NPR show &amp;#8220;Sound Opinions&amp;#8221;. I don&amp;#8217;t have much regard for music journalists in general (I don&amp;#8217;t mean you Tyler), but these guys have a really great show. This record was featured on their show sometime over the summer and I liked what I heard, so I bought it. It got it&amp;#8217;s hooks in immediately. The first half of the album was the part that&amp;#8217;s immediately catchy on first listen, so I put it on repeat and rarely made it to the back nine.&lt;/p&gt;
+
+&lt;p&gt;The back half is where I spend much of my time lately. This whole album is fantastic from front to back, maybe the best hip hip record for me since Kanye&amp;#8217;s The Graduate. The beats are awesome, the lyrics are hilarious, dirty, intelligible.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href='http://www.youtube.com/watch?v=Bs9mYwK0fF0' title='YouTube - Big Boi - 09 Hustle Blood - Sir Lucious Left Foot'&gt;Hustle Blood&lt;/a&gt;. I had no idea that was Jamie Foxx on there singing the other part&amp;#8230;&lt;/p&gt;</content>
+ </entry>
  
  <entry>
    <title>Net Neutrality and the Golden Goose</title>
@@ -505,22 +537,6 @@ README.txt   drush     drush.bat      drush.php   example.drush.inc     includes
    <pubDate>2010-07-01T00:00:00-04:00</pubDate>
    <id>http://ignoredbydinosaurs.com/2010/07/artist-management</id>
    <content type="html">&lt;object height='450' width='560'&gt;&lt;param name='movie' value='http://www.youtube.com/v/NdBGV86Vz6E&amp;amp;hl=en_US&amp;amp;fs=1' /&gt;&lt;param name='allowFullScreen' value='true' /&gt;&lt;param name='allowscriptaccess' value='always' /&gt;&lt;embed src='http://www.youtube.com/v/NdBGV86Vz6E&amp;amp;hl=en_US&amp;amp;fs=1' allowfullscreen='true' type='application/x-shockwave-flash' allowscriptaccess='always' height='450' width='560' /&gt;&lt;/object&gt;</content>
- </entry>
- 
- <entry>
-   <title>ibd update</title>
-   <link href="http://ignoredbydinosaurs.com/2010/06/ibd-update"/>
-   <pubDate>2010-06-28T00:00:00-04:00</pubDate>
-   <id>http://ignoredbydinosaurs.com/2010/06/ibd-update</id>
-   <content type="html">&lt;p&gt;Hello, faithful. Or curious. Or google searchers. As usual I&amp;#8217;ve got too many ideas and too much work and not enough time or attention span.&lt;/p&gt;
-
-&lt;p&gt;The iBD project &lt;a href='http://github.com/JGrubb/ignored-by-dinosaurs'&gt;lives here&lt;/a&gt;, or rather is in gestation here. It&amp;#8217;s probably going to be a few weeks at the least until i can actually put some time into it. As I see it, there&amp;#8217;s a goodish amount of work to be done. Gee, I wonder if that&amp;#8217;s why nobody has really tried this before? Anyway, in the meantime I have some actual work that I need to get off of my plate and into my portfolio. Being a relative Drupal newby presents many thrilling challenges.&lt;/p&gt;
-
-&lt;p&gt;The good news is that one of my current client projects involve calendaring, a big portion of the to-do list for this project. Drupal already has most of this ground covered for us, but implementation is going to be key. Adding an actual calendar does up the complexity, both for us as the builders and installers and for the end-client, the bands.&lt;/p&gt;
-
-&lt;p&gt;eCommerce is the big deal here, I think. For too long it&amp;#8217;s been in the hands of someone else for most bands. That&amp;#8217;s got to change. If anyone knows more than I do about Amazon S3, please chime in. I think DIY content distribution is going to be the paradigm of the near-future, and it&amp;#8217;s not that difficult for developers to do. The challenge is to create a system that not to difficult for bands to do. As always. A system that monitors digital content downloads on the site and automatically throttles up cloud distribution as needed?&lt;/p&gt;
-
-&lt;p&gt;Anyway, just a quick &amp;#8220;hi&amp;#8221;, and to let you know that I&amp;#8217;m around if you need me.&lt;/p&gt;</content>
  </entry>
  
  
