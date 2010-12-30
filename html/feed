@@ -4,13 +4,29 @@
  <title>Ignored By Dinosaurs</title>
  <link href="http://ignoredbydinosaurs.com/feed" rel="self"/>
  <link href="http://ignoredbydinosaurs.com/"/>
- <updated>2010-12-24T13:26:42-05:00</updated>
+ <updated>2010-12-30T13:03:39-05:00</updated>
  <id>http://ignoredbydinosaurs.com/</id>
  <author>
    <name>J Grubb</name>
    <email>therealjohnnygrubb@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>KaBOOM!</title>
+   <link href="http://ignoredbydinosaurs.com/2010/12/ka-boom"/>
+   <pubDate>2010-12-30T00:00:00-05:00</pubDate>
+   <id>http://ignoredbydinosaurs.com/2010/12/ka-boom</id>
+   <content type="html">&lt;blockquote&gt;
+&lt;p&gt;As business models go, there are currently two dominant ones: either people like your product enough to purchase it or they don’t care enough to buy it but will overlook its deficiencies if it’s “free” in exchange for their personal browsing and purchasing info sold to advertisers. The former model is Apple’s, the latter is Google’s.&lt;/p&gt;
+
+&lt;p&gt;Apple sells emotional experiences. The price is what users pay to be delighted by Apple’s stream of innovations and to be free of the lowest common denominator burdens and the pervasive harvesting of their personal info.&lt;/p&gt;
+
+&lt;p&gt;Google sells eyeballs. To be more precise, the clickstream attached to those eyeballs. Thus scale, indeed dominance, is absolutely crucial to Google’s model.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+&lt;p&gt;~ via &lt;a href='http://counternotions.com/2010/12/28/the-unbearable-inevitability-of-being-android-1995/' title='The Unbearable Inevitability of Being Android, 1995 &amp;amp;laquo; counternotions'&gt;counternotions&lt;/a&gt;&lt;/p&gt;</content>
+ </entry>
  
  <entry>
    <title>Top 3 albums of the year</title>
@@ -39,7 +55,7 @@
 
 &lt;p&gt;I first heard about this album on the NPR show &amp;#8220;Sound Opinions&amp;#8221;. I don&amp;#8217;t have much regard for music journalists in general (I don&amp;#8217;t mean you Tyler), but these guys have a really great show. This record was featured on their show sometime over the summer and I liked what I heard, so I bought it. It got it&amp;#8217;s hooks in immediately. The first half of the album was the part that&amp;#8217;s immediately catchy on first listen, so I put it on repeat and rarely made it to the back nine.&lt;/p&gt;
 
-&lt;p&gt;The back half is where I spend much of my time lately. This whole album is fantastic from front to back, maybe the best hip hip record for me since Kanye&amp;#8217;s Graduation. The beats are awesome, the lyrics are hilarious, dirty, intelligible.&lt;/p&gt;
+&lt;p&gt;The back half is where I spend much of my time lately. This whole album is fantastic from front to back, maybe the best hip hop record for me since Kanye&amp;#8217;s Graduation. The beats are awesome, the lyrics are hilarious, dirty, intelligible.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href='http://www.youtube.com/watch?v=Bs9mYwK0fF0' title='YouTube - Big Boi - 09 Hustle Blood - Sir Lucious Left Foot'&gt;Hustle Blood&lt;/a&gt;. I had no idea that was Jamie Foxx on there singing the other part&amp;#8230;&lt;/p&gt;</content>
  </entry>
@@ -529,14 +545,6 @@ README.txt   drush     drush.bat      drush.php   example.drush.inc     includes
    <content type="html">&lt;p&gt;I knew they were out there somewhere. Their twist is that they&amp;#8217;re writing all the tools themselves. They don&amp;#8217;t have all their cards down on the table, but it seems like they&amp;#8217;re ultimately after some kind of easy hosted thing.&lt;/p&gt;
 &lt;a href='http://cashmusic.org/'&gt;http://cashmusic.org/&lt;/a&gt;
 &lt;p&gt;I still think that Drupal is a better way to go. In fact, I think any open source movement that can piggyback on the conventions and success of another is already that much further up the ladder. These guys appear to have a track record, though. Who knows. Maybe some of their tools can be adapted.&lt;/p&gt;</content>
- </entry>
- 
- <entry>
-   <title>Artist Management</title>
-   <link href="http://ignoredbydinosaurs.com/2010/07/artist-management"/>
-   <pubDate>2010-07-01T00:00:00-04:00</pubDate>
-   <id>http://ignoredbydinosaurs.com/2010/07/artist-management</id>
-   <content type="html">&lt;object height='450' width='560'&gt;&lt;param name='movie' value='http://www.youtube.com/v/NdBGV86Vz6E&amp;amp;hl=en_US&amp;amp;fs=1' /&gt;&lt;param name='allowFullScreen' value='true' /&gt;&lt;param name='allowscriptaccess' value='always' /&gt;&lt;embed src='http://www.youtube.com/v/NdBGV86Vz6E&amp;amp;hl=en_US&amp;amp;fs=1' allowfullscreen='true' type='application/x-shockwave-flash' allowscriptaccess='always' height='450' width='560' /&gt;&lt;/object&gt;</content>
  </entry>
  
  
