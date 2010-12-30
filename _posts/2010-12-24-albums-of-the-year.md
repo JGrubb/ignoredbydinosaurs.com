@@ -25,6 +25,6 @@ Going back and listening to some old Outkast I've think I've figured out that th
 
 I first heard about this album on the NPR show "Sound Opinions".  I don't have much regard for music journalists in general (I don't mean you Tyler), but these guys have a really great show.  This record was featured on their show sometime over the summer and I liked what I heard, so I bought it.  It got it's hooks in immediately.  The first half of the album was the part that's immediately catchy on first listen, so I put it on repeat and rarely made it to the back nine.
 
-The back half is where I spend much of my time lately.  This whole album is fantastic from front to back, maybe the best hip hip record for me since Kanye's Graduation.  The beats are awesome, the lyrics are hilarious, dirty, intelligible.  
+The back half is where I spend much of my time lately.  This whole album is fantastic from front to back, maybe the best hip hop record for me since Kanye's Graduation.  The beats are awesome, the lyrics are hilarious, dirty, intelligible.  
 
 [Hustle Blood](http://www.youtube.com/watch?v=Bs9mYwK0fF0 "YouTube - Big Boi - 09 Hustle Blood - Sir Lucious Left Foot").  I had no idea that was Jamie Foxx on there singing the other part...
