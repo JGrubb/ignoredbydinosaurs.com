@@ -1,10 +1,10 @@
 /* Layout for desktop version */
 
 body {
-	background-color:#f9f9f9;
+	background-color:#f1f1f1;
 	color:#444;
 	font-size:1.2em;
-	background-image: url('/images/bg.jpg') fixed center center no-repeat;
+	background-image: url('/images/bg.jpg');
 }
 
 a {
@@ -13,7 +13,7 @@ a {
 }
 
 a:hover {
-	color:#7FAF1B;
+	color:#755C3B;
 }
 
 time {
@@ -26,6 +26,15 @@ time {
 	font-size:3.5em;
 	margin:.6em 0;
 	line-height:0.8em;
+	text-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+}
+
+.logo a:hover {
+	color: #755C3B;
+}
+
+.brown {
+	color: #755C3B;
 }
 
 .nav {
@@ -41,23 +50,27 @@ time {
 	font-weight: normal;
 	margin-right:5px;
 	padding:3px 5px;
-	background:#eee;
-	background: -webkit-gradient(linear, left top, left bottom, from(#eee), to(#fff));
-	background: -moz-linear-gradient(top, #eee, #fff);
-	border:1px solid #ccc;
+	border:1px solid rgba(117, 92, 59, 0.4);
+	background: rgba(255, 255, 255, 0.4);
 	text-shadow: 0 1px 1px rgba(0,0,0,.3);
 		-webkit-border-radius: 3px;
 		-moz-border-radius: 3px;
 	border-radius: 3px;
-		-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
-		-moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
-	box-shadow: 0 1px 2px rgba(0,0,0,.2);
+		-webkit-box-shadow: 0 1px 2px rgba(117, 92, 59, 0.3);
+		-moz-box-shadow: 0 1px 2px rgba(117, 92, 59, 0.3);
+	box-shadow: 0 1px 2px rgba(117, 92, 59, 0.3);
+}
+
+.nav li a:hover {
+	background: rgba(255, 255, 255, 0.6);
 }
 
 .post-title {
 	font-size:2em;
 	display: block;
-	line-height: 0.8;
+	line-height: 0.5;
+	text-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+	border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .post-title a {
@@ -70,10 +83,8 @@ a.morelink {
 	margin-right:5px;
 	margin-top:10px;
 	padding:3px 5px;
-	background:#eee;
-	background: -webkit-gradient(linear, left top, left bottom, from(#eee), to(#fff));
-	background: -moz-linear-gradient(top, #eee, #fff);
-	border:1px solid #ccc;
+	background: rgba(255, 255, 255, 0.4);
+	border:1px solid rgba(117, 92, 59, 0.4);
 	text-shadow: 0 1px 1px rgba(0,0,0,.3);
 		-webkit-border-radius: 3px;
 		-moz-border-radius: 3px;
@@ -83,16 +94,22 @@ a.morelink {
 	box-shadow: 0 1px 2px rgba(0,0,0,.2);
 }
 
+a.morelink:hover {
+	background: rgba(255, 255, 255, 0.6);
+}
+
 .row {
 	background-image:url('./images/bg.jpg') fixed center center no-repeat;
 }
 
 blockquote {
 	padding:1em 2em;
+	padding-bottom:0.1em;
 	font-style: italic;
 	font-size: 0.8em;
-	background: #f4f4f4;
-	border-bottom:1px solid #ccc;
+	background: rgba(255, 255, 255, 0.4);
+	border-left:1px dotted rgba(0, 0, 0, 0.4);
+	
 }
 
 code {
