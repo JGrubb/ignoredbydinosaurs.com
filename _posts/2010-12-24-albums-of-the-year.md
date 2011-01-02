@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Top 3 albums of the year
+meta_desc: A little year-end wrap up of the best music I've been listening to lately.
 ---
 
 ##\#3 Arcade Fire - The Suburbs

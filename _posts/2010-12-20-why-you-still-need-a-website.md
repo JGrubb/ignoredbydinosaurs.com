@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Facebook may rule the world, but you still need your own website.
+meta_desc: Wherein I belated respond to a point brought up in a prior conversation about why artists in particualr should NOT cede their web presence to one of the dominant convenience stores on the web today.
 ---
 
 ## I was having this conversation on Saturday...

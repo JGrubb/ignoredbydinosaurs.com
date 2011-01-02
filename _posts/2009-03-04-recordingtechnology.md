@@ -3,6 +3,7 @@ layout: post
 title: recordingTechnology.
 created: 1236215580
 permalink: /2009/03/recording-technology
+meta_desc: A brief aside, delving into some of the historic roots of this modern music industry.
 ---
 Now, this part won't be any news to anyone, but will mainly serve to help organize the thoughts in my brain.  First, the old way:
 

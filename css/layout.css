@@ -37,6 +37,10 @@ time {
 	color: #755C3B;
 }
 
+.small {
+	font-size:0.75em;
+}
+
 .nav {
 	margin-bottom:30px;
 }
@@ -138,6 +142,20 @@ code {
 
 #disqus_thread {
 	margin-top:30px;
+}
+
+.archive-post{
+	margin:10px 0;
+}
+
+h3.archive-title {
+	margin-bottom: 5px;
+}
+
+.archive-desc {
+	font-style:italic;
+	font-size:0.8em;
+	margin-left:1em;
 }
 
 /* Layout for mobile version */

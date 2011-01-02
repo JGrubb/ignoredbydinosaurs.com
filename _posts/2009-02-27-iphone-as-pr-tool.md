@@ -3,6 +3,7 @@ layout: post
 title: iPhone as PR tool.
 created: 1235769792
 permalink: /2009/02/iphone-pr-tool
+meta_desc: Written in the early morning hours of the mobile revolution...
 ---
 So, if you're in a band and you don't have a website, you're not really a band, right?  If you own a business and you don't have a website, your business doesn't really exist, right?  If you ran a festival, could you see how you could get by without having a website?
 
