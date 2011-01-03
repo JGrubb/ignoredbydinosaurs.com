@@ -2,6 +2,7 @@
 layout: post
 title: Chapter 6b - the layman's introduction to database migrations in Ruby on Rails
 created: 1255569570
+meta_desc: An introduction to database migrations in Rails.  What they are, why they are effing amazing, and why anyone should care.
 ---
 This is not for programmers.  This is for myself, because when I first started poking at Rails 6 months ago, I didn't have any idea why I needed to edit a migration file, much less what a migration was, except that it must have something to do with a database.  I only knew that because of the command
 
@@ -27,8 +28,7 @@ One of the files that is created when we run that scaffold generator is called a
 
 Now, what if you wanted to undo that?  That's a command you ran there, not some source code that you can save and delete later if you change a few things.  You can't place SQL statements under version control.  You'd have to go and type that statement into the text file that was under version control, and then hope that you could effectively backtrack to it later if you wanted.  If your application and it's database have come a ways since that command you're going to have a good time figuring out how to undo it.  Rails doesn't make you do that.  In fact, you almost never are going to talk directly to your database in Rails.  Instead, you go to the most recent migration file (which <em>is</em> source code and thus under version control) and alter a line to look like this:
 
-`add_column :products, :price, :decimal,
-:precision => 8, :scale => 2, :default => 0`
+`add_column :products, :price, :decimal, :precision => 8, :scale => 2, :default => 0`
 
 Then you run a script that alters the database for you.  Below this add column instruction, or "up method", you add the remove column instruction, or "down method":
 

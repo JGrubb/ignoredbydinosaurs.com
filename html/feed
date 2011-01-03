@@ -4,13 +4,75 @@
  <title>Ignored By Dinosaurs</title>
  <link href="http://ignoredbydinosaurs.com/feed" rel="self"/>
  <link href="http://ignoredbydinosaurs.com/"/>
- <updated>2011-01-03T10:01:27-05:00</updated>
+ <updated>2011-01-03T12:16:22-05:00</updated>
  <id>http://ignoredbydinosaurs.com/</id>
  <author>
    <name>J Grubb</name>
    <email>therealjohnnygrubb@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Helpful books</title>
+   <link href="http://ignoredbydinosaurs.com/books"/>
+   <pubDate>2011-01-03T12:16:22-05:00</pubDate>
+   <id>http://ignoredbydinosaurs.com/helpful-programming-books</id>
+   <content type="html">&lt;p&gt;This is a little collection of books that I&amp;#8217;ve found helpful over the past few years, ranging from design to development to business to fiction.&lt;/p&gt;
+
+&lt;h2 id='rubyrails'&gt;Ruby/Rails&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href='http://amazon.com/dp/1933988657' title='Amazon.com: The Well-Grounded Rubyist (9781933988658): David A. Black: Books'&gt;The Well-Grounded Rubyist&lt;/a&gt; - Great second programming book.&lt;/li&gt;
+
+&lt;li&gt;&lt;a href='http://amazon.com/dp/1934356549' title='Amazon.com: Agile Web Development with Rails (9781934356548): Sam Ruby, Dave Thomas, David Heinemeier Hansson: Books'&gt;Agile Web Development with Rails&lt;/a&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;a href='http://amazon.com/dp/1934356476' title='Amazon.com: Metaprogramming Ruby: Program Like the Ruby Pros (9781934356470): Paolo Perrotta: Books'&gt;Metaprogramming Ruby&lt;/a&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;a href='http://amazon.com/dp/1934356360' title='Amazon.com: Learn to Program, Second Edition (The Facets of Ruby Series) (9781934356364): Chris Pine: Books'&gt;Learn to Program&lt;/a&gt; - Great first programming book.&lt;/li&gt;
+
+&lt;li&gt;&lt;a href='http://amazon.com/dp/0321490452' title='Amazon.com: Design Patterns in Ruby (9780321490452): Russ Olsen: Books'&gt;Design Patterns in Ruby&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id='drupal'&gt;Drupal&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href='http://amazon.com/dp/0596515804' title='Amazon.com: Using Drupal (9780596515805): Angela Byron, Addison Berry, Nathan Haug, Jeff Eaton, James Walker, Jeff Robbins: Books'&gt;Using Drupal&lt;/a&gt; - Great first Drupal book.&lt;/li&gt;
+
+&lt;li&gt;&lt;a href='http://amazon.com/dp/1847198228' title='Amazon.com: Drupal 6 Search Engine Optimization (9781847198228): Benjamin Finklea: Books'&gt;Drupal 6 Search Engine Optimization&lt;/a&gt; - Great general SEO book with heavy Drupal focus.&lt;/li&gt;
+
+&lt;li&gt;&lt;a href='http://amazon.com/dp/1430209895' title='Amazon.com: Pro Drupal Development, Second Edition (9781430209898): John K. VanDyk: Books'&gt;Pro Drupal Development&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id='general_front_end_development__design__usability'&gt;General Front End Development / Design / Usability&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href='http://amazon.com/dp/0596802447' title='Amazon.com: CSS: The Missing Manual (9780596802448): David Sawyer McFarland: Books'&gt;CSS: the Missing Manual&lt;/a&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;a href='http://amazon.com/dp/0596159773' title='Amazon.com: jQuery Cookbook: Solutions &amp;amp;amp; Examples for jQuery Developers (Animal Guide) (9780596159771): Cody Lindley: Books'&gt;Jquery Cookbook&lt;/a&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;a href='http://amazon.com/dp/0321344758' title='Amazon.com: Don&amp;amp;#39;t Make Me Think: A Common Sense Approach to Web Usability, 2nd Edition (9780321344755): Steve Krug: Books'&gt;Don&amp;#8217;t Make Me Think!&lt;/a&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;a href='http://amazon.com/dp/0321489829' title='Amazon.com: Web Design for ROI: Turning Browsers into Buyers &amp;amp;amp; Prospects into Leads (9780321489821): Lance Loveday, Sandra Niehaus: Books'&gt;Web Design for ROI&lt;/a&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;a href='http://amazon.com/dp/0465067107' title='Amazon.com: The Design of Everyday Things (9780465067107): Donald A. Norman: Books'&gt;The Design of Everyday Things&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id='general_back_end_development__databases'&gt;General Back End Development / Databases&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href='http://amazon.com/dp/0596520832' title='Amazon.com: Learning SQL (9780596520830): Alan Beaulieu: Books'&gt;Learning SQL&lt;/a&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;a href='http://amazon.com/dp/1590597699' title='Amazon.com: Beginning Database Design: From Novice to Professional (9781590597699): Clare Churcher: Books'&gt;Beginning Database Design&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id='iphone__cocoa'&gt;iPhone / Cocoa&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href='http://amazon.com/dp/0321503619' title='Amazon.com: Cocoa(R) Programming for Mac(R) OS X (3rd Edition) (9780321503619): Aaron Pablo Hillegass: Books'&gt;Cocoa Programming for OS X&lt;/a&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;a href='http://amazon.com/dp/1934356255' title='Amazon.com: iPhone SDK Development (The Pragmatic Programmers) (9781934356258): Bill Dudney, Christopher Adamson: Books'&gt;iPhone SDK Development&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content>
+ </entry>
  
  <entry>
    <title>KaBOOM!</title>
@@ -539,16 +601,6 @@ README.txt   drush     drush.bat      drush.php   example.drush.inc     includes
 &lt;p&gt;I&amp;#8217;ve been having issues with updating the Drupal core with Drush. &lt;code&gt;drush up&lt;/code&gt; works just fine to update any modules, but for some reason I get an error that Drush needs PHP 5.2 when trying to update the core. It seems to kick out of php5 when it gets to Drupal core. I&amp;#8217;ve tried running the full &lt;code&gt;php5 /home/70298/users/.home/bin/drush/drush.php up&lt;/code&gt; and it still says that my cli version of PHP is too old. Any suggestions/workarounds/fixes are most welcome. Thanks, JG.&lt;/p&gt;
 
 &lt;p&gt;EDIT - November 8, 2010 After filing a ticket with Media Temple&amp;#8217;s Awesome Customer Support, they pointed me to a &lt;a href='http://wiki.mediatemple.net/w/GS:Allow_multiple_open_basedir_directories'&gt;knowledge base article on configuring multiple open basedir directories&lt;/a&gt;. I haven&amp;#8217;t had a chance to go through it yet and update the instructions above, but if and when this becomes absolutely necessary to use Drush, I certainly will.&lt;/p&gt;</content>
- </entry>
- 
- <entry>
-   <title>Here they are =></title>
-   <link href="http://ignoredbydinosaurs.com/2010/07/here-they-are"/>
-   <pubDate>2010-07-15T00:00:00-04:00</pubDate>
-   <id>http://ignoredbydinosaurs.com/2010/07/here-they-are</id>
-   <content type="html">&lt;p&gt;I knew they were out there somewhere. Their twist is that they&amp;#8217;re writing all the tools themselves. They don&amp;#8217;t have all their cards down on the table, but it seems like they&amp;#8217;re ultimately after some kind of easy hosted thing.&lt;/p&gt;
-&lt;a href='http://cashmusic.org/'&gt;http://cashmusic.org/&lt;/a&gt;
-&lt;p&gt;I still think that Drupal is a better way to go. In fact, I think any open source movement that can piggyback on the conventions and success of another is already that much further up the ladder. These guys appear to have a track record, though. Who knows. Maybe some of their tools can be adapted.&lt;/p&gt;</content>
  </entry>
  
  

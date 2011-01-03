@@ -6,7 +6,7 @@
     <title>Chapter 6b - the layman's introduction to database migrations in Ruby on Rails | IgnoredByDinosaurs</title>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <meta http-equiv="content-language" content="en" />
-		
+		<meta name="description" content="An introduction to database migrations in Rails.  What they are, why they are effing amazing, and why anyone should care." />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		<meta name="google-site-verification" content="ZW3GBpFJ0aC-Xr6n__YokO1Yy_Mba3osaM0bOfGhGVI" />
     <link rel="stylesheet" href="/css/1140.css" type="text/css" media="screen" />
@@ -23,8 +23,10 @@
 </head>
   <div class="container">
 	<div class="row">
-		<div class="logo">
-			<a href="/">ig<span class="brown">nor</span>ed <span class="brown">By</span> Dino<span class="brown">saur</span>s</a>
+		<div id="header">
+			<div class="logo">
+				<a href="/">ig<span class="brown">nor</span>ed <span class="brown">By</span> Dino<span class="brown">saur</span>s</a>
+			</div>
 		</div>
 			<ul class="nav twocol">
 		<li><a href="/about-ibd">About iBD</a></li>
@@ -32,6 +34,7 @@
 		<li><a href="/archive">Archive</a></li>
 		<li><a href="mailto:therealjohnnygrubb@gmail.com">Contact</a></li>
 		<li><a href="https://github.com/JGrubb/ignoredbydinosaurs.com">Source code</a></li>
+		<li><a href="/books">Books</a></li>
 	</ul>
 	
 <div class="post eightcol">
@@ -62,11 +65,7 @@
 
 <p>Now, what if you wanted to undo that? That&#8217;s a command you ran there, not some source code that you can save and delete later if you change a few things. You can&#8217;t place SQL statements under version control. You&#8217;d have to go and type that statement into the text file that was under version control, and then hope that you could effectively backtrack to it later if you wanted. If your application and it&#8217;s database have come a ways since that command you&#8217;re going to have a good time figuring out how to undo it. Rails doesn&#8217;t make you do that. In fact, you almost never are going to talk directly to your database in Rails. Instead, you go to the most recent migration file (which <em>is</em> source code and thus under version control) and alter a line to look like this:</p>
 
-<dl>
-<dt><code>add_column :products, :price, :decimal,</code></dt>
-
-<dd>precision =&gt; 8, :scale =&gt; 2, :default =&gt; 0<code></code></dd>
-</dl>
+<p><code>add_column :products, :price, :decimal, :precision =&gt; 8, :scale =&gt; 2, :default =&gt; 0</code></p>
 
 <p>Then you run a script that alters the database for you. Below this add column instruction, or &#8220;up method&#8221;, you add the remove column instruction, or &#8220;down method&#8221;:</p>
 

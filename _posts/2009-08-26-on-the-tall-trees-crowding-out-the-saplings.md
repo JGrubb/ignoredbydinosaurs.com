@@ -3,6 +3,7 @@ layout: post
 title: on the tall trees crowding out the saplings
 created: 1251296820
 permalink: /2009/08/tall-trees-crowding-out-saplings
+meta_desc: A post in my piss-ant potshots at Phish series.
 ---
 Someone left this as a comment for me on Facebook (I think), something in reference to a snarky status update I made about Phish and my not really giving much of a shit about them.  I meant this in a mildly light-hearted manner, but I got more comments on it than most Railroad Earth updates get.  People get fired up about some Phish, boy!  
 

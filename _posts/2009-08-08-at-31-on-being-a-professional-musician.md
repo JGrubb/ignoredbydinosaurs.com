@@ -3,7 +3,7 @@ layout: post
 title: At 31, on being a professional musician
 created: 1249763491
 permalink: /2009/08/at-31-being-professional-musician
-meta_desc: Where I start to show the burn marks...
+meta_desc: Where I start to show the burn marks from being on the road for 7 years straight.
 ---
 We played in Toronto last night.  It was our first Canadian gig and it went well.  The club wasn't much to speak of, but that's to be expected from our first time in a new market.  The promoter was pleased with the turnout, though earlier in the day there was a bit of handwringing over the lack of presold tickets.  According to him people don't want to pay the TicketMaster surcharge, which adds up to well over half the base ticket price.  This is from the mouth of the Live Nation promoter - "people don't want to pay the ridiculous TicketMaster surcharge".  I thought that dovetailed nicely with <a href="http://ignoredByDinosaurs.com/2009/08/the-concert-biz/">yesterday's post</a>.
 

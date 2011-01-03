@@ -2,6 +2,7 @@
 layout: post
 title: Chapter 6a - Version Control
 created: 1255523574
+meta_desc: An introduction to that most important of software development tools known broadly as "version control", with a hint of Rails migrations at the end.
 ---
 So it's been a while, eh?  Not too much in the mood to write about what I've learned when most of what I've learned is how much I have to learn, y'know?  Anyway, I've been back into Ruby on Rails lately, since Ruby has got to be the dead simplest real programming language out there.  Oh yeah, and I have a major project cooking on Rails, but I'll elaborate later.  Let's talk about version control...
 

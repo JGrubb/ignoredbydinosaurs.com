@@ -3,6 +3,7 @@ layout: post
 title: Anybody wanna pile on Apple? You, there!
 created: 1249784247
 permalink: /2009/08/anybody-wanna-pile-apple-you-there
+meta_desc: A repost of a terrifically long post by Jason Calacanis in which he lays into Apple just a bit.
 ---
 For those of you following along at home, here's <a href="http://calacanis.com/2009/08/08/the-case-against-apple-in-five-parts/">The Case Against Apple–in Five Parts</a>.  It's a broader version of my "<a href="http://ignoredByDinosaurs.com/category/iphone/">Phases of iPhone Ownership</a>".  Enjoy.
 
