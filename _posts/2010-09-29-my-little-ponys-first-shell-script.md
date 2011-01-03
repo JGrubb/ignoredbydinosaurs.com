@@ -2,6 +2,7 @@
 layout: post
 title: My little pony's first shell script
 created: 1285763400
+meta_desc: The one where I get all proud of myself because I wrote a Bash script that works.
 ---
 So I've been doing a lot of CMS work lately, both Drupal and Wordpress.  The Wordpress gigs seem to come and go within a week, and are mostly just banging together a theme with varying amounts of complexity.  I'm a recent convert to the 960.gs CSS framework, which makes the absolute quickest work of laying out a website.  It's a thing of beauty and I've actually <a href="http://github.com/JGrubb/Base-WP-theme">created my own base theme</a> to make the work even quicker, but that's for another post.  
 

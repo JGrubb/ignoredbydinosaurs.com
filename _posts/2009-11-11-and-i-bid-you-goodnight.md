@@ -2,6 +2,7 @@
 layout: post
 title: And I bid you goodnight...
 created: 1257987807
+meta_desc: The one where I tell the world in my own flowery way that I'm quitting Railroad Earth.
 ---
 Well, campers, the day has come.  Regular readers of this blog might be a little less surprised about this particular piece of news, but I'm pretty surprised to be writing it.  I've been writing it in my head for a few weeks now, but now that I'm sitting here, I don't really know how to put it.
 

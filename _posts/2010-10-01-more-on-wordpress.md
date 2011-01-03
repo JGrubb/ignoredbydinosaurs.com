@@ -3,6 +3,7 @@ layout: post
 title: More on Wordpress
 created: 1285958589
 permalink: /2010/10/more-wordpress
+meta_desc: A bit of introductory information for those wishing to build websites with Wordpress.
 ---
 This one is for my buddy, Bob.  Bob is an old school developer who has recently been baptized by the cooling waters of the web.  He's building a site in Wordpress, so I thought I'd post a few relevant pieces of info up here for him, and those of his ilk.
 

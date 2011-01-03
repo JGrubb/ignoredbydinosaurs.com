@@ -6,7 +6,7 @@
     <title>Migrating the blog from Drupal to Jekyll | IgnoredByDinosaurs</title>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <meta http-equiv="content-language" content="en" />
-		<meta name="description" content="The not altogether tortuous process of extracting my content from Drupal and migrating it to Jekyll, the static site generator." />
+		<meta name="description" content="The not altogether tortuous process of extracting my content from Drupal and migrating it to Jekyll, the static site generator written in Ruby.  I'm not sure if this will help those attempting such a migration in the technical sense, but perhaps it will serve as moral support that such a migration can be completed, even by someone with such rudimentary hacking skills as myself." />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		<meta name="google-site-verification" content="ZW3GBpFJ0aC-Xr6n__YokO1Yy_Mba3osaM0bOfGhGVI" />
     <link rel="stylesheet" href="/css/1140.css" type="text/css" media="screen" />
@@ -65,6 +65,8 @@
 <p><code>ruby -r &#39;~/PLAY/jekyll/_import/drupal&#39; -e &#39;Jekyll::Drupal.process( &quot;#{ENV[&quot;DB&quot;]}&quot;, &quot;#{ENV[&quot;USER&quot;]}&quot;, &quot;#{ENV[&quot;PASS&quot;]}&quot;)&#39;</code></p>
 
 <p>where <code>~/PLAY/jekyll</code> is the root of my jekyll install in order to get ruby to read the migrator file that was there instead of trying to find one that wasn&#8217;t. I&#8217;m sure the instructions will work fine for someone who knows more than me, but hey it worked.</p>
+
+<p><em>edit: it now occurs to me that if I wanted this to really work the correct way, I should&#8217;ve forked Matt Dipasquale&#8217;s version of Jekyll and built my site that way, but I&#8217;m not sure how that plays with the RubyGem system and in any event I made it work. YMMV.</em></p>
 
 <h2 id='to_give_back_unto_the_community'>to give back unto the community&#8230;</h2>
 

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: ibd Version 5.0, and top 5 bass influences.	
+meta_desc: Starting a series that will hopefully get finished, I celebrate a pending return to musical semi-relevance with a bit of a wrap up of who most informed my musical sensibilities.  Installment number 1 (or number 5 if ORDER rank DESC) - the late Mr. Cliff Burton.
 ---
 Well, here we are.  It was a tortuous migration, but IgnoredByDinosaurs (the blog) has reached version 5.  I think it's version 5, let's see there was Blogger, then WP, then Drupal, then back to WP, then back to Drupal, and now this bad boy, so I guess you would call this one 6.0.
 

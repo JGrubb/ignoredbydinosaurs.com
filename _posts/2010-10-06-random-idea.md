@@ -2,6 +2,7 @@
 layout: post
 title: Random idea
 created: 1286422300
+meta_desc: SSIA, no?
 ---
 My vet just recently joined the 21st century and moved all of their records from big, brown paper files to a computer system.  Her husband is an IT guy so he did the research and picked out all the computers, networked them together and set up this software system for the office.  It looked like a pretty big job to migrate all of their client records to a computer system, but hey, the avoided it long enough, right?
 

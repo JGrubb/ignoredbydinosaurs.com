@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Migrating the blog from Drupal to Jekyll
-meta_desc: The not altogether tortuous process of extracting my content from Drupal and migrating it to Jekyll, the static site generator.
+meta_desc: The not altogether tortuous process of extracting my content from Drupal and migrating it to Jekyll, the static site generator written in Ruby.  I'm not sure if this will help those attempting such a migration in the technical sense, but perhaps it will serve as moral support that such a migration can be completed, even by someone with such rudimentary hacking skills as myself.
 ---
 ##Reasons for leaving Drupal, a preamble
 
@@ -31,6 +31,8 @@ I followed all of the instructions on [this page](https://github.com/mojombo/jek
 
 
 where `~/PLAY/jekyll` is the root of my jekyll install in order to get ruby to read the migrator file that was there instead of trying to find one that wasn't.  I'm sure the instructions will work fine for someone who knows more than me, but hey it worked.
+
+_edit: it now occurs to me that if I wanted this to really work the correct way, I should've forked Matt Dipasquale's version of Jekyll and built my site that way, but I'm not sure how that plays with the RubyGem system and in any event I made it work.  YMMV._
 
 ##to give back unto the community...
 

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: The Bass influence countdown, number 4
+meta_desc: Though the title rather says it all, in this post I pay my respects to my favorite DJ/producer from the late 90s, Mr. John Digweed.
 ---
 ##\#4 - John Digweed
 

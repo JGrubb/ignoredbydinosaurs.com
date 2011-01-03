@@ -2,6 +2,7 @@
 layout: post
 title: Let's try something.
 created: 1289939718
+meta_desc: Wherein I begin a series on building a basic Ruby web app.
 ---
 Does anybody here want to build something?  My buddy Jimmy of This Blog fame laid an idea on me the other night.  He's a teacher, and a fairly progressive, observant one at that.  I believe him when he says that there's nothing out there like this kinda simple, cool idea that he had.  I think it must exist somewhere but it's not being properly promoted if it does.  So, I thought maybe it'd be a cool idea to try and teach him a little something about web development, and teach myself a lot in the process.  There's no way that this idea of his is currently within my grasp since a big part of the concept is an iOS app, but I don't think the overall idea is really that far outside the realm of possibility.  It's going to need a web backend to it, anyway.  So let's see.  Where to start?
 
