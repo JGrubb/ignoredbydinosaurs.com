@@ -3,6 +3,7 @@ layout: post
 title: Helpful books
 permalink: /books
 date: false
+comments: false
 ---
 
 This is a little collection of books that I've found helpful over the past few years, ranging from design to development to business to fiction.
