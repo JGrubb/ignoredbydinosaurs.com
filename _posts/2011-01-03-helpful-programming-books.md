@@ -42,3 +42,9 @@ This is a little collection of books that I've found helpful over the past few y
 ## General Business / Startup Culture
 
 * [Founders At Work](http://amazon.com/dp/1430210788 "Amazon.com: Founders at Work: Stories of Startups&#39; Early Days (Recipes: a Problem-Solution Ap) (9781430210788): Jessica Livingston: Books")
+
+* [Tribes](http://amazon.com/dp/1591842336 "Amazon.com: Tribes: We Need You to Lead Us (9781591842330): Seth Godin: Books")
+
+* [Linchpin](http://amazon.com/dp/1591843162 "Amazon.com: Linchpin: Are You Indispensable? (9781591843160): Seth Godin: Books")
+
+* [Blink](http://amazon.com/dp/0316010669 "Amazon.com: Blink: The Power of Thinking Without Thinking (9780316010665): Malcolm Gladwell: Books")
