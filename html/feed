@@ -4,7 +4,7 @@
  <title>Ignored By Dinosaurs</title>
  <link href="http://ignoredbydinosaurs.com/feed" rel="self"/>
  <link href="http://ignoredbydinosaurs.com/"/>
- <updated>2011-01-03T12:16:22-05:00</updated>
+ <updated>2011-01-03T12:51:34-05:00</updated>
  <id>http://ignoredbydinosaurs.com/</id>
  <author>
    <name>J Grubb</name>
@@ -15,7 +15,7 @@
  <entry>
    <title>Helpful books</title>
    <link href="http://ignoredbydinosaurs.com/books"/>
-   <pubDate>2011-01-03T12:16:22-05:00</pubDate>
+   <pubDate>2011-01-03T12:51:34-05:00</pubDate>
    <id>http://ignoredbydinosaurs.com/helpful-programming-books</id>
    <content type="html">&lt;p&gt;This is a little collection of books that I&amp;#8217;ve found helpful over the past few years, ranging from design to development to business to fiction.&lt;/p&gt;
 
