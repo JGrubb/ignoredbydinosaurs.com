@@ -7,6 +7,7 @@ layout: default
 	<div class="text">
   	{{ content }}
 	</div>
+	{% unless page.comments == 'false' %}
 	<div id="disqus_thread"></div>
 	<script type="text/javascript">
 	    var disqus_shortname = 'ignoredbydinosaurs'; // required: replace example with your forum shortname
@@ -24,7 +25,7 @@ layout: default
 	</script>
 	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
-
+	{% endunless %}
 <div class="twocol last">
 	<div class="others">
 		{% if page.next %}
