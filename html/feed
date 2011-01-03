@@ -4,7 +4,7 @@
  <title>Ignored By Dinosaurs</title>
  <link href="http://ignoredbydinosaurs.com/feed" rel="self"/>
  <link href="http://ignoredbydinosaurs.com/"/>
- <updated>2011-01-03T12:52:33-05:00</updated>
+ <updated>2011-01-03T12:55:09-05:00</updated>
  <id>http://ignoredbydinosaurs.com/</id>
  <author>
    <name>J Grubb</name>
@@ -15,7 +15,7 @@
  <entry>
    <title>Helpful books</title>
    <link href="http://ignoredbydinosaurs.com/books"/>
-   <pubDate>2011-01-03T12:52:33-05:00</pubDate>
+   <pubDate>2011-01-03T12:55:09-05:00</pubDate>
    <id>http://ignoredbydinosaurs.com/helpful-programming-books</id>
    <content type="html">&lt;p&gt;This is a little collection of books that I&amp;#8217;ve found helpful over the past few years, ranging from design to development to business to fiction.&lt;/p&gt;
 
@@ -71,6 +71,12 @@
 &lt;li&gt;&lt;a href='http://amazon.com/dp/0321503619' title='Amazon.com: Cocoa(R) Programming for Mac(R) OS X (3rd Edition) (9780321503619): Aaron Pablo Hillegass: Books'&gt;Cocoa Programming for OS X&lt;/a&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;a href='http://amazon.com/dp/1934356255' title='Amazon.com: iPhone SDK Development (The Pragmatic Programmers) (9781934356258): Bill Dudney, Christopher Adamson: Books'&gt;iPhone SDK Development&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id='general_business__startup_culture'&gt;General Business / Startup Culture&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href='http://amazon.com/dp/1430210788' title='Amazon.com: Founders at Work: Stories of Startups&amp;amp;#39; Early Days (Recipes: a Problem-Solution Ap) (9781430210788): Jessica Livingston: Books'&gt;Founders At Work&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;</content>
  </entry>
  

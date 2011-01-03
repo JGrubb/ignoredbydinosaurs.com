@@ -38,3 +38,7 @@ This is a little collection of books that I've found helpful over the past few y
 
 * [Cocoa Programming for OS X](http://amazon.com/dp/0321503619 "Amazon.com: Cocoa(R) Programming for Mac(R) OS X (3rd Edition) (9780321503619): Aaron Pablo Hillegass: Books")
 * [iPhone SDK Development](http://amazon.com/dp/1934356255 "Amazon.com: iPhone SDK Development (The Pragmatic Programmers) (9781934356258): Bill Dudney, Christopher Adamson: Books")
+
+## General Business / Startup Culture
+
+* [Founders At Work](http://amazon.com/dp/1430210788 "Amazon.com: Founders at Work: Stories of Startups&#39; Early Days (Recipes: a Problem-Solution Ap) (9781430210788): Jessica Livingston: Books")
