@@ -2,7 +2,6 @@
 layout: post
 title: Helpful books
 permalink: /books
-date: false
 comments: false
 ---
 

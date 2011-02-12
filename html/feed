@@ -4,7 +4,7 @@
  <title>Ignored By Dinosaurs</title>
  <link href="http://ignoredbydinosaurs.com/feed" rel="self"/>
  <link href="http://ignoredbydinosaurs.com/"/>
- <updated>2011-01-03T17:57:06-05:00</updated>
+ <updated>2011-02-12T18:14:55-05:00</updated>
  <id>http://ignoredbydinosaurs.com/</id>
  <author>
    <name>J Grubb</name>
@@ -13,9 +13,53 @@
 
  
  <entry>
+   <title>On Life After Earth</title>
+   <link href="http://ignoredbydinosaurs.com/2011/02/life-after-earth"/>
+   <pubDate>2011-02-12T00:00:00-05:00</pubDate>
+   <id>http://ignoredbydinosaurs.com/2011/02/life-after-earth</id>
+   <content type="html">&lt;p&gt;I suppose there&amp;#8217;s a few ways a post with this title could go. I&amp;#8217;m flying back from my first run with the new band, and there were a few themes bouncing around for me the last couple weeks. This band is a lot lower overhead. There&amp;#8217;s no bus call. There&amp;#8217;s no soundguy (although I personally hope that&amp;#8217;s remedied this year). Load in and setup takes about 15 minutes. Billy and Drew managed to work out lift passes for us to all get out on the mountain 3 times in the last two weeks. I grew up skiing a lot in the Rockies with my folks, but had basically taken a 13 year hiatus. The last time I&amp;#8217;d been on a mountain was about 5 years ago on the Honkytonk/Railroad tour in 2006, so I had forgotten how much I love skiing until about 100 yards into our first run at Jackson Hole (an amazing mountain).&lt;/p&gt;
+
+&lt;p&gt;I miss my family quite a lot. We&amp;#8217;d all gotten used to my being home and a cell phone is a poor substitute for a hug. I can already see where that&amp;#8217;s going to be a problem again, but I&amp;#8217;m hoping that this gig remains a nice, steady, part-time thing because I really like the music. The guys are very nice guys, I&amp;#8217;m meeting all manner of the CO scene; already collecting some funny stories about the things you&amp;#8217;d expect there&amp;#8217;d be funny stories about.&lt;/p&gt;
+
+&lt;p&gt;It feels so good to have a bass in my hands. I&amp;#8217;m really thankful.&lt;/p&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>On Joining A Band</title>
+   <link href="http://ignoredbydinosaurs.com/2011/01/on-joining-a-band"/>
+   <pubDate>2011-01-15T00:00:00-05:00</pubDate>
+   <id>http://ignoredbydinosaurs.com/2011/01/on-joining-a-band</id>
+   <content type="html">&lt;p&gt;Hi. It&amp;#8217;s been a busy couple of weeks. I&amp;#8217;ve been on the road for the last week driving myself all over the northeast with Tao Seegar, George Kilby, Andrew McConathy and a couple of other dudes in what has turned out to be a warm up run for rejoining music playing society in a couple of weeks. I always write the best blog posts about the most elaborately thoughtful and incisive topics when I&amp;#8217;m driving and listening to music. No, really! Alas, as my hands are usually full at the time, most of them go by never being committed to bytes. However, I&amp;#8217;ve had lots of time to sit and think this week about what motivates me professionally.&lt;/p&gt;
+
+&lt;p&gt;I&amp;#8217;ve been reading some of the reaction to the recent announcement of my joining up with a new band in a few weeks. Pretty much as I expected - mostly support but at least one saying something like &lt;em&gt;&amp;#8220;wuh? I thought he was leaving to blah blah blah. He&amp;#8217;s full of blah blah blah.&amp;#8221;&lt;/em&gt; I haven&amp;#8217;t been digging that hard. Anyway, that post was actually pretty helpful in terms of jolting me into a mindset of wanting to explain myself, which ultimately leads me to really set out for myself what I&amp;#8217;m doing, why, and what the big plan is. A huge part of laying out a successful plan is knowing when to improvise. So it goes.&lt;/p&gt;
+
+&lt;p&gt;I did say I was leaving to go do something else. I did specifically name software development as that other thing that I was interested in pursuing career-wise, &lt;em&gt;but&lt;/em&gt;&amp;#8230; I never, ever, ever said I was done playing music or that I would never go on the road again. I thought the subtext of my big quitting RRE announcement was pretty clear. It just wasn&amp;#8217;t fun anymore, and it wasn&amp;#8217;t fair to anyone to keep pretending that it was. I said that my plans got rearranged when this new record deal popped up and that I&amp;#8217;d be leaning on my faith a lot in the coming year as I tried to sort out what to do after being in a successful band that was going to be hard to top creatively.&lt;/p&gt;
+
+&lt;p&gt;Faith is a hard thing to keep up. There were a few points last year where I wasn&amp;#8217;t really sure how I was going to make it out of this world alive. Not playing music was something I needed to do as a process of detox from the RRE experience, but not playing music was also leaving the pressure relief valve on my head closed for an indeterminate amount of time.&lt;/p&gt;
+
+&lt;p&gt;I scrounged around and found some good dev work. I fired my first client. I learned how to work up good quotes. I learned how much job interviewing totally sucks and that nobody cares about what you did over there and how much you have to contribute. Then toward the end of last year I came across a free book on learning Python that had some really relevant advice&amp;#8230;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Programming as a profession is only moderately interesting. It can be a good job, but if you want to make about the same money and be happier, you could actually just go run a fast food joint. You are much better off using code as your secret weapon in another profession.&lt;/p&gt;
+
+&lt;p&gt;People who can code in the world of technology companies are a dime a dozen and get no respect. People who can code in biology, medicine, government, sociology, physics, history, and mathematics are respected and can do amazing things to advance those disciplines.&lt;/p&gt;
+
+&lt;p&gt;~ from &lt;a href='http://learnpythonthehardway.org/index' title='Learn Python The Hard Way: Learn Python The Hard Way'&gt;Learn Python the Hard Way by Zed Shaw&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&amp;#8230;which was pretty much the plan all along. The only reason I was interviewing for these faceless jobs that have nothing to do with the music business in the first place is because of the very real financial pressures on a 32 year old with 2 kids in the middle of the worst economy in 400,000 years. There&amp;#8217;s a lot of programming work out there. I&amp;#8217;ll have the resume and experience to write my own ticket in another year or two, and I suspect that I&amp;#8217;ll have found the proper application for my skills inside the music industry by then.&lt;/p&gt;
+
+&lt;p&gt;In the meantime, I obviously couldn&amp;#8217;t have planned this Emmitt Nershi thing, and that&amp;#8217;s where the faith part comes in.&lt;/p&gt;
+
+&lt;p&gt;I had the hardest and best year of my life last year. I got to be home with my boys and my wife for the first time ever. I got to establish rituals and bond with my kids in a way that I know there&amp;#8217;s &lt;em&gt;absolutely no way I could&amp;#8217;ve had I still been on the road&lt;/em&gt;. I got to step out of a scene that I love but that also has a considerable dark side in it&amp;#8217;s effects on your/my psyche. To voluntarily step out of a job where people clapped and cheered and showed up in droves even when the job was done less-than-stellar was a good move. It was a lot like pruning back my ego. I heartily recommend it for all musicians.&lt;/p&gt;
+
+&lt;p&gt;And now a gig presents itself that has potential to strike a much healthier balance for me personally and give me the time to continue to grow and diversify professionally, to put back to work all of the connections and skills that I&amp;#8217;ve developed over the years. So yes, I jumped at it.&lt;/p&gt;</content>
+ </entry>
+ 
+ <entry>
    <title>Helpful books</title>
    <link href="http://ignoredbydinosaurs.com/books"/>
-   <pubDate>2011-01-03T17:57:06-05:00</pubDate>
+   <pubDate>2011-01-03T00:00:00-05:00</pubDate>
    <id>http://ignoredbydinosaurs.com/helpful-programming-books</id>
    <content type="html">&lt;p&gt;This is a little collection of books that I&amp;#8217;ve found helpful over the past few years, ranging from design to development to business to fiction.&lt;/p&gt;
 
@@ -545,74 +589,6 @@ We just need to choose not to discriminate on the web and thereby maintain the w
 &lt;p&gt;Make no mistake. If this happens it &lt;strong&gt;will&lt;/strong&gt; be a very bad thing for America.&lt;/p&gt;
 
 &lt;p&gt;Via &lt;a href='http://www.avc.com/a_vc/2010/08/regulation-strangulation.html'&gt;AVC&lt;/a&gt;.&lt;/p&gt;</content>
- </entry>
- 
- <entry>
-   <title>Apple, iTunes, and Anti-trust</title>
-   <link href="http://ignoredbydinosaurs.com/2010/07/apple-itunes-and-anti-trust"/>
-   <pubDate>2010-07-18T00:00:00-04:00</pubDate>
-   <id>http://ignoredbydinosaurs.com/2010/07/apple-itunes-and-anti-trust</id>
-   <content type="html">&lt;p&gt;I was just thinking about iTunes this morning as I was downloading the &lt;a href='http://www.amazon.com/Lucious-Foot-Chico-Dusty-Explicit/dp/B003TX24OU/ref=sr_1_1?ie=UTF8&amp;s=dmusic&amp;qid=1279501246&amp;sr=8-1'&gt;new Big Boi&lt;/a&gt; record. iTunes is the only option to download music on my iPhone. I&amp;#8217;d rather download music from Amazon mostly because they offer their catalog in mp3 rather than AAC format, because their albums tend to be a dollar cheaper, but mostly I think Apple could use some competition.&lt;/p&gt;
-
-&lt;p&gt;Amazon has the MOST outstanding iPhone app I&amp;#8217;ve ever seen. It&amp;#8217;s not quite as easy as the website for doing heavy research, but only because of the size of the screen. I actually think the interface is better on the iPhone app. All the information you need is right there, and it&amp;#8217;s as intuitively laid out as it could possibly be. You can track your order, the search is fantastic and all of the product reviews are right there. Unfortunately, due to the rules in the iPhone SDK and the restrictions that Apple places on iPhone developers, you can&amp;#8217;t download music from Amazon to your iPhone. There&amp;#8217;s nothing preventing this feature from a technical standpoint, though Apple would argue that outside developers might write crappy software that would degrade the performance of blah blah blah. I don&amp;#8217;t think Amazon writes crappy software. The only real reason is to prevent competition.&lt;/p&gt;
-
-&lt;p&gt;iTunes is the &amp;#8220;largest seller of music on the planet&amp;#8221;. I&amp;#8217;m not in the mood to do any research on the market share of the iPod and the iPhone in terms of smartphones and mp3 players, but it&amp;#8217;s obviously substantial. In terms of mobile delivery of digital music, it&amp;#8217;s a virtual monopoly.&lt;/p&gt;
-
-&lt;p&gt;If/when the DOJ (or more likely the EU) starts making noise about opening anti-trust charges against Apple to force it open it&amp;#8217;s platform up a little bit, I&amp;#8217;ll be cheering them on.&lt;/p&gt;</content>
- </entry>
- 
- <entry>
-   <title>Installing Drush on Media Temple Grid Server</title>
-   <link href="http://ignoredbydinosaurs.com/2010/07/installing-drush-on-media-temple-grid-server"/>
-   <pubDate>2010-07-16T00:00:00-04:00</pubDate>
-   <id>http://ignoredbydinosaurs.com/2010/07/installing-drush-on-media-temple-grid-server</id>
-   <content type="html">&lt;p&gt;&lt;a href='http://drupal.org/project/drush' title='Drush | drupal.org'&gt;Drush&lt;/a&gt; is a tool for working on Drupal websites. It&amp;#8217;s technically filed away on Drupal.org as a &amp;#8220;module&amp;#8221;, but it&amp;#8217;s not exactly a module. It&amp;#8217;s more like an add-on for your webserver setup, either &lt;a href='http://ignoredbydinosaurs.com/2010/01/newby-web-programmer-episode-1'&gt;development&lt;/a&gt; or production, that adds some really useful tools for managing your Drupal website. For instance, those of you familiar with Wordpress might be surprised to know that Drupal has no built in facility for updating either the core Drupal code or any of the add-ons (which go by the name &amp;#8220;Plug-ins&amp;#8221; in Wordpress and &amp;#8220;Modules&amp;#8221; in Drupal). I don&amp;#8217;t have any statistics to back this up, but I think the average Drupal site is built with many more of these open-source-and-constantly-shifting contributions than the typical Wordpress site.&lt;/p&gt;
-
-&lt;p&gt;What all that means is that Drupal is a pain in the ass to maintain. When one of your modules has an update, you get a message that tells you so. These messages come all the time. They never stop, actually. And there&amp;#8217;s no way to make them go away except to go and download the latest version(s) and upload it/them to the server over FTP, hope nothing went wrong with the transfer, and then go and update your DB, more or less manually. Over time, slackness can set in.&lt;/p&gt;
-
-&lt;p&gt;I&amp;#8217;ve been reading about it for several weeks because the most interesting thing it does (to me now) is take care of updating your stuff. The downside for some is that it&amp;#8217;s a command line tool. However, if you like the command line because it makes you feel like a real programmer, you&amp;#8217;re in luck! &lt;code&gt;drush up&lt;/code&gt; updates your site, modules and all by downloading them straight from the Drupal CVS repository, and then running any DB updates for you. &amp;#8220;Magic&amp;#8221;, you might say had you been deprived of this after having tasted Wordpress&amp;#8217; sweet waters.&lt;/p&gt;
-
-&lt;p&gt;I haven&amp;#8217;t even used it yet, but I spent the last two days figuring our how to install it, and found the answer scattered over 3 or 4 different places. Maybe I&amp;#8217;m the only one, but I figured I&amp;#8217;d make it a little easier for the next guy.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href='http://kb.mediatemple.net/questions/16/Connecting+via+SSH+to+your+(gs'&gt;Make sure you know how to use SSH&lt;/a&gt;+Grid-Service &amp;#8220;Connecting via SSH to your (gs) Grid-Service&amp;#8221;) on your grid server account, and log in.&lt;/li&gt;
-
-&lt;li&gt;You will now be at the command line. You want to make sure you are in the home directory, so type:&lt;br /&gt; &lt;code&gt;cd ~/&lt;/code&gt;&lt;/li&gt;
-
-&lt;li&gt;At this point you&amp;#8217;ll create a folder for stuff that you install to live in. Type:&lt;br /&gt; &lt;code&gt;mkdir bin&lt;/code&gt;, and then switch into that directory:&lt;br /&gt; &lt;code&gt;cd bin&lt;/code&gt;&lt;/li&gt;
-
-&lt;li&gt;This command fetches it from drupal.org for you:&lt;br /&gt; &lt;code&gt;wget http://ftp.drupal.org/files/projects/drush-All-versions-3.0-beta1.tar.gz&lt;/code&gt;&lt;br /&gt; in tarball form.&lt;/li&gt;
-
-&lt;li&gt;Untar: &lt;code&gt;tar xzvf drush-All-versions-3.0-beta1.tar.gz&lt;/code&gt;&lt;/li&gt;
-
-&lt;li&gt;Switch into the new &lt;code&gt;drush&lt;/code&gt; folder:&lt;br /&gt; &lt;code&gt;cd drush&lt;/code&gt;&lt;/li&gt;
-
-&lt;li&gt;Take a look at the contents of that folder by typing &lt;code&gt;ls&lt;/code&gt; and make sure everything looks like this: &lt;code&gt;LICENSE.txt  commands  drush.api.php  drush.info  drush_logo-black.png  example.drushrc.php
-README.txt   drush     drush.bat      drush.php   example.drush.inc     includes
-&lt;/code&gt;&lt;/li&gt;
-
-&lt;li&gt;Note the path to that folder by typing: &lt;code&gt;pwd&lt;/code&gt;. &lt;br /&gt; You&amp;#8217;ll get something back like: &lt;code&gt;/home/XXXXX/users/.home/bin/drush&lt;/code&gt;.&lt;br /&gt; The drush command is at the end of that path, and you have to let the server know that now.&lt;br /&gt; Note that everything before &lt;code&gt;bin&lt;/code&gt; can be replaced with &lt;code&gt;~/&lt;/code&gt;.&lt;/li&gt;
-
-&lt;li&gt;Switch back to your FTP client and root around in your server for the &amp;#8220;home&amp;#8221; folder. It&amp;#8217;s going to be back toward the root:&lt;br /&gt;&lt;code&gt;cd ~/users&lt;/code&gt;&lt;/li&gt;
-
-&lt;li&gt;You may or may not see a file named &lt;code&gt;.bash_profile&lt;/code&gt;. Note that it might be hidden depending on your FTP client. If you are sure that it&amp;#8217;s not there, create a file and give it that name.&lt;/li&gt;
-
-&lt;li&gt;MT runs PHP4 on the command line by default. You have to specifically tell it to run Drush with PHP5. Thus, paste this into the file you just created (&lt;code&gt;.bash_profile&lt;/code&gt;).&lt;br /&gt; &lt;code&gt;alias drush=&amp;#39;/usr/bin/php5 ~/bin/drush/drush.php&amp;#39;&lt;/code&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;code&gt;source .bash_profile&lt;/code&gt; to reload the &lt;code&gt;.bash_profile&lt;/code&gt; file.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;God willing, if you type in &lt;code&gt;drush&lt;/code&gt; at this point you are going to get a long list of newly available commands.&lt;/p&gt;
-
-&lt;p&gt;Note that this took me over a month of poking and prodding to get working correctly. Specifically, in contrast to all the Drush installation tutorials I found out there, I had to specifically direct it to the &lt;code&gt;drush.php&lt;/code&gt; file, rather than the generic &lt;code&gt;drush&lt;/code&gt; wrapper file that the tutorials directed me to use when aliasing the Drush command. As usually YMMV.&lt;/p&gt;
-
-&lt;p&gt;Good luck!&lt;/p&gt;
-
-&lt;p&gt;EDIT - September 8, 2010&lt;/p&gt;
-
-&lt;p&gt;I&amp;#8217;ve been having issues with updating the Drupal core with Drush. &lt;code&gt;drush up&lt;/code&gt; works just fine to update any modules, but for some reason I get an error that Drush needs PHP 5.2 when trying to update the core. It seems to kick out of php5 when it gets to Drupal core. I&amp;#8217;ve tried running the full &lt;code&gt;php5 /home/70298/users/.home/bin/drush/drush.php up&lt;/code&gt; and it still says that my cli version of PHP is too old. Any suggestions/workarounds/fixes are most welcome. Thanks, JG.&lt;/p&gt;
-
-&lt;p&gt;EDIT - November 8, 2010 After filing a ticket with Media Temple&amp;#8217;s Awesome Customer Support, they pointed me to a &lt;a href='http://wiki.mediatemple.net/w/GS:Allow_multiple_open_basedir_directories'&gt;knowledge base article on configuring multiple open basedir directories&lt;/a&gt;. I haven&amp;#8217;t had a chance to go through it yet and update the instructions above, but if and when this becomes absolutely necessary to use Drush, I certainly will.&lt;/p&gt;</content>
  </entry>
  
  
