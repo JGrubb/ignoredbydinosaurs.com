@@ -12,7 +12,7 @@ I just realized this weekend that I missed something in Friday's post.
 </ul>
 
 So, if you haven't already, take a look at the dates, and allow me to prepare a meditation on why November seems to be such a drag for touring bands...
-<!--break-->
+
 Surprise!  I'm a cliche!  All of these announcements were dated sometime in November - Billy in '06, Ben in '07, Zac in '08, and myself in '09.  I already asked, what is it about November that makes one of us flip out and quit our band each year?  Well, obviously, all of these bands are summertime festival circuit bands.  That was RRE's bread and butter, sort of like the hippy band equivalent of Black Friday.  Remaining closed on Black Friday is not an option for most retail businesses, just as not hitting the road each summer is not an option for a band that also wishes to remain a viable business.  So, how does that end up laying out your touring year?  We'll start in the spring...
 
 Spring tour is great.  People have been bottled up all winter and are ready to party.  You've had all winter to get creative (or not) and hopefully have a boatload of new tunes ready for your crowd.  These are all club dates since festival season hasn't begun yet, and usually they are packed with a fired up crowd.  You deliver.  Your job is the best one on earth.  March, April, May.

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: On Life After Earth
+published: false
 ---
 I suppose there's a few ways a post with this title could go.  I'm flying back from my first run with the new band, and there were a few themes bouncing around the last couple weeks.  This band is a lot lower overhead.  There's no bus call.  There's no soundguy (although I personally hope that's remedied this year).  Load in and setup take about 15 minutes.  Billy and Drew managed to work out lift passes for us to all get out on the mountain 3 times in the last two weeks.  I grew up skiing a lot in the Rockies with my folks, but had basically taken a 13 year hiatus.  The last time I'd been on a mountain was about 5 years ago on the Honkytonk/Railroad tour in 2006, so I had forgotten how much I love skiing until about 100 yards into our first run at Jackson Hole (an amazing mountain).
 

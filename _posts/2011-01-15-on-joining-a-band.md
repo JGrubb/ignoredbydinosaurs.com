@@ -1,6 +1,7 @@
 ---
 title: On Joining A Band
 layout: post
+published: false
 ---
 Hi.  It's been a busy couple of weeks.  I've been on the road for the last week driving myself all over the northeast with Tao Seegar, George Kilby, Andrew McConathy and a couple of other dudes in what has turned out to be a warm up run for rejoining music playing society in a couple of weeks.  I always write the best blog posts about the most elaborately thoughtful and incisive topics when I'm driving and listening to music.  No, really!  Alas, as my hands are usually full at the time, most of them go by never being committed to bytes.  However, I've had lots of time to sit and think this week about what motivates me professionally.
 
