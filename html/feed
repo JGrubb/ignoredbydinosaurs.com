@@ -4,13 +4,31 @@
  <title>Ignored By Dinosaurs</title>
  <link href="http://ignoredbydinosaurs.com/feed" rel="self"/>
  <link href="http://ignoredbydinosaurs.com/"/>
- <updated>2011-02-25T08:16:36-05:00</updated>
+ <updated>2011-03-11T13:55:48-05:00</updated>
  <id>http://ignoredbydinosaurs.com/</id>
  <author>
    <name>J Grubb</name>
    <email>therealjohnnygrubb@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Title</title>
+   <link href="http://ignoredbydinosaurs.com/2011/03/the-url-of-this-post"/>
+   <pubDate>2011-03-11T00:00:00-05:00</pubDate>
+   <id>http://ignoredbydinosaurs.com/2011/03/the-url-of-this-post</id>
+   <content type="html">&lt;p&gt;It has been a week. I&amp;#8217;ve been working lately on a site for a non-prof out in California. Their mission is the spread of invasive plant species in California. I built them a system to allow the crowdsourcing of their Spring Nursery Survey, which is where they send folks out to various botanical nurseries around the state and make sure that they aren&amp;#8217;t selling any plants that they shouldn&amp;#8217;t be selling.&lt;/p&gt;
+
+&lt;p&gt;It&amp;#8217;s not illegal to sell invasive plant species, most of them are quite pretty. It&amp;#8217;s only when they jump the garden fence and escape into the wild that they become a problem. Being invasive means basically that they grow totally out of control, a big problem in a wildfire prone state like CA.&lt;/p&gt;
+
+&lt;p&gt;Anyhoo, what I&amp;#8217;ve done is build them a system that allows them to work a base of volunteers across the state to go out to nurseries and send back information about those nurseries and whether or not they&amp;#8217;re selling some of this stuff that maybe they shouldn&amp;#8217;t be. It&amp;#8217;s an almost perfect use case for Drupal, so that kept me busy much of last month.&lt;/p&gt;
+
+&lt;p&gt;This month is two brand new clients from Austin, TX. One was already built and launched in a big old Wordpress sprint, and the other is my first legit &amp;#8220;enterprise&amp;#8221; client - a large Drupal setup on which I am now the sole developer.&lt;/p&gt;
+
+&lt;p&gt;I&amp;#8217;m ready to play some music, but it&amp;#8217;s kind of a good thing for the bottom line that I can&amp;#8217;t this month. The end of this month ushers in festival season for me. To say I&amp;#8217;m excited is nowhere near enough.&lt;/p&gt;
+
+&lt;p&gt;I really need to work up a new design. Later&amp;#8230;&lt;/p&gt;</content>
+ </entry>
  
  <entry>
    <title>Meta</title>
@@ -561,20 +579,6 @@ We just need to choose not to discriminate on the web and thereby maintain the w
 &lt;p&gt;Make no mistake. If this happens it &lt;strong&gt;will&lt;/strong&gt; be a very bad thing for America.&lt;/p&gt;
 
 &lt;p&gt;Via &lt;a href='http://www.avc.com/a_vc/2010/08/regulation-strangulation.html'&gt;AVC&lt;/a&gt;.&lt;/p&gt;</content>
- </entry>
- 
- <entry>
-   <title>Apple, iTunes, and Anti-trust</title>
-   <link href="http://ignoredbydinosaurs.com/2010/07/apple-itunes-and-anti-trust"/>
-   <pubDate>2010-07-18T00:00:00-04:00</pubDate>
-   <id>http://ignoredbydinosaurs.com/2010/07/apple-itunes-and-anti-trust</id>
-   <content type="html">&lt;p&gt;I was just thinking about iTunes this morning as I was downloading the &lt;a href='http://www.amazon.com/Lucious-Foot-Chico-Dusty-Explicit/dp/B003TX24OU/ref=sr_1_1?ie=UTF8&amp;s=dmusic&amp;qid=1279501246&amp;sr=8-1'&gt;new Big Boi&lt;/a&gt; record. iTunes is the only option to download music on my iPhone. I&amp;#8217;d rather download music from Amazon mostly because they offer their catalog in mp3 rather than AAC format, because their albums tend to be a dollar cheaper, but mostly I think Apple could use some competition.&lt;/p&gt;
-
-&lt;p&gt;Amazon has the MOST outstanding iPhone app I&amp;#8217;ve ever seen. It&amp;#8217;s not quite as easy as the website for doing heavy research, but only because of the size of the screen. I actually think the interface is better on the iPhone app. All the information you need is right there, and it&amp;#8217;s as intuitively laid out as it could possibly be. You can track your order, the search is fantastic and all of the product reviews are right there. Unfortunately, due to the rules in the iPhone SDK and the restrictions that Apple places on iPhone developers, you can&amp;#8217;t download music from Amazon to your iPhone. There&amp;#8217;s nothing preventing this feature from a technical standpoint, though Apple would argue that outside developers might write crappy software that would degrade the performance of blah blah blah. I don&amp;#8217;t think Amazon writes crappy software. The only real reason is to prevent competition.&lt;/p&gt;
-
-&lt;p&gt;iTunes is the &amp;#8220;largest seller of music on the planet&amp;#8221;. I&amp;#8217;m not in the mood to do any research on the market share of the iPod and the iPhone in terms of smartphones and mp3 players, but it&amp;#8217;s obviously substantial. In terms of mobile delivery of digital music, it&amp;#8217;s a virtual monopoly.&lt;/p&gt;
-
-&lt;p&gt;If/when the DOJ (or more likely the EU) starts making noise about opening anti-trust charges against Apple to force it open it&amp;#8217;s platform up a little bit, I&amp;#8217;ll be cheering them on.&lt;/p&gt;</content>
  </entry>
  
  
