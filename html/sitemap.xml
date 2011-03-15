@@ -5,9 +5,16 @@
   http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 	<url>
 		<loc>http://ignoredbydinosaurs.com</loc>
-		<lastmod>2011-03-11</lastmod>
+		<lastmod>2011-03-15</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>1.0</priority>
+	</url>
+	
+	<url>
+		<loc>http://ignoredbydinosaurs.com/2011/03/what-really-killed-the-music-industry</loc>
+		<lastmod>2011-03-15</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
 	</url>
 	
 	<url>
