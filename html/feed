@@ -4,13 +4,39 @@
  <title>Ignored By Dinosaurs</title>
  <link href="http://ignoredbydinosaurs.com/feed" rel="self"/>
  <link href="http://ignoredbydinosaurs.com/"/>
- <updated>2011-03-15T08:38:32-04:00</updated>
+ <updated>2011-04-27T17:55:02-04:00</updated>
  <id>http://ignoredbydinosaurs.com/</id>
  <author>
    <name>J Grubb</name>
    <email>therealjohnnygrubb@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Bluegrass fans</title>
+   <link href="http://ignoredbydinosaurs.com/2011/04/bluegrass-cont"/>
+   <pubDate>2011-04-27T00:00:00-04:00</pubDate>
+   <id>http://ignoredbydinosaurs.com/2011/04/bluegrass-cont</id>
+   <content type="html">&lt;p&gt;Regarding &lt;a href='http://chrispandolfi.com/?p=567'&gt;Pandolfi's recent pot stirrer&lt;/a&gt;:&lt;/p&gt;
+
+&lt;p&gt;It&amp;#8217;s pretty much all been said out there, but I&amp;#8217;ll tell you what gets me going to the point that I have to write about it. It&amp;#8217;s when I read comments like this one -&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Bands like Railroad Earth, Green Sky, Yonder Mountain, Infamous Stringdusters, etc. are going to be labeled bluegrass and I think that&amp;#8217;s fine&amp;#8230;.as long as they understand where the roots of the music came from and they have an understanding and respect for that.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Get stuffed. We&amp;#8217;re all out here working as hard as we can to live doing what we love. You are the armchair quarterbacking internet dweller. For us to care about whether or not you approve of our reverence for tradition or the lack thereof would render us unable to do our jobs.&lt;/p&gt;
+
+&lt;p&gt;Same dude, same comment -&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;The only thing I wish is that these newer grassy bands stop all playing solely through pickups and get some high quality mics, like the Punch Brothers or the Jaybirds. I went to a Yonder Mountain show 2 weeks ago and I cringed every time I heard Jeff Austin solo with his pickup-burdened Nugget. He might of well had a Michael Kelly or something as it would have sounded the same. Sorry if that&amp;#8217;s harsh&amp;#8230;just not a big fan of his style or sound, I guess.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;We&amp;#8217;ve already established our freedom to an opinion, but had you ever done any touring you&amp;#8217;d probably have realized the technical and acoustical limitations of playing with live microphones on loud stages. They don&amp;#8217;t make the sound better. Period. Ever. I&amp;#8217;ve never heard of the Jaybirds, but I&amp;#8217;m guessing the crowd that the Punch Brothers primarily plays to is a very quiet crowd. Good for them. Obviously some of us prefer a different setting.&lt;/p&gt;
+&lt;object height='390' width='640'&gt;&lt;param name='movie' value='http://www.youtube.com/v/fCV8qHmkEHk?fs=1&amp;amp;hl=en_US&amp;amp;rel=0' /&gt;&lt;param name='allowFullScreen' value='true' /&gt;&lt;param name='allowscriptaccess' value='always' /&gt;&lt;embed src='http://www.youtube.com/v/fCV8qHmkEHk?fs=1&amp;amp;hl=en_US&amp;amp;rel=0' allowfullscreen='true' type='application/x-shockwave-flash' allowscriptaccess='always' height='390' width='640' /&gt;&lt;/object&gt;
+&lt;p&gt;By the way, Andy Hall came to the Nashville show last night and helped us destroy the place.&lt;/p&gt;</content>
+ </entry>
  
  <entry>
    <title>What really killed the music industry...</title>
@@ -550,32 +576,6 @@ and your comments will be gone.&lt;/li&gt;
 &lt;p&gt;Anyway, my point was that Anil&amp;#8217;s blog has seen a lot more interesting action lately, which is cool because he&amp;#8217;s got some really interesting takes on some of the business out there and the culture that goes with it. Enjoy.&lt;/p&gt;
 
 &lt;p&gt;jg&lt;/p&gt;</content>
- </entry>
- 
- <entry>
-   <title>Real innovation in the publishing industry</title>
-   <link href="http://ignoredbydinosaurs.com/2010/09/real-innovation-publishing-industry"/>
-   <pubDate>2010-09-01T00:00:00-04:00</pubDate>
-   <id>http://ignoredbydinosaurs.com/2010/09/real-innovation-in-the-publishing-industry</id>
-   <content type="html">&lt;p&gt;And I&amp;#8217;m not talking about the iPad. The iPad is so cool I still haven&amp;#8217;t had the opportunity to play with one yet, but from a hundred miles up it&amp;#8217;s still just one of the bazillion devices that fall into the terrifically broad and jam-packed category of &amp;#8220;gadgets to read stuff on the internet&amp;#8221;. &amp;#8221;&lt;a href='http://unsuck-it.com/consume-content/'&gt;Consume content&lt;/a&gt;&amp;#8221; is the hipster way of saying it. It&amp;#8217;s an obviously lucrative market, which is why it gets the attention of so many innovators. Well and good, but what about people who &amp;#8220;produce content&amp;#8221;, we&amp;#8217;ll call them writers and publishers from now on&amp;#8230;&lt;/p&gt;
-
-&lt;p&gt;I finally experimented today with a service that I signed up for several months ago but never spent the 45 minutes to learn how to get it going. It&amp;#8217;s called &lt;a href='http://typekit.com/'&gt;Typekit&lt;/a&gt;. The idea is &lt;em&gt;so&lt;/em&gt; simple and &lt;em&gt;so&lt;/em&gt; brilliant. Allow me&amp;#8230;&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;&amp;amp;lt;geek content &amp;amp;lt;!--feel free to skip ahead--&amp;amp;gt; &amp;amp;gt;&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;There&amp;#8217;s a fundamental issue when you&amp;#8217;re building a website that most people probably aren&amp;#8217;t aware of at all. The issue is the limited number of fonts that you can reliably use to set the type on said website. The vast majority of the world is browsing your site on a Windows computer with a standard set of fonts installed on it. Yes, fonts are installed on your computer. It&amp;#8217;s a weird concept. When you browse to a website, that website tells your browser what font it would prefer to have used when the browser shows you that webpage. It&amp;#8217;s not at all uncommon for the designer to want to use a font that&amp;#8217;s not installed on that computer. There are only about a dozen or so &amp;#8221;&lt;a href='http://www.ampsoft.net/webdesign-l/WindowsMacFonts.html'&gt;web-safe fonts&lt;/a&gt;&amp;#8221; that you can rely on, and it gets old really fast using those same fonts over and over and over. If the designer wants to work outside that box a little he may ask the browser to call a more exotic font, but he&amp;#8217;ll also specify what he wants used if that font doesn&amp;#8217;t exist on the user&amp;#8217;s computer. Confused yet? An example perhaps&amp;#8230;&lt;/p&gt;
-&lt;p style='font-family:arial'&gt;This is a sentence set in Arial.&lt;/p&gt;&lt;p style='font-family:&amp;apos;lucida grande&amp;apos;'&gt;This is a sentence set in Lucida Grande&lt;/p&gt;&lt;p style='font-family:georgia'&gt;This is a sentence set in Georgia&lt;/p&gt;&lt;p style='font-family:&amp;apos;courier new&amp;apos;'&gt;This is a sentence set in Courier New&lt;/p&gt;
-&lt;p&gt;That&amp;#8217;s all cool, but what if you want to use something more exotic to give the name of the site &lt;a href='http://twitter.com/'&gt;a bit more branded flair&lt;/a&gt;? Well, in the case of Twitter and most every other website on Earth that means firing up Photoshop and making it there. You get many more fonts to choose from and you can always make your own if you want. Photoshop then spits out your cool text as an image. Yes, that Twitter logo is an image, not HTML text. That means that every browser renders it just like you want it, but it also means that it&amp;#8217;s a relative pain to change and that search engines can&amp;#8217;t tell what it says unless you fill in a bunch of info about it. HTML is preferable for anything that&amp;#8217;s meant to be read, but then you only get those dozen fonts. Double rainbow of a bummer.&lt;/p&gt;
-
-&lt;p&gt;So Typekit has a service that lets you use a whole bunch of different fonts, served up to every browser that&amp;#8217;s reasonably modern. I won&amp;#8217;t bore you with the details (that&amp;#8217;s for another post), but it&amp;#8217;s a serious lifesaver. I&amp;#8217;m working on a site right now and &lt;span style='font-family:&amp;apos;myriad pro&amp;apos;'&gt;my favorite Myriad Pro&lt;/span&gt; just ain&amp;#8217;t doin&amp;#8217; it for the site header when it&amp;#8217;s set 3 inches tall. For a variety of reasons I didn&amp;#8217;t want to go to Photoshop, so I dove in and tried out Typekit. I soon came upon a cool font called &lt;h2 class='tk-cody bigger'&gt;Cody something or other&lt;/h2&gt;&lt;/p&gt;
-
-&lt;p&gt;Not exactly what the designer used, but vastly more stylish than Myriad.&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;&amp;amp;lt;/geek content&amp;amp;gt;&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;Now, here&amp;#8217;s why this is cool for all of us. Services like this are actually starting to focus on the &amp;#8220;production&amp;#8221; end of the content business. That&amp;#8217;s a very good thing for all of us. That means that the web is finally hitting puberty as a publishing medium. &lt;a href='http://takeoutphoto.blogspot.com/2008/09/psychology-of-typeface.html'&gt;There's a reason that there are a million different fonts in the world&lt;/a&gt;, because an all Courier world would be very boring indeed. It&amp;#8217;s a terrible thing that most websites only get a choice of a dozen different fonts, but it&amp;#8217;s a wonderful thing that someone is putting their head toward solving this problem for us all. I personally think that this is a BIG market waiting to happen. Get in now.&lt;/p&gt;
-
-&lt;p&gt;Speaking of BIG markets waiting to happen, has anyone tried out &lt;a href='https://www.greplin.com/'&gt;Greplin&lt;/a&gt; yet?&lt;/p&gt;</content>
  </entry>
  
  
