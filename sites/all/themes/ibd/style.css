@@ -1,0 +1,196 @@
+html {
+	background-color: #F0F7F9;
+}
+
+body {
+	height: 100%;
+	font-size: 15px;
+	color: #757b7c;
+	background-color: #F0F7F9;
+	background-image: url('/images/bg.jpg') top right no-repeat;
+}
+
+a {
+	color: #444;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #999999;
+}
+
+.site-name {
+	font-weight: normal;
+}
+
+#header {
+	height: 105px;
+}
+
+#header ul.menu {
+	height: 20px;
+}
+
+#header ul.menu li {
+	float: left;
+	margin-right: 20px;
+}
+
+#branding {
+	height: 42px;
+	margin: 58px 0 0;
+}
+
+.site-name {
+	font-size: 90px;
+}
+
+#navigation {
+	float: right;
+	margin-bottom: 10px;
+}
+
+#page {
+	padding: 0 0 20px;
+	font-size: 16px;
+	line-height: 20px;
+}
+
+
+#page .node-content a:hover {
+	text-decoration: none;
+}
+
+#main {
+	padding-top: 20px;
+}
+
+ul.links {
+	margin-top: 10px;
+}
+
+ul.links li a {
+	margin-right: 10px;
+	padding: 3px 6px;
+}
+
+ul.links li a:active {
+	padding: 4px 6px 2px;
+}
+
+.links .pager-current {
+	margin-right: 10px;
+	background-color: #ccc;
+	color:#444;
+	padding: 3px 6px;
+	border: 1px solid #ddd;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	font-weight: normal;
+}
+
+.node-title,
+.page-title {
+	font-size: 26px;
+}
+
+.node-content {
+	margin-top: 16px;
+}
+
+.node p {
+	line-height: 24px;
+}
+
+.node-submitted {
+	margin-top: 10px;
+	font-style: italic;
+}
+
+.node {
+}
+
+.front .node {
+	padding: 15px 0;
+}
+
+.front #content {
+	margin-top: -15px;
+}
+
+#comments {
+	padding-top: 15px;
+}
+
+#block-views-recent_posts-block_1,
+#block-statistics-0 {
+	padding-left: 10px;
+	padding-top: 15px;
+	margin-top: 17px;\}
+
+#block-views-recent_posts-block_1 .views-row,
+#block-statistics-0 li {
+	margin: 8px 0;
+}
+
+#search-block-form {
+	margin:0 0 30px;
+}
+
+#search-block-form label {
+	visibility: hidden;
+}
+
+#search-block-form input {
+	border-radius:3px;
+	-moz-border-radius: 3px;
+	font-size: 15px;
+	padding: 3px 5px;
+	display: block;
+	width:75%;
+	margin-bottom: 8px;
+	color:#999;
+}
+
+#search-block-form #edit-submit {
+	width:70px;
+	border: 1px solid #ccc;
+	background-color: #cbcbcb;
+	color:#444;
+	font-size: 12px;
+	font-weight: normal;
+	border:1px solid #cbcbcb;
+}
+
+#search-block-form #edit-submit:hover {
+	border-color: #999;
+}
+
+#footer {
+	height: 160px;
+}
+
+#user-login-form .form-item {
+	float:left;
+	margin-right: 15px;
+	width: 140px;
+	}
+
+#user-login-form input {
+	width: 90%;
+	font-size: 1.2em;
+	padding: 2px 5px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	background-color: #FFF7FF;
+	color: #919999;
+}
+
+#user-login-form .form-submit {
+	clear: both;
+	background-color: #FFF7FF;
+	width: 80px;
+	border: 1px solid #f1f1f1;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	}

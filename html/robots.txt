@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-# Hello, thank you for viewing my robots.txt file.  I hope that you'll find it spartan, yet functional.  If you're the kind of person that looks at a file like this, please get in touch.

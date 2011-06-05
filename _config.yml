@@ -1,3 +1,0 @@
-permalink: /:year/:month/:title
-destination: html
-server: true

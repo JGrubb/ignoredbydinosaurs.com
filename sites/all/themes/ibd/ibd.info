@@ -1,0 +1,18 @@
+name = "iBD"
+description = "My theme."
+base theme = "tao"
+core = "6.x"
+engine = "phptemplate"
+
+regions[left] = "Left sidebar"
+regions[right] = "Right sidebar"
+regions[content_top] = "Content Top"
+regions[content] = "Content"
+regions[header] = "Header"
+regions[footer] = "Footer"
+
+scripts[] = "js/twitter.js"
+
+stylesheets[all][] = "reset.css"
+stylesheets[all][] = "960.css"
+stylesheets[all][] = "style.css"

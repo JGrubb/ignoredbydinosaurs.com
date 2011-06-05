@@ -1,0 +1,21 @@
+body {
+	color:#444;
+	font:16px/1.5 "lucida grande", helvetica, arial, sans-serif;
+}
+
+p {
+	line-height:1.5;
+}
+
+#header {
+	background:#444;
+}
+
+#branding {
+
+}
+
+.logo {
+	font-size:2em;
+	padding:1em 0;
+}
