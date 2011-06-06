@@ -2,3 +2,5 @@ sites/default/settings.php
 css/*
 js/*
 backup/*
+sites/default/files/js/*
+sites/default/files/backup_migrate/*
