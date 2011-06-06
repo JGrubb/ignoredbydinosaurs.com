@@ -1,0 +1,190 @@
+<?php
+
+/**
+ * @file
+ * Provides any required installation or upgrade path requirements.
+ */
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function disqus_uninstall() {
+  variable_del('disqus_domain');
+  variable_del('disqus_userapikey');
+  variable_del('disqus_nodetypes');
+  variable_del('disqus_developer');
+  variable_del('disqus_sso');
+  variable_del('disqus_secretkey');
+  variable_del('disqus_publickey');
+  drupal_uninstall_schema('disqus');
+}
+
+/**
+ * Implementation of hook_install().
+ */
+function disqus_install() {
+  drupal_install_schema('disqus');
+}
+
+/**
+ * Implementation of hook_schema().
+ */
+function disqus_schema() {
+  $schema = array();
+  $schema['disqus'] = array(
+    'fields' => array(
+      'did' => array(
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'nid' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'status' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array('did'),
+    'indexes' => array(
+      'nid' => array('nid'),
+      'status' => array('status'),
+    ),
+  );
+  return $schema;
+}
+
+
+/**
+ * Updates the paths on the Disqus side to use the straight node URLs instead of the aliases.
+ */
+function disqus_update_6000(&$sandbox = NULL) {
+  $ret = array();
+  $domain = variable_get('disqus_domain', '');
+  // Only process if the path module is enabled.
+  if (module_exists('path') && !empty($domain)) {
+    $user_api_key = variable_get('disqus_userapikey', '');
+    $forum_api_key = NULL;
+    // This could be expensive, so we stick it in a batch.
+    if (!isset($sandbox['progress'])) {
+      // Make sure we have a User API key.
+      if (empty($user_api_key)) {
+        return array(
+          '#abort' => array(
+            'success' => FALSE,
+            'query' => t('Visit <a href="@settings">the Disqus settings</a> first and put in your User API Key.', array('@settings' => url('admin/settings/disqus'))), 
+          ),
+        );
+      }
+
+      // Update the thread on the Disqus end.
+      $disqus = disqus($user_api_key);
+      try {
+        $forums = $disqus->get_forum_list();
+      }
+      catch (DisqusException $exception) {
+        return array(
+          '#abort' => array(
+            'success' => FALSE,
+            'query' => t('Error retrieving forum list from Disqus. It is recommended you <a href="?op=selection">try again</a>.'),
+          ),
+        );
+      }
+
+      // Find the forum information.
+      $forum = NULL;
+      foreach ($forums as $forum_details) {
+        if ($forum_details->shortname == $domain) {
+          $forum = $forum_details;
+          break;
+        }
+      }
+      if (!isset($forum)) {
+        return array(
+          '#abort' => array(
+            'success' => FALSE,
+            'query' => t('Disqus forum %domain not found. Check your <a href="@settings">settings</a> and then <a href="?op=selection">try again</a>.', array('%domain' => $domain, '@settings' => url('admin/settings/disqus'))),
+          ),
+        );
+      }
+
+      // Retrieve the forum API key.
+      try {
+        $forum_api_key = $disqus->get_forum_api_key($forum->id);
+      }
+      catch (DisqusException $exception) {
+        return array(
+          '#abort' => array(
+            'success' => FALSE,
+            'query' => t('Could not retrieve the forum API key for %name. It is recommended you <a href="?op=selection">try again</a>.', array('%name' => $forum->name)),
+          ),
+        );
+      }
+
+      // Setup the batch API.
+      $sandbox['forum_api_key'] = $forum_api_key;
+      $sandbox['progress'] = 0;
+      $sandbox['current_pid'] = 0;
+      $sandbox['max'] = db_result(db_query('SELECT COUNT(DISTINCT pid) FROM {url_alias} WHERE src LIKE "node/%"'));
+    }
+
+    // Create the disqus interface.
+    $disqus = disqus($user_api_key, $sandbox['forum_api_key']);
+
+    // Go through each node and update the path on the Disqus end in batches.
+    $url_aliases = db_query_range("SELECT pid, dst, src FROM {url_alias} WHERE pid > %d AND src LIKE 'node/%' ORDER BY pid ASC", $sandbox['current_pid'], 0, 5);
+    while ($alias = db_fetch_object($url_aliases)) {
+      // Retrieve the thread to update.
+      try {
+        // Retrieve the thread with the alias.
+        $url = url($alias->src, array(
+          'absolute' => TRUE,
+        ));
+        $thread = $disqus->get_thread_by_url($url);
+      }
+      catch (DisqusException $exception) {
+        return array(
+          '#abort' => array(
+            'success' => FALSE,
+            'query' => t('Failed to retrieve thread information for %url.', array('%url' => $url)),
+          ),
+        );
+      }
+
+      // Update the thread with the original node path rather then its alias.
+      if (isset($thread)) {
+        // Retrieve the path without the alias.
+        $url = url($alias->src, array(
+          'absolute' => TRUE,
+          'alias' => TRUE, // State that it's already an alias.
+        ));
+        try {
+          $disqus->update_thread($thread->id, array('url' => $url));
+        }
+        catch (DisqusException $exception) {
+          // Don't exit if updating the thread fails.
+        }
+      }
+
+      // Move the progress bar forward.
+      $sandbox['progress']++;
+      $sandbox['current_pid'] = $alias->pid;
+    }
+
+    // Update the finished status.
+    $ret['#finished'] = empty($sandbox['max']) ? 1 : ($sandbox['progress'] / $sandbox['max']);
+  }
+  return $ret;
+}
+
+/**
+ * Update to add the new schema.
+ */
+function disqus_update_6001(&$sandbox = NULL) {
+  return drupal_install_schema('disqus');
+}

@@ -1,0 +1,63 @@
+<?php
+
+/**
+ * @file
+ * The install and update hooks for the Disqus module.
+ */
+
+/**
+ * Implementation of hook_install().
+ */
+function disqus_migrate_install() {
+  // Create the table.
+  drupal_install_schema('disqus_migrate');
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function disqus_migrate_uninstall() {
+  // Remove the table.
+  drupal_uninstall_schema('disqus_migrate');
+}
+
+/**
+ * Implementation of hook_schema().
+ */
+function disqus_migrate_schema() {
+  $schema['disqus_migrate_export'] = array(
+    'description' => 'The base table for nodes.',
+    'fields' => array(
+      'did' => array(
+        'description' => 'The primary identifier for the Disqus comment.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'cid' => array(
+        'description' => 'The current {comments}.cid comment identifier.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'fid' => array(
+        'description' => 'The Disqus forum identifier.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array('did'),
+  );
+  return $schema;
+}
+
+/**
+ * Installs the disqus export schema.
+ */
+function disqus_migrate_update_6100() {
+  drupal_install_schema('disqus_migrate');
+  return array();
+}
