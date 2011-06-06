@@ -105,8 +105,6 @@ DirectoryIndex index.php
   # If your site is running in a VirtualDocumentRoot at http://example.com/,
   # uncomment the following line:
   # RewriteBase /
-  RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
-  RewriteRule ^(.*)$ http://%1%{REQUEST_URI} [L,R=301]
 
   # Rewrite URLs of the form 'x' to the form 'index.php?q=x'.
   RewriteCond %{REQUEST_FILENAME} !-f
@@ -115,6 +113,4 @@ DirectoryIndex index.php
   RewriteRule ^(.*)$ index.php?q=$1 [L,QSA]
 </IfModule>
 
-# $Id: .htaccess,v 1.90.2.5 2010/02/02 07:25:22 dries Exp $
-
-AddHandler php5-script .php
+# $Id$
