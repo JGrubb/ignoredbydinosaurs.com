@@ -13,3 +13,6 @@ regions[footer] = "Footer"
 
 stylesheets[screen][] = "css/960.css"
 stylesheets[screen][] = "css/style.css"
+stylesheets[screen][] = "css/nivo-slider.css"
+
+scripts[] = js/scripts.js

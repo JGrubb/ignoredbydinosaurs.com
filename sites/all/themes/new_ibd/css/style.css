@@ -23,3 +23,67 @@ a {
 .logo a {
 	text-decoration:none;
 }
+
+.primary-tabs a {
+	margin-right:5px;
+	padding:0 5px;
+	text-decoration:none;
+	border:1px solid #ccc;
+	border-radius:2px;
+}
+
+.home-copy {
+	text-align:justify;
+}
+
+.home-copy h1 {
+	font-size:1.5em;
+}
+
+.slideshow img {
+	margin:0 auto;
+	padding:5px;
+	background:#f4f4f4;
+	border:1px solid #ddd;
+	border-radius:3px;
+}
+
+.teaser-header {
+	text-align:center;
+	font-size:1.5em;
+	font-style:italic;
+	color:#666;
+}
+
+#block-views-home_teasers-block_1 {
+	margin-top:2em;
+	padding-top:1em;
+	border-top:5px solid #eee;
+}
+
+.view-home-teasers .views-row {
+	width:30%;
+	float:left;
+	padding:1em 1.5%;
+}
+
+.view-id-archive .views-field-created {
+	font-size:14px;
+	font-style:italic;
+}
+
+.view-id-archive .views-row {
+	margin:1em auto;
+}
+
+.page-taxonomy h1.page-title {
+	text-align:center;
+	font-size:1.5em;
+	font-weight:100;
+	margin-bottom:1em;
+}
+
+#block-views-categories-block_1 .block-title {
+	font-size:1.2em;
+	text-align:center;
+}

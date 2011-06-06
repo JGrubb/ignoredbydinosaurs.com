@@ -56,6 +56,11 @@
   </div></div>
 
   <?php print $scripts ?>
+	<script type="text/javascript">
+	$(document).ready(function() {
+		$('.slideshow').cycle();
+	});
+	</script>
   <?php print $closure ?>
 
   </body>
