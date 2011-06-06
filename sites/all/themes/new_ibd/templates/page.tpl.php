@@ -4,6 +4,8 @@
     <?php print $head ?>
     <?php print $styles ?>
     <title><?php print $head_title ?></title>
+		<script type="text/javascript" src="http://use.typekit.com/dqg8end.js"></script>
+		<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
   </head>
   <body <?php print drupal_attributes($attr) ?>>
 
