@@ -1,6 +1,5 @@
 <?php
 
-// $Id: nodewords.api.php,v 1.1.2.17 2010/04/18 14:16:48 kiam Exp $
 
 /**
  * @file.
@@ -8,27 +7,45 @@
  */
 
 /**
- * The hook is used from nodewords.module to know which API is supported by the
- * the module.
+ * Reports the API is supported by the modules implementing meta tags.
  *
  * @return
  * An array containing the following indexes:
  *
- *   - api - the API version used by the module; basing on this value
+ *   - path - the path where the files for the integration with Nodewords are
+ *     placed.
+ *   - version - the API version used by the module; basing on this value
  *     Nodewords will take the necessary steps to assure to keep the module
  *     compatible with Nodewords, The minimum API currently supported by the
  *     module is contained in the constant NODEWORDS_MINIMUM_API_VERSION, and
  *     the current API version is contained in the constant
  *     NODEWORDS_API_VERSION.
- *   - path - the path where the files for the integration with Nodewords are
- *     placed.
 */
 function hook_nodewords_api() {
-  return array('api' => '1.12', 'path' => '');
+  return array('version' => '1.14', 'path' => '');
 }
 
 /**
- * This hook allow modules to be notified when meta tags are deleted.
+ * Alters the default meta tags values.
+ *
+ * @param &$values
+ *  The array of default meta tags values.
+ * @param $parameters
+ *  An array of parameters. The currently defined are:
+ *   * type - the type of object for the page to which the meta
+ *     tags are associated.
+ *   * id - The ID for the object associated with the page.
+ *   * phase - when it's 'pre_load', the hook is called before the meta tags
+ *     loaded from the database.
+ */
+function hook_nodewords_default_values_alter(&$values, $parameters) {
+  if (!empty($values['abstract']) && $parameters['type'] == NODEWORDS_TYPE_USER) {
+    $values['abstract'] = t('User profile');
+  }
+}
+
+/**
+ * Notifies modules when meta tags are deleted.
  *
  * @param $options.
  *   An array of options that allows to identify the meta tags being deleted.
@@ -40,7 +57,54 @@ function hook_nodewords_delete_tags($options) {
 }
 
 /**
- * This hook declares the meta tags implemented by the module.
+ * Changes the permission a user has on the meta tags being edited.
+ *
+ * @param &$permission
+ *   TRUE, if the user can edit the current meta tag.
+ * @param $object
+ *   An array describing the object to which the meta tag are associated.
+ * @param $tag_name
+ *   The name of the meta tag.
+ * @param $tag_info
+ *   An array describing the meta tag.
+ */
+function hook_nodewords_tags_permission_alter(&$permission, $object, $tag_name, $tag_info) {
+  global $user;
+  if (user_access('administer meta tags')) {
+    $permission = TRUE;
+    return;
+  }
+
+  if ($object['type'] == 'node' && ($node = node_load($options['id']))) {
+    if ($user->uid == $node->uid && user_access("edit one's own node meta tags")) {
+      $permission = TRUE;
+      return;
+    }
+
+    if (user_access('edit any node meta tags')) {
+      $permission = TRUE;
+    }
+    else {
+      $permission = FALSE;
+    }
+  }
+  elseif ($object['type'] == 'user' && ($account = user_load($object['id']))) {
+    if ($user->uid == $account->uid && user_access("edit one's own user profile meta tags")) {
+      $permission = TRUE;
+      return;
+    }
+
+    if (user_access('edit any user profile meta tags')) {
+      $permission = TRUE;
+    }
+    else {
+      $permission = FALSE;
+    }
+  }
+}
+
+/**
+ * Declares the meta tags implemented by the module.
  *
  *
  * @return
@@ -77,8 +141,10 @@ function hook_nodewords_tags_info() {
       'callback' => 'nodewords_extra_location',
       'label' => t('Location'),
       'templates' => array(
-        'geo.position' => NODEWORDS_META,
-        'icbm' => NODEWORDS_META,
+        'head' => array(
+          'geo.position' => NODEWORDS_META,
+          'icbm' => NODEWORDS_META,
+        )
       ),
     ),
   );
@@ -86,6 +152,14 @@ function hook_nodewords_tags_info() {
   return $tags;
 }
 
+/**
+ * Alters the meta tags description passed by other modules.
+ *
+ * @param &$tags_info
+ *   The array containing the information about the implemented meta tags.
+ *
+ * @see hook_nodewords_tags_info().
+ */
 function hook_nodewords_tags_info_alter(&$tags_info) {
   if (isset($tags_info['abstract'])) {
     $tags_info['abstract']['label'] = t('New label for abstract');
@@ -93,7 +167,7 @@ function hook_nodewords_tags_info_alter(&$tags_info) {
 }
 
 /**
- * Alter the meta tags content.
+ * Alters the meta tags content.
  *
  * @param &$tags
  *  The array of meta tags values.
@@ -112,7 +186,8 @@ function hook_nodewords_tags_alter(&$tags, $parameters) {
 }
 
 /**
- * Alter the string containing the meta tags output; it is called when the meta tags are already rendered.
+ * Alters the meta tags output.
+ * The hook is called when the meta tags are already rendered.
  *
  * @param &$output
  *  The string to alter.
@@ -139,9 +214,7 @@ function hook_nodewords_tags_output_alter(&$output, $parameters) {
 }
 
 /**
- * The hook is used from the module to determinate the type of the object
- * associated with the currently viewed page (node, user, taxonomy term), and
- * the ID of the object.
+ * Determinates the type of the object associated with the viewed page.
  *
  * @param &$result
  *   the array used to write the result.
@@ -157,4 +230,3 @@ function hook_nodewords_type_id(&$result, $arg) {
     }
   }
 }
-

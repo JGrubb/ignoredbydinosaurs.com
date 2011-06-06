@@ -1,5 +1,4 @@
 <?php
-// $Id: image.inc,v 1.1.4.7 2010/03/21 13:11:23 kiam Exp $
 
 /**
  * @file
@@ -16,7 +15,7 @@ function image_nodewords_type_id(&$result, $arg) {
       $result['type'] = NODEWORDS_TYPE_VOCABULARY;
       $result['id'] = variable_get('image_gallery_nav_vocabulary', 0);
     }
-    elseif (isset($arg[2]) && is_numeric($arg[2])) {
+    elseif (is_numeric($arg[2])) {
       $result['type'] = NODEWORDS_TYPE_TERM;
       $result['id'] = $arg[1];
     }

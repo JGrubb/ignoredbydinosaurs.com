@@ -1,5 +1,4 @@
 <?php
-// $Id: nodewords_extra.module,v 1.1.2.63 2010/04/18 14:16:48 kiam Exp $
 
 /**
  * @file
@@ -18,33 +17,11 @@ function nodewords_extra_form_nodewords_settings_form_alter(&$form, &$form_state
 }
 
 /**
- * Implements hook_menu().
- */
-function nodewords_extra_menu() {
-  $items = array();
-
-  $items['labels.rdf'] = array(
-    'title' => 'ICRA labels',
-    'page callback' => 'nodewords_extra_verification_content',
-    'access arguments' => array('access content'),
-    'type' => MENU_CALLBACK,
-  );
-
-  return $items;
-}
-
-/**
  * Implements hook_nodewords_api().
  */
 function nodewords_extra_nodewords_api() {
   return array(
-    'api' => '1.12',
+    'version' => '1.14',
     'path' => '',
   );
-}
-
-function nodewords_extra_verification_content() {
-  drupal_set_header('Content-Type: application/rdf+xml; charset=utf-8');
-
-  print variable_get('nodewords_icra_validation_content', '');
 }

@@ -1,5 +1,4 @@
 <?php
-// $Id: nodewords_basic.module,v 1.1.2.77 2010/04/18 14:16:48 kiam Exp $
 
 /**
  * @file
@@ -11,7 +10,7 @@
  */
 function nodewords_basic_nodewords_api() {
   return array(
-    'api' => '1.12',
+    'version' => '1.14',
     'path' => '',
   );
 }

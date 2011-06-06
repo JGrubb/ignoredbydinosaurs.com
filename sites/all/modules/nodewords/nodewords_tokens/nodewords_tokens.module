@@ -1,5 +1,4 @@
 <?php
-// $Id: nodewords_tokens.module,v 1.1.2.13 2010/04/18 14:08:39 kiam Exp $
 
 define('NODEWORDS_DESCRIPTION_GENERATION_BODY', 1);
 define('NODEWORDS_DESCRIPTION_GENERATION_TEASER', 2);
@@ -45,16 +44,16 @@ function nodewords_tokens_form_nodewords_admin_settings_form_alter(&$form, $form
     '#title' => t('Filter the text added by third-party modules in the node teaser'),
     '#options' => $options,
     '#default_value' => variable_get('nodewords_filter_modules_output', array()),
-    '#checkall' => variable_get('nodewords_enable_checkall', FALSE),
+    '#checkall' => TRUE,
   );
 
   $form['tokens_generation']['description']['nodewords_filter_regexp'] = array(
-    '#type' => 'textfield',
+    '#type' => 'textarea',
     '#title' => t('Custom regular expression'),
     '#description' => t('A regular expression used to filter the text added in the node teaser from a third-party module. The regular expression uses the <a href="http://www.php.net/manual/en/pcre.pattern.php">Perl compatible</a> syntax.'),
     '#element_validate' => array('nodewords_tokens_filter_regex_validate'),
     '#default_value' => variable_get('nodewords_filter_regexp', ''),
-    '#size' => 60,
+    '#wysiwyg' => FALSE,
   );
 
   $options = array(
@@ -87,7 +86,7 @@ function nodewords_tokens_form_nodewords_admin_settings_form_alter(&$form, $form
       $form['tokens_generation']['taxonomy_keywords']['nodewords_keyword_vids'] = array(
         '#type' => $count > 10 ? 'select' : 'checkboxes',
         '#title' => t('Auto-keywords vocabularies'),
-        '#description' => t('Select the vocabularies which contain terms you want to add to the keywords meta tag for nodes.'),
+        '#description' => t('Select the vocabularies which contain terms you want to add to the content of the token %token.', array('%token' => 'metatags-taxonomy-keywords')),
         '#default_value' => variable_get('nodewords_keyword_vids', array()),
         '#options' => $options,
       );
@@ -97,7 +96,7 @@ function nodewords_tokens_form_nodewords_admin_settings_form_alter(&$form, $form
       }
       elseif ($count > 2) {
         // Add support for Check All if the checkboxes are more than two.
-        $form['tokens_generation']['taxonomy_keywords']['nodewords_keyword_vids']['#checkall'] = variable_get('nodewords_enable_checkall', FALSE);
+        $form['tokens_generation']['taxonomy_keywords']['nodewords_keyword_vids']['#checkall'] = TRUE;
       }
     }
   }
@@ -163,8 +162,6 @@ function nodewords_tokens_token_list($type = 'all') {
     $tokens['global']['metatags-global-keywords-2'] = t('The global keywords.');
     $tokens['global']['metatags-global-keywords-1-raw'] = t('The raw global keywords.');
     $tokens['global']['metatags-global-keywords-2-raw'] = t('The raw global keywords.');
-    $tokens['global']['metatags-normal-url'] = t('The internal URL of the current page.');
-    $tokens['global']['metatags-url-alias'] = t('The alias of the current page URL.');
   }
 
   if ($type == 'all' || $type == 'node') {
@@ -186,43 +183,31 @@ function nodewords_tokens_token_list($type = 'all') {
 function nodewords_tokens_token_values($type, $object = NULL, $options = array()) {
   $values = array();
 
-  switch ($type) {
-    case 'global':
-      $value = nodewords_unique_values(variable_get('metatags_extra_global_keywords_1', ''));
-      $values['metatags-global-keywords-1-raw'] = $value;
-      $values['metatags-global-keywords-1'] = check_plain($value);
+  if ($type == 'global') {
+    $value = nodewords_unique_values(variable_get('nodewords_global_keywords_1', ''));
+    $values['metatags-global-keywords-1-raw'] = $value;
+    $values['metatags-global-keywords-1'] = check_plain($value);
 
-      $value = nodewords_unique_values(variable_get('metatags_extra_global_keywords_2', ''));
-      $values['metatags-global-keywords-2-raw'] = $value;
-      $values['metatags-global-keywords-2'] = check_plain($value);
+    $value = nodewords_unique_values(variable_get('nodewords_global_keywords_2', ''));
+    $values['metatags-global-keywords-2-raw'] = $value;
+    $values['metatags-global-keywords-2'] = check_plain($value);
+  }
 
-      if (drupal_is_front_page()) {
-        $path = '<front>';
-      }
-      else {
-        $path = $_GET['q'];
-      }
+  if ($type == 'node' && !empty($object)) {
+    $values['metatags-description-raw'] = _nodewords_tokens_metatag_from_node_content($object);
+    $values['metatags-description'] = check_plain($values['metatags-description-raw']);
 
-      $values['metatags-normal-url'] = nodewords_url($path);
-      $values['metatags-url-alias'] = nodewords_url($path, array('alias' => FALSE));
-      break;
-
-    case 'node':
-      $value = '';
-      $values['metatags-description-raw'] = _nodewords_tokens_metatag_from_node_content($object);
-      $values['metatags-description'] = check_plain($values['metatags-description-raw']);
-
-      if (module_exists('taxonomy')) {
-        foreach (taxonomy_node_get_terms($object) as $term) {
-          if (in_array($term->vid, variable_get('nodewords_keyword_vids', array()))) {
-            $value .= ',' . $term->name;
-          }
+    $value = '';
+    if (module_exists('taxonomy')) {
+      foreach (taxonomy_node_get_terms($object) as $term) {
+        if (in_array($term->vid, variable_get('nodewords_keyword_vids', array()))) {
+          $value .= ',' . $term->name;
         }
       }
-      $value = nodewords_unique_values($value);
-      $values['metatags-taxonomy-keywords-raw'] = $value;
-      $values['metatags-taxonomy-keywords'] = check_plain($value);
-      break;
+    }
+    $value = nodewords_unique_values($value);
+    $values['metatags-taxonomy-keywords-raw'] = $value;
+    $values['metatags-taxonomy-keywords'] = check_plain($value);
   }
 
   return $values;
@@ -294,10 +279,7 @@ function _nodewords_tokens_metatag_from_node_content($node, $options = array()) 
         $result = preg_replace('/' . $regexp . '/i', '', $result);
       }
 
-      $result = node_teaser(
-        trim(preg_replace('/(\r\n?|\n)/', ' ', $result)),
-        $node->format, $options['size']
-      );
+      $result = preg_replace('/(\r\n?|\n)/', ' ', node_teaser(trim($result), $node->format, $options['size']));
     }
   }
 
@@ -325,10 +307,8 @@ function _nodewords_tokens_metatag_from_node_content($node, $options = array()) 
       )
     );
 
-    $result = node_teaser(
-      trim(preg_replace('/(\r\n?|\n)/', ' ', $result)),
-      $node->format, $options['size']
-    );
+
+    $result = preg_replace('/(\r\n?|\n)/', ' ', node_teaser(trim($result),$node->format, $options['size']));
   }
 
   return $result;

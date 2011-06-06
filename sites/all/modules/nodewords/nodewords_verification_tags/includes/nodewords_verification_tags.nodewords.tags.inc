@@ -1,10 +1,35 @@
 <?php
-// $Id: nodewords_verification_tags.nodewords.tags.inc,v 1.1.2.2 2010/03/21 13:11:24 kiam Exp $
 
 /**
  * @file
  * Nodewords support file.
  */
+
+/**
+ * Set the form fields used to implement the options for the meta tag.
+ */
+function nodewords_verification_tags_alexa_verification_code_form(&$form, $content, $options) {
+  $form['alexa_verification_code'] = array(
+    '#tree' => TRUE,
+  );
+
+  $form['alexa_verification_code']['value'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Alexa verification code'),
+    '#description' => t('<a href="@alexa-url">Alexa</a> will ask you to add a meta tag in order to verify you have write access to the pages of the web site you registered with their services. You can obtain a verification code <a href="@alexa-claim-your-site">claiming your site</a>', array('@alexa-url' => 'http://www.alexa.com', '@alexa-claim-your-site' => 'http://www.alexa.com/siteowners/claim')) . $options['description'],
+    '#default_value' => empty($content['value']) ? '' : $content['value'],
+    '#maxlength' => variable_get('nodewords_max_size', 350),
+  );
+}
+
+/**
+ * Set the meta tag content.
+ */
+function nodewords_verification_tags_alexa_verification_code_prepare(&$tags, $content, $options) {
+  if (!empty($content['value'])) {
+    $tags['alexa_verification_code:alexaVerifyID'] = $content['value'];
+  }
+}
 
 /**
  * Set the form fields used to implement the options for the meta tag.
@@ -24,6 +49,15 @@ function nodewords_verification_tags_bing_webmaster_center_form(&$form, $content
 }
 
 /**
+ * Set the meta tag content.
+ */
+function nodewords_verification_tags_bing_webmaster_center_prepare(&$tags, $content, $options) {
+  if (!empty($content['value'])) {
+    $tags['bing_webmaster_center:msvalidate.01'] = $content['value'];
+  }
+}
+
+/**
  * Set the form fields used to implement the options for the meta tag.
  */
 function nodewords_verification_tags_google_webmaster_tools_form(&$form, $content, $options) {
@@ -38,6 +72,15 @@ function nodewords_verification_tags_google_webmaster_tools_form(&$form, $conten
     '#default_value' => empty($content['value']) ? '' : $content['value'],
     '#maxlength' => variable_get('nodewords_max_size', 350),
   );
+}
+
+/**
+ * Set the meta tag content.
+ */
+function nodewords_verification_tags_google_webmaster_tools_prepare(&$tags, $content, $options) {
+  if (!empty($content['value'])) {
+    $tags['google_webmaster_tools:google-site-verification'] = $content['value'];
+  }
 }
 
 /**
@@ -60,26 +103,34 @@ function nodewords_verification_tags_yahoo_site_explorer_form(&$form, $content, 
 /**
  * Set the meta tag content.
  */
-function nodewords_verification_tags_bing_webmaster_center_prepare(&$tags, $content, $options) {
-  if (!empty($content['value'])) {
-    $tags['bing_webmaster_center:msvalidate.01'] = $content['value'];
-  }
-}
-
-/**
- * Set the meta tag content.
- */
-function nodewords_verification_tags_google_webmaster_tools_prepare(&$tags, $content, $options) {
-  if (!empty($content['value'])) {
-    $tags['google_webmaster_tools:google-site-verification'] = $content['value'];
-  }
-}
-
-/**
- * Set the meta tag content.
- */
 function nodewords_verification_tags_yahoo_site_explorer_prepare(&$tags, $content, $options) {
   if (!empty($content['value'])) {
     $tags['yahoo_site_explorer:y_key'] = $content['value'];
+  }
+}
+
+/**
+ * Set the form fields used to implement the options for the meta tag.
+ */
+function nodewords_verification_tags_yandex_webmaster_tools_form(&$form, $content, $options) {
+  $form['yandex_webmaster_tools'] = array(
+    '#tree' => TRUE,
+  );
+
+  $form['yandex_webmaster_tools']['value'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Yandex verification code'),
+    '#description' => t('<a href="@yandex-webmaster">Yandex Webmaster</a> will ask you to add a meta tag in your web site to provide you with an easy way to make your site more <a href="@yandex-url">Yandex</a>-friendly.', array('@yandex-webmaster' => 'https://webmaster.yandex.ru/', '@yandex-url' => 'http://yandex.ru')) . $options['description'],
+    '#default_value' => empty($content['value']) ? '' : $content['value'],
+    '#maxlength' => variable_get('nodewords_max_size', 350),
+  );
+}
+
+/**
+ * Set the meta tag content.
+ */
+function nodewords_verification_tags_yandex_webmaster_tools_prepare(&$tags, $content, $options) {
+  if (!empty($content['value'])) {
+    $tags['yandex_webmaster_tools:yandex-verification'] = $content['value'];
   }
 }

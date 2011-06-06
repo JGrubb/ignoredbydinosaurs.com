@@ -1,5 +1,4 @@
 <?php
-// $Id: nodewords_tokens.install,v 1.1.2.7 2010/04/17 13:11:50 kiam Exp $
 
 /**
  * @file
@@ -61,6 +60,22 @@ function nodewords_tokens_update_6102() {
   );
 
   variable_del('nodewords_tokens_installed');
+
+  return $ret;
+}
+
+/**
+ * Implements hook_update_N().
+ */
+function nodewords_tokens_update_6104() {
+  $ret = array();
+
+  variable_del('nodewords_remove_extra_whitespaces');
+
+  $ret[] = array(
+    'success' => TRUE,
+    'query' => 'Removed obsolete persistent variables',
+  );
 
   return $ret;
 }

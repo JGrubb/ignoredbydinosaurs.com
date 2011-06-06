@@ -1,5 +1,4 @@
 <?php
-// $Id: nodewords_admin.admin.inc,v 1.1.2.4 2010/04/18 10:18:15 kiam Exp $
 
 /**
  * @file
@@ -40,7 +39,7 @@ function nodewords_admin_settings_form() {
 
   if (!empty($tags_info)) {
     foreach ($tags_info as $name => $info) {
-      $options[$name] = '';
+      $options[$name] = $info['label'];
 
       $bool = (
         (
@@ -54,45 +53,32 @@ function nodewords_admin_settings_form() {
           (count(array_intersect($admin_pages, $info['context']['denied'])) != count($admin_pages))
         )
       );
-      if ($bool || empty($info['context']['allowed']) || empty($info['context']['allowed'])) {
+      if ($bool || empty($info['context']['allowed'])) {
         $enabled_options[$name] = '';
       }
     }
 
+    $form['nodewords_head'] = array(
+      '#type' => 'checkboxes',
+      '#title' => t('Enabled meta tags'),
+      '#options' => $options,
+      '#default_value' => variable_get('nodewords_head', array()),
+      '#checkall' => TRUE ? 'nodewords-head-output' : FALSE,
+    );
+
     $form['enabled'] = array(
       '#type' => 'fieldset',
-      '#title' => t('Enabled meta tags'),
-      '#description' => t('These settings change the meta tags that will be output, and shown in edit forms.'),
+      '#title' => t('Meta tag forms'),
+      '#description' => t('These settings change which meta tags are shown in edit forms.'),
       '#collapsible' => TRUE,
       '#weight' => 0,
       '#group' => 'nodewords',
     );
 
-    $form['enabled']['output'] = array(
-      '#type' => 'fieldset',
-      '#title' => t('Meta tags to output'),
-      '#description' => t('These settings change the meta tags that will be output. Meta tags are used in search indexes only if there are modules implementing the necessary code.'),
-      '#collapsible' => TRUE,
-      '#theme' => 'nodewords_admin_output_metatags',
-    );
-
-    $form['enabled']['output']['nodewords_head'] = array(
-      '#type' => 'checkboxes',
-      '#options' => $options,
-      '#default_value' => variable_get('nodewords_head', array()),
-      '#checkall' => variable_get('nodewords_enable_checkall', FALSE) ? 'nodewords-head-output' : FALSE,
-    );
-
-    $form['enabled']['output']['nodewords_search_index'] = array(
-      '#type' => 'checkboxes',
-      '#options' => $options,
-      '#default_value' => variable_get('nodewords_search_index', array()),
-      '#checkall' => variable_get('nodewords_enable_checkall', FALSE) ? 'nodewords-search-index-output' : FALSE,
-    );
-
     $form['enabled']['admin'] = array(
       '#type' => 'fieldset',
       '#title' => t('Meta tags enabled on administrative settings pages'),
+      '#collapsible' => TRUE,
       '#theme' => 'nodewords_admin_enabled_metatags',
       '#weight' => 0,
     );
@@ -106,7 +92,7 @@ function nodewords_admin_settings_form() {
       '#type' => 'checkboxes',
       '#options' => $enabled_options,
       '#default_value' => variable_get('nodewords_admin_edit', array()),
-      '#checkall' => variable_get('nodewords_enable_checkall', FALSE) ? 'nodewords-enabled-metatags-admin-edit-form' : FALSE,
+      '#checkall' => TRUE ? 'nodewords-enabled-metatags-admin-edit-form' : FALSE,
     );
 
     foreach ($tags_info as $name => $info) {
@@ -124,11 +110,6 @@ function nodewords_admin_settings_form() {
     $form['nodewords_head'] = array(
       '#type' => 'value',
       '#value' => variable_get('nodewords_head', array()),
-    );
-
-    $form['nodewords_search_index'] = array(
-      '#type' => 'value',
-      '#value' => variable_get('nodewords_search_index', array()),
     );
 
     $form['nodewords_admin_edit'] = array(
@@ -150,16 +131,24 @@ function nodewords_admin_settings_form() {
     '#type' => 'checkbox',
     '#title' => t('Repeat meta tags for lists'),
     '#description' => t('Some search engines punish sites that use the same meta tags on different pages. Uncheck this option if you want to suppress the repetition of the same meta tags on pages that use the pager - if unchecked, Drupal will only display the meta tags for the first page and not for subsequent pages. If unsure, select this option.'),
-     '#default_value' => variable_get('nodewords_list_repeat', FALSE),
+    '#default_value' => variable_get('nodewords_list_repeat', FALSE),
   );
 
-  $default_size = variable_get('nodewords_max_size', 350);
+  $form['metatags_creation']['nodewords_enable_tokens'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Enable tokens'),
+    '#description' => t('This setting allows to use the tokens implemented in <a href="@token">token.module</a> in meta tags content.', array(
+      '@token' => 'http://drupal.org/project/token',
+    )),
+    '#default_value' => variable_get('nodewords_enable_tokens', TRUE) && module_exists('token'),
+    '#disabled' => !module_exists('token'),
+  );
 
   $form['metatags_creation']['nodewords_max_size'] = array(
     '#type' => 'textfield',
     '#title' => t('Maximum meta tags length'),
     '#description' => t('The maximum length to use for the meta tags form fields.'),
-    '#default_value' => $default_size,
+    '#default_value' => variable_get('nodewords_max_size', 350),
     '#required' => TRUE,
     '#element_validate' => array('nodewords_admin_max_size_validate'),
     '#size' => 6,
@@ -173,57 +162,6 @@ function nodewords_admin_settings_form() {
     '#default_value' => variable_get('nodewords_base_url', ''),
     '#element_validate' => array('nodewords_admin_base_url_validate'),
   );
-
-  $form['third_party_integration'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Third party modules integration'),
-    '#description' => t('These options enable the integration between Nodewords and other modules.'),
-    '#collapsible' => TRUE,
-    '#weight' => 8,
-    '#group' => 'nodewords',
-  );
-
-  $form['third_party_integration']['nodewords_enable_checkall'] = array(
-    '#type' => 'checkbox',
-    '#title' => t(
-      'Enable the integration with <a href="@checkall">checkall.module</a>',
-      array('@checkall' => 'http://drupal.org/project/checkall')
-    ),
-    '#description' => t(
-      'The integration with checkall.module allows to check/uncheck all the checkboxes of a set with a click.'
-    ),
-    '#default_value' => variable_get('nodewords_enable_checkall', FALSE),
-  );
-
-  if (!module_exists('checkall')) {
-    $form['third_party_integration']['nodewords_enable_checkall']['#description'] .= ' ' .t(
-      'The module checkall.module is not enabled, or installed.'
-    );
-
-    if (!variable_get('nodewords_enable_checkall', FALSE)) {
-      $form['third_party_integration']['nodewords_enable_checkall']['#disabled'] = TRUE;
-    }
-  }
-
-  $form['third_party_integration']['nodewords_enable_tokens'] = array(
-    '#type' => 'checkbox',
-    '#title' => t(
-      'Enable the integration with <a href="@token">token.module</a>',
-      array('@token' => 'http://drupal.org/project/token')
-    ),
-    '#description' => t(
-      'The integration with token.module allows to use tokens in meta tags content.'
-    ),
-    '#default_value' => variable_get('nodewords_enable_tokens', TRUE),
-  );
-
-  if (!module_exists('token')) {
-    $form['third_party_integration']['nodewords_enable_tokens']['#description'] .=  ' ' . t('The module token.module is not enabled, or installed.');
-
-    if (!variable_get('nodewords_enable_tokens', TRUE)) {
-      $form['third_party_integration']['nodewords_enable_tokens']['#disabled'] = TRUE;
-    }
-  }
 
   foreach ($tags_info as $name => $info) {
     $function = $info['callback'] . '_settings_form';
@@ -267,7 +205,7 @@ function nodewords_admin_base_url_validate($element, &$form_state) {
 }
 
 /**
- * Function to validate the value entered for the maximum meta tags length.
+ * Function to validate the meta tags length.
  *
  */
 function nodewords_admin_max_size_validate($element, &$form_state) {
@@ -275,7 +213,7 @@ function nodewords_admin_max_size_validate($element, &$form_state) {
     $value = trim($element['#value']);
 
     if (empty($value) || (!empty($value) && (!is_numeric($value) || $value <= 0))) {
-      form_error($element, t('The maximum length must be a number greater than zero.'));
+      form_error($element, t('The maximum length must be a positive integer.'));
     }
   }
 }
@@ -350,7 +288,14 @@ function nodewords_admin_tags_edit_form(&$form_state, $options = array()) {
     )
   );
 
-  if (!empty($form['nodewords'])) {
+  if (empty($form['nodewords'])) {
+    $form['warning'] = array(
+      '#value' => t('You have not yet enabled any <a href="@url">meta tags for administrative settings pages</a>.', array('@url' => url('admin/content/nodewords'))),
+      '#prefix' => '<div class="messages warning">',
+      '#suffix' => '</div>',
+    );
+  }
+  else {
     $form['nodewords']['#tree'] = TRUE;
 
     $form['submit'] = array(
@@ -406,36 +351,9 @@ function theme_nodewords_admin_enabled_metatags($form) {
   $header[] = t('Meta tag');
   $header[] = array(
     'data' => t('Show in edit form'),
-    'class' => (variable_get('nodewords_enable_checkall', FALSE) && count($rows) > 1) ? 'nodewords-enabled-metatags-admin-edit-form' : '',
+    'class' => (TRUE && count($rows) > 1) ? 'nodewords-enabled-metatags-admin-edit-form' : '',
   );
   $header[] = t('Use the default value');
-
-  return theme('table', $header, $rows) . drupal_render($form);
-}
-
-/**
- * Render the output settings fieldset.
- */
-function theme_nodewords_admin_output_metatags($form) {
-  foreach (nodewords_get_possible_tags() as $name => $info) {
-    $row = array();
-
-    $row[] = $info['label'];
-    $row[] = drupal_render($form['nodewords_head'][$name]);
-    $row[] = drupal_render($form['nodewords_search_index'][$name]);
-
-    $rows[] = $row;
-  }
-
-  $header[] = t('Meta tag');
-  $header[] = array(
-    'data' => t('In HTML tag HEAD'),
-    'class' => (variable_get('nodewords_enable_checkall', FALSE) && count($rows) > 1) ? 'nodewords-head-output' : '',
-  );
-  $header[] = array(
-    'data' => t('In search index'),
-    'class' => (variable_get('nodewords_enable_checkall', FALSE) && count($rows) > 1) ? 'nodewords-search-index-output' : '',
-  );
 
   return theme('table', $header, $rows) . drupal_render($form);
 }

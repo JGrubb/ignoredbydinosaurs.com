@@ -1,5 +1,4 @@
 <?php
-// $Id: nodewords_extra.install,v 1.1.2.14 2010/03/21 13:11:24 kiam Exp $
 
 /**
  * @file
@@ -12,10 +11,6 @@
 function nodewords_extra_install() {
   db_query("UPDATE {system} SET weight = 14 WHERE name = 'nodewords_extra' AND type = 'module'");
 }
-
-/**
- * Next update ID: 6106.
-*/
 
 /**
  * Implements hook_uninstall().
@@ -35,4 +30,15 @@ function nodewords_extra_uninstall() {
 
     db_query("DELETE FROM {nodewords} WHERE name IN (". db_placeholders($metatags, 'varchar') .")", $metatags);
   }
+}
+
+/**
+ * Removed support for IRCA PICS labels.
+ */
+function nodewords_extra_update_6106() {
+  $ret = array();
+  $ret[] = update_sql("DELETE FROM {nodewords} WHERE name = 'pics-label'");
+  variable_del('nodewords_icra_validation_content');
+  $ret[] = array('success' => TRUE, 'query' => 'Removed support for the IRCA PICS label meta tags. See <a href="http://www.icra.org/">http://www.icra.org/</a> for more information.');
+  return $ret;
 }

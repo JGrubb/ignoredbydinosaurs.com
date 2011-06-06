@@ -1,5 +1,4 @@
 <?php
-// $Id: nodewords_admin.module,v 1.1.2.8 2010/04/18 14:08:39 kiam Exp $
 
 /**
  * @file
@@ -7,70 +6,7 @@
  */
 
 /**
- * Implements hook_form_FORM_ID_alter().
- */
-function nodewords_admin_form_taxonomy_form_term_alter(&$form, &$form_state) {
-  $bool = (
-    !isset($form_state['confirm_delete']) &&
-    !isset($form_state['confirm_parents'])
-  );
-  if ($bool) {
-    if (!empty($form_state['values']['nodewords'])) {
-      $tags = $form_state['values']['nodewords'];
-    }
-    elseif (isset($form['tid']['#value']) && is_numeric($form['tid']['#value'])) {
-      $id = $form['tid']['#value'];
-      $tags = nodewords_load_tags(array(
-        'type' => NODEWORDS_TYPE_TERM, 'id' => $id
-      ));
-    }
-    else {
-      $tags = array();
-    }
-
-    $form['nodewords'] = nodewords_tags_edit_fields(
-      array( 'type' => NODEWORDS_TYPE_TERM, 'id' => isset($id) ? $id : 0),
-      $tags,
-      array('fieldset' => TRUE)
-    );
-
-    $form['submit']['#weight'] = 45;
-    $form['delete']['#weight'] = 50;
-  }
-}
-
-/**
- * Implements hook_form_FORM_ID_alter().
- */
-function nodewords_admin_form_taxonomy_form_vocabulary_alter(&$form, &$form_state) {
-  if (isset($form['vid']['#value'])) {
-    $id = $form['vid']['#value'];
-
-    if (!empty($form_state['values']['nodewords'])) {
-      $tags = $form_state['values']['nodewords'];
-    }
-    elseif (isset($id) && is_numeric($id)) {
-      $tags = nodewords_load_tags(array(
-        'type' => NODEWORDS_TYPE_VOCABULARY, 'id' => $id
-      ));
-    }
-    else {
-      $tags = array();
-    }
-
-    $form['nodewords'] = nodewords_tags_edit_fields(
-      array('type' => NODEWORDS_TYPE_VOCABULARY, 'id' => $id),
-      $tags,
-      array('fieldset' => TRUE)
-    );
-
-    $form['submit']['#weight'] = 45;
-    $form['delete']['#weight'] = 50;
-  }
-}
-
-/**
- *  Implemenation of hook_help().
+ *  Implements hook_help().
  */
 function nodewords_admin_help($path, $arg) {
   switch ($path) {
@@ -192,10 +128,6 @@ function nodewords_admin_theme() {
       'arguments' => array('form' => array()),
       'file' => 'nodewords_admin.admin.inc',
     ),
-    'nodewords_admin_output_metatags' => array(
-      'arguments' => array('form' => array()),
-      'file' => 'nodewords_admin.admin.inc',
-    ),
   );
 }
 
@@ -227,31 +159,33 @@ function nodewords_admin_user_operations() {
  */
 function nodewords_admin_mass_update($ids, $type, $operation = 'delete') {
   if ($operation == 'delete') {
-    if (($count = count($ids))) {
-      if ($count <= 10) {
-        db_query("DELETE FROM {nodewords} WHERE id IN (" . db_placeholders($ids, 'int') . ") AND type = %d",
-          array_merge($ids, array($type))
-        );
+    if (count($ids) <= 10) {
+      db_query("DELETE FROM {nodewords} WHERE id IN (" . db_placeholders($ids, 'int') . ") AND type = %d",
+        array_merge($ids, array($type))
+      );
 
-        if ($type == NODEWORDS_TYPE_PAGE) {
-          db_query("DELETE FROM {nodewords_custom} WHERE pid IN (" . db_placeholders($ids, 'int') . ")", $ids);
+      if ($type == NODEWORDS_TYPE_PAGE) {
+        foreach ($ids as $id) {
+          module_invoke_all('nodewords_delete_tags',
+            array('type' => NODEWORDS_TYPE_PAGE, 'id' => $id)
+          );
         }
+      }
 
-        drupal_set_message(t('The update has been performed.'));
-      }
-      else {
-        $batch = array(
-          'operations' => array(
-            array('_nodewords_mass_delete_batch_process', array($ids, $type))
-          ),
-          'finished' => '_nodewords_admin_mass_update_batch_finished',
-          'title' => t('Processing'),
-          'progress_message' => '',
-          'error_message' => t('The update has encountered an error.'),
-          'file' => drupal_get_path('module', 'nodewords_admin') .'/nodewords_admin.admin.inc',
-        );
-        batch_set($batch);
-      }
+      drupal_set_message(t('The update has been performed.'));
+    }
+    else {
+      $batch = array(
+        'operations' => array(
+          array('_nodewords_mass_delete_batch_process', array($ids, $type))
+        ),
+        'finished' => '_nodewords_admin_mass_update_batch_finished',
+        'title' => t('Processing'),
+        'progress_message' => '',
+        'error_message' => t('The update has encountered an error.'),
+        'file' => drupal_get_path('module', 'nodewords_admin') .'/nodewords_admin.admin.inc',
+      );
+      batch_set($batch);
     }
   }
 }

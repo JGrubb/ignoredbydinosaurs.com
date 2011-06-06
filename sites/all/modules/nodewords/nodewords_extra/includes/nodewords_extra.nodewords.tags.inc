@@ -1,5 +1,4 @@
 <?php
-// $Id: nodewords_extra.nodewords.tags.inc,v 1.1.2.4 2010/03/24 13:24:28 kiam Exp $
 
 /**
  * @file
@@ -66,26 +65,16 @@ function nodewords_extra_dc_date_form(&$form, $content, $options) {
     '#tree' => TRUE,
   );
 
-  $bool = (
-    isset($content['value']['day']) &&
-    isset($content['value']['month']) &&
-    isset($content['value']['year'])
-  );
-  if ($bool) {
-    $value = $content['value']['day'] . ' ' . $content['value']['month'] . ' ' . $content['value']['year'];
-  }
-  elseif (isset($content['value']) && is_string($content['value'])) {
-    $value = $content['value'];
-  }
-  else {
-    $value = '';
+  if (isset($content['value']) && is_array($content['value'])) {
+    // Support the older date form element value.
+    $content['value'] = $content['value']['day'] . ' ' . $content['value']['month'] . ' ' . $content['value']['year'];
   }
 
   $form['dc.date']['value'] = array(
     '#type' => 'textfield',
     '#title' => t('Dublin Core date'),
     '#description' => t('Enter day, month, and year in this order, separated by a space; a invalid date will not be used. The timezone is UTC.') . $options['description'],
-    '#default_value' => $value,
+    '#default_value' => isset($content['value']) ? $content['value'] : '',
   );
 }
 
@@ -93,42 +82,36 @@ function nodewords_extra_dc_date_form(&$form, $content, $options) {
  * Check if the meta tag content is empty.
  */
 function nodewords_extra_dc_date_is_empty($content) {
-  $bool = (
-    isset($content['value']['day']) &&
-    isset($content['value']['month']) &&
-    isset($content['value']['year'])
-  );
-  if ($bool) {
-    return FALSE;
+  if (!empty($content['value'])) {
+    if (is_array($content['value'])) {
+      // Support the older date form element value.
+      return FALSE;
+    }
+    else {
+      $parts = preg_split('/\s+/', $content['value'], -1, PREG_SPLIT_NO_EMPTY);
+      return count($parts) != 3;
+    }
   }
-
-  return empty($content['value']);
+  return TRUE;
 }
 
 /**
  * Set the meta tag content.
  */
 function nodewords_extra_dc_date_prepare(&$tags, $content, $options) {
-  $bool = (
-    isset($content['value']['day']) &&
-    isset($content['value']['month']) &&
-    isset($content['value']['year'])
-  );
-  if ($bool) {
-    $value = $content['value']['day'] . ' ' . $content['value']['month'] . ' ' . $content['value']['year'];
-  }
-  elseif (isset($content['value']) && is_string($content['value'])) {
-    $value = $content['value'];
-  }
-  else {
-    $value = '';
-  }
-  if (!empty($value)) {
-    $values = array_filter(array_map('trim', explode(' ', $value)));
-    if (count($values) == 3) {
-      $time = mktime(0, 0, 0, $values[0], $values[1], $values[2]);
-      if ($time > 0) {
-        $tags['dc.date'] = date('Y-m-d\TH:i:s\Z', $time);
+  if (!empty($content['value'])) {
+    if (is_array($content['value'])) {
+      // Support the older date form element value.
+      $content['value'] = $content['value']['day'] . ' ' . $content['value']['month'] . ' ' . $content['value']['year'];
+    }
+    else {
+      $content['value'] = nodewords_replace_tokens($content['value'], $options);
+    }
+    $parts = preg_split('/\s+/', $content['value'], -1, PREG_SPLIT_NO_EMPTY);
+    if (count($parts) == 3) {
+      list($day, $month, $year) = $parts;
+      if ($timestamp = @gmmktime(0, 0, 0, $month, $day, $year)) {
+        $tags['dc.date'] = gmdate('Y-m-d\TH:i:s\Z', $timestamp);
       }
     }
   }
@@ -139,11 +122,7 @@ function nodewords_extra_dc_date_prepare(&$tags, $content, $options) {
  */
 function nodewords_extra_dc_description_form(&$form, $content, $options) {
   if (!isset($form['description'])) {
-    $bool = (
-      isset($options['content type']) &&
-      variable_get('nodewords_use_teaser_' . $options['content type'], FALSE)
-    );
-    if (!$bool) {
+    if (isset($options['content type']) && variable_get('nodewords_use_teaser_' . $options['content type'], FALSE)) {
       $form['dc.description'] = array(
         '#tree' => TRUE,
       );
@@ -279,65 +258,6 @@ function nodewords_extra_location_prepare(&$tags, $content, $options) {
       $tags['location:geo.position'] = $latitude . ';' . $longitude;
       $tags['location:icbm'] = $latitude . ',' . $longitude;
     }
-  }
-}
-
-/**
- * Set the form fields used to implement the options for the meta tag.
- */
-function nodewords_extra_pics_form(&$form, $content, $options) {
-  $form['pics-label'] = array(
-    '#tree' => TRUE,
-  );
-
-  $form['pics-label']['value'] = array(
-    '#type' => 'textfield',
-    '#title' => t('PICS labels'),
-    '#description' => t('Enter the ICRA PICS labels only, without any extra characters; ICRA PICS labels should be something similar to %icra-pics-example. You can use the online <a href="@icra-label-generator">ICRA label generator</a>.', array('%icra-pics-example' => 'n 0 s 0 v 0 l 0 oa 0 ob 0 oc 0 od 0 oe 0 of 0 og 0 oh 0 c 1', '@icra-label-generator' => 'http://www.icra.org/label/generator/')) . $options['description'],
-    '#default_value' => empty($content['value']) ? '' : $content['value'],
-    '#maxlength' => variable_get('nodewords_max_size', 350),
-  );
-}
-
-/**
- * Set the meta tag content.
- */
-function nodewords_extra_pics_prepare(&$tags, $content, $options) {
-  if (!empty($content['value'])) {
-    if ($options['type'] == NODEWORDS_TYPE_NODE) {
-      $tags['pics-label'] = strtr(
-        '(pics-1.1 "http://www.icra.org/pics/vocabularyv03/" l gen true for %url r (%pics))',
-        array(
-          '%url' => nodewords_url("node/{$options['id']}"),
-          '%pics' => $value,
-        )
-      );
-    }
-    elseif ($options['type'] == NODEWORDS_TYPE_PAGE) {
-      $tags['pics-label'] = strtr(
-        '(pics-1.1 "http://www.icra.org/pics/vocabularyv03/" l gen true for %url r (%pics))',
-        array(
-          '%url' => nodewords_url($_GET['q']),
-          '%pics' => $value,
-        )
-      );
-    }
-  }
-
-  if (variable_get('nodewords_icra_validation_content', '')) {
-    $tags['pics-label:meta'] = nodewords_url('labels.rdf', array('absolute' => TRUE));
-  }
-}
-
-function nodewords_extra_pics_settings_form(&$form, $form_id, $options) {
-  if ($form_id == 'nodewords_admin_settings_form') {
-    $form['metatags_creation']['nodewords_icra_validation_content'] = array(
-      '#type' => 'textarea',
-      '#title' => t('ICRA validation content'),
-      '#description' => t('Enter the validation content you obtained from the <a href="@icra-generator">ICRA label generator</a>. For more information, see <a href="@icra-support">ICRA support</a>.', array('@icra-support' => 'http://www.icra.org/support/', '@icra-generator' => 'http://www.icra.org/label/generator/')),
-      '#default_value' => variable_get('nodewords_icra_validation_content', ''),
-      '#wysiwyg' => FALSE,
-    );
   }
 }
 

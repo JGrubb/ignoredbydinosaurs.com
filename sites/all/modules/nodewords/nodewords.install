@@ -1,5 +1,4 @@
 <?php
-// $Id: nodewords.install,v 1.10.2.184 2010/04/17 13:11:50 kiam Exp $
 
 /**
  * @file
@@ -1018,44 +1017,6 @@ function nodewords_update_6169() {
 /**
  * Implements hook_update_N().
  */
-function nodewords_update_6170() {
-  $ret = array();
-
-  db_drop_index($ret, 'nodewords', 'nodewords_type_id');
-  db_drop_unique_key($ret, 'nodewords', 'nodewords_type_id_name');
-
-  db_change_field($ret, 'nodewords', 'type', 'type',
-    array(
-      'type' => 'int',
-      'size' => 'small',
-      'unsigned' => TRUE,
-      'not null' => TRUE,
-      'default' => 0,
-    )
-  );
-
-  db_change_field($ret, 'nodewords', 'id', 'id',
-    array(
-      'type' => 'int',
-      'unsigned' => TRUE,
-      'not null' => TRUE,
-      'default' => 0,
-    )
-  );
-
-  db_add_index($ret, 'nodewords', 'nodewords_type_id',
-    array('type', 'id')
-  );
-  db_add_unique_key($ret, 'nodewords', 'nodewords_type_id_name',
-    array('type', 'id', 'name')
-  );
-
-  return $ret;
-}
-
-/**
- * Implements hook_update_N().
- */
 function nodewords_update_6176() {
   $ret = array();
 
@@ -1085,12 +1046,78 @@ function nodewords_update_6176() {
 }
 
 /**
+ * Implements hook_update_N().
+ */
+function nodewords_update_6178() {
+  $ret = array();
+
+  db_drop_index($ret, 'nodewords', 'nodewords_type_id');
+  db_drop_unique_key($ret, 'nodewords', 'nodewords_type_id_name');
+
+  db_change_field($ret, 'nodewords', 'type', 'type',
+    array(
+      'type' => 'int',
+      'size' => 'small',
+      'unsigned' => TRUE,
+      'not null' => TRUE,
+      'default' => 0,
+    )
+  );
+
+  db_change_field($ret, 'nodewords', 'id', 'id',
+    array(
+      'type' => 'varchar',
+      'length' => 255,
+      'not null' => TRUE,
+      'default' => '',
+    )
+  );
+
+  $ret[] = update_sql("UPDATE {nodewords} set id = '0' WHERE id = '' OR id IS NULL");
+
+  db_change_field($ret, 'nodewords', 'id', 'id',
+    array(
+      'type' => 'int',
+      'unsigned' => TRUE,
+      'not null' => TRUE,
+      'default' => 0,
+    )
+  );
+
+  db_add_index($ret, 'nodewords', 'nodewords_type_id',
+    array('type', 'id')
+  );
+  db_add_unique_key($ret, 'nodewords', 'nodewords_type_id_name',
+    array('type', 'id', 'name')
+  );
+
+  return $ret;
+}
+
+/**
+ * Implements hook_update_N().
+ */
+function nodewords_update_6179() {
+  $ret = array();
+
+  variable_del('nodewords_enable_checkall');
+
+  $ret[] = array(
+    'success' => TRUE,
+    'query' => 'Removed obsolete persistent variables',
+  );
+
+  return $ret;
+}
+
+/**
  * Implements hook_uninstall().
  */
 function nodewords_uninstall() {
   drupal_uninstall_schema('nodewords');
 
   variable_del('nodewords_base_url');
+  variable_del('nodewords_enable_tokens');
   variable_del('nodewords_global');
   variable_del('nodewords_head');
   variable_del('nodewords_icra_validation_content');

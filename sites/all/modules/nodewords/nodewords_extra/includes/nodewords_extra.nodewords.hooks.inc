@@ -1,5 +1,4 @@
 <?php
-// $Id: nodewords_extra.nodewords.hooks.inc,v 1.1.2.6 2010/04/11 15:39:45 kiam Exp $
 
 /**
  * @file
@@ -107,32 +106,12 @@ function nodewords_extra_nodewords_tags_info() {
       'callback' => 'nodewords_extra_location',
       'label' => t('Location'),
       'templates' => array(
-        'geo.position' => NODEWORDS_META,
-        'icbm' => NODEWORDS_META,
+        'head' => array(
+          'geo.position' => NODEWORDS_META,
+          'icbm' => NODEWORDS_META,
+        ),
       ),
       'tokens' => TRUE,
-    ),
-    'pics-label' => array(
-      'attributes' => array(
-        'meta' => array(
-          'title' => 'ICRA labels',
-          'type' => 'application/rdf+xml',
-        ),
-      ),
-      'callback' => 'nodewords_extra_pics',
-      'context' => array(
-        'allowed' => array(
-          NODEWORDS_TYPE_DEFAULT,
-          NODEWORDS_TYPE_NODE,
-          NODEWORDS_TYPE_PAGE,
-        ),
-      ),
-      'label' => t('PICS labels'),
-      'templates' => array(
-        'pics-label' => NODEWORDS_HTTP_EQUIV,
-        'meta' => NODEWORDS_LINK_REL,
-      ),
-      'weight' => array('meta' => -10),
     ),
     'shorturl' => array(
       'context' => array(

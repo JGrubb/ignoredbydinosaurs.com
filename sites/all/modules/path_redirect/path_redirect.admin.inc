@@ -1,5 +1,5 @@
 <?php
-// $Id: path_redirect.admin.inc,v 1.1.2.84 2010/08/06 14:27:23 davereid Exp $
+// $Id: path_redirect.admin.inc,v 1.1.2.87 2010/12/05 21:14:15 davereid Exp $
 
 /**
  * @file
@@ -39,7 +39,7 @@ function path_redirect_list_redirects($query = array(), $conditions = array(), $
   }
 
   // Build the SQL query.
-  $sql = 'SELECT * FROM {path_redirect}';
+  $sql = 'SELECT rid FROM {path_redirect}';
   if ($query['conditions']) {
     $sql .= ' WHERE (' . implode(') AND (', $query['conditions']). ')';
   }
@@ -51,18 +51,18 @@ function path_redirect_list_redirects($query = array(), $conditions = array(), $
     $query = db_query($sql, $query['args']);
   }
 
-  // Load the redirects. We cannot use path_redirect_load_multiple() since
-  // we want to preserve the sorting order.
-  $redirects = array();
-  while ($redirect = db_fetch_array($query)) {
-    $redirects[$redirect['rid']] = $redirect;
+  // Load the redirects.
+  $rids = array();
+  while ($rid = db_result($query)) {
+    $rids[] = $rid;
   }
-  $redirects = array_map('path_redirect_post_load_redirect', $redirects);
+  $redirects = path_redirect_load_multiple($rids);
 
   $destination = drupal_get_destination();
   $rows = array();
   $weight = 0;
-  foreach ($redirects as $rid => $redirect) {
+  foreach ($rids as $rid) {
+    $redirect = $redirects[$rid];
     $row = array();
     if (isset($header['source'])) {
       $source_url = path_redirect_build_url($redirect['source'], $redirect['source_query']);
@@ -448,7 +448,7 @@ function path_redirect_edit_form_validate($form, &$form_state) {
   $redirect = &$form_state['values'];
 
   if ($existing = path_redirect_load_by_source($redirect['source'], $redirect['language'])) {
-    if ($redirect['rid'] != $existing['rid']) {
+    if ($redirect['rid'] != $existing['rid'] && $redirect['language'] == $existing['language']) {
       // The "from" path should not conflict with another redirect
       form_set_error('source', t('The source path %source is already being redirected. Do you want to <a href="@edit-page">edit the existing redirect</a>?', array('%source' => $redirect['source'], '@edit-page' => url('admin/build/path-redirect/edit/'. $existing['rid']))));
     }
@@ -459,7 +459,7 @@ function path_redirect_edit_form_validate($form, &$form_state) {
   }
 
   // check that there there are no redirect loops
-  if (url($redirect['source']) == url($redirect['redirect'])) {
+  if (url(drupal_strtolower($redirect['source'])) == url(drupal_strtolower($redirect['redirect']))) {
     form_set_error('redirect', t('You are attempting to redirect the page to itself. This will result in an infinite loop.'));
   }
 }

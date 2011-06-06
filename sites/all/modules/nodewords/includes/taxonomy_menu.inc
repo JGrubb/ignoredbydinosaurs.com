@@ -1,5 +1,4 @@
 <?php
-// $Id: taxonomy_menu.inc,v 1.1.4.7 2010/03/21 13:11:23 kiam Exp $
 
 /**
  * @file

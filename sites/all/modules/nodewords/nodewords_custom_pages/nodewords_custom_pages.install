@@ -1,5 +1,4 @@
 <?php
-// $Id: nodewords_custom_pages.install,v 1.1.2.7 2010/04/17 13:11:50 kiam Exp $
 
 /**
  * @file
@@ -70,6 +69,9 @@ function nodewords_custom_pages_schema() {
       ),
     ),
     'primary key' => array('pid'),
+    'indexes' => array(
+      'enabled' => array('enabled'),
+    ),
   );
 
   return $schema;
@@ -185,4 +187,36 @@ function nodewords_custom_pages_update_6102() {
   }
 
   return $ret;
+}
+
+/**
+ * Implements hook_update_N().
+ */
+function nodewords_custom_pages_update_6103() {
+  $ret = array();
+
+  if (!db_table_exists('nodewords_custom')) {
+    $ret = drupal_install_schema('nodewords_custom_pages');
+  }
+
+  $ret[] = update_sql("UPDATE {system} SET weight = -10 WHERE name = 'nodewords_custom_pages' AND type = 'module'");
+
+  return $ret;
+}
+
+/**
+ * Fix non 0\/1 values in {nodewords_custom}.enabled.
+ */
+function nodewords_custom_pages_update_6104() {
+  $ret = array();
+  $ret[] = update_sql("UPDATE {nodewords_custom} SET enabled = 1 WHERE enabled <> 0");
+  db_add_index($ret, 'nodewords_custom', 'enabled', array('enabled'));
+  return $ret;
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function nodewords_custom_pages_uninstall() {
+  drupal_uninstall_schema('nodewords_custom_pages');
 }

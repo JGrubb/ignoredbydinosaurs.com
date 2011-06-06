@@ -1,5 +1,4 @@
 <?php
-// $Id: nodewords_verification_tags.module,v 1.1.2.18 2010/04/18 14:16:49 kiam Exp $
 
 /**
  * @file
@@ -12,7 +11,7 @@
  */
 function nodewords_verification_tags_nodewords_api() {
   return array(
-    'api' => '1.12',
+    'version' => '1.14',
     'path' => '',
   );
 }

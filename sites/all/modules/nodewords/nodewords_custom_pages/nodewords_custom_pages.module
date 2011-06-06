@@ -1,5 +1,4 @@
 <?php
-// $Id: nodewords_custom_pages.module,v 1.1.2.8 2010/04/18 14:16:48 kiam Exp $
 
 /**
  * @file
@@ -7,7 +6,7 @@
  */
 
 /**
- *  Implemenation of hook_help().
+ *  Implements hook_help().
  */
 function nodewords_custom_pages_help($path, $arg) {
   if ($path == 'admin/content/nodewords/custom')
@@ -85,7 +84,7 @@ function nodewords_custom_pages_menu_alter(&$items) {
  */
 function nodewords_custom_pages_nodewords_api() {
   return array(
-    'api' => '1.12',
+    'version' => '1.14',
     'path' => '',
   );
 }
@@ -106,30 +105,32 @@ function nodewords_custom_pages_theme() {
  * Menu callback loader.
  */
 function nodewords_custom_pages_load($pid) {
-  return _nodewords_custom_pages_load_data($pid);
+  $page = db_fetch_object(db_query("SELECT * FROM {nodewords_custom} WHERE pid = %d", $pid));
+  $page->tags = nodewords_load_tags(array('type' => NODEWORDS_TYPE_PAGE, 'id' => $page->pid));
+  return $page;
 }
 
 /**
- * Load the page meta tags data from the database.
+ * Load all page meta tags from the database.
  *
- * @param $id
- *   The ID of the page to load; by default the function loads all the custom
- *   pages data.
+ * @param $enabled
+ *   A boolean that if TRUE will only load enabled pages. Default is TRUE.
  */
-function _nodewords_custom_pages_load_data($id = NULL) {
-  static $pages;
-
-  if (!isset($pages)) {
-    $pages = array();
-    $result = db_query("SELECT * FROM {nodewords_custom} ORDER BY weight ASC");
-
-    while ($page = db_fetch_object($result)) {
-      $page->tags = nodewords_load_tags(array(
-        'type' => NODEWORDS_TYPE_PAGE, 'id' => $page->pid
-      ));
-      $pages[$page->pid] = $page;
-    }
+function nodewords_custom_pages_load_all($enabled = TRUE) {
+  if ($enabled) {
+    $query = db_query("SELECT * FROM {nodewords_custom} WHERE enabled = 1 ORDER BY weight ASC");
+  }
+  else {
+    $query = db_query("SELECT * FROM {nodewords_custom} ORDER BY weight ASC");
   }
 
-  return isset($id) ? (isset($pages[$id]) ? $pages[$id] : FALSE) : $pages;
+  $pages = array();
+  while ($page = db_fetch_object($query)) {
+    $page->tags = nodewords_load_tags(array(
+      'type' => NODEWORDS_TYPE_PAGE, 'id' => $page->pid
+    ));
+    $pages[$page->pid] = $page;
+  }
+
+  return $pages;
 }

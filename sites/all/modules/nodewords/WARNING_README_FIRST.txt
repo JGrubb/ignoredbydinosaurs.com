@@ -1,4 +1,3 @@
-# $Id: WARNING_README_FIRST.txt,v 1.1.2.3 2010/03/23 16:35:30 kiam Exp $
 #
 
 Before to install or update to a new version, read what reported in the project

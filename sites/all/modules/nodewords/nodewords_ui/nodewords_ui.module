@@ -1,5 +1,4 @@
 <?php
-// $Id: nodewords_ui.module,v 1.1.2.9 2010/04/18 14:08:39 kiam Exp $
 
 /**
  * @file
@@ -26,21 +25,80 @@ function nodewords_ui_content_extra_fields() {
  * Implements hook_form_alter().
  */
 function nodewords_ui_form_alter(&$form, $form_state, $form_id) {
-  $bool = (
-    isset($form['type']) &&
-    isset($form['#node']) &&
-    $form_id == $form['type']['#value'] . '_node_form'
-  );
-  if ($bool) {
+  if (isset($form['type']) && isset($form['#node']) && $form_id == $form['type']['#value'] . '_node_form') {
+    if (!user_access('administer meta tags') && !user_access('edit meta tags')) {
+      return;
+    }
+
     $node = $form['#node'];
-    $form['nodewords'] = nodewords_tags_edit_fields(
-      _nodewords_ui_get_node_metatags_type($node),
-      !empty($node->nodewords['metatags']) ? $node->nodewords['metatags'] : array(),
-      array(
-        'fieldset' => TRUE,
-        'tag options' => array('content type' => $form['type']['#value']),
-      )
-    );
+    $options = array('type' => NODEWORDS_TYPE_NODE, 'id' => 0);
+    $tags = !empty($node->nodewords['metatags']) ? $node->nodewords['metatags'] : array();
+
+    if (!empty($form['nid']['#value'])) {
+      $options['id'] = $form['nid']['#value'];
+    }
+
+    $form['nodewords'] = nodewords_tags_edit_fields($options, $tags, array(
+      'fieldset' => TRUE,
+      'tag options' => array('content type' => $form['type']['#value']),
+    ));
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function nodewords_ui_form_taxonomy_form_term_alter(&$form, &$form_state) {
+  if (!user_access('administer meta tags') && !user_access('edit meta tags')) {
+    return;
+  }
+
+  if (isset($form_state['confirm_delete']) || isset($form_state['confirm_parents'])) {
+    // Do not run on confirmation delete forms, which re-use the same form ID.
+    return;
+  }
+
+  $options = array('type' => NODEWORDS_TYPE_TERM, 'id' => 0);
+  $tags = !empty($form_state['values']['nodewords']) ? $form_state['values']['nodewords'] : array();
+
+  if (!empty($form['tid']['#value'])) {
+    $options['id'] = $form['tid']['#value'];
+    if (empty($tags)) {
+      $tags = nodewords_load_tags($options);
+    }
+  }
+
+  $form['nodewords'] = nodewords_tags_edit_fields($options, $tags, array('fieldset' => TRUE));
+
+  $form['submit'] += array('#weight' => 50);
+  if (isset($form['delete'])) {
+    $form['delete'] += array('#weight' => 55);
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function nodewords_ui_form_taxonomy_form_vocabulary_alter(&$form, &$form_state) {
+  if (!user_access('administer meta tags') && !user_access('edit meta tags')) {
+    return;
+  }
+
+  $options = array('type' => NODEWORDS_TYPE_VOCABULARY, 'id' => 0);
+  $tags = !empty($form_state['values']['nodewords']) ? $form_state['values']['nodewords'] : array();
+
+  if (!empty($form['vid']['#value'])) {
+    $options['id'] = $form['vid']['#value'];
+    if (empty($tags)) {
+      $tags = nodewords_load_tags($options);
+    }
+  }
+
+  $form['nodewords'] = nodewords_tags_edit_fields($options, $tags, array('fieldset' => TRUE));
+
+  $form['submit'] += array('#weight' => 50);
+  if (isset($form['delete'])) {
+    $form['delete'] += array('#weight' => 55);
   }
 }
 
@@ -59,6 +117,7 @@ function nodewords_ui_form_nodewords_admin_settings_form_alter(&$form, $form_sta
     $form['enabled']['ui'] = array(
       '#type' => 'fieldset',
       '#title' => t('Meta tags enabled on other edit forms'),
+      '#collapsible' => TRUE,
       '#weight' => 2,
       '#theme' => 'nodewords_ui_enabled_metatags',
     );
@@ -98,7 +157,7 @@ function nodewords_ui_form_nodewords_admin_settings_form_alter(&$form, $form_sta
       '#type' => 'checkboxes',
       '#options' => $enabled_options,
       '#default_value' => variable_get('nodewords_ui_edit', array()),
-      '#checkall' => variable_get('nodewords_enable_checkall', FALSE) ? 'nodewords-enabled-metatags-ui-edit-form' : FALSE,
+      '#checkall' => TRUE ? 'nodewords-enabled-metatags-ui-edit-form' : FALSE,
     );
   }
   else {
@@ -113,11 +172,7 @@ function nodewords_ui_form_nodewords_admin_settings_form_alter(&$form, $form_sta
  * Implements hook_nodeapi().
  */
 function nodewords_ui_nodeapi(&$node, $op, $teaser = NULL, $page = NULL) {
-  $bool = (
-    $op == 'prepare translation' &&
-    isset($node->translation_source->nodewords)
-  );
-  if ($bool) {
+  if ($op == 'prepare translation' && isset($node->translation_source->nodewords)) {
     $node->nodewords = $node->translation_source->nodewords;
   }
 }
@@ -137,23 +192,13 @@ function nodewords_ui_theme() {
  * Implements hook_user().
  */
 function nodewords_ui_user($op, &$edit, &$account, $category = NULL) {
-  global $user;
-
-  $bool = (
-    $op == 'form' &&
-    (
-      user_access('administer meta tags') ||
-      $user->uid == $account->uid
-    ) &&
-    $category == 'account'
-  );
-  if ($bool) {
-    $form['nodewords'] = nodewords_tags_edit_fields(
-      array('type' => NODEWORDS_TYPE_USER, 'id' => $account->uid),
-      isset($account->nodewords['metatags']) ? $account->nodewords['metatags'] : array()
-    );
-
-    return $form;
+  if ($op == 'form' && $category == 'account') {
+    if (user_access('administer meta tags') || user_access('edit meta tags')) {
+      $options = array('type' => NODEWORDS_TYPE_USER, 'id' => $account->uid);
+      $tags = isset($account->nodewords['metatags']) ? $account->nodewords['metatags'] : array();
+      $form['nodewords'] = nodewords_tags_edit_fields($options, $tags, array('fieldset' => TRUE));
+      return $form;
+    }
   }
 }
 
@@ -176,13 +221,9 @@ function theme_nodewords_ui_enabled_metatags($form) {
   $header[] = t('Meta tag');
   $header[] = array(
     'data' => t('Show in edit form'),
-    'class' => (variable_get('nodewords_enable_checkall', FALSE) && count($rows) > 1) ? 'nodewords-enabled-metatags-ui-edit-form' : '',
+    'class' => (TRUE && count($rows) > 1) ? 'nodewords-enabled-metatags-ui-edit-form' : '',
   );
   $header[] = t('Use the default value');
 
   return theme('table', $header, $rows) . drupal_render($form);
-}
-
-function _nodewords_ui_get_node_metatags_type($node) {
-  return array('type' => NODEWORDS_TYPE_NODE, 'id' => $node->nid);
 }
