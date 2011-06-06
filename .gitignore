@@ -1,1 +1,4 @@
-_site/*
+sites/default/settings.php
+css/*
+js/*
+backup/*
