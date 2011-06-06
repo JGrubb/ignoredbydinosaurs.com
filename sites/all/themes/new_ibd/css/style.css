@@ -7,15 +7,19 @@ p {
 	line-height:1.5;
 }
 
+a {
+	color:#888;
+}
+
 #header {
 	background:#444;
 }
 
-#branding {
-
+.logo {
+	font-size:3em;
+	padding:.5em 0;
 }
 
-.logo {
-	font-size:2em;
-	padding:1em 0;
+.logo a {
+	text-decoration:none;
 }
