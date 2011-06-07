@@ -16,7 +16,8 @@ a {
   font-size: 3em;
   padding: 0.5em 0; }
   .logo a {
-    text-decoration: none; }
+    text-decoration: none;
+    color: #1b4f8d; }
     .logo a:active {
       position: relative;
       top: 1px; }
