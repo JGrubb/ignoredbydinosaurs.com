@@ -1,7 +1,7 @@
 body {
   color: #444444;
   font: 16px/1.5 "lucida grande", helvetica, arial, sans-serif;
-  background: #14355d; }
+  background: #0F2B4D; }
 
 p {
   line-height: 1.5; }
@@ -76,9 +76,9 @@ a {
   text-align: center; }
 
 #footer {
-  background: #14355d;
-  background: -webkit-gradient(linear, left top, left bottom, from(#214f87), to(#14355d));
-  background: -moz-linear-gradient(270deg, #214f87, #14355d);
+  background: #0F2B4D;
+  background: -webkit-gradient(linear, left top, left bottom, from(#214f87), to(#0F2B4D));
+  background: -moz-linear-gradient(270deg, #214f87, #0F2B4D);
   color: white;
   border-top: 2px solid #999999;
   margin-bottom: 0;
