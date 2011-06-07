@@ -26,6 +26,9 @@
 			<div class="grid_12">
     <?php if ($site_name): ?><div class='logo'><a href="<?php print $base_path ?>"><?php print $site_name ?></a></div><?php endif; ?>
 			</div>
+			<div id="nav" class="grid_12">
+				<?php if ($primary_links): print theme('links', $primary_links, array()); endif;?>
+			</div>
 		</div>
   </div></div>
 

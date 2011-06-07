@@ -1,94 +1,172 @@
 body {
-	color:#444;
-	font:16px/1.5 "lucida grande", helvetica, arial, sans-serif;
-}
+  color: #444444;
+  font: 16px/1.5 "lucida grande", helvetica, arial, sans-serif;
+  background: #14355d; }
 
 p {
-	line-height:1.5;
-}
+  line-height: 1.5; }
 
 a {
-	color:#888;
-}
+  color: #888888; }
 
-#header {
-	background:#444;
-}
+#header, #branding {
+  background: white; }
 
 .logo {
-	font-size:3em;
-	padding:.5em 0;
-}
-
-.logo a {
-	text-decoration:none;
-}
-
-.logo a:active {
-	position:relative;
-	top:1px;
-}
+  font-size: 3em;
+  padding: 0.5em 0; }
+  .logo a {
+    text-decoration: none; }
+    .logo a:active {
+      position: relative;
+      top: 1px; }
 
 .primary-tabs a {
-	margin-right:5px;
-	padding:0 5px;
-	text-decoration:none;
-	border:1px solid #ccc;
-	border-radius:2px;
-}
+  margin-right: 5px;
+  padding: 0 5px;
+  text-decoration: none;
+  border: 1px solid #cccccc;
+  border-radius: 2px; }
+
+#page {
+  background: white; }
 
 .home-copy {
-	text-align:justify;
-}
-
-.home-copy h1 {
-	font-size:1.5em;
-}
+  text-align: justify; }
+  .home-copy h1 {
+    font-size: 1.5em; }
 
 .slideshow img {
-	margin:0 auto;
-	padding:5px;
-	background:#f4f4f4;
-	border:1px solid #ddd;
-	border-radius:3px;
-}
+  margin: 0 auto;
+  padding: 5px;
+  background: #f4f4f4;
+  border: 1px solid #dddddd;
+  border-radius: 3px; }
 
 .teaser-header {
-	text-align:center;
-	font-size:1.5em;
-	font-style:italic;
-	color:#666;
-}
+  text-align: center;
+  font-size: 1.5em;
+  font-style: italic;
+  color: #666666; }
 
 #block-views-home_teasers-block_1 {
-	margin-top:2em;
-	padding-top:1em;
-	border-top:5px solid #eee;
-}
+  margin-top: 2em;
+  padding-top: 1em;
+  border-top: 5px solid #eeeeee; }
 
 .view-home-teasers .views-row {
-	width:30%;
-	float:left;
-	padding:1em 1.5%;
-}
+  width: 30%;
+  float: left;
+  padding: 1em 1.5%; }
 
 .view-id-archive .views-field-created {
-	font-size:14px;
-	font-style:italic;
-}
-
+  font-size: 14px;
+  font-style: italic; }
 .view-id-archive .views-row {
-	margin:1em auto;
-}
+  margin: 1em auto; }
 
 .page-taxonomy h1.page-title {
-	text-align:center;
-	font-size:1.5em;
-	font-weight:100;
-	margin-bottom:1em;
-}
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: 100;
+  margin-bottom: 1em; }
 
 #block-views-categories-block_1 .block-title {
-	font-size:1.2em;
-	text-align:center;
-}
+  font-size: 1.2em;
+  text-align: center; }
+
+#footer {
+  background: #14355d;
+  background: -webkit-gradient(linear, left top, left bottom, from(#214f87), to(#14355d));
+  background: -moz-linear-gradient(270deg, #214f87, #14355d);
+  color: white;
+  border-top: 2px solid #999999;
+  margin-bottom: 0;
+  padding-top: 20px; }
+  #footer p {
+    font-size: 14px;
+    line-height: 1.25; }
+  #footer .block {
+    width: 25%;
+    float: left; }
+    #footer .block a {
+      color: white; }
+    #footer .block .block-title, #footer .block .block-content {
+      padding: 0 15px; }
+    #footer .block .block-title {
+      font-size: 20px;
+      margin-bottom: 10px; }
+    #footer .block .views-row {
+      margin-bottom: 15px; }
+      #footer .block .views-row a {
+        text-decoration: none;
+        font-style: italic;
+        font-size: 16px; }
+  #footer .tweets ul {
+    margin-left: 0;
+    list-style: none;
+    font-size: 14px; }
+  #footer .tweets li {
+    margin-left: 0;
+    list-style: none;
+    font-size: 14px;
+    margin-bottom: 15px; }
+    #footer .tweets li span.tweet_time a {
+      display: block; }
+
+.seinfeld-badge {
+  margin: 0 0 2em 0; }
+  .seinfeld-badge #calendar {
+    border-bottom: 1px solid black;
+    border-top: 2px solid black;
+    margin: 1em 0 0 0;
+    padding: 0 5px 5px 5px; }
+  .seinfeld-badge table {
+    width: 100%; }
+  .seinfeld-badge th.monthName {
+    color: #b20000;
+    font-weight: 700;
+    letter-spacing: 5px;
+    padding: 5px 0 0 0;
+    text-align: center;
+    text-transform: uppercase; }
+  .seinfeld-badge tr.dayName th {
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 5px 0;
+    text-align: center;
+    font-size: 11px; }
+  .seinfeld-badge td {
+    position: relative;
+    text-align: center; }
+    .seinfeld-badge td.otherMonth {
+      color: #cccccc; }
+    .seinfeld-badge td.today {
+      color: green; }
+  .seinfeld-badge .xmarksthespot {
+    margin: -16px 7px 0;
+    position: absolute;
+    z-index: 100; }
+  .seinfeld-badge .otherMonth .xmarksthespot {
+    opacity: 0.2; }
+  .seinfeld-badge p {
+    margin: 0; }
+  .seinfeld-badge div.streaks {
+    font-size: 0.8em;
+    margin: 0.2em 0.4em 0 0.4em; }
+    .seinfeld-badge div.streaks span.type {
+      font-weight: 700;
+      text-transform: capitalize; }
+    .seinfeld-badge div.streaks strong a {
+      font-style: normal;
+      font-weight: 300; }
+  .seinfeld-badge div.longest_streak {
+    float: right;
+    margin: -1.3em 0 0 0;
+    width: auto; }
+  .seinfeld-badge p.pimpage {
+    float: right;
+    color: #cccccc;
+    font-size: 0.8em;
+    margin: 0.5em 0.4em 0 0.4em;
+    width: auto; }
