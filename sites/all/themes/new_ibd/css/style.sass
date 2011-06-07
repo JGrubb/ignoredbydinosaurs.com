@@ -1,7 +1,10 @@
+$fat_border: 5px solid #eee
+$dark_blue: #0F2B4D
+
 body
   color: #444
   font: 16px / 1.5 "lucida grande", helvetica, arial, sans-serif
-  background: #0F2B4D
+  background: $dark_blue
 
 p
   line-height: 1.5
@@ -31,6 +34,10 @@ a
 #page
   background: #fff
 
+#content
+  padding-top: 30px
+  border-top: $fat_border
+
 .home-copy
   text-align: justify
   h1
@@ -52,7 +59,7 @@ a
 #block-views-home_teasers-block_1
   margin-top: 2em
   padding-top: 1em
-  border-top: 5px solid #eee
+  border-top: $fat_border
 
 .view-home-teasers .views-row
   width: 30%
@@ -77,10 +84,10 @@ a
   text-align: center
 
 #footer
-  background: #0F2B4D
-  background: -webkit-gradient(linear, left top, left bottom, from(#214f87), to(#0F2B4D))
-  background: -moz-linear-gradient(270deg, #214f87, #0F2B4D)
-  background: linear-gradient(270deg, #214f87, #0F2B4D)
+  background: $dark_blue
+  background: -webkit-gradient(linear, left top, left bottom, from(lighten($dark_blue, 15%)), to($dark_blue))
+  background: -moz-linear-gradient(270deg, lighten($dark_blue, 15%), $dark_blue)
+  background: linear-gradient(270deg, lighten($dark_blue, 15%), $dark_blue)
   color: #fff
   border-top: 2px solid #999
   padding-top: 30px
