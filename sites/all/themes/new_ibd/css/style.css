@@ -32,7 +32,7 @@ a {
 #page {
   background: white; }
 
-#content {
+.front #content {
   padding-top: 30px;
   border-top: 5px solid #eeeeee; }
 
