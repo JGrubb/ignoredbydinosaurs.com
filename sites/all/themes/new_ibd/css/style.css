@@ -24,6 +24,11 @@ a {
 	text-decoration:none;
 }
 
+.logo a:active {
+	position:relative;
+	top:1px;
+}
+
 .primary-tabs a {
 	margin-right:5px;
 	padding:0 5px;
