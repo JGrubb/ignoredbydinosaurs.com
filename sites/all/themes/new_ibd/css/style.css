@@ -6,6 +6,14 @@ body {
 p {
   line-height: 1.5; }
 
+.disclaimer {
+  border: 3px solid #eeeeee;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  background: #f7f7f7;
+  padding: 20px;
+  font-size: 18px; }
+
 a {
   color: #888888; }
 
