@@ -109,6 +109,8 @@ a {
         text-decoration: none;
         font-style: italic;
         font-size: 16px; }
+        #footer .block .views-row a:hover {
+          color: #cccccc; }
   #footer .tweets ul {
     margin-left: 0;
     list-style: none;
