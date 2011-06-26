@@ -1,0 +1,239 @@
+<?php
+// $Id: sass.module,v 1.1.2.1 2009/10/21 17:50:23 aidan Exp $
+
+/**
+ * Implementation of hook_help()
+ */
+function sass_help($path, $arg) {
+  $output = '';  //declare your output variable
+  switch ($path) {
+    case "admin/help#sass":
+    case "admin/settings/sass":
+      $output = '<p>'.  t('Configure settings for SASS to CSS conversion') .'</p>';
+      break;
+  }
+  return $output;
+}
+
+
+/**
+ * Implementation of hook_menu()
+ */
+function sass_menu() {
+
+  $items = array();
+
+  $items['admin/settings/sass'] = array(
+    'title'            => t('SASS'),
+    'description'      => t('Configure settings for SASS to CSS '),
+    'page callback'    => 'drupal_get_form',
+    'page arguments'   => array('sass_admin'),
+    'access arguments' => array('access administration pages'),
+   );
+      
+  return $items;
+}
+
+
+/**
+ * Admin configuration page
+ */
+function sass_admin() {
+  $theme = variable_get('theme_default', 'garland');
+  $path = drupal_get_path('theme', $theme);
+  $when_options = array(
+    'cron'   => t('On cron run'),
+    'change' => t('On stylesheet change'),
+    );
+  $style_options = array(
+    'nested'     => 'Nested (default)',
+    'compact'    => 'Compact',
+    'compressed' => 'Compressed',
+    'expanded'   => 'Expanded',
+    );
+  $description  = t('Enter each rule on a new line, in the form of <em>css path</em> => <em>sass path</em>.');
+  $description .= '<ul><li>' . t('If both the source and destination are directories: all sass files in the input directory are converted and saved as a css in the destination directory.') . '</li>';
+  $description .= '<li>' . t('If the source path is a directory, and the destination path is a single file: all sass files are concatenated and output into a single css file.', array('%path' => $path . '/')) . '</li>';
+  $description .= '<li>' . t('Each rule must be relative to %path.', array('%path' => $path . '/')) . '</li></ul>';
+  
+  $form['sass_binary'] = array(
+    '#type'          => 'textfield',
+    '#title'         => t('Path to SASS conversion binary'),
+    '#default_value' => variable_get('sass_binary', '/usr/bin/sass'),
+    '#description'   => t('Location of the SASS binary on your system - please ensure this is a working SASS installation before using this module.'),
+    '#required'      => TRUE,
+  );
+
+  $form['sass_style'] = array(
+    '#type'          => 'select',
+    '#options'       => $style_options,
+    '#title'         => t('SASS output style'),
+    '#default_value' => variable_get('sass_style', 'nested'),
+    '#description'   => t('The style of output from SASS'),
+    '#required'      => TRUE,
+  );
+
+  $form['sass_rules'] = array(
+    '#type'          => 'textarea',
+    '#title'         => t('Rules for stylesheet conversion'),
+    '#default_value' => variable_get('sass_rules', "sass/style.sass => css/main.css\nsass/ => css/\nsass/ => main.css"),
+    '#description'   => $description,
+  );
+
+  $form['sass_when'] = array(
+    '#type'          => 'checkboxes',
+    '#title'         => t('When should conversion be run'),
+    '#options'       => $when_options,
+    '#default_value' => variable_get('sass_when', array()),
+  );
+  
+  return system_settings_form($form);
+}
+
+
+/**
+ * Validation handler for administration form
+ */
+function sass_admin_validate(&$form, &$form_state) {
+
+  // Check path exists
+  if (!is_file($form_state['values']['sass_binary'])) {
+    form_set_error('sass_binary', 'No file found at specified location');
+  }
+
+  // Check binary is executable
+  if (!is_executable($form_state['values']['sass_binary'])) {
+    form_set_error('sass_binary', 'Binary selected is not executable');
+  }
+  
+  // Parse the rules
+  if (!$rules = sass_parse_rules($form_state['values']['sass_rules'])) {
+    form_set_error('sass_rules', 'Unable to parse conversion rules');
+  }
+    
+  // Check all of the files exist
+  $theme = variable_get('theme_default', 'garland');
+  $path = drupal_get_path('theme', $theme);
+  $rule = 0;
+  foreach ($rules as $line => $rule) {
+    list($source, $dest) = $rule;
+
+    // Check for .. sneaky
+    if (strpos($source, '..') !== false || strpos($dest, '..') !== false) {
+      form_set_error('sass_rules', t('Input rule %rule might be sneaky (must not contain double dot)', array('%rule' => "$source => $dest")));
+      return false;
+    }
+    
+    // If source is a file, check if it's there
+    $sourcepath = $path . '/' . $source;
+    $is_file = strpos($source, '.');
+    if ($is_file && !file_exists($sourcepath)) {
+      form_set_error('sass_rules', t('Invalid input file %path does not exist in rule ##rule', array('%path' => $sourcepath, '#rule' => $line+1)));
+      return false;
+    }
+    
+    // If source is a directory, check it's readable
+    if (!$is_file && !is_dir($path . '/' . $source)) {
+      form_set_error('sass_rules', t('Invalid input directory %path in rule ##rule', array('%path' => $sourcepath, '#rule' => $line+1)));
+      return false;
+    }
+
+    // Check destination directory is writeable
+    $destpath = $path . '/' . $dest;
+    if (strpos($dest, '.')) {
+      $destpath = dirname($destpath);
+    }
+    if (!is_writeable($destpath)) {
+      form_set_error('sass_rules', t('Invalid destination path %path is not writable in rule ##rule', array('%path' => $destpath, '#rule' => $line+1)));
+      return false;
+    }
+  }
+}
+
+
+/**
+ * Implements hook_init()
+ *
+ * Check whether any of the CSS files have changed
+ */
+function sass_init() {
+  $when = variable_get('sass_when', array());
+  $when = array_filter($when);
+  if (!isset($when['change'])) {
+    return;
+  }
+  
+  $rules = sass_parse_rules(variable_get('sass_rules', ''));
+  if (empty($rules)) {
+    return;
+  }
+  
+  // Expand each of the rules into a list of files
+  foreach ($rules as $rule) {
+    $files = sass_expand_rule($rule[0], $rule[1]);
+    
+    foreach ($files as $sass => $css) {
+      // TODO: Check if file has been modified since last generation
+      
+      // Convert
+      sass_convert($sass, $css);
+    }
+  }
+}
+
+
+/**
+ * Build a list of CSS input files, and SASS output files
+ */
+function sass_parse_rules($input) {
+  $parsed = array();
+  $rules = explode("\n", trim($input));
+  foreach ($rules as $rule) {
+    list($source, $dest) = explode(' => ', trim($rule));
+    $parsed[] = array(trim($source), trim($dest)); 
+  }
+
+  return $parsed;
+}
+
+
+/**
+ * Run the SASS conversion process
+ */
+function sass_convert($input, $output) {
+  $siteroot = dirname($_SERVER['SCRIPT_FILENAME']);
+
+  $cmd = sprintf('%s --style %s %s %s',
+    variable_get('sass_binary', '/usr/bin/sass'),
+    variable_get('sass_style', 'nested'),
+    escapeshellarg($siteroot . '/' . $input),
+    escapeshellarg($siteroot . '/' . $output)
+    );
+
+  // This should be forked
+  system($cmd, $status);
+  return $status;
+}
+
+
+/**
+ * Expand a rule and return a list of source and destination files
+ */
+function sass_expand_rule($source, $dest) {
+  $theme = variable_get('theme_default', 'garland');
+  $path = drupal_get_path('theme', $theme);
+  $source = $path . '/' . $source;
+  $dest = $path . '/' . $dest;
+
+  return array(
+    $source => $dest,
+    );
+}
+
+
+/**
+ * Implements hook_cron()
+ */
+function sass_cron() {
+  // TODO
+}

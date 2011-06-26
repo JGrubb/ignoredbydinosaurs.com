@@ -193,3 +193,14 @@ a {
     font-size: 0.8em;
     margin: 0.5em 0.4em 0 0.4em;
     width: auto; }
+
+#user-login input.form-submit {
+  padding: 2px 5px;
+  border: 1px solid #aaaaaa;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  margin: 10px 0;
+  background: #f5f4f5; }
+  #user-login input.form-submit:hover {
+    -moz-box-shadow: 0 0 3px #555555;
+    box-shadow: 0 0 3px #555555; }

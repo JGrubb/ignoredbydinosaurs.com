@@ -1,0 +1,10 @@
+; $Id: sass.info,v 1.1.2.1 2009/10/21 17:50:23 aidan Exp $
+name = "SASS"
+description = "Tools for developers using SASS"
+package = "Other"
+core = 6.x
+; Information added by drupal.org packaging script on 2009-10-21
+version = "6.x-1.0"
+core = "6.x"
+project = "sass"
+datestamp = "1256147811"
