@@ -204,3 +204,6 @@ a {
   #user-login input.form-submit:hover {
     -moz-box-shadow: 0 0 3px #555555;
     box-shadow: 0 0 3px #555555; }
+  #user-login input.form-submit:active {
+    position: relative;
+    top: 1px; }
