@@ -23,6 +23,27 @@ p {
 
 a {
   color: #888888; }
+  a.button {
+    color: white;
+    font-size: 24px;
+    text-decoration: none;
+    background: #174378;
+    background: -moz-linear-gradient(270deg, #205ba2, #174378);
+    background: -webkit-gradient(linear, left top, left bottom, from(#205ba2), to(#174378));
+    background: linear-gradient(270deg, #205ba2, #174378);
+    padding: 3px 10px 0;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    border: 1px solid #444444; }
+    a.button:hover {
+      background: #0f2b4d;
+      background: -moz-linear-gradient(270deg, #174378, #0f2b4d);
+      background: -webkit-gradient(linear, left top, left bottom, from(#174378), to(#0f2b4d));
+      background: linear-gradient(270deg, #174378, #0f2b4d); }
+    a.button:active {
+      position: relative;
+      top: 1px; }
 
 #header, #branding {
   background: #f8f8f8; }

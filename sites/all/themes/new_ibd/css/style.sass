@@ -1,5 +1,14 @@
 $fat_border: 5px solid #eee
 $dark_blue: #0F2B4D
+@mixin grad($a, $b)
+  background: -moz-linear-gradient(270deg, $a, $b)
+  background: -webkit-gradient(linear, left top, left bottom, from($a), to($b))
+  background: linear-gradient(270deg, $a, $b)
+  
+@mixin radius($a)
+  -moz-border-radius: $a
+  -webkit-border-radius: $a
+  border-radius: $a
 
 body
   color: #444
@@ -26,6 +35,21 @@ p
 
 a
   color: #888
+  &.button
+    color: #fff
+    font-size: 24px
+    text-decoration: none
+    background: lighten($dark_blue, 10%)
+    @include grad(lighten($dark_blue, 20%), lighten($dark_blue,10%))
+    padding: 3px 10px 0
+    @include radius(2px)
+    border: 1px solid #444
+    &:hover
+      background: $dark_blue
+      @include grad(lighten($dark_blue, 10%), $dark_blue)
+    &:active
+      position: relative
+      top: 1px
 
 #header, #branding
   background: #f8f8f8
