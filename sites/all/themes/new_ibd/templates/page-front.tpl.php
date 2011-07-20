@@ -43,7 +43,18 @@
 			  <?php endif; ?>
 	        <?php if ($tabs) print $tabs ?>
 	        <?php if ($tabs2) print $tabs2 ?>
-	        <div id='content' class='clear-block'><?php print $content ?></div>
+	        <div id='content' class='clear-block'>
+	          <div class="grid_6 alpha home-copy">
+	            <?php print $content ?>
+	          </div>
+	          <div class="grid_6 omega">
+	            <?php print $right ?>
+	          </div>
+	          <div class="grid_12 alpha omega">
+	            <?php print $content_bottom ?>
+	          </div>
+	        </div>
+	      </div>
 	    </div>
 		</div>
   </div></div>

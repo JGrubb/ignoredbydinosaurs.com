@@ -45,7 +45,10 @@
         <?php if ($tabs) print $tabs ?>
         <?php if ($tabs2) print $tabs2 ?>
         <?php if ($content_top) print $content_top ?>
-        <div id='content' class='clear-block'><?php print $content ?></div>
+        <div id='content' class='clear-block'>
+          <?php print $content ?>
+          <?php print $content_bottom ?>
+        </div>
     </div>
 
     <?php if ($right): ?>

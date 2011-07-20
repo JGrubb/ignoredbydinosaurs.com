@@ -78,12 +78,15 @@ a {
     font-size: 2em;
     font-weight: 100; }
 
-.slideshow img {
+#block-views-home_slideshow-block_1 {
   margin: 0 auto;
-  padding: 5px;
-  background: #f4f4f4;
+  padding: 4px;
   border: 1px solid #dddddd;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
   border-radius: 3px; }
+  #block-views-home_slideshow-block_1:hover {
+    border: 1px solid #888888; }
 
 .teaser-header {
   text-align: center;
@@ -229,6 +232,38 @@ a {
     position: relative;
     top: 1px; }
 
+.page-contact .form-text {
+  padding: 1px 5px;
+  color: #999999;
+  font-size: 1.2em;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px; }
+.page-contact textarea {
+  width: 620px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px; }
+.page-contact .form-submit {
+  padding: 3px 10px 5px;
+  border: 1px solid #bbbbbb;
+  background: #eeeeee;
+  background: -moz-linear-gradient(270deg, #f6f6f6, #dddddd);
+  background: -webkit-gradient(linear, left top, left bottom, from(#f6f6f6), to(#dddddd));
+  background: linear-gradient(270deg, #f6f6f6, #dddddd);
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  font-size: 1.2em;
+  color: #666666;
+  margin: 10px 0 20px; }
+  .page-contact .form-submit:hover {
+    background: #dddddd;
+    background: -moz-linear-gradient(270deg, #eeeeee, #c4c4c4);
+    background: -webkit-gradient(linear, left top, left bottom, from(#eeeeee), to(#c4c4c4));
+    background: linear-gradient(270deg, #eeeeee, #c4c4c4);
+    color: #444444; }
+
 #block-views-portfolio_slideshow-block_1 {
   position: relative;
   height: 282px;
@@ -244,3 +279,15 @@ a {
   font-size: 34px;
   color: #888888;
   margin-top: -20px; }
+.node-type-portfolio .client, .node-type-portfolio .solution {
+  font-size: 1.2em;
+  margin: 10px 0;
+  padding: 15px;
+  border-bottom: 5px solid #eeeeee;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px; }
+  .node-type-portfolio .client h2, .node-type-portfolio .solution h2 {
+    font-size: 1.5em;
+    text-align: center;
+    color: #888888; }

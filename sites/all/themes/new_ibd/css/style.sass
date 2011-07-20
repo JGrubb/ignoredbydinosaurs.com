@@ -9,6 +9,24 @@ $dark_blue: #0F2B4D
   -moz-border-radius: $a
   -webkit-border-radius: $a
   border-radius: $a
+  
+@mixin shadow($a, $b, $c, $d)
+  -moz-box-shadow: $a $b $c $d
+  -webkit-box-shadow: $a $b $c $d
+  box-shadow: $a $b $c $d
+  
+@mixin button()
+  padding: 3px 10px 5px
+  border: 1px solid #bbb
+  background: #eee
+  @include grad(#f6f6f6, #ddd)
+  @include radius(2px)
+  font-size: 1.2em
+  color: #666
+  &:hover
+    background: #ddd
+    @include grad(#eee, #c4c4c4)
+    color: #444
 
 body
   color: #444
@@ -84,12 +102,13 @@ a
     font-size: 2em
     font-weight: 100
 
-.slideshow img
+#block-views-home_slideshow-block_1
   margin: 0 auto
-  padding: 5px
-  background: #f4f4f4
+  padding: 4px
   border: 1px solid #ddd
-  border-radius: 3px
+  @include radius(3px)
+  &:hover
+    border: 1px solid #888
 
 .teaser-header
   text-align: center
@@ -236,5 +255,17 @@ a
     &:active
       position: relative
       top: 1px
-      
+.page-contact
+  .form-text
+    padding: 1px 5px
+    color: #999
+    font-size: 1.2em
+    @include radius(2px)
+  textarea
+    width: 620px
+    @include radius(3px)
+  .form-submit
+    @include button()
+    margin: 10px 0 20px
+  
 @import portfolio.sass
