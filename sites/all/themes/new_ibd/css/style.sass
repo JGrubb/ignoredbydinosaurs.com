@@ -126,9 +126,7 @@ a
 
 #footer
   background: $dark_blue
-  background: -webkit-gradient(linear, left top, left bottom, from(lighten($dark_blue, 15%)), to($dark_blue))
-  background: -moz-linear-gradient(270deg, lighten($dark_blue, 15%), $dark_blue)
-  background: linear-gradient(270deg, lighten($dark_blue, 15%), $dark_blue)
+  @include grad(lighten($dark_blue, 15%), $dark_blue)
   color: #fff
   border-top: 2px solid #999
   padding-top: 30px
@@ -238,3 +236,5 @@ a
     &:active
       position: relative
       top: 1px
+      
+@import portfolio.sass

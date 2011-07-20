@@ -44,6 +44,7 @@
         <?php if ($title): ?><h1 class='page-title'><?php print $title ?></h1><?php endif; ?>
         <?php if ($tabs) print $tabs ?>
         <?php if ($tabs2) print $tabs2 ?>
+        <?php if ($content_top) print $content_top ?>
         <div id='content' class='clear-block'><?php print $content ?></div>
     </div>
 
