@@ -12,13 +12,80 @@
     font-size: 34px
     color: #888
     margin-top: -20px
-  .client, .solution
+  .field-field-client, .field-field-solution
     font-size: 1.2em
-    margin: 10px 0
-    padding: 15px
+    padding: 30px 20px
     border-bottom: $fat_border
-    @include radius(3px)
-    h2
+    @include transition(background, 0.5s, linear)
+    &:hover
+      background: lighten($dark_blue, 80%)
+    .field-label
       font-size: 1.5em
       text-align: center
       color: #888
+      @include serif(normal, normal)
+      margin-bottom: 20px
+  #block-block-15
+    text-align: center
+    margin: 40px 0 30px
+  #block-views-sidebar_content-block_1
+    margin-bottom: 30px
+    padding-bottom: 30px
+    border-bottom: $fat_border
+    .block-title
+      text-align: center
+      font-size: 1.5em
+      font-style: italic
+      border-bottom: $fat_border
+      color: #888
+      margin-bottom: 20px
+      padding-bottom: 10px
+    ul
+      margin-bottom: 20px
+    li
+      font-size: 0.9em
+      padding: 8px 15px
+      @include transition(background, 0.3s, ease)
+      &:hover
+        background: lighten($dark_blue, 75%)
+        
+.view-full-portfolio
+  .views-row
+    clear: both
+    margin: 20px 0 0
+    border-bottom: $fat_border
+    padding: 20px 0 40px
+    overflow: auto
+  .views-field-title
+    font-size: 1.5em
+    margin-bottom: 10px
+    font-style: italic
+    a
+      text-decoration: none
+  .views-field-field-front-page-image-fid
+    float: left
+    margin-right: 20px
+    border: 1px solid #eee
+    padding: 5px 5px 0
+    @include radius(3px)
+    &:hover
+      border-color: #888
+  .views-field-field-client-value
+    font-size: 1.2em
+  .views-field-tid
+    clear: both
+    li
+      float: left
+      @include button($dark_blue)
+      margin-top: 10px
+      margin-right: 20px
+      padding-bottom: 0
+    
+.page-portfolio
+  h1.page-title
+    text-align: center
+    font-size: 4em
+    color: #eee
+    font-weight: 100
+    margin-bottom: -20px
+    border-bottom: $fat_border

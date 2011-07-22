@@ -23,6 +23,8 @@ p {
 
 a {
   color: #888888; }
+  a:hover {
+    color: #444444; }
   a.button {
     color: white;
     font-size: 24px;
@@ -35,7 +37,12 @@ a {
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
     border-radius: 2px;
-    border: 1px solid #444444; }
+    border: 1px solid #444444;
+    -webkit-transition: background 0.2s ease;
+    -moz-transition: background 0.2s ease;
+    -o-transition: background 0.2s ease;
+    -ms-transition: background 0.2s ease;
+    transition: background 0.2s ease; }
     a.button:hover {
       background: #0f2b4d;
       background: -moz-linear-gradient(270deg, #174378, #0f2b4d);
@@ -84,25 +91,48 @@ a {
   border: 1px solid #dddddd;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
-  border-radius: 3px; }
+  border-radius: 3px;
+  -webkit-transition: border 0.3s ease;
+  -moz-transition: border 0.3s ease;
+  -o-transition: border 0.3s ease;
+  -ms-transition: border 0.3s ease;
+  transition: border 0.3s ease;
+  height: 360px; }
   #block-views-home_slideshow-block_1:hover {
-    border: 1px solid #888888; }
+    border: 1px solid #444444; }
 
-.teaser-header {
+.front .view-header {
   text-align: center;
   font-size: 1.5em;
   font-style: italic;
   color: #666666; }
 
-#block-views-home_teasers-block_1 {
+#block-views-home_teasers-block_1,
+#block-views-recent_portfolio-block_1 {
   margin-top: 2em;
-  padding-top: 1em;
+  padding: 1em 0;
   border-top: 5px solid #eeeeee; }
 
-.view-home-teasers .views-row {
-  width: 30%;
+.view-home-teasers .views-row,
+.view-recent-portfolio .views-row {
+  width: 273px;
   float: left;
-  padding: 1em 1.5%; }
+  padding: 20px; }
+  .view-home-teasers .views-row img,
+  .view-recent-portfolio .views-row img {
+    margin: 10px;
+    padding: 10px;
+    -webkit-transition: background 0.3s ease;
+    -moz-transition: background 0.3s ease;
+    -o-transition: background 0.3s ease;
+    -ms-transition: background 0.3s ease;
+    transition: background 0.3s ease; }
+    .view-home-teasers .views-row img:hover,
+    .view-recent-portfolio .views-row img:hover {
+      background: #dddddd; }
+
+.view-home-teasers .views-row-odd {
+  background: #f7f7f7; }
 
 .view-id-archive .views-field-created {
   font-size: 14px;
@@ -248,21 +278,21 @@ a {
   padding: 3px 10px 5px;
   border: 1px solid #bbbbbb;
   background: #eeeeee;
-  background: -moz-linear-gradient(270deg, #f6f6f6, #dddddd);
-  background: -webkit-gradient(linear, left top, left bottom, from(#f6f6f6), to(#dddddd));
-  background: linear-gradient(270deg, #f6f6f6, #dddddd);
-  -moz-border-radius: 2px;
-  -webkit-border-radius: 2px;
-  border-radius: 2px;
+  background: -moz-linear-gradient(270deg, white, #eeeeee);
+  background: -webkit-gradient(linear, left top, left bottom, from(white), to(#eeeeee));
+  background: linear-gradient(270deg, white, #eeeeee);
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
   font-size: 1.2em;
-  color: #666666;
+  color: white;
   margin: 10px 0 20px; }
   .page-contact .form-submit:hover {
-    background: #dddddd;
-    background: -moz-linear-gradient(270deg, #eeeeee, #c4c4c4);
-    background: -webkit-gradient(linear, left top, left bottom, from(#eeeeee), to(#c4c4c4));
-    background: linear-gradient(270deg, #eeeeee, #c4c4c4);
-    color: #444444; }
+    background: #d4d4d4;
+    background: -moz-linear-gradient(270deg, #d4d4d4, #aeaeae);
+    background: -webkit-gradient(linear, left top, left bottom, from(#d4d4d4), to(#aeaeae));
+    background: linear-gradient(270deg, #d4d4d4, #aeaeae);
+    color: white; }
 
 #block-views-portfolio_slideshow-block_1 {
   position: relative;
@@ -279,15 +309,106 @@ a {
   font-size: 34px;
   color: #888888;
   margin-top: -20px; }
-.node-type-portfolio .client, .node-type-portfolio .solution {
+.node-type-portfolio .field-field-client, .node-type-portfolio .field-field-solution {
   font-size: 1.2em;
-  margin: 10px 0;
-  padding: 15px;
+  padding: 30px 20px;
   border-bottom: 5px solid #eeeeee;
+  -webkit-transition: background 0.5s linear;
+  -moz-transition: background 0.5s linear;
+  -o-transition: background 0.5s linear;
+  -ms-transition: background 0.5s linear;
+  transition: background 0.5s linear; }
+  .node-type-portfolio .field-field-client:hover, .node-type-portfolio .field-field-solution:hover {
+    background: #f7fafd; }
+  .node-type-portfolio .field-field-client .field-label, .node-type-portfolio .field-field-solution .field-label {
+    font-size: 1.5em;
+    text-align: center;
+    color: #888888;
+    font-family: garamond-premier-pro-1, garamond-premier-pro-2, serif;
+    font-style: normal;
+    font-weight: normal;
+    margin-bottom: 20px; }
+.node-type-portfolio #block-block-15 {
+  text-align: center;
+  margin: 40px 0 30px; }
+.node-type-portfolio #block-views-sidebar_content-block_1 {
+  margin-bottom: 30px;
+  padding-bottom: 30px;
+  border-bottom: 5px solid #eeeeee; }
+  .node-type-portfolio #block-views-sidebar_content-block_1 .block-title {
+    text-align: center;
+    font-size: 1.5em;
+    font-style: italic;
+    border-bottom: 5px solid #eeeeee;
+    color: #888888;
+    margin-bottom: 20px;
+    padding-bottom: 10px; }
+  .node-type-portfolio #block-views-sidebar_content-block_1 ul {
+    margin-bottom: 20px; }
+  .node-type-portfolio #block-views-sidebar_content-block_1 li {
+    font-size: 0.9em;
+    padding: 8px 15px;
+    -webkit-transition: background 0.3s ease;
+    -moz-transition: background 0.3s ease;
+    -o-transition: background 0.3s ease;
+    -ms-transition: background 0.3s ease;
+    transition: background 0.3s ease; }
+    .node-type-portfolio #block-views-sidebar_content-block_1 li:hover {
+      background: #e1ecf9; }
+
+.view-full-portfolio .views-row {
+  clear: both;
+  margin: 20px 0 0;
+  border-bottom: 5px solid #eeeeee;
+  padding: 20px 0 40px;
+  overflow: auto; }
+.view-full-portfolio .views-field-title {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  font-style: italic; }
+  .view-full-portfolio .views-field-title a {
+    text-decoration: none; }
+.view-full-portfolio .views-field-field-front-page-image-fid {
+  float: left;
+  margin-right: 20px;
+  border: 1px solid #eeeeee;
+  padding: 5px 5px 0;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
   border-radius: 3px; }
-  .node-type-portfolio .client h2, .node-type-portfolio .solution h2 {
-    font-size: 1.5em;
-    text-align: center;
-    color: #888888; }
+  .view-full-portfolio .views-field-field-front-page-image-fid:hover {
+    border-color: #888888; }
+.view-full-portfolio .views-field-field-client-value {
+  font-size: 1.2em; }
+.view-full-portfolio .views-field-tid {
+  clear: both; }
+  .view-full-portfolio .views-field-tid li {
+    float: left;
+    padding: 3px 10px 5px;
+    border: 1px solid #bbbbbb;
+    background: #0f2b4d;
+    background: -moz-linear-gradient(270deg, #1b4f8d, #0f2b4d);
+    background: -webkit-gradient(linear, left top, left bottom, from(#1b4f8d), to(#0f2b4d));
+    background: linear-gradient(270deg, #1b4f8d, #0f2b4d);
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    font-size: 1.2em;
+    color: white;
+    margin-top: 10px;
+    margin-right: 20px;
+    padding-bottom: 0; }
+    .view-full-portfolio .views-field-tid li:hover {
+      background: #071322;
+      background: -moz-linear-gradient(270deg, #071322, black);
+      background: -webkit-gradient(linear, left top, left bottom, from(#071322), to(black));
+      background: linear-gradient(270deg, #071322, black);
+      color: white; }
+
+.page-portfolio h1.page-title {
+  text-align: center;
+  font-size: 4em;
+  color: #eeeeee;
+  font-weight: 100;
+  margin-bottom: -20px;
+  border-bottom: 5px solid #eeeeee; }

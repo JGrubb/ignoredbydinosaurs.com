@@ -1,5 +1,11 @@
 $fat_border: 5px solid #eee
 $dark_blue: #0F2B4D
+
+@mixin serif($style, $weight)
+  font-family: garamond-premier-pro-1,garamond-premier-pro-2,serif
+  font-style: $style
+  font-weight: $weight
+  
 @mixin grad($a, $b)
   background: -moz-linear-gradient(270deg, $a, $b)
   background: -webkit-gradient(linear, left top, left bottom, from($a), to($b))
@@ -15,18 +21,25 @@ $dark_blue: #0F2B4D
   -webkit-box-shadow: $a $b $c $d
   box-shadow: $a $b $c $d
   
-@mixin button()
+@mixin button($color)
   padding: 3px 10px 5px
   border: 1px solid #bbb
-  background: #eee
-  @include grad(#f6f6f6, #ddd)
-  @include radius(2px)
+  background: $color
+  @include grad(lighten($color, 15%), $color)
+  @include radius(3px)
   font-size: 1.2em
-  color: #666
+  color: #fff
   &:hover
-    background: #ddd
-    @include grad(#eee, #c4c4c4)
-    color: #444
+    background: darken($color, 10%)
+    @include grad(darken($color, 10%), darken($color, 25%))
+    color: #fff
+    
+@mixin transition($property, $speed, $style)
+  -webkit-transition: $property $speed $style
+  -moz-transition: $property $speed $style
+  -o-transition: $property $speed $style
+  -ms-transition: $property $speed $style
+  transition: $property $speed $style
 
 body
   color: #444
@@ -53,6 +66,8 @@ p
 
 a
   color: #888
+  &:hover
+    color: #444
   &.button
     color: #fff
     font-size: 24px
@@ -62,6 +77,7 @@ a
     padding: 3px 10px 0
     @include radius(2px)
     border: 1px solid #444
+    @include transition(background, 0.2s, ease)
     &:hover
       background: $dark_blue
       @include grad(lighten($dark_blue, 10%), $dark_blue)
@@ -107,24 +123,39 @@ a
   padding: 4px
   border: 1px solid #ddd
   @include radius(3px)
+  @include transition(border, 0.3s, ease)
+  height: 360px
   &:hover
-    border: 1px solid #888
+    border: 1px solid #444
 
-.teaser-header
-  text-align: center
-  font-size: 1.5em
-  font-style: italic
-  color: #666
+.front
+  .view-header
+    text-align: center
+    font-size: 1.5em
+    font-style: italic
+    color: #666
 
-#block-views-home_teasers-block_1
+#block-views-home_teasers-block_1,
+#block-views-recent_portfolio-block_1
   margin-top: 2em
-  padding-top: 1em
-  border-top: $fat_border
+  padding: 1em 0
+  border-top: $fat-border
 
-.view-home-teasers .views-row
-  width: 30%
-  float: left
-  padding: 1em 1.5%
+.view-home-teasers,
+.view-recent-portfolio
+  .views-row
+    width: 273px
+    float: left
+    padding: 20px
+    img
+      margin: 10px
+      padding: 10px
+      @include transition(background, 0.3s, ease)
+      &:hover
+        background: #ddd
+
+.view-home-teasers .views-row-odd
+  background: #f7f7f7
 
 .view-id-archive
   .views-field-created
@@ -265,7 +296,7 @@ a
     width: 620px
     @include radius(3px)
   .form-submit
-    @include button()
+    @include button(#eee)
     margin: 10px 0 20px
   
 @import portfolio.sass
