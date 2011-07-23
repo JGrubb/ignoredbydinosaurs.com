@@ -69,6 +69,7 @@
 			</div>
 		</div>
   </div></div>
+  <?php print $scripts ?>
   <?php print $closure ?>
 
   </body>
