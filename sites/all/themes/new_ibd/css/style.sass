@@ -21,18 +21,18 @@ $dark_blue: #0F2B4D
   -webkit-box-shadow: $a $b $c $d
   box-shadow: $a $b $c $d
   
-@mixin button($color)
+@mixin button($text, $color)
   padding: 3px 10px 5px
   border: 1px solid #bbb
   background: $color
   @include grad(lighten($color, 15%), $color)
   @include radius(3px)
-  font-size: 1.2em
-  color: #fff
+  font-size: 1.3em
+  color: $text
   &:hover
     background: darken($color, 10%)
-    @include grad(darken($color, 10%), darken($color, 25%))
-    color: #fff
+    @include grad($color, darken($color, 15%))
+    color: $text
     
 @mixin transition($property, $speed, $style)
   -webkit-transition: $property $speed $style
@@ -69,18 +69,9 @@ a
   &:hover
     color: #444
   &.button
-    color: #fff
-    font-size: 24px
     text-decoration: none
-    background: lighten($dark_blue, 10%)
-    @include grad(lighten($dark_blue, 20%), lighten($dark_blue,10%))
-    padding: 3px 10px 0
-    @include radius(2px)
-    border: 1px solid #444
+    @include button(#fff, $dark_blue)
     @include transition(background, 0.2s, ease)
-    &:hover
-      background: $dark_blue
-      @include grad(lighten($dark_blue, 10%), $dark_blue)
     &:active
       position: relative
       top: 1px
@@ -296,7 +287,11 @@ a
     width: 620px
     @include radius(3px)
   .form-submit
-    @include button(#eee)
+    @include button(#444, #eee)
     margin: 10px 0 20px
+    
+#copyright
+  clear: both
+  text-align: center
   
 @import portfolio.sass
