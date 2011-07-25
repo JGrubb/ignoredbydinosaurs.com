@@ -53,7 +53,35 @@ a {
       position: relative;
       top: 1px; }
 
-#header, #branding {
+#header {
+  background: #1b4f8d;
+  border-bottom: 1px solid #0f2b4d; }
+  #header #block-menu-primary-links {
+    float: right;
+    padding: 5px 0; }
+    #header #block-menu-primary-links li {
+      float: left;
+      -moz-border-radius: 2px;
+      -webkit-border-radius: 2px;
+      border-radius: 2px;
+      font-size: 14px;
+      margin-left: 10px; }
+      #header #block-menu-primary-links li a {
+        padding: 4px 10px;
+        text-decoration: none;
+        font-weight: bold;
+        color: white; }
+      #header #block-menu-primary-links li.active-trail {
+        border-top: none;
+        background: #0f2b4d; }
+        #header #block-menu-primary-links li.active-trail a {
+          color: white; }
+      #header #block-menu-primary-links li ul li.active-trail {
+        -moz-box-shadow: inset 0 0 0 #888888;
+        -webkit-box-shadow: inset 0 0 0 #888888;
+        box-shadow: inset 0 0 0 #888888; }
+
+#branding {
   background: #f8f8f8; }
 
 #branding {
@@ -278,22 +306,22 @@ a {
 .page-contact .form-submit {
   padding: 3px 10px 5px;
   border: 1px solid #bbbbbb;
-  background: #eeeeee;
-  background: -moz-linear-gradient(270deg, white, #eeeeee);
-  background: -webkit-gradient(linear, left top, left bottom, from(white), to(#eeeeee));
-  background: linear-gradient(270deg, white, #eeeeee);
+  background: #1b4f8d;
+  background: -moz-linear-gradient(270deg, #2873cd, #1b4f8d);
+  background: -webkit-gradient(linear, left top, left bottom, from(#2873cd), to(#1b4f8d));
+  background: linear-gradient(270deg, #2873cd, #1b4f8d);
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
   border-radius: 3px;
   font-size: 1.3em;
-  color: #444444;
+  color: white;
   margin: 10px 0 20px; }
   .page-contact .form-submit:hover {
-    background: #d4d4d4;
-    background: -moz-linear-gradient(270deg, #eeeeee, #c8c8c8);
-    background: -webkit-gradient(linear, left top, left bottom, from(#eeeeee), to(#c8c8c8));
-    background: linear-gradient(270deg, #eeeeee, #c8c8c8);
-    color: #444444; }
+    background: #133762;
+    background: -moz-linear-gradient(270deg, #1b4f8d, #0f2b4d);
+    background: -webkit-gradient(linear, left top, left bottom, from(#1b4f8d), to(#0f2b4d));
+    background: linear-gradient(270deg, #1b4f8d, #0f2b4d);
+    color: white; }
 
 #copyright {
   clear: both;
@@ -318,13 +346,13 @@ a {
   font-size: 1.2em;
   padding: 30px 20px;
   border-bottom: 5px solid #eeeeee;
-  -webkit-transition: background 0.5s linear;
-  -moz-transition: background 0.5s linear;
-  -o-transition: background 0.5s linear;
-  -ms-transition: background 0.5s linear;
-  transition: background 0.5s linear; }
+  -webkit-transition: background 0.3s linear;
+  -moz-transition: background 0.3s linear;
+  -o-transition: background 0.3s linear;
+  -ms-transition: background 0.3s linear;
+  transition: background 0.3s linear; }
   .node-type-portfolio .field-field-client:hover, .node-type-portfolio .field-field-solution:hover {
-    background: #f7fafd; }
+    background: #eef4fc; }
   .node-type-portfolio .field-field-client .field-label, .node-type-portfolio .field-field-solution .field-label {
     font-size: 1.5em;
     text-align: center;
@@ -362,58 +390,48 @@ a {
       background: #e1ecf9; }
 
 .view-full-portfolio .views-row {
-  clear: both;
-  margin: 20px 0 0;
+  padding: 20px 0;
   border-bottom: 5px solid #eeeeee;
-  padding: 20px 0 40px;
-  overflow: auto; }
+  padding: 20px 10px 40px;
+  overflow: auto;
+  -webkit-transition: background 0.3s ease;
+  -moz-transition: background 0.3s ease;
+  -o-transition: background 0.3s ease;
+  -ms-transition: background 0.3s ease;
+  transition: background 0.3s ease; }
+  .view-full-portfolio .views-row:hover {
+    background: #f2f7fd; }
 .view-full-portfolio .views-field-title {
   font-size: 1.5em;
   margin-bottom: 10px;
-  font-style: italic; }
+  font-style: italic;
+  text-align: center; }
   .view-full-portfolio .views-field-title a {
     text-decoration: none; }
 .view-full-portfolio .views-field-field-front-page-image-fid {
-  float: left;
-  margin-right: 20px;
   border: 1px solid #eeeeee;
   padding: 5px 5px 0;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
-  border-radius: 3px; }
+  border-radius: 3px;
+  background: white; }
   .view-full-portfolio .views-field-field-front-page-image-fid:hover {
     border-color: #888888; }
 .view-full-portfolio .views-field-field-client-value {
   font-size: 1.2em; }
-.view-full-portfolio .views-field-tid {
-  clear: both; }
-  .view-full-portfolio .views-field-tid li {
-    float: left;
-    padding: 3px 10px 5px;
-    border: 1px solid #bbbbbb;
-    background: #0f2b4d;
-    background: -moz-linear-gradient(270deg, #1b4f8d, #0f2b4d);
-    background: -webkit-gradient(linear, left top, left bottom, from(#1b4f8d), to(#0f2b4d));
-    background: linear-gradient(270deg, #1b4f8d, #0f2b4d);
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
-    font-size: 1.3em;
-    color: white;
-    margin-top: 10px;
-    margin-right: 20px;
-    padding-bottom: 0; }
-    .view-full-portfolio .views-field-tid li:hover {
-      background: #071322;
-      background: -moz-linear-gradient(270deg, #0f2b4d, #03070d);
-      background: -webkit-gradient(linear, left top, left bottom, from(#0f2b4d), to(#03070d));
-      background: linear-gradient(270deg, #0f2b4d, #03070d);
-      color: white; }
+.view-full-portfolio .views-row-odd .views-field-field-front-page-image-fid {
+  float: left;
+  margin-right: 30px; }
+.view-full-portfolio .views-row-even .views-field-field-front-page-image-fid {
+  float: right;
+  margin-left: 30px; }
 
 .page-portfolio h1.page-title {
   text-align: center;
   font-size: 4em;
   color: #eeeeee;
   font-weight: 100;
-  margin-bottom: -20px;
   border-bottom: 5px solid #eeeeee; }
+
+.portfolio-index .grid_8 {
+  width: 940px; }

@@ -16,9 +16,9 @@
     font-size: 1.2em
     padding: 30px 20px
     border-bottom: $fat_border
-    @include transition(background, 0.5s, linear)
+    @include transition(background, 0.3s, linear)
     &:hover
-      background: lighten($dark_blue, 80%)
+      background: lighten($dark_blue, 78%)
     .field-label
       font-size: 1.5em
       text-align: center
@@ -51,35 +51,37 @@
         
 .view-full-portfolio
   .views-row
-    clear: both
-    margin: 20px 0 0
+    padding: 20px 0
     border-bottom: $fat_border
-    padding: 20px 0 40px
+    padding: 20px 10px 40px
     overflow: auto
+    @include transition(background, 0.3s, ease)
+    &:hover
+      background: lighten($dark_blue, 79%)
   .views-field-title
     font-size: 1.5em
     margin-bottom: 10px
     font-style: italic
+    text-align: center
     a
       text-decoration: none
   .views-field-field-front-page-image-fid
-    float: left
-    margin-right: 20px
     border: 1px solid #eee
     padding: 5px 5px 0
     @include radius(3px)
+    background: #fff
     &:hover
       border-color: #888
   .views-field-field-client-value
     font-size: 1.2em
-  .views-field-tid
-    clear: both
-    li
+  .views-row-odd
+    .views-field-field-front-page-image-fid
       float: left
-      @include button(#fff, $dark_blue)
-      margin-top: 10px
-      margin-right: 20px
-      padding-bottom: 0
+      margin-right: 30px
+  .views-row-even
+    .views-field-field-front-page-image-fid
+      float: right
+      margin-left: 30px
     
 .page-portfolio
   h1.page-title
@@ -87,5 +89,8 @@
     font-size: 4em
     color: #eee
     font-weight: 100
-    margin-bottom: -20px
     border-bottom: $fat_border
+    
+.portfolio-index
+  .grid_8
+    width: 940px

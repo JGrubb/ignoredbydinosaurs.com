@@ -21,6 +21,11 @@ $dark_blue: #0F2B4D
   -webkit-box-shadow: $a $b $c $d
   box-shadow: $a $b $c $d
   
+@mixin inset-shadow($a, $b, $c, $d)
+  -moz-box-shadow: inset $a $b $c $d
+  -webkit-box-shadow: inset $a $b $c $d
+  box-shadow: inset $a $b $c $d
+  
 @mixin button($text, $color)
   padding: 3px 10px 5px
   border: 1px solid #bbb
@@ -76,7 +81,33 @@ a
       position: relative
       top: 1px
 
-#header, #branding
+#header
+  background: lighten($dark_blue, 15%)
+  border-bottom: 1px solid $dark_blue
+  #block-menu-primary-links
+    float: right
+    padding: 5px 0
+    li
+      float: left
+      @include radius(2px)
+      font-size: 14px
+      margin-left: 10px
+      a
+        padding: 4px 10px
+        text-decoration: none
+        font-weight: bold
+        color: #fff
+      &.active-trail
+        border-top: none
+        background: $dark_blue
+        a
+          color: #fff
+      ul
+        li
+          &.active-trail
+            @include inset-shadow(0, 0, 0, #888)
+
+#branding
   background: #f8f8f8
 
 #branding
@@ -287,7 +318,7 @@ a
     width: 620px
     @include radius(3px)
   .form-submit
-    @include button(#444, #eee)
+    @include button(#fff, lighten($dark_blue, 15%))
     margin: 10px 0 20px
     
 #copyright
