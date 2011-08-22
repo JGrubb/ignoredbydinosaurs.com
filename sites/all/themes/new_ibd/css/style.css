@@ -22,9 +22,9 @@ p {
   font-size: 18px; }
 
 a {
-  color: #0f2b4d; }
+  color: #205ba2; }
   a:hover {
-    color: #444444; }
+    color: #0f2b4d; }
   a.button {
     text-decoration: none;
     padding: 3px 10px 5px;
@@ -178,6 +178,11 @@ a {
 #block-views-categories-block_1 .block-title {
   font-size: 1.2em;
   text-align: center; }
+
+#right .block-title {
+  font-size: 18px; }
+#right p {
+  color: #888888; }
 
 #footer {
   background: #0f2b4d;

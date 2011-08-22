@@ -70,9 +70,9 @@ p
   font-size: 18px
 
 a
-  color: $dark_blue
+  color: lighten($dark_blue, 20%)
   &:hover
-    color: #444
+    color: $dark_blue
   &.button
     text-decoration: none
     @include button(#fff, $dark_blue)
@@ -195,6 +195,12 @@ a
 #block-views-categories-block_1 .block-title
   font-size: 1.2em
   text-align: center
+  
+#right
+  .block-title
+    font-size: 18px
+  p
+    color: #888
 
 #footer
   background: $dark_blue
