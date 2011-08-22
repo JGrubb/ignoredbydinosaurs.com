@@ -6,6 +6,15 @@ body {
 p {
   line-height: 1.5; }
 
+blockquote {
+  font-style: italic;
+  padding: 0;
+  border-color: white;
+  padding: 20px;
+  background: url(../images/icon-quote.gif) left top no-repeat; }
+  blockquote p:last-child {
+    margin-bottom: 0; }
+
 .page-title {
   font-size: 24px;
   font-weight: normal; }
