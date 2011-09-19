@@ -1,0 +1,152 @@
+<!doctype html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!-- Consider adding a manifest.appcache: h5bp.com/d/Offline -->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+
+  <!-- Use the .htaccess and remove these lines to avoid edge case issues.
+       More info: h5bp.com/b/378 -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>Why I dig on Sass these days (the quick version) | ignored by dinosaurs</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory: mathiasbynens.be/notes/touch-icons -->
+
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <!-- More ideas for your <head> here: h5bp.com/d/head-Tips -->
+
+  <!-- All JavaScript at the bottom, except this Modernizr build incl. Respond.js
+       Respond is a polyfill for min/max-width media queries. Modernizr enables HTML5 elements & feature detects; 
+       for optimal performance, create your own custom Modernizr build: www.modernizr.com/download/ -->
+  <script src="js/libs/modernizr-2.0.6.min.js"></script>
+</head>
+
+<body>
+  <header>
+    <a href="/"><h1 id="logo">Ignored By Dinosaurs</h1></a>
+    <ul class="nav">
+  		<li><a href="/about-ibd">About iBD</a></li>
+  		<li><a href="/about-me">Me</a></li>
+  		<li><a href="/archive">Archive</a></li>
+  		<li><a href="mailto:therealjohnnygrubb@gmail.com">Contact</a></li>
+  		<li><a href="https://github.com/JGrubb/ignoredbydinosaurs.com">Source code</a></li>
+  		<li><a href="/books">Books</a></li>
+  	</ul>
+  </header>
+  <div role="main">
+    <p>Sass is a programming language. It&#8217;s purpose is to take some of the repetitive drudgery out of writing CSS (don&#8217;t get me wrong, I love writing CSS). It does this by letting you define things such as constants and functions, things that other programming languages give you but CSS doesn&#8217;t. The end purpose of Sass is to be digested and spit out as plain old CSS.</p>
+
+<p>There are a couple of best parts. One of them is being able to define constants, referred to as variables in Sass. This lets you do things like define a standard color palate at the top of your sheet like this:</p>
+<pre>
+$dark_blue: #064463
+$green: #68db1e
+$med_blue: #0089c7
+</pre>
+<p>Then, any time you need to use that shade of dark blue, rather than having to go find (or remember) <code>#064464</code> you just put <code>$dark_blue</code>. That&#8217;s it.</p>
+<pre>
+background: $dark_blue
+</pre>
+<p>Done.</p>
+
+<p>Sass also has what are called mixins, but are more like functions in other languages. My personal favorite use of mixins is this one -</p>
+<pre>
+@mixin gradient($color1, $color2)
+  background: -webkit-gradient(linear, left top, left bottom, from($color1), to($color2))
+  background: -moz-linear-gradient(270deg, $color1, $color2)
+  background: linear-gradient(270deg, $color1, $color2)
+  -pie-background: linear-gradient(270deg, $color1, $color2)
+  behavior: url(/sites/default/files/pie/PIE.htc)
+</pre>
+<p>This defines all those different vendor specific ways of writing a CSS background gradient (with a dash of <a href='http://css3pie.com/'>css3pie</a> to boot!) and lets you simply drop this in your sheet :</p>
+<pre>
+@include gradient($dark_blue, $med_blue)
+</pre>
+<p>And again, done. It gets compiled and spit out exactly how you need it to be. Still experimenting with the exact colors of that gradient? Change the color once for the whole thing and you can&#8217;t forget to do it for Firefox after you&#8217;ve spent 10 minutes getting it just right in Chrome.</p>
+
+<p>It starts getting really fun when you do things like this :</p>
+<pre>
+background: lighten($dark_blue, 10%)
+</pre>
+<p>Oops, that&#8217;s too light.</p>
+<pre>
+background: lighten($dark_blue, 7%)
+</pre><em>Perrrrfect</em>
+<p>Mix them all together!</p>
+<pre>
+@include gradient(lighten($dark_blue, 10%), $dark_blue)
+</pre>
+<p>This is how Sass saves you time. You can even try it out with existing stylesheets with the <code>sass-convert</code> command. The syntax is <code>sass-convert input-file.css</code>. This spits out your CSS file as Sass at standard output, so try this to get it into a file -</p>
+<pre>
+sass-convert style.css > style.sass
+</pre>
+<p>Sass has a handy watcher function that you can invoke to automatically convert your Sass files into CSS files when you update them. Separate the Sass source file and the target CSS files by a colon.</p>
+<pre>
+sass --watch style.sass:style.css
+</pre>
+<p>Enjoy!</p>
+
+<p>Edit 7/27 &#8211;</p>
+
+<p>There are some damn handy additions in Sass 3.1. for instance, foreach loops -</p>
+<pre>
+@mixin grad($color1, $color2)
+  @each $browser in webkit, moz, o, ms
+    background: -#{$browser}-linear-gradient(top, $color1, $color2)
+</pre>
+<ul>
+<li>spits out this</li>
+</ul>
+<pre>
+          background: -webkit-linear-gradient(top, #e7e7e7, #b4b4b4);
+          background: -moz-linear-gradient(top, #e7e7e7, #b4b4b4);
+          background: -o-linear-gradient(top, #e7e7e7, #b4b4b4);
+          background: -ms-linear-gradient(top, #e7e7e7, #b4b4b4);
+</pre>
+<p>So, there!</p>
+  </div>
+  <footer>
+
+  </footer>
+
+
+  <!-- JavaScript at the bottom for fast page loading -->
+
+  <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="js/libs/jquery-1.6.4.min.js"><\/script>')</script>
+
+
+  <!-- scripts concatenated and minified via build script -->
+  <script defer src="js/plugins.js"></script>
+  <script defer src="js/script.js"></script>
+  <!-- end scripts -->
+
+
+  <!-- Asynchronous Google Analytics snippet. Change UA-XXXXX-X to be your site's ID.
+       mathiasbynens.be/notes/async-analytics-snippet -->
+  <script>
+    var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview'],['_trackPageLoadTime']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+  </script>
+
+  <!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.
+       chromium.org/developers/how-tos/chrome-frame-getting-started -->
+  <!--[if lt IE 7 ]>
+    <script defer src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+    <script defer>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+  <![endif]-->
+
+</body>
+</html>

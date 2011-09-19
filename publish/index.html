@@ -1,0 +1,15 @@
+---
+layout: post
+title: Home
+---
+
+{% for post in site.posts limit:3 %}
+	<div class="index-post post">
+		<h2 class=post-title><a href="{{ post.url  }}" title=Permalink>{{ post.title }}</a></h2>
+		<div class=text>
+			<p><time>{{ post.date | date_to_string }}</time></p>
+			{{ post.content | truncatewords:30 }}
+		</div>
+		<a class=morelink href="{{ post.url }}">More</a>
+	</div>
+{% endfor %}

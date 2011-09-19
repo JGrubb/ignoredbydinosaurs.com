@@ -1,0 +1,140 @@
+<!doctype html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!-- Consider adding a manifest.appcache: h5bp.com/d/Offline -->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+
+  <!-- Use the .htaccess and remove these lines to avoid edge case issues.
+       More info: h5bp.com/b/378 -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>Drupal select list for the form API - 50 states | ignored by dinosaurs</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory: mathiasbynens.be/notes/touch-icons -->
+
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <!-- More ideas for your <head> here: h5bp.com/d/head-Tips -->
+
+  <!-- All JavaScript at the bottom, except this Modernizr build incl. Respond.js
+       Respond is a polyfill for min/max-width media queries. Modernizr enables HTML5 elements & feature detects; 
+       for optimal performance, create your own custom Modernizr build: www.modernizr.com/download/ -->
+  <script src="js/libs/modernizr-2.0.6.min.js"></script>
+</head>
+
+<body>
+  <header>
+    <a href="/"><h1 id="logo">Ignored By Dinosaurs</h1></a>
+    <ul class="nav">
+  		<li><a href="/about-ibd">About iBD</a></li>
+  		<li><a href="/about-me">Me</a></li>
+  		<li><a href="/archive">Archive</a></li>
+  		<li><a href="mailto:therealjohnnygrubb@gmail.com">Contact</a></li>
+  		<li><a href="https://github.com/JGrubb/ignoredbydinosaurs.com">Source code</a></li>
+  		<li><a href="/books">Books</a></li>
+  	</ul>
+  </header>
+  <div role="main">
+    <p>This is the list I&#8217;ve spent a half hour hacking around in TextMate trying to figure out how to not manually build. Couldn&#8217;t quite do it, so here it is, that you may find it and use it when building a Drupal form that has a select list of all 50 states and the District of Columbia.</p>
+<pre>
+'#options' => array(
+	'' => t('Please Select'),
+	'AL' => t('Alabama'),
+	'AK' => t('Alaska'),
+	'AZ' => t('Arizona'),
+	'AR' => t('Arkansas'),
+	'CA' => t('California'),
+	'CO' => t('Colorado'),
+	'CT' => t('Connecticut'),
+	'DE' => t('Delaware'),
+	'DC' => t('District of Columbia'),
+	'FL' => t('Florida'),
+	'GA' => t('Georgia'),
+	'HI' => t('Hawaii'),
+	'ID' => t('Idaho'),
+	'IL' => t('Illinois'),
+	'IN' => t('Indiana'),
+	'IA' => t('Iowa'),
+	'KS' => t('Kansas'),
+	'KY' => t('Kentucky'),
+	'LA' => t('Louisiana'),
+	'ME' => t('Maine'),
+	'MD' => t('Maryland'),
+	'MA' => t('Massachusetts'),
+	'MI' => t('Michigan'),
+	'MN' => t('Minnesota'),
+	'MS' => t('Mississippi'),
+	'MO' => t('Missouri'),
+	'MY' => t('Montana'),
+	'NE' => t('Nebraska'),
+	'NV' => t('Nevada'),
+	'NH' => t('New Hampshire'),
+	'NJ' => t('New Jersey'),
+	'NM' => t('New Mexico'),
+	'NY' => t('New York'),
+	'NC' => t('North Carolina'),
+	'ND' => t('North Dakota'),
+	'OH' => t('Ohio'),
+	'OK' => t('Oklahoma'),
+	'OR' => t('Oregon'),
+	'PA' => t('Pennsylvania'),
+	'RI' => t('Rhode Island'),
+	'SC' => t('South Carolina'),
+	'SD' => t('South Dakota'),
+	'TN' => t('Tennessee'),
+	'TX' => t('Texas'),
+	'UT' => t('Utah'),
+	'VT' => t('Vermont'),
+	'VA' => t('Virginia'),
+	'WA' => t('Washington'),
+	'WV' => t('West Virginia'),
+	'WI' => t('Wisconsin'),
+	'WY' => t('Wyoming'),
+),
+</pre>
+  </div>
+  <footer>
+
+  </footer>
+
+
+  <!-- JavaScript at the bottom for fast page loading -->
+
+  <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="js/libs/jquery-1.6.4.min.js"><\/script>')</script>
+
+
+  <!-- scripts concatenated and minified via build script -->
+  <script defer src="js/plugins.js"></script>
+  <script defer src="js/script.js"></script>
+  <!-- end scripts -->
+
+
+  <!-- Asynchronous Google Analytics snippet. Change UA-XXXXX-X to be your site's ID.
+       mathiasbynens.be/notes/async-analytics-snippet -->
+  <script>
+    var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview'],['_trackPageLoadTime']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+  </script>
+
+  <!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.
+       chromium.org/developers/how-tos/chrome-frame-getting-started -->
+  <!--[if lt IE 7 ]>
+    <script defer src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+    <script defer>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+  <![endif]-->
+
+</body>
+</html>

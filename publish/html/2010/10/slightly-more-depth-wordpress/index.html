@@ -1,0 +1,117 @@
+<!doctype html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!-- Consider adding a manifest.appcache: h5bp.com/d/Offline -->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+
+  <!-- Use the .htaccess and remove these lines to avoid edge case issues.
+       More info: h5bp.com/b/378 -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>Slightly more in depth with Wordpress | ignored by dinosaurs</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory: mathiasbynens.be/notes/touch-icons -->
+
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <!-- More ideas for your <head> here: h5bp.com/d/head-Tips -->
+
+  <!-- All JavaScript at the bottom, except this Modernizr build incl. Respond.js
+       Respond is a polyfill for min/max-width media queries. Modernizr enables HTML5 elements & feature detects; 
+       for optimal performance, create your own custom Modernizr build: www.modernizr.com/download/ -->
+  <script src="js/libs/modernizr-2.0.6.min.js"></script>
+</head>
+
+<body>
+  <header>
+    <a href="/"><h1 id="logo">Ignored By Dinosaurs</h1></a>
+    <ul class="nav">
+  		<li><a href="/about-ibd">About iBD</a></li>
+  		<li><a href="/about-me">Me</a></li>
+  		<li><a href="/archive">Archive</a></li>
+  		<li><a href="mailto:therealjohnnygrubb@gmail.com">Contact</a></li>
+  		<li><a href="https://github.com/JGrubb/ignoredbydinosaurs.com">Source code</a></li>
+  		<li><a href="/books">Books</a></li>
+  	</ul>
+  </header>
+  <div role="main">
+    <blockquote>
+<p>I am having a blast. I found a nice photo gallery Gen Next - has lots of cool features; still working on it.</p>
+
+<p>I do need some help:</p>
+
+<p>1) how do I keep the &#8216;home&#8217; page of the WP site clear of posts? I just want to put some html text and links. It seems to always show the latest posts. I need to understand what is going on with that page.</p>
+
+<p>2) How can I order the posts within a category. example: For Lyrics I have category per album with a post for each song. I need to order them in track order, it seems to always put the newest post first. Ordering by permalink would work since I put the track number as the 1st part of the name.</p>
+
+<p>3) Gotta turn off the right nav stuff - not needed.</p>
+
+<p>I tried creating a category called Lyrics and then adding sub-categories for each album. That created the Lyrics page with all songs listed, I wanted just links to the sub-categories; plus it made the menu real ugly with all the albums listed below main menu. I resolved this by making Lyrics a page and putting links to the &#8216;album&#8217; categories in the html. It seems to work fine but I am not sure if I could have done this another way.</p>
+
+<p>also: where do I comment out the &#8216;add comments&#8217; stuff?</p>
+</blockquote>
+
+<p>Alright, in order &#8211;</p>
+<ol>
+<li>Go to Settings -> Reading and set the top option to display a static page as the home page.  You'll have a list of options for which static page you want.</li>
+<li>As with almost any programming challenge, there are a couple of ways to go about it.  I'm not exactly sure how you want them to display in every situation, but I'll take a beginning guess.
+<ol>
+<li>The easiest, and in this case probably best way to go is to just make sure you enter the lyrics for the songs in the reverse order than how you want them to appear.  If you've already entered some of them in, you can alter the "published date" on the edit screen of each lyric page.  I'd just edit that have them line up in the order that you want.</li>
+<li>The more stylish option would be to write a function in your theme's `functions.php` file.  To make this work correctly you'd have to make use of the "custom fields" feature.  I'm a tiny bit rusty on the exact way to go about this, but basically "custom fields" are extra bits of metadata that you can add to any page or post in WP.  For instance, you could create one custom field with a key called "track number" and use the value of that field to define the track number.  You'd then figure out the correct function to call with the correct arguments to make it show up in the right order when someone came to the lyrics section of the site.</li>
+<li>Doing the same thing from the theme template would also be an option, and probably a little more realistic since you'd be able to have the correct template called by following the naming convention for a given category.  <a href='http://codex.wordpress.org/Template_Hierarchy'>This page</a> will tell you how.</li>
+<li>Slightly off-topic, but there's also the option of creating a blanket "Lyrics" category, and then creating a post for each album that simply lists the songs in the running order, and then links the song titles to another post that contains the lyrics for that song.  This option might give you the most control for the least effort.</li>
+</ol>
+</li>
+<li>So you don't need a right sidebar at all?</li>
+<li>Right, yeah I would ditch the sub-categories for the albums, and probably go with option 4 above.</li>
+<li>If you look at <a href='http://github.com/JGrubb/Base-WP-theme/blob/master//page.php'>line 29 on the page.php</a> file and <a href='http://github.com/JGrubb/Base-WP-theme/blob/master//single.php'>line 39 on the single.php</a> file, you'll see the comment function.  I'd just comment it out so it reads -
+
+`&lt;?php //comments_template( '', true ); ?&gt;`<br />
+and your comments will be gone.</li>
+</ol>
+  </div>
+  <footer>
+
+  </footer>
+
+
+  <!-- JavaScript at the bottom for fast page loading -->
+
+  <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="js/libs/jquery-1.6.4.min.js"><\/script>')</script>
+
+
+  <!-- scripts concatenated and minified via build script -->
+  <script defer src="js/plugins.js"></script>
+  <script defer src="js/script.js"></script>
+  <!-- end scripts -->
+
+
+  <!-- Asynchronous Google Analytics snippet. Change UA-XXXXX-X to be your site's ID.
+       mathiasbynens.be/notes/async-analytics-snippet -->
+  <script>
+    var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview'],['_trackPageLoadTime']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+  </script>
+
+  <!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.
+       chromium.org/developers/how-tos/chrome-frame-getting-started -->
+  <!--[if lt IE 7 ]>
+    <script defer src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+    <script defer>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+  <![endif]-->
+
+</body>
+</html>

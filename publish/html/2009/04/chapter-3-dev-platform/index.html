@@ -1,0 +1,104 @@
+<!doctype html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!-- Consider adding a manifest.appcache: h5bp.com/d/Offline -->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+
+  <!-- Use the .htaccess and remove these lines to avoid edge case issues.
+       More info: h5bp.com/b/378 -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>Chapter3 - devPlatform | ignored by dinosaurs</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory: mathiasbynens.be/notes/touch-icons -->
+
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <!-- More ideas for your <head> here: h5bp.com/d/head-Tips -->
+
+  <!-- All JavaScript at the bottom, except this Modernizr build incl. Respond.js
+       Respond is a polyfill for min/max-width media queries. Modernizr enables HTML5 elements & feature detects; 
+       for optimal performance, create your own custom Modernizr build: www.modernizr.com/download/ -->
+  <script src="js/libs/modernizr-2.0.6.min.js"></script>
+</head>
+
+<body>
+  <header>
+    <a href="/"><h1 id="logo">Ignored By Dinosaurs</h1></a>
+    <ul class="nav">
+  		<li><a href="/about-ibd">About iBD</a></li>
+  		<li><a href="/about-me">Me</a></li>
+  		<li><a href="/archive">Archive</a></li>
+  		<li><a href="mailto:therealjohnnygrubb@gmail.com">Contact</a></li>
+  		<li><a href="https://github.com/JGrubb/ignoredbydinosaurs.com">Source code</a></li>
+  		<li><a href="/books">Books</a></li>
+  	</ul>
+  </header>
+  <div role="main">
+    <p>As in, what does that mean, anyway?  I&#8217;ll try and keep it short.</p>
+
+<p>When I spoke of Ruby on Rails the other day as the &#8216;hotsh!t dev platform of the day&#8217;, I realized that it would need some clarification.  So let me clarify.</p>
+
+<p>Coding pretty much anything is a massive, time consuming job.  That&#8217;s part of the reason that computer languages have evolved from 1s and 0s to Fortran to C to C++ to Java to Ruby: if you were to try and write the Twitter website in assembly language (binary), you&#8217;d be there coding for a very long time.  If you were to try and write Windows 7, you couldn&#8217;t do it.  Hell, they can barely do it now.</p>
+
+<p>Man has devised a better way.  I wrote about some of it in the <a href='http://ignoredbydinosaurs.com/blog/?p=92'><span style='text-decoration: underline;'>Database post</span></a>.  He has set to automating as much of the menial, repetitive work as possible so that the developer may set his mind toward accomplishing other tasks, like the fun bits of the application.  In the case of iPhone development, Apple has created an environment in which to write the apps, <a href='http://developer.apple.com/TOOLS/xcode/'><span style='text-decoration: underline;'>X Code</span></a>.  X Code is itself an application that runs on your Mac just like any other application.  The nice thing about X Code is that Apple designed it specifically for the purposes of making applications for Macs and iPhones.</p>
+
+<p>History lesson, culled mostly from the Mac dev bible, <a href='http://www.amazon.com/Cocoa-Programming-Mac-OS-3rd/dp/0321503619/ref=sr_1_1?ie=UTF8&amp;s=books&amp;qid=1239052561&amp;sr=1-1'><em><span style='text-decoration: underline;'>Cocoa Programming for Mac OS X</span></em></a>:</p>
+
+<p>Apple computers was started years ago in a garage by two guys named Steve.  They&#8217;re both very famous now, Steve W perhaps <em>slightly</em> less so.  The two guys named Steve decided that since they were both programmers and engineers, that perhaps they should hire a CEO type to help them with their rapidly growing company.  CEO guy came in and moved Steve J to some kind of powerless position in the company, so he split.  He started another company called NeXT.  They never did anything commercially successful, but they did develop an operating system and a platform for writing applications - one that started with a fairly significant library of code already put together to make the developers job that much quicker.  At some point, Apple was not doing well financially or otherwise and Microsoft came in and basically gave them a lifeline.  This was in the 90s.  Steve J at that point was an intensely innovative failure.  Funny, huh?</p>
+
+<p>Around this time Apple decided to buy NeXT computers along with the Operating System that they had developed.  Steve J was brought back as an advisor for a little bit before becoming CEO within a year.  The NeXT OS eventually became Mac OS X, which eventually became the iPhone OS.  The point is that even though the iPhone has only been around for less than 2 years now, the developmental lead-up took decades.  During that time, various developers decided that they would put together &#8216;libraries&#8217; of code for making Macintosh applications and save themselves the time of having to rewrite all this code that&#8217;s essentially &#8220;boilerplate&#8221;, meaning the same in every app, there to provide low level functionality that the end user never encounters and is very rarely altered even by the developer though widely varying apps are coming out the other end.  Every language that&#8217;s in any kind of wide use has it&#8217;s own set of libraries, there to provide standard functionality for the programmer and standard sets of instructions for the computer to execute when certain functions are called within the app.</p>
+
+<p>Okay, sorry.  There&#8217;s a lot in there that I wouldn&#8217;t have understood 9 months ago, so let me break it down for you.</p>
+
+<p>When you tell X Code to start a new project, it asks you what kind of project you&#8217;d like to start.  It gives you the options of a couple of different layouts of iPhone apps.  Perhaps you&#8217;d care to build a navigation-based application.  That&#8217;s when you use buttons to navigate through different tables of data and settings.  The Setting app on your (or your friends&#8217;) iPhone is an example of a navigation-based app.  Maybe today you&#8217;d like a tab-bar based app.  This is like the iPod app on the iPhone.  You have a menu of a few pages at the bottom of the screen that take you to different pages in the app.  Maybe you just want a blank window because you&#8217;re building a game that your crew can play in the bus between gigs.  Anyway, after you decide that, it puts together the skeleton of your application with a bunch of different chunks of code that every single app is going to need to run.  The developer then fills out the skeleton and a newborn baby application is brought into the world.  Apple calls their development framework Cocoa, and for iPhone it&#8217;s Cocoa Touch.  Cocoa is just a collection of pre-compiled libraries of code lashed together to help make the dev process that much easier.  Cocoa has a name, so it seems like it should be a physical thing.  It&#8217;s not.  This has been one of the hardest parts about this process to get my head around.  It&#8217;s a bunch of code that someone else already wrote so that you don&#8217;t have to.</p>
+
+<p>Ruby on Rails is also a framework.  A big part of writing Rails apps is using a command called &#8216;script&#8217;.  You call a script command to help you build these chunks of code, and the script automatically does a LOT of the tedious work for you.  I love this, because I don&#8217;t have nearly the experience to write something from the ground up, and that sounds like a lot of wasted time besides.  Tweaking the generated code is then how the developer builds his app.  Brilliant.  This is what a development platform is.  This is why most Mac applications have that &#8220;Mac-y&#8221; look and feel.  This is why all these New-Web social networking sites have a that sorta clean, modern look and feel, and why so many of them employ Google maps as well as each other in their functionality.</p>
+
+<p>Once you get your head around which platform you want to develop on (I&#8217;m thinking Rails to learn), then you can start learning your way around the API, which is where the real fun begins.  I&#8217;m not there yet, but will try to remember to link there when I am.</p>
+  </div>
+  <footer>
+
+  </footer>
+
+
+  <!-- JavaScript at the bottom for fast page loading -->
+
+  <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="js/libs/jquery-1.6.4.min.js"><\/script>')</script>
+
+
+  <!-- scripts concatenated and minified via build script -->
+  <script defer src="js/plugins.js"></script>
+  <script defer src="js/script.js"></script>
+  <!-- end scripts -->
+
+
+  <!-- Asynchronous Google Analytics snippet. Change UA-XXXXX-X to be your site's ID.
+       mathiasbynens.be/notes/async-analytics-snippet -->
+  <script>
+    var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview'],['_trackPageLoadTime']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+  </script>
+
+  <!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.
+       chromium.org/developers/how-tos/chrome-frame-getting-started -->
+  <!--[if lt IE 7 ]>
+    <script defer src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+    <script defer>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+  <![endif]-->
+
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!doctype html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!-- Consider adding a manifest.appcache: h5bp.com/d/Offline -->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+
+  <!-- Use the .htaccess and remove these lines to avoid edge case issues.
+       More info: h5bp.com/b/378 -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>Chapter2 - Databases | ignored by dinosaurs</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory: mathiasbynens.be/notes/touch-icons -->
+
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <!-- More ideas for your <head> here: h5bp.com/d/head-Tips -->
+
+  <!-- All JavaScript at the bottom, except this Modernizr build incl. Respond.js
+       Respond is a polyfill for min/max-width media queries. Modernizr enables HTML5 elements & feature detects; 
+       for optimal performance, create your own custom Modernizr build: www.modernizr.com/download/ -->
+  <script src="js/libs/modernizr-2.0.6.min.js"></script>
+</head>
+
+<body>
+  <header>
+    <a href="/"><h1 id="logo">Ignored By Dinosaurs</h1></a>
+    <ul class="nav">
+  		<li><a href="/about-ibd">About iBD</a></li>
+  		<li><a href="/about-me">Me</a></li>
+  		<li><a href="/archive">Archive</a></li>
+  		<li><a href="mailto:therealjohnnygrubb@gmail.com">Contact</a></li>
+  		<li><a href="https://github.com/JGrubb/ignoredbydinosaurs.com">Source code</a></li>
+  		<li><a href="/books">Books</a></li>
+  	</ul>
+  </header>
+  <div role="main">
+    <p>This part of the blog is going to be tough to write.  Not because I don&#8217;t have much to say on the topic, but because I have frequent pangs of &#8220;dude, you don&#8217;t really know anything about any of this stuff&#8221;.  Then the other side of my brain speaks up. &#8220;Dude, it&#8217;s cool.  They know you&#8217;re not a professor.  That&#8217;s the point of this whole thing, right?  If someone wants hard facts and a professionally written tutorial on computer science, they&#8217;d probably go somewhere else.  If they&#8217;re here, they&#8217;re either a friend or an understanding onlooker, and either way they&#8217;re probably well aware that you&#8217;re just a bass player.  Nobody really expects that much from the bass player.&#8221;  So, I&#8217;m on I 70 headed east across Kansas after selling the <em>shit </em>out of the Ogden theater this weekend.</p>
+
+<p>And now, my initial impressions on the theory and practice of the database.</p>
+
+<p>What the hell is a database?  Being a visual kind of thinker, I&#8217;ve been trying to come up with some sort of relatable analogy to help myself understand exactly what it is.</p>
+
+<p>&#8220;It&#8217;s a series of tables, populated with data, and the tables relate to each other.&#8221;</p>
+
+<p>Okay.  What do you do with it?</p>
+
+<p>&#8220;Well, once you have the data in your database, you can run queries on it.&#8221;</p>
+
+<p>That sounds like a lot of fun!  But what the hell does that mean?</p>
+
+<p>&#8220;Well, queries are like a request that you make.  Say you have a database that&#8217;s populated with every song that RRE has ever played at every show in every venue.  If you wanted to know what you played at a given venue the previous time that you were there, then you could query the database to give you the set list from that show.&#8221;</p>
+
+<p>Well, that&#8217;s cool.</p>
+
+<p>&#8220;Yeah, but say you wanted to know how many times you&#8217;ve played Mighty River.  You could query the same database and get an answer on that, too.  Say you wanted to know the venues where you played it.  You could query that, too.&#8221;</p>
+
+<p>Okay, I get it.  So a database is kind of like a big spreadsheet?</p>
+
+<p>&#8220;Sort of, but not really.  You see a spreadsheet is basically one big monolithic sheet that stores your data in rows and columns; like a database, but a database is made up of many of those sheets, and the collection of those sheets and the way that they relate to each other, and the queries that you can then make of the data is what makes it a more useful tool than just a big sheet with some numbers on it.&#8221;</p>
+
+<p>Okay.  So, how about an example?</p>
+
+<p>For this, we shall turn to the web.  Actually, never mind because this is a blog which means that you don&#8217;t need to turn at all.  Let&#8217;s press Ctrl-T and get a fresh tab going in your browser and go on over to <a href='http://amazon.com'>Amazon</a>.  Mac users have the option of Cmd-clicking the link to open in a new browser tab, so you don&#8217;t have to navigate away from me.</p>
+
+<p>Okay.  You see all that stuff on the page?  Just about everything there is stored in a big-ass database - all the text, all the ads, all the pictures.  Now, why is this important?  For that, we&#8217;ll turn to my bookshelf and it&#8217;s copy of <em>The Complete and Unabridged History of The Internet</em>.  I see here in chapter two after all this non-sense about universities and the DoD that once upon a time there was no such thing as the World Wide Web.  I&#8217;ll skip to the part where then there was a WWW.  The first websites on the newborn baby web were mostly authored in straight HTML, an interpreted language used to help your computer assemble some data on the other end into a web page.  A skilled HTML coder can control every single element on the page that&#8217;s being displayed down to the very pixel (until it&#8217;s opened in another browser, but that&#8217;s another chapter).  The HTML basically tells your browser what text to display, how to format it, what the background color ought to be, where to place the pictures and to what they should link.  This is understandably tedious and time consuming work, but you gotta do it if you want your website to look right.</p>
+
+<p>Somewhere along the way, websites started getting much more complex.  Some genius decided to make a big online store where you could get pretty much anything, from books to socks to computers to whatever.  Now, imagine if you will, the task of hand coding every page.  For every item and every view and every picture and every review there was some army of poor bastards on the other end furiously coding away to keep up with the inflow of new inventory/users/reviews.  I recently read about some guy who worked for an online newspaper, and he supposedly spent 14 hours a day coding HTML for the site before he figured out that there was a better way to get your steady flow of content up there.</p>
+
+<p>The answer lies in scripting language and a database.</p>
+
+<p>A scripting language is basically the same thing as an interpreted language in as much as it&#8217;s not compiled, or even thought of until &#8220;runtime&#8221;.  At runtime, the computer gives instructions to something, probably your browser, which then passes the request along to the code.  It&#8217;s at that time (runtime) that the code is crunched into the binary code that your computer can actually do something with on the processor level.  This is hyper-simplified.</p>
+
+<p>What this means in the Amazon example is that instead of hand-coding every page, why not just build a template that gets populated with the data that&#8217;s requested at the time?  Then you don&#8217;t have to rebuild the wheel every single time a page request is made.  Well, how do you build a template?  With a scripting language, of course!</p>
+
+<p>I&#8217;ll just cut to the bird-eye view.  When you go to Amazon, and it knows that it&#8217;s you, and it spits out all that stuff that you should buy based on past purchases, that&#8217;s because all of that info is stored in a database.  When you click on an item and go to that items page, and the page looks just like the last one, that&#8217;s because all that info is stored in a database.  There&#8217;s a table in there for every one of you, and for every item on the site.  The table for you has all of your info in it, including past purchases, addresses, billing info, etc.  The table for each item has the description, pictures, reviews, links, etc.</p>
+
+<p>The point is that each of these tables is filled out in a standard way with all of their pertinent data.  Why this is cool is that some automated process can then do something with it, like fill out a web page, or display your customer profile.  The scripting language is what automates the process.  It provides the instructions for the web server on the other end of your computer to &#8220;dynamically&#8221; make up the HTML needed to display the pictures and profile info and whatever else in a cohesive way across the entire website.  Dynamically means that you don&#8217;t need an army of HTMLers because the computer is writing the HTML at the time of the page request. Every different kind of page on the site (say reviews vs. the home page) has it&#8217;s own scripted template that&#8217;s called up when the appropriate request is made. Kinda cool, no?</p>
+
+<p>So, a database is somewhere between MS Excel and that big Tupperware bin where you keep all your summer clothes.  We&#8217;ll dive into the beauty of doing things this way later.</p>
+
+<p>A few database driven websites:</p>
+<a href='http://www.archive.org/search.php?query=collection%3ARailroadEarth&amp;sort=-date'>Archive.org</a><a href='http://twitter.com'>Twitter</a><a href='http://ignoredbydinosaurs.com/blog'>This blog</a><a href='http://messageboard.tapeop.com/index.php?sid=d5ce53c0f1b60db5b462e65e841b6cfa'>Any message forum</a>
+<p>Extra credit : Start paying attention to URLs, especially whenever the letters .php are used.  PHP is a very widely used scripting language for making database driven websites, and if .php is included somewhere on your address bar, you&#8217;re looking at data that&#8217;s stored in a database.</p>
+  </div>
+  <footer>
+
+  </footer>
+
+
+  <!-- JavaScript at the bottom for fast page loading -->
+
+  <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="js/libs/jquery-1.6.4.min.js"><\/script>')</script>
+
+
+  <!-- scripts concatenated and minified via build script -->
+  <script defer src="js/plugins.js"></script>
+  <script defer src="js/script.js"></script>
+  <!-- end scripts -->
+
+
+  <!-- Asynchronous Google Analytics snippet. Change UA-XXXXX-X to be your site's ID.
+       mathiasbynens.be/notes/async-analytics-snippet -->
+  <script>
+    var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview'],['_trackPageLoadTime']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+  </script>
+
+  <!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.
+       chromium.org/developers/how-tos/chrome-frame-getting-started -->
+  <!--[if lt IE 7 ]>
+    <script defer src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+    <script defer>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+  <![endif]-->
+
+</body>
+</html>

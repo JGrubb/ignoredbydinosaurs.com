@@ -1,0 +1,102 @@
+<!doctype html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!-- Consider adding a manifest.appcache: h5bp.com/d/Offline -->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+
+  <!-- Use the .htaccess and remove these lines to avoid edge case issues.
+       More info: h5bp.com/b/378 -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>Real innovation in the publishing industry | ignored by dinosaurs</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory: mathiasbynens.be/notes/touch-icons -->
+
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <!-- More ideas for your <head> here: h5bp.com/d/head-Tips -->
+
+  <!-- All JavaScript at the bottom, except this Modernizr build incl. Respond.js
+       Respond is a polyfill for min/max-width media queries. Modernizr enables HTML5 elements & feature detects; 
+       for optimal performance, create your own custom Modernizr build: www.modernizr.com/download/ -->
+  <script src="js/libs/modernizr-2.0.6.min.js"></script>
+</head>
+
+<body>
+  <header>
+    <a href="/"><h1 id="logo">Ignored By Dinosaurs</h1></a>
+    <ul class="nav">
+  		<li><a href="/about-ibd">About iBD</a></li>
+  		<li><a href="/about-me">Me</a></li>
+  		<li><a href="/archive">Archive</a></li>
+  		<li><a href="mailto:therealjohnnygrubb@gmail.com">Contact</a></li>
+  		<li><a href="https://github.com/JGrubb/ignoredbydinosaurs.com">Source code</a></li>
+  		<li><a href="/books">Books</a></li>
+  	</ul>
+  </header>
+  <div role="main">
+    <p>And I&#8217;m not talking about the iPad. The iPad is so cool I still haven&#8217;t had the opportunity to play with one yet, but from a hundred miles up it&#8217;s still just one of the bazillion devices that fall into the terrifically broad and jam-packed category of &#8220;gadgets to read stuff on the internet&#8221;. &#8221;<a href='http://unsuck-it.com/consume-content/'>Consume content</a>&#8221; is the hipster way of saying it. It&#8217;s an obviously lucrative market, which is why it gets the attention of so many innovators. Well and good, but what about people who &#8220;produce content&#8221;, we&#8217;ll call them writers and publishers from now on&#8230;</p>
+
+<p>I finally experimented today with a service that I signed up for several months ago but never spent the 45 minutes to learn how to get it going. It&#8217;s called <a href='http://typekit.com/'>Typekit</a>. The idea is <em>so</em> simple and <em>so</em> brilliant. Allow me&#8230;</p>
+
+<p><code>&amp;lt;geek content &amp;lt;!--feel free to skip ahead--&amp;gt; &amp;gt;</code></p>
+
+<p>There&#8217;s a fundamental issue when you&#8217;re building a website that most people probably aren&#8217;t aware of at all. The issue is the limited number of fonts that you can reliably use to set the type on said website. The vast majority of the world is browsing your site on a Windows computer with a standard set of fonts installed on it. Yes, fonts are installed on your computer. It&#8217;s a weird concept. When you browse to a website, that website tells your browser what font it would prefer to have used when the browser shows you that webpage. It&#8217;s not at all uncommon for the designer to want to use a font that&#8217;s not installed on that computer. There are only about a dozen or so &#8221;<a href='http://www.ampsoft.net/webdesign-l/WindowsMacFonts.html'>web-safe fonts</a>&#8221; that you can rely on, and it gets old really fast using those same fonts over and over and over. If the designer wants to work outside that box a little he may ask the browser to call a more exotic font, but he&#8217;ll also specify what he wants used if that font doesn&#8217;t exist on the user&#8217;s computer. Confused yet? An example perhaps&#8230;</p>
+<p style='font-family:arial'>This is a sentence set in Arial.</p><p style='font-family:&apos;lucida grande&apos;'>This is a sentence set in Lucida Grande</p><p style='font-family:georgia'>This is a sentence set in Georgia</p><p style='font-family:&apos;courier new&apos;'>This is a sentence set in Courier New</p>
+<p>That&#8217;s all cool, but what if you want to use something more exotic to give the name of the site <a href='http://twitter.com/'>a bit more branded flair</a>? Well, in the case of Twitter and most every other website on Earth that means firing up Photoshop and making it there. You get many more fonts to choose from and you can always make your own if you want. Photoshop then spits out your cool text as an image. Yes, that Twitter logo is an image, not HTML text. That means that every browser renders it just like you want it, but it also means that it&#8217;s a relative pain to change and that search engines can&#8217;t tell what it says unless you fill in a bunch of info about it. HTML is preferable for anything that&#8217;s meant to be read, but then you only get those dozen fonts. Double rainbow of a bummer.</p>
+
+<p>So Typekit has a service that lets you use a whole bunch of different fonts, served up to every browser that&#8217;s reasonably modern. I won&#8217;t bore you with the details (that&#8217;s for another post), but it&#8217;s a serious lifesaver. I&#8217;m working on a site right now and <span style='font-family:&apos;myriad pro&apos;'>my favorite Myriad Pro</span> just ain&#8217;t doin&#8217; it for the site header when it&#8217;s set 3 inches tall. For a variety of reasons I didn&#8217;t want to go to Photoshop, so I dove in and tried out Typekit. I soon came upon a cool font called <h2 class='tk-cody bigger'>Cody something or other</h2></p>
+
+<p>Not exactly what the designer used, but vastly more stylish than Myriad.</p>
+
+<p><code>&amp;lt;/geek content&amp;gt;</code></p>
+
+<p>Now, here&#8217;s why this is cool for all of us. Services like this are actually starting to focus on the &#8220;production&#8221; end of the content business. That&#8217;s a very good thing for all of us. That means that the web is finally hitting puberty as a publishing medium. <a href='http://takeoutphoto.blogspot.com/2008/09/psychology-of-typeface.html'>There's a reason that there are a million different fonts in the world</a>, because an all Courier world would be very boring indeed. It&#8217;s a terrible thing that most websites only get a choice of a dozen different fonts, but it&#8217;s a wonderful thing that someone is putting their head toward solving this problem for us all. I personally think that this is a BIG market waiting to happen. Get in now.</p>
+
+<p>Speaking of BIG markets waiting to happen, has anyone tried out <a href='https://www.greplin.com/'>Greplin</a> yet?</p>
+  </div>
+  <footer>
+
+  </footer>
+
+
+  <!-- JavaScript at the bottom for fast page loading -->
+
+  <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="js/libs/jquery-1.6.4.min.js"><\/script>')</script>
+
+
+  <!-- scripts concatenated and minified via build script -->
+  <script defer src="js/plugins.js"></script>
+  <script defer src="js/script.js"></script>
+  <!-- end scripts -->
+
+
+  <!-- Asynchronous Google Analytics snippet. Change UA-XXXXX-X to be your site's ID.
+       mathiasbynens.be/notes/async-analytics-snippet -->
+  <script>
+    var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview'],['_trackPageLoadTime']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+  </script>
+
+  <!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.
+       chromium.org/developers/how-tos/chrome-frame-getting-started -->
+  <!--[if lt IE 7 ]>
+    <script defer src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+    <script defer>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+  <![endif]-->
+
+</body>
+</html>
