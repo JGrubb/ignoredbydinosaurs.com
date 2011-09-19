@@ -1,0 +1,569 @@
+/* HTML5 ✰ Boilerplate
+ *
+ * What follows is the result of much research on cross-browser styling.
+ * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
+ * Kroc Camen, and the H5BP dev community and team.
+ *
+ * Detailed information about this CSS: h5bp.com/css
+ *
+ * ==|== normalize ========================================================== */
+/* =============================================================================
+ * HTML5 display definitions
+ * ========================================================================== */
+/* line 16, ../_sass/style.sass */
+article, aside, details, figcaption, figure, footer, header, hgroup, nav, section {
+  display: block;
+}
+
+/* line 19, ../_sass/style.sass */
+audio, canvas, video {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+}
+
+/* line 24, ../_sass/style.sass */
+audio:not([controls]), [hidden] {
+  display: none;
+}
+
+/* =============================================================================
+ * Base
+ * ========================================================================== */
+/* 1. Correct text resizing oddly in IE6/7 when body font-size is set using em units
+ * 2. Force vertical scrollbar in non-IE
+ * 3. Prevent iOS text size adjust on device orientation change, without disabling user zoom: h5bp.com/g */
+/* line 36, ../_sass/style.sass */
+html {
+  font-size: 100%;
+  overflow-y: scroll;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+/* line 42, ../_sass/style.sass */
+body {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.231;
+  font-family: sans-serif;
+  color: #222222;
+}
+
+/* line 49, ../_sass/style.sass */
+button, input, select, textarea {
+  font-family: sans-serif;
+  color: #222222;
+}
+
+/* Remove text-shadow in selection highlight: h5bp.com/i
+ * These selection declarations have to be separate
+ * Also: hot pink! (or customize the background color to match your design)
+ *
+ *  &:-moz-selection, &:selection
+ *    background: #7BC2FE
+ *    color: #fff
+ *    text-shadow: none */
+/* =============================================================================
+ * Links
+ * ========================================================================== */
+/* line 67, ../_sass/style.sass */
+a {
+  color: #0000ee;
+}
+/* line 69, ../_sass/style.sass */
+a:visited {
+  color: #551a8b;
+}
+/* line 71, ../_sass/style.sass */
+a:hover {
+  color: #0066ee;
+}
+/* line 73, ../_sass/style.sass */
+a:focus {
+  outline: thin dotted;
+}
+/* line 75, ../_sass/style.sass */
+a:hover, a:active {
+  outline: 0;
+}
+
+/* Improve readability when focused and hovered in all browsers: h5bp.com/h */
+/* =============================================================================
+ * Typography
+ * ========================================================================== */
+/* line 84, ../_sass/style.sass */
+abbr[title] {
+  border-bottom: 1px dotted;
+}
+
+/* line 87, ../_sass/style.sass */
+b, strong {
+  font-weight: bold;
+}
+
+/* line 90, ../_sass/style.sass */
+blockquote {
+  margin: 1em 40px;
+}
+
+/* line 93, ../_sass/style.sass */
+dfn {
+  font-style: italic;
+}
+
+/* line 96, ../_sass/style.sass */
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #cccccc;
+  margin: 1em 0;
+  padding: 0;
+}
+
+/* line 104, ../_sass/style.sass */
+ins {
+  background: #ffff99;
+  color: black;
+  text-decoration: none;
+}
+
+/* line 109, ../_sass/style.sass */
+mark {
+  background: yellow;
+  color: black;
+  font-style: italic;
+  font-weight: bold;
+}
+
+/* Redeclare monospace font family: h5bp.com/j */
+/* line 117, ../_sass/style.sass */
+pre, code, kbd, samp {
+  font-family: monospace, serif;
+  _font-family: "courier new", monospace;
+  font-size: 1em;
+}
+
+/* Improve readability of pre-formatted text in all browsers */
+/* line 124, ../_sass/style.sass */
+pre {
+  white-space: pre;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* line 129, ../_sass/style.sass */
+q {
+  quotes: none;
+}
+/* line 131, ../_sass/style.sass */
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+/* line 135, ../_sass/style.sass */
+small {
+  font-size: 85%;
+}
+
+/* Position subscript and superscript content without affecting line-height: h5bp.com/k */
+/* line 140, ../_sass/style.sass */
+sub {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+/* line 146, ../_sass/style.sass */
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+  top: -0.5em;
+}
+
+/* line 153, ../_sass/style.sass */
+sub {
+  bottom: -0.25em;
+}
+
+/* =============================================================================
+ * Lists
+ * ========================================================================== */
+/* line 160, ../_sass/style.sass */
+ul, ol {
+  margin: 1em 0;
+  padding: 0 0 0 40px;
+}
+
+/* line 164, ../_sass/style.sass */
+dd {
+  margin: 0 0 0 40px;
+}
+
+/* line 168, ../_sass/style.sass */
+nav ul, nav ol {
+  list-style: none;
+  list-style-image: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* =============================================================================
+ * Embedded content
+ * ========================================================================== */
+/* 1. Improve image quality when scaled in IE7: h5bp.com/d
+ * 2. Remove the gap between images and borders on image containers: h5bp.com/e */
+/* line 182, ../_sass/style.sass */
+img {
+  border: 0;
+  -ms-interpolation-mode: bicubic;
+  vertical-align: middle;
+}
+
+/* Correct overflow not hidden in IE9 */
+/* line 190, ../_sass/style.sass */
+svg:not(:root) {
+  overflow: hidden;
+}
+
+/* =============================================================================
+ * Figures
+ * ========================================================================== */
+/* line 197, ../_sass/style.sass */
+figure, form {
+  margin: 0;
+}
+
+/* =============================================================================
+ * Forms
+ * ========================================================================== */
+/* line 204, ../_sass/style.sass */
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+/* Indicate that 'label' will shift focus to the associated form element */
+/* line 211, ../_sass/style.sass */
+label {
+  cursor: pointer;
+}
+
+/* 1. Correct color not inheriting in IE6/7/8/9
+ * 2. Correct alignment displayed oddly in IE6/7 */
+/* line 218, ../_sass/style.sass */
+legend {
+  border: 0;
+  *margin-left: -7px;
+  padding: 0;
+}
+
+/* 1. Correct font-size not inheriting in all browsers
+ * 2. Remove margins in FF3/4 S5 Chrome
+ * 3. Define consistent vertical alignment display in all browsers */
+/* line 228, ../_sass/style.sass */
+button, input, select, textarea {
+  font-size: 100%;
+  margin: 0;
+  vertical-align: baseline;
+  *vertical-align: middle;
+}
+
+/* 1. Define line-height as normal to match FF3/4 (set using !important in the UA stylesheet)
+ * 2. Correct inner spacing displayed oddly in IE6/7 */
+/* line 238, ../_sass/style.sass */
+button, input {
+  line-height: normal;
+  *overflow: visible;
+}
+
+/* Reintroduce inner spacing in 'table' to avoid overlap and whitespace issues in IE6/7 */
+/* line 246, ../_sass/style.sass */
+table button, table input {
+  *overflow: auto;
+}
+
+/* 1. Display hand cursor for clickable form elements
+ * 2. Allow styling of clickable form elements in iOS */
+/* line 253, ../_sass/style.sass */
+button {
+  cursor: pointer;
+  -webkit-appearance: button;
+}
+
+/* line 258, ../_sass/style.sass */
+input[type="button"], input[type="reset"], input[type="submit"] {
+  cursor: pointer;
+  -webkit-appearance: button;
+}
+/* line 261, ../_sass/style.sass */
+input[type="checkbox"], input[type="radio"] {
+  box-sizing: border-box;
+  padding: 0;
+}
+/* line 264, ../_sass/style.sass */
+input[type="search"] {
+  -webkit-appearance: textfield;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+}
+/* line 269, ../_sass/style.sass */
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/* Consistent box sizing and appearance */
+/* Remove inner padding and border in FF3/4: h5bp.com/l */
+/* line 278, ../_sass/style.sass */
+button::-moz-focus-inner, input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+/* 1. Remove default vertical scrollbar in IE6/7/8/9
+ * 2. Allow only vertical resizing */
+/* line 286, ../_sass/style.sass */
+textarea {
+  overflow: auto;
+  vertical-align: top;
+  resize: vertical;
+}
+
+/* Colors for form validity */
+/* line 295, ../_sass/style.sass */
+input:invalid, textarea:invalid {
+  background-color: #f0dddd;
+}
+
+/* =============================================================================
+ * Tables
+ * ========================================================================== */
+/* line 302, ../_sass/style.sass */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* line 306, ../_sass/style.sass */
+td {
+  vertical-align: top;
+}
+
+/* ==|== primary styles =====================================================
+ * Author:
+ * ========================================================================== */
+/* line 51, ../../../../../Library/Ruby/Gems/1.8/gems/compass-0.11.5/frameworks/compass/stylesheets/compass/typography/_vertical_rhythm.scss */
+body {
+  font-size: 100%;
+  line-height: 1.5em;
+}
+
+/* line 55, ../../../../../Library/Ruby/Gems/1.8/gems/compass-0.11.5/frameworks/compass/stylesheets/compass/typography/_vertical_rhythm.scss */
+html > body {
+  font-size: 16px;
+}
+
+/* line 7, ../_sass/_ibd.sass */
+body {
+  font-family: "lucida grande", helvetica, arial, sans-serif;
+  background: url("../images/debug.png");
+}
+
+/* line 11, ../_sass/_ibd.sass */
+h1 {
+  font-size: 2.5em;
+  line-height: 1.2em;
+}
+
+/* line 14, ../_sass/_ibd.sass */
+h2 {
+  font-size: 1.75em;
+  line-height: 1.714em;
+}
+
+/* line 17, ../_sass/_ibd.sass */
+h3 {
+  font-size: 1.25em;
+  line-height: 1.2em;
+}
+
+/* line 20, ../_sass/_ibd.sass */
+h4, h5 {
+  font-size: 1em;
+  line-height: 1.5em;
+}
+
+/* ==|== media queries ======================================================
+ * PLACEHOLDER Media Queries for Responsive Design.
+ * These override the primary ('mobile first') styles
+ * Modify as content requires.
+ * ========================================================================== */
+@media only screen and (min-width: 480px) {
+  /* Style adjustments for viewports 480px and over go here */
+}
+@media only screen and (min-width: 768px) {
+  /* Style adjustments for viewports 768px and over go here */
+}
+/* ==|== non-semantic helper classes ========================================
+ * Please define your styles before this section.
+ * ========================================================================== */
+/* For image replacement */
+/* line 333, ../_sass/style.sass */
+.ir {
+  display: block;
+  border: 0;
+  text-indent: -999em;
+  overflow: hidden;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  text-align: left;
+  direction: ltr;
+}
+/* line 342, ../_sass/style.sass */
+.ir br {
+  display: none;
+}
+
+/* Hide from both screenreaders and browsers: h5bp.com/u */
+/* line 347, ../_sass/style.sass */
+.hidden {
+  display: none !important;
+  visibility: hidden;
+}
+
+/* Hide only visually, but have it available for screenreaders: h5bp.com/v */
+/* line 353, ../_sass/style.sass */
+.visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+/* line 363, ../_sass/style.sass */
+.visuallyhidden.focusable:active, .visuallyhidden.focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto;
+}
+
+/* Extends the .visuallyhidden class to allow the element to be focusable when navigated to via the keyboard: h5bp.com/p */
+/* Hide visually and from screenreaders, but maintain layout */
+/* line 375, ../_sass/style.sass */
+.invisible {
+  visibility: hidden;
+}
+
+/* Contain floats: h5bp.com/q */
+/* line 380, ../_sass/style.sass */
+.clearfix {
+  *zoom: 1;
+}
+/* line 381, ../_sass/style.sass */
+.clearfix:before {
+  content: "";
+  display: table;
+}
+/* line 384, ../_sass/style.sass */
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* ==|== print styles =======================================================
+ * Print styles.
+ * Inlined to avoid required HTTP connection: h5bp.com/r
+ * ========================================================================== */
+@media print {
+  /* line 396, ../_sass/style.sass */
+  * {
+    background: transparent !important;
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    filter: none !important;
+    -ms-filter: none !important;
+  }
+
+  /* Black prints faster: h5bp.com/s */
+  /* line 404, ../_sass/style.sass */
+  a {
+    text-decoration: underline;
+  }
+  /* line 406, ../_sass/style.sass */
+  a:visited {
+    text-decoration: underline;
+  }
+  /* line 408, ../_sass/style.sass */
+  a[href]:after {
+    content: " (" attr(href) ")";
+  }
+
+  /* line 410, ../_sass/style.sass */
+  abbr[title]:after {
+    content: " (" attr(title) ")";
+  }
+
+  /* line 412, ../_sass/style.sass */
+  .ir a:after {
+    content: "";
+  }
+
+  /* line 415, ../_sass/style.sass */
+  a[href^="javascript:"]:after, a[href^="#"]:after {
+    content: "";
+  }
+
+  /* Don't show links for images, or javascript/internal links */
+  /* line 418, ../_sass/style.sass */
+  pre, blockquote {
+    border: 1px solid #999999;
+    page-break-inside: avoid;
+  }
+
+  /* line 421, ../_sass/style.sass */
+  thead {
+    display: table-header-group;
+  }
+
+  /* h5bp.com/t */
+  /* line 424, ../_sass/style.sass */
+  tr {
+    page-break-inside: avoid;
+  }
+
+  /* line 426, ../_sass/style.sass */
+  img {
+    page-break-inside: avoid;
+    max-width: 100% !important;
+  }
+
+  @page {
+    margin: 0.5cm;
+}
+
+  /* line 432, ../_sass/style.sass */
+  p, h2, h3 {
+    orphans: 3;
+    widows: 3;
+  }
+
+  /* line 435, ../_sass/style.sass */
+  h2, h3 {
+    page-break-after: avoid;
+  }
+}

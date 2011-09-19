@@ -1,0 +1,86 @@
+<!doctype html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!-- Consider adding a manifest.appcache: h5bp.com/d/Offline -->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+
+  <!-- Use the .htaccess and remove these lines to avoid edge case issues.
+       More info: h5bp.com/b/378 -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>The newby web programmer.  Episode 3. | ignored by dinosaurs</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory: mathiasbynens.be/notes/touch-icons -->
+
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <!-- More ideas for your <head> here: h5bp.com/d/head-Tips -->
+
+  <!-- All JavaScript at the bottom, except this Modernizr build incl. Respond.js
+       Respond is a polyfill for min/max-width media queries. Modernizr enables HTML5 elements & feature detects; 
+       for optimal performance, create your own custom Modernizr build: www.modernizr.com/download/ -->
+  <script src="js/libs/modernizr-2.0.6.min.js"></script>
+</head>
+
+<body>
+  <header>
+    <a href="/"><h1 id="logo">Ignored By Dinosaurs</h1></a>
+    <ul class="nav">
+  		<li><a href="/about-ibd">About iBD</a></li>
+  		<li><a href="/about-me">Me</a></li>
+  		<li><a href="/archive">Archive</a></li>
+  		<li><a href="mailto:therealjohnnygrubb@gmail.com">Contact</a></li>
+  		<li><a href="https://github.com/JGrubb/ignoredbydinosaurs.com">Source code</a></li>
+  		<li><a href="/books">Books</a></li>
+  	</ul>
+  </header>
+  <div role="main">
+    <p>So, you&#8217;ve spent the last few months teaching yourself Wordpress. Good job. There are lot of crappy websites out there, most of them built by some site-builder commodity crap-stuffer at GoDaddy or Network Solutions or some other budget host. These are God-awful examples of poor web development practices. They&#8217;re ugly. They don&#8217;t render correctly in browsers. Many are all but invisible to search engines, which begs the question - if a website fails to show up in the first couple of pages of Google, does it make a sound? Wordpress is a wonderful tool to combat these evils. It&#8217;s easily editable. It&#8217;s easy to learn. It&#8217;s east to add features. It&#8217;s typically built using modern presentation techniques that actually DO show up in search engines. The <a href='http://diythemes.com/'>Thesis theme</a> is a marvel of <a href='http://ignoredbydinosaurs.com/2009/05/seo-in-action/'>SEO</a> and will get your page - pretty much no matter what - up on to the first page of Google depending on what you&#8217;re writing about. Neither here nor there, because you already have an idea of most of this stuff. You&#8217;ve been tinkering around with MAMP and wordpress on your computer and now you want to know how to get your creation up and visible to the world. This is involves two simple steps, and rather than repeat them, I&#8217;ll just link to the site where I learned how to do it.</p>
+<a href='http://weeklywp.com/2009/06/move-wordpress-to-a-new-server/'>http://weeklywp.com/2009/06/move-wordpress-to-a-new-server/</a>
+<p>Questions and requests for clarifications are most welcome. The first big hint is on the front page of the MAMP welcome page. PHPMyAdmin is a database tool for managing your database. That&#8217;s where you&#8217;ll export the database that you&#8217;ve been using to develop locally and upload it to your webhost. Follow the instructions in the tutorial. Every webhost I&#8217;ve seen so far has PHPMyAdmin installed somewhere, but where they&#8217;v hidden it usually varies. If you are installing this on a server that&#8217;s owned by, say, the Stamford school system, you might need to talk to an IT admin to get it happening.</p>
+  </div>
+  <footer>
+
+  </footer>
+
+
+  <!-- JavaScript at the bottom for fast page loading -->
+
+  <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="js/libs/jquery-1.6.4.min.js"><\/script>')</script>
+
+
+  <!-- scripts concatenated and minified via build script -->
+  <script defer src="js/plugins.js"></script>
+  <script defer src="js/script.js"></script>
+  <!-- end scripts -->
+
+
+  <!-- Asynchronous Google Analytics snippet. Change UA-XXXXX-X to be your site's ID.
+       mathiasbynens.be/notes/async-analytics-snippet -->
+  <script>
+    var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview'],['_trackPageLoadTime']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+  </script>
+
+  <!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.
+       chromium.org/developers/how-tos/chrome-frame-getting-started -->
+  <!--[if lt IE 7 ]>
+    <script defer src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+    <script defer>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+  <![endif]-->
+
+</body>
+</html>

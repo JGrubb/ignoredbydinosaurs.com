@@ -1,0 +1,106 @@
+<!doctype html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!-- Consider adding a manifest.appcache: h5bp.com/d/Offline -->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+
+  <!-- Use the .htaccess and remove these lines to avoid edge case issues.
+       More info: h5bp.com/b/378 -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>Akamai plist error in console - you downloaded an Adobe product, didn't you? | ignored by dinosaurs</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory: mathiasbynens.be/notes/touch-icons -->
+
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <!-- More ideas for your <head> here: h5bp.com/d/head-Tips -->
+
+  <!-- All JavaScript at the bottom, except this Modernizr build incl. Respond.js
+       Respond is a polyfill for min/max-width media queries. Modernizr enables HTML5 elements & feature detects; 
+       for optimal performance, create your own custom Modernizr build: www.modernizr.com/download/ -->
+  <script src="js/libs/modernizr-2.0.6.min.js"></script>
+</head>
+
+<body>
+  <header>
+    <a href="/"><h1 id="logo">Ignored By Dinosaurs</h1></a>
+    <ul class="nav">
+  		<li><a href="/about-ibd">About iBD</a></li>
+  		<li><a href="/about-me">Me</a></li>
+  		<li><a href="/archive">Archive</a></li>
+  		<li><a href="mailto:therealjohnnygrubb@gmail.com">Contact</a></li>
+  		<li><a href="https://github.com/JGrubb/ignoredbydinosaurs.com">Source code</a></li>
+  		<li><a href="/books">Books</a></li>
+  	</ul>
+  </header>
+  <div role="main">
+    <p>Inaugurating a new &#8220;Geek&#8221; category for this post with the hope that I can prune back most of the current categories into Geek and Non-Geek. Anyway =&gt;</p>
+
+<p>You&#8217;re probably on a Macintosh and noticed it hanging momentarily every ten seconds or so. You probably recently downloaded Photoshop or Dreamweaver or some other Adobe product that made you download and install the Akamai download manager before it would let you download and install the Adobe product you wanted in the first place. Being conscientious about organization and maintenance of the files in your computer you probably deleted the Akamai download manager after you used it. You went on your merry way and are probably enjoying your Adobe product. At some point you realized this really annoying hang that your computer has been doing. You went to the Console app and saw a list of error messages a mile long about a call to some plist feature that OS X couldn&#8217;t find. You have glimpsed the trail of your enemy. A brief Google search turned up a few dated clues. You&#8217;ve found yourself here. Welcome. Let&#8217;s kill that fucker, shall we?</p>
+
+<p>Here&#8217;s the error -</p>
+
+<p><code>3/19/10 12:10:10 PM	com.apple.launchd.peruser.501[398] (com.akamai.client.plist[606]) Bug: launchd_core_logic.c:4103 (23932):13 &lt;br /&gt;
+3/19/10 12:10:10 PM	com.apple.launchd.peruser.501[398] (com.akamai.client.plist[606]) posix_spawn(&quot;/Applications/Akamai/loader.pl&quot;, ...): No such file or directory&lt;br /&gt;
+3/19/10 12:10:10 PM	com.apple.launchd.peruser.501[398] (com.akamai.client.plist[606]) Exited with exit code: 1&lt;br /&gt;
+3/19/10 12:10:10 PM	com.apple.launchd.peruser.501[398] (com.akamai.client.plist) Throttling respawn: Will start in 10 seconds
+</code></p>
+
+<p>Well, thanks a lot. You check out your Library folders and can&#8217;t find a plist item for Akamai. You can&#8217;t find anything for <code>com.apple.launchd</code>. Spotlight doesn&#8217;t find anything for Akamai. Spotlight doesn&#8217;t find anything for <code>com.apple.launched.peruser</code>. The trail is going cold. This is why you hate &#8220;download managers&#8221;. Aren&#8217;t you capable of managing your own downloads?</p>
+
+<p>Well, the sad news is that since you&#8217;re a conscientious, but perhaps not completely and utterly thorough computer user, you didn&#8217;t dive deep into the README that was provided in the Akamai folder. There was actually some useful info buried in there. Here&#8217;s the fix.</p>
+
+<p>First, you have to go back to Adobe and pick out any trial product to use (again). This will cause the Akamai thing to be reinstalled on your system, which is all you&#8217;re after. It&#8217;ll download that goofy Akamai thing again to a disk image which you then install. It will then start downloading the Adobe whatever. You can stop the download at that point. Now open up the Terminal and paste this command -</p>
+
+<p><code>/Applications/Akamai/admintool uninstall -force</code></p>
+
+<p>This is the only proper way to uninstall that stupid thing that you didn&#8217;t want on your computer in the first place and for which they don&#8217;t even provide an uninstaller, just a little hint in a README buried in the Akamai folder. Restart your computer and hope it forgets all about it. Carry on&#8230;</p>
+
+<p>Props to the <a href='http://discussions.apple.com/thread.jspa?messageID=11243793#11243793'>Apple Forum</a> for providing the answer.</p>
+  </div>
+  <footer>
+
+  </footer>
+
+
+  <!-- JavaScript at the bottom for fast page loading -->
+
+  <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="js/libs/jquery-1.6.4.min.js"><\/script>')</script>
+
+
+  <!-- scripts concatenated and minified via build script -->
+  <script defer src="js/plugins.js"></script>
+  <script defer src="js/script.js"></script>
+  <!-- end scripts -->
+
+
+  <!-- Asynchronous Google Analytics snippet. Change UA-XXXXX-X to be your site's ID.
+       mathiasbynens.be/notes/async-analytics-snippet -->
+  <script>
+    var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview'],['_trackPageLoadTime']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+  </script>
+
+  <!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.
+       chromium.org/developers/how-tos/chrome-frame-getting-started -->
+  <!--[if lt IE 7 ]>
+    <script defer src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+    <script defer>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+  <![endif]-->
+
+</body>
+</html>

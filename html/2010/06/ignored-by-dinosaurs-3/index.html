@@ -1,0 +1,109 @@
+<!doctype html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!-- Consider adding a manifest.appcache: h5bp.com/d/Offline -->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+
+  <!-- Use the .htaccess and remove these lines to avoid edge case issues.
+       More info: h5bp.com/b/378 -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>Ignored by dinosaurs - 3 | ignored by dinosaurs</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory: mathiasbynens.be/notes/touch-icons -->
+
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <!-- More ideas for your <head> here: h5bp.com/d/head-Tips -->
+
+  <!-- All JavaScript at the bottom, except this Modernizr build incl. Respond.js
+       Respond is a polyfill for min/max-width media queries. Modernizr enables HTML5 elements & feature detects; 
+       for optimal performance, create your own custom Modernizr build: www.modernizr.com/download/ -->
+  <script src="js/libs/modernizr-2.0.6.min.js"></script>
+</head>
+
+<body>
+  <header>
+    <a href="/"><h1 id="logo">Ignored By Dinosaurs</h1></a>
+    <ul class="nav">
+  		<li><a href="/about-ibd">About iBD</a></li>
+  		<li><a href="/about-me">Me</a></li>
+  		<li><a href="/archive">Archive</a></li>
+  		<li><a href="mailto:therealjohnnygrubb@gmail.com">Contact</a></li>
+  		<li><a href="https://github.com/JGrubb/ignoredbydinosaurs.com">Source code</a></li>
+  		<li><a href="/books">Books</a></li>
+  	</ul>
+  </header>
+  <div role="main">
+    <h2>The open source website system for musical artists</h2>
+<p>It&#8217;s so <em>obvious</em> when I say it out loud. (edit: that&#8217;s not exactly the most succinct tagline though, so help me out.)</p>
+
+<p>If you&#8217;re just joining the party and you don&#8217;t know what open source is, <a href='http://ignoredbydinosaurs.com/2010/05/open-source-and-why-its-cool/'>check this out</a>. If we haven&#8217;t met before, this is <a href='http://ignoredbydinosaurs.com/category/personal/'>some more of my backstory</a> over the last year or so.</p>
+<h2>Pre-ramble</h2>
+<p>Forgive me if you&#8217;ve read some of this here a hundred times. Part of my process is to refine repeatedly.</p>
+
+<p>I&#8217;m a musician. I&#8217;m 32. My entire professional career has been spent behind the wheel of either an upright bass, an electric bass, or a pair of turntables. In particular the years from 2003 to 2009 were spent on the road with the band <a href='http://railroadearth.com/'>Railroad Earth</a>. About 2 years ago I started teaching myself to program. I wasn&#8217;t really sure where I&#8217;d end up, but it seemed like a good skill to have for the inevitable day that I just couldn&#8217;t keep touring for a living anymore. <!--break--> <h2>Recent history</h2></p>
+
+<p>I quit the band and started making a living as a web programmer. I found a client who needed a me and have since been busy doing lots of nice stuff with a designer who I get along great with. About a month ago I got another gig doing a little thing for this environmental non-prof out in San Francisco. I built exactly the thing they asked me to in both <a href='http://rubyonrails.org/'>Ruby on Rails</a> and <a href='http://drupal.org/'>Drupal</a>. I built the Ruby version first with lots of help from a friend in about 5 days. I spent 3 agonizing days trying to launch it on a shared webserver before giving up and rebuilding the entire thing in Drupal with 36 hours left until the deadline. The Drupal version lit up the first time I flipped on the switch and <span class='highlight'>saved my bacon.</span> I had already bought a ticket to DrupalCon - happening in San Francisco a few weeks after that.</p>
+<h2>Drupal (droo'-pul)</h2>
+<p>While at DrupalCon I drank lots and lots and <em>lots</em> of open source Kool-Aid. The buzz that I got at DrupalCon was exactly like the buzz I used to get at music festivals we&#8217;d play every summer. Tons of cool people hanging out, sharing ideas, drinking beer, meeting new cool people, and being excited about the same thing - the same cool, creative thing. I went to sessions for geeks, for marketing folks, for freelancers, for non-profits, for you name it.</p>
+
+<p>I came back a Drupal developer.</p>
+
+<p>One of the cool tools that I was introduced to there was called <a href='http://openatrium.com/'>OpenAtrium</a>. It&#8217;s basically a tool for managing projects, a thing that becomes very necessary the instant you get off the road and start building websites. I had tried out <a href='http://basecamphq.com/'>BaseCamp</a> with my new gig and liked it a lot. OA was essentially an open source variation, built on top of Drupal. Many of the contributions of the Drupal developer community were rolled into one comprehensive, focused package that was probably done in a fraction of the time that an enterprise team would taken to do a proprietary version of something similar.</p>
+
+<p>Open source is a very powerful idea. Drupal is free. All the cool things that people have built to customize and extend Drupal are free. That&#8217;s why Open Atrium is free.</p>
+<h2>The open source website system for musical artists</h2>
+<p>So a cool feature of Drupal that&#8217;s only recently getting attention paid to it is the &#8220;installation profile&#8221;. That&#8217;s how OA works, and it basically means that you can set up Drupal how you want it (you can quite literally do almost anything that involves the internet with Drupal) and build a script that installs it that way anywhere. You can have, for example, a <em>real</em> band website, for free, right out of the box. The <a href='http://drupal.org/handbook/modules/blog'>blog</a>, the <a href='http://drupal.org/project/calendar'>tour dates</a>, the <a href='http://drupal.org/project/fbconnect'>Facebook</a> and <a href='http://drupal.org/project/flickr'>Flickr</a> integration, the <a href='http://drupal.org/project/advanced_forum'>forum</a>, the <a href='http://drupal.org/project/ubercart'>eCommerce</a> - virtually all of the pieces are <a href='http://drupal.org/project/Modules'>laying right there</a>, waiting to be assembled by those of us who know how. Those of us who need something that doesn&#8217;t exist yet write it and give it back to everyone else using the system. It&#8217;s constantly improved. The roadmap for this thing could be ridiculously cool. The <a href='http://drupal.org/project/Services'>API possibilities</a> if a bunch of people started using this thing? Come on!</p>
+
+<p>I know, the irony of this being a Wordpress powered site has occurred to me, but before I go and uproot and move this blog to Drupal so that we can get to collaborating for real, does this sound like a good idea? One that could maybe change the game?</p>
+<h2>Pssst, Drupal devs...</h2>
+<p>I don&#8217;t know if you&#8217;ve noticed, but the guys who made up OA and PressFlow and OpenPublish are making a damn decent business as consultants for their product. I don&#8217;t know if there&#8217;s any money to be made here or not, but this market has been waiting for this idea. Hell, <a href='http://groups.drupal.org/node/1041'>Drupal has been waiting for this idea</a>. I know a <em>lot</em> of people in the music biz that would probably be delighted to help us out. We can get press and we can get traction. Anybody wanna help out?</p>
+
+<p>Edit: <a href='http://acquia.com/blog/business-models-drupal-distributions'>the post that put the last piece of this idea into place</a>. Thanks, Dries!</p>
+  </div>
+  <footer>
+
+  </footer>
+
+
+  <!-- JavaScript at the bottom for fast page loading -->
+
+  <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="js/libs/jquery-1.6.4.min.js"><\/script>')</script>
+
+
+  <!-- scripts concatenated and minified via build script -->
+  <script defer src="js/plugins.js"></script>
+  <script defer src="js/script.js"></script>
+  <!-- end scripts -->
+
+
+  <!-- Asynchronous Google Analytics snippet. Change UA-XXXXX-X to be your site's ID.
+       mathiasbynens.be/notes/async-analytics-snippet -->
+  <script>
+    var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview'],['_trackPageLoadTime']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+  </script>
+
+  <!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.
+       chromium.org/developers/how-tos/chrome-frame-getting-started -->
+  <!--[if lt IE 7 ]>
+    <script defer src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+    <script defer>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+  <![endif]-->
+
+</body>
+</html>

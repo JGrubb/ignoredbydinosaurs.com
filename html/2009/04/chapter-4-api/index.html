@@ -1,0 +1,94 @@
+<!doctype html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!-- Consider adding a manifest.appcache: h5bp.com/d/Offline -->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+
+  <!-- Use the .htaccess and remove these lines to avoid edge case issues.
+       More info: h5bp.com/b/378 -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>Chapter 4 - The API | ignored by dinosaurs</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory: mathiasbynens.be/notes/touch-icons -->
+
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <!-- More ideas for your <head> here: h5bp.com/d/head-Tips -->
+
+  <!-- All JavaScript at the bottom, except this Modernizr build incl. Respond.js
+       Respond is a polyfill for min/max-width media queries. Modernizr enables HTML5 elements & feature detects; 
+       for optimal performance, create your own custom Modernizr build: www.modernizr.com/download/ -->
+  <script src="js/libs/modernizr-2.0.6.min.js"></script>
+</head>
+
+<body>
+  <header>
+    <a href="/"><h1 id="logo">Ignored By Dinosaurs</h1></a>
+    <ul class="nav">
+  		<li><a href="/about-ibd">About iBD</a></li>
+  		<li><a href="/about-me">Me</a></li>
+  		<li><a href="/archive">Archive</a></li>
+  		<li><a href="mailto:therealjohnnygrubb@gmail.com">Contact</a></li>
+  		<li><a href="https://github.com/JGrubb/ignoredbydinosaurs.com">Source code</a></li>
+  		<li><a href="/books">Books</a></li>
+  	</ul>
+  </header>
+  <div role="main">
+    <p>Facebook made <a href='http://developers.facebook.com/news.php?blog=1&amp;story=225' title='FBDevLink' target='_blank'>this announcement yesterday</a> through the Developers section of their site:</p>
+<blockquote>Today we are excited to announce an important step toward greater openness through Facebook Platform. For the first time, we're opening the core Facebook product experience -- the <a href='http://blog.facebook.com/blog.php?post=57822962130'><em>stream</em></a> -- with the new Facebook Open Stream API.</blockquote>
+<p>What this says to me is that Twitter is having a major impact on the evolution of the internet right now, namely in the heat they&#8217;re putting on Facebook to innovate.</p>
+
+<p>Now, the close up view of Twitter and Facebook looks pretty similar. Facebook is a place where people can make their own little website and stash pictures there to show their friends, etc., but the real innovation of Facebook has been to tap into the collective ADD of humanity and provide a place where you can tell people what you&#8217;re doing and read about what they&#8217;re doing, in small chunks. Twitter is a place where you can tap into the collective ADD of humanity and tell people what you&#8217;re doing and read about what they&#8217;re doing in small chunks, but the real innovation of Twitter is their API.</p>
+
+<p>An API (<a href='http://en.wikipedia.org/wiki/API'>Application Programming Interface</a>) is basically the software equivalent to a door into your application. The 3rd party developer is then able to write his own application that uses that door to do stuff with the application (or it&#8217;s data) on the other side. It&#8217;s cool. It&#8217;s what takes your application from being more or less a mute, single-celled organism to one that all the sudden can speak with others and communicate. That&#8217;s why there are so many Twitter clients coming out all the time. Twitter on it&#8217;s own is cool, if a bit mundane, but that they&#8217;ve opened the system to others to make more fun/valuable for them is why they are changing the world right now.</p>
+
+<p>Facebook is paying close attention. They&#8217;ve kept lean and innovative where MySpace went bloated and corporate, but they&#8217;ve always preferred the closed ecosystem approach. All those applications that people continually send you are cool and all, but they force the developer to work within the confines of FB rules if you want to interact with the stuff that&#8217;s going on within their walls. And there is an unfathomable amount of stuff going on within their walls. Think what you could do if you could break out all those people talking to each other, all those people posting photos, all those people connecting over similar interests or old school ties and start figuring out new ways to play with all that. The possibilities make Twitter look like a drop in the bucket&#8230;</p>
+<em>
+</em>
+  </div>
+  <footer>
+
+  </footer>
+
+
+  <!-- JavaScript at the bottom for fast page loading -->
+
+  <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="js/libs/jquery-1.6.4.min.js"><\/script>')</script>
+
+
+  <!-- scripts concatenated and minified via build script -->
+  <script defer src="js/plugins.js"></script>
+  <script defer src="js/script.js"></script>
+  <!-- end scripts -->
+
+
+  <!-- Asynchronous Google Analytics snippet. Change UA-XXXXX-X to be your site's ID.
+       mathiasbynens.be/notes/async-analytics-snippet -->
+  <script>
+    var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview'],['_trackPageLoadTime']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+  </script>
+
+  <!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.
+       chromium.org/developers/how-tos/chrome-frame-getting-started -->
+  <!--[if lt IE 7 ]>
+    <script defer src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+    <script defer>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+  <![endif]-->
+
+</body>
+</html>

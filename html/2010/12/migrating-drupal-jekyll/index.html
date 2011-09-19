@@ -1,0 +1,116 @@
+<!doctype html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!-- Consider adding a manifest.appcache: h5bp.com/d/Offline -->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+
+  <!-- Use the .htaccess and remove these lines to avoid edge case issues.
+       More info: h5bp.com/b/378 -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>Migrating the blog from Drupal to Jekyll | ignored by dinosaurs</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory: mathiasbynens.be/notes/touch-icons -->
+
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <!-- More ideas for your <head> here: h5bp.com/d/head-Tips -->
+
+  <!-- All JavaScript at the bottom, except this Modernizr build incl. Respond.js
+       Respond is a polyfill for min/max-width media queries. Modernizr enables HTML5 elements & feature detects; 
+       for optimal performance, create your own custom Modernizr build: www.modernizr.com/download/ -->
+  <script src="js/libs/modernizr-2.0.6.min.js"></script>
+</head>
+
+<body>
+  <header>
+    <a href="/"><h1 id="logo">Ignored By Dinosaurs</h1></a>
+    <ul class="nav">
+  		<li><a href="/about-ibd">About iBD</a></li>
+  		<li><a href="/about-me">Me</a></li>
+  		<li><a href="/archive">Archive</a></li>
+  		<li><a href="mailto:therealjohnnygrubb@gmail.com">Contact</a></li>
+  		<li><a href="https://github.com/JGrubb/ignoredbydinosaurs.com">Source code</a></li>
+  		<li><a href="/books">Books</a></li>
+  	</ul>
+  </header>
+  <div role="main">
+    <h2 id='reasons_for_leaving_drupal_a_preamble'>Reasons for leaving Drupal, a preamble</h2>
+
+<p>I&#8217;d had this website on Drupal since some time in July. If you look through the <a href='http://ignoredbydinosaurs.com/archive/'>archives</a>, you&#8217;ll notice a relative dearth of posts from this time period. Drupal just has a way of sucking all the fun out of blogging. It&#8217;s very, very slow for one thing. I had a lot of trouble integrating the site with the Disqus comment system that handled all of my Wordpress comments before I made the move so I was forced to use Drupal&#8217;s comment system. I&#8217;d written a couple of posts in the &#8220;didn&#8217;t find much in Google about it, so I decided to become the authoritative voice on it&#8221; vein, and had a ton of comments on one of them. Those comments appear to be gone now, even though I devoted an entire day to exporting them out of Drupal into Disqus with a <a href='http://drupal.org/node/269010' title='Migrate from Drupal comment.module to Disqus comments | drupal.org'>solution that someone came up with</a>.</p>
+
+<p>Basically, Drupal is a beast. If you have a project that you are trying to build that involves users with accounts, and different levels of access to the content based on those roles, go with Drupal. For anything else, anything simpler, stay away. Drupal gives the impression of being somehow more user friendly since you can configure these massively complex sites without actually coding much of anything, but is that really a good thing?? Drupal&#8217;s inherent dependence on <a href='http://developmentseed.org/blog/2009/jul/09/development-staging-production-workflow-problem-drupal' title='The Development -&amp;gt; Staging -&amp;gt; Production Workflow Problem in Drupal | Development Seed'>stashing so much configuration in the database</a> will be the death of the project if it&#8217;s not figured out, and I personally don&#8217;t think anything short of a MAJOR rewrite is going to sort it out. The major Drupal rewrite that&#8217;s about to drop on the world some time has taken 2 years to get even close to the door, and a rewrite that would effectively fix this particular issue would also effectively rewrite the entire philosophy of being able to build a site in the browser, arguably the whole reason for Drupal existence in the first place.</p>
+
+<p>I haven&#8217;t even gotten to the part about moving Drupal to Git. Why not put the whole thing up in GitHub? Have you heard of Rails? It&#8217;s doing pretty well, and I&#8217;d wager that a large part of the reason for that is how easy it is to dive in and contribute to open source on GitHub. I&#8217;ve never once seen it even mentioned to move Drupal to GitHub.</p>
+
+<p>anyway&#8230;</p>
+
+<h2 id='reasons_for_migrating_to_jekyll_regular_ramble'>Reasons for migrating to Jekyll, regular ramble</h2>
+
+<p>First off, it really wasn&#8217;t that hard, so skip ahead if you wish. I spent a good several hours on Github researching other sites that people had going on the platform out there. I&#8217;ve been studying a whole lot of Ruby lately, so it was down to Jekyll or a few other simple solutions. I started building a solution out of Sinatra, but decided that deployment was probably going to be more of a headache than I felt like dealing with.</p>
+
+<p>I loved the idea of a static HTML site since one of my main gripes about Drupal was how many times I could count the little page load indicator going around on Chrome. This site is blazing fast now, so yay for that.</p>
+
+<p>I love the idea that there are no security updates, no databases to backup, no crufty markup that comes from where exactly? Basically, there&#8217;s very little tradeoff. It&#8217;s mostly win. So, on to the show.</p>
+
+<h2 id='migrating_from_drupal_to_jekyll_the_meat'>Migrating from Drupal to Jekyll, the meat</h2>
+
+<p>One of the things that I didn&#8217;t understand about Jekyll was that it doesn&#8217;t really generate a site template for you (you get used to that when dealing with Ruby). You have to build that part or Jekyll won&#8217;t do anything at all. It&#8217;s easy enough to get started though, just Google or <a href='https://github.com/mojombo/jekyll/wiki/Sites'>borrow from other GitHubbers</a>. The tricky part was liberating my posts from Drupal, which was made vastly easier by <a href='https://github.com/mattdipasquale/jekyll/blob/master/lib/jekyll/migrators/drupal.rb'>this fellow having written a Drupal migrator</a> only a few weeks ago.</p>
+
+<p>I followed all of the instructions on <a href='https://github.com/mojombo/jekyll/wiki/Blog-Migrations'>this page</a> for getting the migrators to work, but kept getting an error message that ruby couldn&#8217;t find the specified file or something like that. So an hour or two of fiddling around with the migrator file in my Jekyll directory and finally changing the command to something like this -</p>
+
+<p><code>ruby -r &#39;~/PLAY/jekyll/_import/drupal&#39; -e &#39;Jekyll::Drupal.process( &quot;#{ENV[&quot;DB&quot;]}&quot;, &quot;#{ENV[&quot;USER&quot;]}&quot;, &quot;#{ENV[&quot;PASS&quot;]}&quot;)&#39;</code></p>
+
+<p>where <code>~/PLAY/jekyll</code> is the root of my jekyll install in order to get ruby to read the migrator file that was there instead of trying to find one that wasn&#8217;t. I&#8217;m sure the instructions will work fine for someone who knows more than me, but hey it worked.</p>
+
+<p><em>edit: it now occurs to me that if I wanted this to really work the correct way, I should&#8217;ve forked Matt Dipasquale&#8217;s version of Jekyll and built my site that way, but I&#8217;m not sure how that plays with the RubyGem system and in any event I made it work. YMMV.</em></p>
+
+<h2 id='to_give_back_unto_the_community'>to give back unto the community&#8230;</h2>
+
+<p>TODO - add a bit into the Drupal migrator that also liberates the URL aliases from the DB, as the author of the current migrator apparently used the stock Drupal URL scheme (node/*). Jekyll has an easy facility for setting the permalinks for your posts, but going through every post to make sure they were right was needlessly tedious in hindsight.</p>
+  </div>
+  <footer>
+
+  </footer>
+
+
+  <!-- JavaScript at the bottom for fast page loading -->
+
+  <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="js/libs/jquery-1.6.4.min.js"><\/script>')</script>
+
+
+  <!-- scripts concatenated and minified via build script -->
+  <script defer src="js/plugins.js"></script>
+  <script defer src="js/script.js"></script>
+  <!-- end scripts -->
+
+
+  <!-- Asynchronous Google Analytics snippet. Change UA-XXXXX-X to be your site's ID.
+       mathiasbynens.be/notes/async-analytics-snippet -->
+  <script>
+    var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview'],['_trackPageLoadTime']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+  </script>
+
+  <!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.
+       chromium.org/developers/how-tos/chrome-frame-getting-started -->
+  <!--[if lt IE 7 ]>
+    <script defer src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+    <script defer>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+  <![endif]-->
+
+</body>
+</html>
