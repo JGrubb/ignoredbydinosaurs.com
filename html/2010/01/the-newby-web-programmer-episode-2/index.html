@@ -28,23 +28,17 @@
   <!-- All JavaScript at the bottom, except this Modernizr build incl. Respond.js
        Respond is a polyfill for min/max-width media queries. Modernizr enables HTML5 elements & feature detects; 
        for optimal performance, create your own custom Modernizr build: www.modernizr.com/download/ -->
-  <script src="js/libs/modernizr-2.0.6.min.js"></script>
+  <script src="/js/libs/modernizr-2.0.6.min.js"></script>
 </head>
 
 <body>
   <header>
     <a href="/"><h1 id="logo">Ignored By Dinosaurs</h1></a>
-    <ul class="nav">
-  		<li><a href="/about-ibd">About iBD</a></li>
-  		<li><a href="/about-me">Me</a></li>
-  		<li><a href="/archive">Archive</a></li>
-  		<li><a href="mailto:therealjohnnygrubb@gmail.com">Contact</a></li>
-  		<li><a href="https://github.com/JGrubb/ignoredbydinosaurs.com">Source code</a></li>
-  		<li><a href="/books">Books</a></li>
-  	</ul>
   </header>
   <div role="main">
-    <p>So, you&#8217;ve gone and installed MAMP and WordPress on your computer, or if you wanna sound really hip you call it your &#8220;local machine&#8221;. You&#8217;ve gone and started building out a wordpress site for your school because your current website is an outdated embarrassment. Wordpress is kind of the no brainer choice, or so your buddy told you, because it&#8217;s super easy for anyone to use who&#8217;s familiar with a word processor. You&#8217;d like to attempt to keep the content on your site fresh, so it sounds good to you. Then you have a meeting with your principle and your so-called webmaster to talk about getting some of the things you&#8217;ve done put up and made available to the world. Then they drop a little piece of info on you.</p>
+    <h2></h2>
+<article class="blog">
+  <p>So, you&#8217;ve gone and installed MAMP and WordPress on your computer, or if you wanna sound really hip you call it your &#8220;local machine&#8221;. You&#8217;ve gone and started building out a wordpress site for your school because your current website is an outdated embarrassment. Wordpress is kind of the no brainer choice, or so your buddy told you, because it&#8217;s super easy for anyone to use who&#8217;s familiar with a word processor. You&#8217;d like to attempt to keep the content on your site fresh, so it sounds good to you. Then you have a meeting with your principle and your so-called webmaster to talk about getting some of the things you&#8217;ve done put up and made available to the world. Then they drop a little piece of info on you.</p>
 
 <p>Your school&#8217;s webhost doesn&#8217;t do PHP, and they don&#8217;t know if the district will let you move to another host. Let me tell you what this seemingly innocuous piece of information means.</p>
 
@@ -57,22 +51,47 @@
 <p>Scripted languages have to have their respective libraries of code installed in order to for them to be &#8220;interpreted&#8221; at &#8220;runtime&#8221;. This whole long explanation is to tell you that since your webhost doesn&#8217;t appear to have the appropriate libraries installed, your WordPress application is going to look like a bunch of gibberish to your webserver. You can upload it, but as soon as you point a browser at the index.php file, the server is going to throw a &#8220;what the fuck is this?&#8221;, also called an error. That&#8217;s why you had to install MAMP on your computer in the first place, remember? And unfortunately, installing PHP isn&#8217;t an easy process, especially for someone who almost certainly doesn&#8217;t have the proper &#8220;permissions&#8221; allotted to them in the operating system of the webserver.</p>
 
 <p>I realize there&#8217;s a bunch of gobbledeegook in here. I&#8217;ll try to un-muddy the waters a bit in subsequent posts. Specific questions are most welcome. I should clarify that any webhosting company in the world is going to have PHP, and most likely a raft of other languages installed so that they can accommodate all types of clients and their disparately coded applications. That your school&#8217;s webhost doesn&#8217;t have PHP - the most widely used web programming language in the world for the last decade or so running - tells me that your district has their own hilariously outdated webservers set up in the furnace room of some office somewhere. We may be dead in the water, Jimmy&#8230;</p>
+</article>
+<section>
+  
+</section>
   </div>
-  <footer>
-
-  </footer>
+<footer>
+  <div class="wrap">
+    <section>
+      <h2>About iBD</h2>
+      <p>Ibd is a web development consultancy based in the beautiful, wooded countryside of Stillwater, New Jersey. Ibd specializes in content management. We've worked for environmental non-profits, health insurance companies, local yoga studios, advertising agencies and many others on projects small and huge. Ibd is a proud member of the <a href="http://drupal.org/" title="Drupal - Open Source CMS | drupal.org">Drupal Association</a> and also works custom wonders with <a href="http://wordpress.org/" title="WordPress &#8250; Blog Tool and Publishing Platform">Wordpress</a>.</p>
+      <p>We're interested in hearing about your project. Please drop us a line.</p>
+    </section>
+    <section>
+      <h2>Recent Posts</h2>
+      
+      <div class="post-link"><a href="/2011/09/great-lie-lorem-ipsum">The Great Lie - Lorem Ipsum</a></div>
+      
+      <div class="post-link"><a href="/2011/08/so-what-are-you">So what are you up to?</a></div>
+      
+      <div class="post-link"><a href="/2011/07/why-i-dig-sass-these-days-quick-version">Why I dig on Sass these days (the quick version)</a></div>
+      
+      <div class="post-link"><a href="/2011/06/quick-trip-panic-room">A quick trip to the Panic Room</a></div>
+      
+    </section>
+    <section>
+      <div class="tweets"></div>
+    </section>
+  </div>
+</footer>
 
 
   <!-- JavaScript at the bottom for fast page loading -->
 
   <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
-  <script>window.jQuery || document.write('<script src="js/libs/jquery-1.6.4.min.js"><\/script>')</script>
+  <script>window.jQuery || document.write('<script src="/js/libs/jquery-1.6.4.min.js"><\/script>')</script>
 
 
   <!-- scripts concatenated and minified via build script -->
-  <script defer src="js/plugins.js"></script>
-  <script defer src="js/script.js"></script>
+  <script defer src="/js/plugins.js"></script>
+  <script defer src="/js/script.js"></script>
   <!-- end scripts -->
 
 

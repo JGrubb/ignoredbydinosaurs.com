@@ -1,0 +1,18 @@
+<footer>
+  <div class="wrap">
+    <section>
+      <h2>About iBD</h2>
+      <p>Ibd is a web development consultancy based in the beautiful, wooded countryside of Stillwater, New Jersey. Ibd specializes in content management. We've worked for environmental non-profits, health insurance companies, local yoga studios, advertising agencies and many others on projects small and huge. Ibd is a proud member of the <a href="http://drupal.org/" title="Drupal - Open Source CMS | drupal.org">Drupal Association</a> and also works custom wonders with <a href="http://wordpress.org/" title="WordPress &#8250; Blog Tool and Publishing Platform">Wordpress</a>.</p>
+      <p>We're interested in hearing about your project. Please drop us a line.</p>
+    </section>
+    <section>
+      <h2>Recent Posts</h2>
+      {% for post in site.posts limit:4 %}
+      <div class="post-link"><a href="{{ post.url }}">{{ post.title }}</a></div>
+      {% endfor %}
+    </section>
+    <section>
+      <div class="tweets"></div>
+    </section>
+  </div>
+</footer>

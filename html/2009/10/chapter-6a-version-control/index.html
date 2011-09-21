@@ -28,23 +28,17 @@
   <!-- All JavaScript at the bottom, except this Modernizr build incl. Respond.js
        Respond is a polyfill for min/max-width media queries. Modernizr enables HTML5 elements & feature detects; 
        for optimal performance, create your own custom Modernizr build: www.modernizr.com/download/ -->
-  <script src="js/libs/modernizr-2.0.6.min.js"></script>
+  <script src="/js/libs/modernizr-2.0.6.min.js"></script>
 </head>
 
 <body>
   <header>
     <a href="/"><h1 id="logo">Ignored By Dinosaurs</h1></a>
-    <ul class="nav">
-  		<li><a href="/about-ibd">About iBD</a></li>
-  		<li><a href="/about-me">Me</a></li>
-  		<li><a href="/archive">Archive</a></li>
-  		<li><a href="mailto:therealjohnnygrubb@gmail.com">Contact</a></li>
-  		<li><a href="https://github.com/JGrubb/ignoredbydinosaurs.com">Source code</a></li>
-  		<li><a href="/books">Books</a></li>
-  	</ul>
   </header>
   <div role="main">
-    <p>So it&#8217;s been a while, eh? Not too much in the mood to write about what I&#8217;ve learned when most of what I&#8217;ve learned is how much I have to learn, y&#8217;know? Anyway, I&#8217;ve been back into Ruby on Rails lately, since Ruby has got to be the dead simplest real programming language out there. Oh yeah, and I have a major project cooking on Rails, but I&#8217;ll elaborate later. Let&#8217;s talk about version control&#8230;</p>
+    <h2></h2>
+<article class="blog">
+  <p>So it&#8217;s been a while, eh? Not too much in the mood to write about what I&#8217;ve learned when most of what I&#8217;ve learned is how much I have to learn, y&#8217;know? Anyway, I&#8217;ve been back into Ruby on Rails lately, since Ruby has got to be the dead simplest real programming language out there. Oh yeah, and I have a major project cooking on Rails, but I&#8217;ll elaborate later. Let&#8217;s talk about version control&#8230;</p>
 
 <p>Let&#8217;s pretend you&#8217;re typing that last term paper in college. This is the modern era, so we&#8217;re using a word processing program. That program has eaten a few of our papers over the course of our college career, so we know to save our paper often. This is a huge paper, so we&#8217;ve also decided that it&#8217;d be prudent to save it under different names as it progresses so that we can go back in time to an earlier version with no hassle, y&#8217;know just in case we stray too far from the objective in the future. This is basically the same idea behind version control.</p>
 
@@ -55,22 +49,47 @@
 <p>Now, the only problem with all of these version control systems is that they don&#8217;t track changes to databases. The reason that this is a big deal is that the vast majority of large, modern, dynamic websites store a lot of data in their database. Some content management systems like Drupal actually store templates that determine how the website gets rendered to your browser in their database by default. You can change this if you know what you&#8217;re doing, and that assumes a lot. Nothing is going to change the fact that many database powered websites have to occasionally make changes to the layout (schema) of their database to incorporate new features and the like. The new Like feature on that site probably has it&#8217;s value stored in a column somewhere in a database. What if that feature sucks or is buggy? How can you roll back a database to an earlier state without using up your quota of blood pressure meds too soon? Under traditional version control systems, you can&#8217;t.</p>
 
 <p>Luckily, someone has figured this out for us. It&#8217;s called a &#8220;migration&#8221;. I&#8217;ll be back. I promise&#8230;</p>
+</article>
+<section>
+  
+</section>
   </div>
-  <footer>
-
-  </footer>
+<footer>
+  <div class="wrap">
+    <section>
+      <h2>About iBD</h2>
+      <p>Ibd is a web development consultancy based in the beautiful, wooded countryside of Stillwater, New Jersey. Ibd specializes in content management. We've worked for environmental non-profits, health insurance companies, local yoga studios, advertising agencies and many others on projects small and huge. Ibd is a proud member of the <a href="http://drupal.org/" title="Drupal - Open Source CMS | drupal.org">Drupal Association</a> and also works custom wonders with <a href="http://wordpress.org/" title="WordPress &#8250; Blog Tool and Publishing Platform">Wordpress</a>.</p>
+      <p>We're interested in hearing about your project. Please drop us a line.</p>
+    </section>
+    <section>
+      <h2>Recent Posts</h2>
+      
+      <div class="post-link"><a href="/2011/09/great-lie-lorem-ipsum">The Great Lie - Lorem Ipsum</a></div>
+      
+      <div class="post-link"><a href="/2011/08/so-what-are-you">So what are you up to?</a></div>
+      
+      <div class="post-link"><a href="/2011/07/why-i-dig-sass-these-days-quick-version">Why I dig on Sass these days (the quick version)</a></div>
+      
+      <div class="post-link"><a href="/2011/06/quick-trip-panic-room">A quick trip to the Panic Room</a></div>
+      
+    </section>
+    <section>
+      <div class="tweets"></div>
+    </section>
+  </div>
+</footer>
 
 
   <!-- JavaScript at the bottom for fast page loading -->
 
   <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
-  <script>window.jQuery || document.write('<script src="js/libs/jquery-1.6.4.min.js"><\/script>')</script>
+  <script>window.jQuery || document.write('<script src="/js/libs/jquery-1.6.4.min.js"><\/script>')</script>
 
 
   <!-- scripts concatenated and minified via build script -->
-  <script defer src="js/plugins.js"></script>
-  <script defer src="js/script.js"></script>
+  <script defer src="/js/plugins.js"></script>
+  <script defer src="/js/script.js"></script>
   <!-- end scripts -->
 
 

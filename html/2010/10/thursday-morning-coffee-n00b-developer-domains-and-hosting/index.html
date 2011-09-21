@@ -28,23 +28,17 @@
   <!-- All JavaScript at the bottom, except this Modernizr build incl. Respond.js
        Respond is a polyfill for min/max-width media queries. Modernizr enables HTML5 elements & feature detects; 
        for optimal performance, create your own custom Modernizr build: www.modernizr.com/download/ -->
-  <script src="js/libs/modernizr-2.0.6.min.js"></script>
+  <script src="/js/libs/modernizr-2.0.6.min.js"></script>
 </head>
 
 <body>
   <header>
     <a href="/"><h1 id="logo">Ignored By Dinosaurs</h1></a>
-    <ul class="nav">
-  		<li><a href="/about-ibd">About iBD</a></li>
-  		<li><a href="/about-me">Me</a></li>
-  		<li><a href="/archive">Archive</a></li>
-  		<li><a href="mailto:therealjohnnygrubb@gmail.com">Contact</a></li>
-  		<li><a href="https://github.com/JGrubb/ignoredbydinosaurs.com">Source code</a></li>
-  		<li><a href="/books">Books</a></li>
-  	</ul>
   </header>
   <div role="main">
-    <p>Welcome back to another installment of the newby web developer series. This morning&#8217;s entry comes once again from our buddy Jimmy, who the two of you reading might know as the highly technically inclined CT robo-teacher. He&#8217;ll probably be reforming the state of education in your state soon.</p>
+    <h2></h2>
+<article class="blog">
+  <p>Welcome back to another installment of the newby web developer series. This morning&#8217;s entry comes once again from our buddy Jimmy, who the two of you reading might know as the highly technically inclined CT robo-teacher. He&#8217;ll probably be reforming the state of education in your state soon.</p>
 <blockquote>What's up fool.
 
 My friend wants me to build him a simple site using wordpress. He already owns the domain name.
@@ -74,22 +68,47 @@ Jimmy</blockquote>
 <p>So, the tl;dr is that if he bought the domain name through a webhost as part of a hosting package, you don&#8217;t need to do anything. If he bought the domain name on it&#8217;s own, you need to go to the Domain Control Panel or the Domain Manager or whatever it&#8217;s called where it was registered. In there somewhere is a setting for the nameservers. On the webhost&#8217;s end, you&#8217;ll find what their nameservers are (usually something like ns1.awesomewebhost.com and ns2.awesomewebhost.com) and put that information into the proper fields on the registrar end. There&#8217;s always at least 2 nameservers at every host because like all servers, they can go down and if they both go down your site will be unavailable. It happens.</p>
 
 <p>Changing nameserver information is like firing an MX missile. There is no &#8220;undo&#8221;. There is no recalling the missile. Once you push the button to change the nameservers, that change of address starts filtering out to the rest of the world&#8217;s DNS servers so that the request can be sent to the proper IP address. This filtering-out process can take anywhere from a few hours to a few days, depending. Once it&#8217;s done, the whole world will be pointed to the party on your server.</p>
+</article>
+<section>
+  
+</section>
   </div>
-  <footer>
-
-  </footer>
+<footer>
+  <div class="wrap">
+    <section>
+      <h2>About iBD</h2>
+      <p>Ibd is a web development consultancy based in the beautiful, wooded countryside of Stillwater, New Jersey. Ibd specializes in content management. We've worked for environmental non-profits, health insurance companies, local yoga studios, advertising agencies and many others on projects small and huge. Ibd is a proud member of the <a href="http://drupal.org/" title="Drupal - Open Source CMS | drupal.org">Drupal Association</a> and also works custom wonders with <a href="http://wordpress.org/" title="WordPress &#8250; Blog Tool and Publishing Platform">Wordpress</a>.</p>
+      <p>We're interested in hearing about your project. Please drop us a line.</p>
+    </section>
+    <section>
+      <h2>Recent Posts</h2>
+      
+      <div class="post-link"><a href="/2011/09/great-lie-lorem-ipsum">The Great Lie - Lorem Ipsum</a></div>
+      
+      <div class="post-link"><a href="/2011/08/so-what-are-you">So what are you up to?</a></div>
+      
+      <div class="post-link"><a href="/2011/07/why-i-dig-sass-these-days-quick-version">Why I dig on Sass these days (the quick version)</a></div>
+      
+      <div class="post-link"><a href="/2011/06/quick-trip-panic-room">A quick trip to the Panic Room</a></div>
+      
+    </section>
+    <section>
+      <div class="tweets"></div>
+    </section>
+  </div>
+</footer>
 
 
   <!-- JavaScript at the bottom for fast page loading -->
 
   <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
-  <script>window.jQuery || document.write('<script src="js/libs/jquery-1.6.4.min.js"><\/script>')</script>
+  <script>window.jQuery || document.write('<script src="/js/libs/jquery-1.6.4.min.js"><\/script>')</script>
 
 
   <!-- scripts concatenated and minified via build script -->
-  <script defer src="js/plugins.js"></script>
-  <script defer src="js/script.js"></script>
+  <script defer src="/js/plugins.js"></script>
+  <script defer src="/js/script.js"></script>
   <!-- end scripts -->
 
 

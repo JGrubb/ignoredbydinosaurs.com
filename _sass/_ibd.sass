@@ -1,12 +1,18 @@
 @import "compass/typography"
 
 $base-font-size: 16px
-$base-line-height: 24px
+$base-line-height: 22px
 @include establish-baseline
+
+$blue: #064464
+
+html
+  margin: 0
+  padding: 0
 
 body
   font-family: 'lucida grande', helvetica, arial, sans-serif
-  @include debug-vertical-alignment("../images/debug.png")
+  color: #444
   
 h1
   @include adjust-font-size-to(40px)
@@ -19,6 +25,36 @@ h3
   
 h4, h5
   @include adjust-font-size-to(16px)
+
+a
+  color: #666
+  text-decoration: none
+  &:visited
+    color: inherit
+  &:hover
+    text-decoration: underline
+    color: $blue
   
-p
-  margin: 1.5em 0
+header
+  background: #f4f4f4
+  border-bottom: 1px solid #ddd
+  margin: 0
+  a h1
+    font-weight: normal
+    text-align: center
+    margin: 0
+    padding: 10px
+    
+.blog
+  margin: 0 20px
+  width: auto
+  
+  
+
+footer
+  background: lighten($blue, 15%)
+  border-top: 1px solid #444
+  @include gradient(lighten($blue, 15%), lighten($blue, 5%))
+  color: #fff
+  h2
+    @include adjust-font-size-to(20px)

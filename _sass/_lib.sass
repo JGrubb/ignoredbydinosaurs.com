@@ -1,3 +1,20 @@
+$width: 100%
+$grid_cols: 12
+$gutters: 2%
+
+// Lib
+
+@mixin container()
+  width: $width
+  margin: 0 auto
+
+@mixin grid($cols, $margin-right: $gutters)
+  width: (($width / $grid_cols) * $cols) - ($gutters)
+  display: inline
+  float: left
+  margin-left: $margin-left
+  margin-right: $margin-right
+
 @mixin radius($a)
   -moz-border-radius: $a
   -webkit-border-radius: $a

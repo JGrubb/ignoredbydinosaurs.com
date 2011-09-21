@@ -28,39 +28,29 @@
   <!-- All JavaScript at the bottom, except this Modernizr build incl. Respond.js
        Respond is a polyfill for min/max-width media queries. Modernizr enables HTML5 elements & feature detects; 
        for optimal performance, create your own custom Modernizr build: www.modernizr.com/download/ -->
-  <script src="js/libs/modernizr-2.0.6.min.js"></script>
+  <script src="/js/libs/modernizr-2.0.6.min.js"></script>
 </head>
 
 <body>
   <header>
     <a href="/"><h1 id="logo">Ignored By Dinosaurs</h1></a>
-    <ul class="nav">
-  		<li><a href="/about-ibd">About iBD</a></li>
-  		<li><a href="/about-me">Me</a></li>
-  		<li><a href="/archive">Archive</a></li>
-  		<li><a href="mailto:therealjohnnygrubb@gmail.com">Contact</a></li>
-  		<li><a href="https://github.com/JGrubb/ignoredbydinosaurs.com">Source code</a></li>
-  		<li><a href="/books">Books</a></li>
-  	</ul>
   </header>
   <div role="main">
     {{ content }}
   </div>
-  <footer>
-
-  </footer>
+{% include footer.html %}
 
 
   <!-- JavaScript at the bottom for fast page loading -->
 
   <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
-  <script>window.jQuery || document.write('<script src="js/libs/jquery-1.6.4.min.js"><\/script>')</script>
+  <script>window.jQuery || document.write('<script src="/js/libs/jquery-1.6.4.min.js"><\/script>')</script>
 
 
   <!-- scripts concatenated and minified via build script -->
-  <script defer src="js/plugins.js"></script>
-  <script defer src="js/script.js"></script>
+  <script defer src="/js/plugins.js"></script>
+  <script defer src="/js/script.js"></script>
   <!-- end scripts -->
 
 
