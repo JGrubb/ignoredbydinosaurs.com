@@ -397,18 +397,20 @@ $.fn.cycle.defaults = {
 /***************************************************
 	     ADDITIONAL CODE FOR TWITTER
 ***************************************************/
-    jQuery(document).ready(function($) {
-      $(".tweets").tweet({
-        join_text: "auto",
-        username: "johnnygrubb",
-        avatar_size: 0,
-        count: 3,
-        auto_join_text_default: "", 
-        auto_join_text_ed: "",
-        auto_join_text_ing: "",
-        auto_join_text_reply: "",
-        auto_join_text_url: "",
-        loading_text: "loading tweets..."
-      });
-    })
+jQuery(document).ready(function($) {
+  $(".tweets").tweet({
+    join_text: "auto",
+    username: "johnnygrubb",
+    avatar_size: 0,
+    count: 3,
+    auto_join_text_default: "", 
+    auto_join_text_ed: "",
+    auto_join_text_ing: "",
+    auto_join_text_reply: "",
+    auto_join_text_url: "",
+    loading_text: "loading tweets..."
+  });
+  $("img").removeAttr("height").removeAttr("width");
+});
+
 

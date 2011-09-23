@@ -1,10 +1,25 @@
-$fat_border: 5px solid #eee
+$fat_border: 3px solid #eee
 $dark_blue: #0F2B4D
 
-@mixin serif($style, $weight)
-  font-family: garamond-premier-pro-1,garamond-premier-pro-2,serif
-  font-style: $style
-  font-weight: $weight
+$width: 100%
+$grid_cols: 12
+$gutters: 1.25%
+
+.clear
+  clear: both
+// Lib
+
+@mixin container()
+  width: $width
+  margin: 0 auto
+  max-width: 1140px
+
+@mixin grid($cols, $margin-left: $gutters, $margin-right: $gutters)
+  width: (($width / $grid_cols) * $cols) - ($margin-left + $margin-right)
+  display: inline
+  float: left
+  margin-left: $margin-left
+  margin-right: $margin-right
   
 @mixin grad($a, $b)
   background: -moz-linear-gradient(270deg, $a, $b)
@@ -46,13 +61,26 @@ $dark_blue: #0F2B4D
   -ms-transition: $property $speed $style
   transition: $property $speed $style
 
+.wrap
+  @include container
+
 body
   color: #444
-  font: 16px / 1.5 "lucida grande", helvetica, arial, sans-serif
+  font: 16px "lucida grande", helvetica, arial, sans-serif
   background: $dark_blue
 
 p
-  line-height: 1.5
+  margin: 1.5em 0
+  line-height: 24px
+  font-family: georgia
+
+h1
+  font-size: 2em
+
+h2, .prose h2
+  font-size: 1.75em
+  line-height: 1.75em
+  font-weight: normal
 
 blockquote
   font-style: italic
@@ -139,6 +167,31 @@ a
   border: 1px solid #ccc
   border-radius: 2px
 
+.front
+  #main
+    @include container
+  .home-copy
+    @include grid(6)
+  .slideshow
+    @include grid(6)
+    img
+      max-width: 100%
+  
+
+#main
+  @include grid(8)
+
+.page-archive
+  #main
+    @include container
+    .views-row
+      @include grid(3)
+      height: 80px
+      .views-field-created
+        font-size: 22px
+        color: #888
+        
+
 #page
   background: #fff
   padding-top: 30px
@@ -172,21 +225,29 @@ a
   padding: 1em 0
   border-top: $fat-border
 
+#block-views-recent_portfolio-block_1
+  @include grid(8)
+
+#block-views-home_teasers-block_1
+  @include grid(4)
+  p
+    font-size: 12px
+    line-height: 18px
+
 .view-home-teasers,
 .view-recent-portfolio
   .views-row
-    width: 273px
-    float: left
-    padding: 20px
+    width: 90%
+    padding: 5%
     img
-      margin: 10px
-      padding: 10px
+      max-width: 47%
+      padding: 1.5%
+      float: left
+      margin-right: 1.5%
       @include transition(background, 0.3s, ease)
       &:hover
         background: #ddd
 
-.view-home-teasers .views-row-odd
-  background: #f7f7f7
 
 .view-id-archive
   .views-field-created
@@ -206,10 +267,13 @@ a
   text-align: center
   
 #right
+  @include grid(4)
   .block-title
     font-size: 18px
   p
     color: #888
+    font-size: 14px
+    line-height: 21px
 
 #footer
   background: $dark_blue
@@ -219,9 +283,9 @@ a
   padding-top: 30px
   p
     font-size: 14px
-    line-height: 1.25
+    line-height: 20px
   .block
-    width: 25%
+    @include grid(3, $margin-left: 0.25%, $margin-right: 0.25%)
     float: left
     a
       color: #fff
@@ -340,4 +404,116 @@ a
   clear: both
   text-align: center
   
-@import portfolio.sass
+#block-views-portfolio_slideshow-block_1
+  padding: 5px
+  @include radius(3px)
+  img
+    width: 47%
+    margin: 0.75%
+    padding: 0.75%
+    background: #ddd
+    float: left
+    min-width: 230px
+
+.node-type-portfolio
+  .page-title
+    font-size: 34px
+    color: #888
+    margin-top: -20px
+  .field-field-client, .field-field-solution
+    padding: 30px 20px
+    border-bottom: $fat_border
+    @include transition(background, 0.3s, linear)
+    &:hover
+      background: lighten($dark_blue, 78%)
+    .field-label
+      font-size: 1.75em
+      text-align: center
+      color: #888
+      font-family: georgia
+      font-weight: normal
+      margin-bottom: 20px
+  #block-block-15
+    text-align: center
+    margin: 40px 0 30px
+
+  #block-views-sidebar_content-block_1
+    margin-bottom: 30px
+    padding-bottom: 30px
+    border-bottom: $fat_border
+    .block-title
+      text-align: center
+      font-size: 1.5em
+      font-style: italic
+      border-bottom: $fat_border
+      color: #888
+      margin-bottom: 20px
+      padding-bottom: 10px
+    ul
+      margin-bottom: 20px
+    li
+      font-size: 0.9em
+      padding: 8px 15px
+      @include transition(background, 0.3s, ease)
+      &:hover
+        background: lighten($dark_blue, 75%)
+
+.page-portfolio
+  #main
+    @include container
+    .views-row
+      padding: 20px 0
+      border-bottom: $fat_border
+      padding: 1.5% 3%
+      overflow: auto
+      @include transition(background, 0.3s, ease)
+      &:hover
+        background: lighten($dark_blue, 79%)
+    .views-field-title
+      font-size: 1.5em
+      margin-bottom: 10px
+      font-style: italic
+      text-align: center
+      a
+        text-decoration: none
+    .views-field-field-front-page-image-fid
+      border: 1px solid #eee
+      padding: 5px 5px 0
+      @include radius(3px)
+      background: #fff
+      &:hover
+        border-color: #888
+    .views-row-odd
+      .views-field-field-front-page-image-fid
+        float: left
+        margin-right: 2%
+    .views-row-even
+      .views-field-field-front-page-image-fid
+        float: right
+        margin-left: 2%
+
+.page-portfolio
+  h1.page-title
+    text-align: center
+    font-size: 4em
+    color: #eee
+    font-weight: 100
+    border-bottom: $fat_border
+    
+@media screen and (max-width: 799px)
+  .logo
+    text-align: center
+  .wrap
+    width: 96%
+    padding: 2%
+    overflow: hidden
+    .home-copy, .slideshow, #block-views-recent_portfolio-block_1, #block-views-home_teasers-block_1, #main, #right
+      width: auto
+      float: none
+      img
+        max-width: 100%
+  #footer .block
+    width: auto
+    float: none
+    .block-title
+      text-align: center

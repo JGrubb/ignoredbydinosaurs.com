@@ -12,7 +12,6 @@ regions[content_bottom] = "Content Bottom"
 regions[header] = "Header"
 regions[footer] = "Footer"
 
-stylesheets[screen][] = "css/960.css"
 stylesheets[screen][] = "css/style.css"
 stylesheets[handheld][] = "css/mobile.css"
 

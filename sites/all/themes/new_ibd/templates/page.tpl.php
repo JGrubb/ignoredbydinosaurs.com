@@ -4,8 +4,6 @@
     <?php print $head ?>
     <?php print $styles ?>
     <title><?php print $head_title ?></title>
-		<script type="text/javascript" src="http://use.typekit.com/dqg8end.js"></script>
-		<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
   </head>
   <body <?php print drupal_attributes($attr) ?>>
 
@@ -22,19 +20,19 @@
   <?php endif; ?>
 
   <div id='branding'><div class='limiter clear-block'>
-		<div class="container_12">
-			<div class="grid_12">
+		<div class="wrap">
+			<div>
     <?php if ($site_name): ?><div class='logo'><a href="<?php print $base_path ?>"><?php print $site_name ?></a></div><?php endif; ?>
 			</div>
-			<div id="nav" class="grid_12">
+			<div id="nav">
 				<?php if ($primary_links): print theme('links', $primary_links, array()); endif;?>
 			</div>
 		</div>
   </div></div>
 
   <div id='page'><div class='limiter clear-block'>
-		<div class="container_12">
-    <div id='main' class='clear-block grid_8'>
+		<div class="wrap">
+    <div id='main' class='clear-block'>
 			<?php if ($help || ($show_messages && $messages)): ?>
 		    <div id='console'><div class='limiter clear-block'>
 		      <?php print $help; ?>
@@ -52,14 +50,14 @@
     </div>
 
     <?php if ($right): ?>
-      <div id='right' class='clear-block grid_4'><?php print $right ?></div>
+      <div id='right' class='clear-block'><?php print $right ?></div>
     <?php endif; ?>
 		</div>
   </div></div>
 
   <div id="footer"><div class='limiter clear-block'>
-		<div class="container_12">
-			<div class="grid_12">
+		<div class="wrap">
+			<div class="">
 		    <?php print $feed_icons ?>
 		    <?php print $footer ?>
 		    <?php print $footer_message ?>

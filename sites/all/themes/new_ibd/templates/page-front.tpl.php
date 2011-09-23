@@ -4,8 +4,7 @@
     <?php print $head ?>
     <?php print $styles ?>
     <title><?php print $head_title ?></title>
-		<script type="text/javascript" src="http://use.typekit.com/dqg8end.js"></script>
-		<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    <meta name=viewport content="width=device-width,initial-scale=1">
   </head>
   <body <?php print drupal_attributes($attr) ?>>
 
@@ -22,18 +21,18 @@
   <?php endif; ?>
 
   <div id='branding'><div class='limiter clear-block'>
-		<div class="container_12">
-			<div class="grid_12">
+		<div class="wrap">
+			<div>
     <?php if ($site_name): ?><div class='logo'><a href="<?php print $base_path ?>"><?php print $site_name ?></a></div><?php endif; ?>
 			</div>
-			<div id="nav" class="grid_12">
+			<div id="nav">
 				<?php if ($primary_links): print theme('links', $primary_links, array()); endif;?>
 			</div>
 		</div>
   </div></div>
 
   <div id='page'><div class='limiter clear-block'>
-		<div class="container_12">
+		<div class="wrap">
 	    <div id='main' class='clear-block grid_12'>
 				<?php if ($help || ($show_messages && $messages)): ?>
 			    <div id='console'><div class='limiter clear-block'>
@@ -44,13 +43,14 @@
 	        <?php if ($tabs) print $tabs ?>
 	        <?php if ($tabs2) print $tabs2 ?>
 	        <div id='content' class='clear-block'>
-	          <div class="grid_6 alpha home-copy">
+	          <div class="home-copy">
 	            <?php print $content ?>
 	          </div>
-	          <div class="grid_6 omega">
+	          <div class="slideshow">
 	            <?php print $right ?>
 	          </div>
-	          <div class="grid_12 alpha omega">
+	          <div class="clear"></div>
+	          <div class="wrap">
 	            <?php print $content_bottom ?>
 	          </div>
 	        </div>
@@ -60,8 +60,8 @@
   </div></div>
 
   <div id="footer"><div class='limiter clear-block'>
-		<div class="container_12">
-			<div class="grid_12">
+		<div class="wrap">
+			<div>
 		    <?php print $feed_icons ?>
 		    <?php print $footer ?>
 		    <?php print $footer_message ?>
