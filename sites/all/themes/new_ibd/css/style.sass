@@ -146,9 +146,8 @@ a
 
 #branding
   background: #f8f8f8
-
-#branding
   border-bottom: 1px solid #eee
+  
 
 .logo
   font-size: 3em
@@ -504,20 +503,21 @@ a
   .logo
     text-align: center
   .wrap
-    width: 96%
-    padding: 2%
+    @include container
     overflow: hidden
     .home-copy, .slideshow, #block-views-recent_portfolio-block_1, #block-views-home_teasers-block_1, #main, #right
-      width: auto
-      float: none
+      @include grid(12)
       img
         max-width: 100%
   #footer .block
-    width: 47%
-    float: left
-    height: 500px
+    @include grid(6)
+    height: 300px
     .block-title
       text-align: center
+ 
+@media screen and (max-width: 650px)
+  #footer .block
+    height: 420px
       
 @media screen and (max-width: 480px)
   #footer .block
