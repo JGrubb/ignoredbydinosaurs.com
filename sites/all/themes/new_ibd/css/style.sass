@@ -9,10 +9,10 @@ $gutters: 1.25%
   clear: both
 // Lib
 
-@mixin container()
+@mixin container($max-width: 1140px)
   width: $width
   margin: 0 auto
-  max-width: 1140px
+  max-width: $max-width
 
 @mixin grid($cols, $margin-left: $gutters, $margin-right: $gutters)
   width: (($width / $grid_cols) * $cols) - ($margin-left + $margin-right)
@@ -280,6 +280,8 @@ a
   color: #fff
   border-top: 2px solid #999
   padding-top: 30px
+  .wrap
+    @include container($max-width:1320px)
   p
     font-size: 14px
     line-height: 20px
@@ -315,7 +317,7 @@ a
         display: block
 
 .seinfeld-badge
-  margin: 0 0 2em 0
+  margin: 0 auto
   #calendar
     border-bottom: 1px solid #000
     border-top: 2px solid #000
@@ -505,21 +507,26 @@ a
   .wrap
     @include container
     overflow: hidden
-    .home-copy, .slideshow, #block-views-recent_portfolio-block_1, #block-views-home_teasers-block_1, #main, #right
-      @include grid(12)
+    .home-copy, .slideshow, #block-views-recent_portfolio-block_1, #block-views-home_teasers-block_1, #main, #right,
+      @include grid(12, $margin-left: 4%, $margin-right: 4%)
       img
         max-width: 100%
+        margin: inherit auto
   #footer .block
     @include grid(6)
     height: 300px
     .block-title
       text-align: center
+  .page-archive .views-row
+    @include grid(6)
  
 @media screen and (max-width: 650px)
   #footer .block
     height: 420px
+  
       
 @media screen and (max-width: 480px)
   #footer .block
-    width: auto
-    float: none
+    @include grid(12)
+  .page-archive .views-row
+    @include grid(12)

@@ -281,6 +281,10 @@ a {
   color: white;
   border-top: 2px solid #999999;
   padding-top: 30px; }
+  #footer .wrap {
+    width: 100%;
+    margin: 0 auto;
+    max-width: 1320px; }
   #footer p {
     font-size: 14px;
     line-height: 20px; }
@@ -319,7 +323,7 @@ a {
       display: block; }
 
 .seinfeld-badge {
-  margin: 0 0 2em 0; }
+  margin: 0 auto; }
   .seinfeld-badge #calendar {
     border-bottom: 1px solid black;
     border-top: 2px solid black;
@@ -543,13 +547,14 @@ a {
     max-width: 1140px;
     overflow: hidden; }
     .wrap .home-copy, .wrap .slideshow, .wrap #block-views-recent_portfolio-block_1, .wrap #block-views-home_teasers-block_1, .wrap #main, .wrap #right {
-      width: 97.5%;
+      width: 92%;
       display: inline;
       float: left;
-      margin-left: 1.25%;
-      margin-right: 1.25%; }
+      margin-left: 4%;
+      margin-right: 4%; }
       .wrap .home-copy img, .wrap .slideshow img, .wrap #block-views-recent_portfolio-block_1 img, .wrap #block-views-home_teasers-block_1 img, .wrap #main img, .wrap #right img {
-        max-width: 100%; }
+        max-width: 100%;
+        margin: inherit auto; }
 
   #footer .block {
     width: 47.5%;
@@ -559,11 +564,28 @@ a {
     margin-right: 1.25%;
     height: 300px; }
     #footer .block .block-title {
-      text-align: center; } }
+      text-align: center; }
+
+  .page-archive .views-row {
+    width: 47.5%;
+    display: inline;
+    float: left;
+    margin-left: 1.25%;
+    margin-right: 1.25%; } }
 @media screen and (max-width: 650px) {
   #footer .block {
     height: 420px; } }
 @media screen and (max-width: 480px) {
   #footer .block {
-    width: auto;
-    float: none; } }
+    width: 97.5%;
+    display: inline;
+    float: left;
+    margin-left: 1.25%;
+    margin-right: 1.25%; }
+
+  .page-archive .views-row {
+    width: 97.5%;
+    display: inline;
+    float: left;
+    margin-left: 1.25%;
+    margin-right: 1.25%; } }
