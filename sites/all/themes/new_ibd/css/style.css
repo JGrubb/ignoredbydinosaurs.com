@@ -550,7 +550,12 @@ a {
         max-width: 100%; }
 
   #footer .block {
-    width: auto;
-    float: none; }
+    width: 47%;
+    float: left;
+    height: 500px; }
     #footer .block .block-title {
       text-align: center; } }
+@media screen and (max-width: 480px) {
+  #footer .block {
+    width: auto;
+    float: none; } }
