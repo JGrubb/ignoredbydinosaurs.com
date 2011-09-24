@@ -584,7 +584,7 @@ a {
     margin-right: 1.25%;
     height: auto; }
 
-  .page-archive .views-row {
+  .page-archive #main .views-row {
     width: 97.5%;
     display: inline;
     float: left;
