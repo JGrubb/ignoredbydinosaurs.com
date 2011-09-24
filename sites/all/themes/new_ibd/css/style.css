@@ -566,7 +566,7 @@ a {
     #footer .block .block-title {
       text-align: center; }
 
-  .page-archive .views-row {
+  .page-archive #main .views-row {
     width: 47.5%;
     display: inline;
     float: left;
