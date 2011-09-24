@@ -13,6 +13,5 @@ regions[header] = "Header"
 regions[footer] = "Footer"
 
 stylesheets[screen][] = "css/style.css"
-stylesheets[handheld][] = "css/mobile.css"
 
 scripts[] = js/scripts.js
