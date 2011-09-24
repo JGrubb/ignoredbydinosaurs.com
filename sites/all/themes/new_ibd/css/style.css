@@ -572,7 +572,7 @@ a {
     float: left;
     margin-left: 1.25%;
     margin-right: 1.25%; } }
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 650px) and (min-width: 481px) {
   #footer .block {
     height: 420px; } }
 @media screen and (max-width: 480px) {
@@ -581,7 +581,8 @@ a {
     display: inline;
     float: left;
     margin-left: 1.25%;
-    margin-right: 1.25%; }
+    margin-right: 1.25%;
+    height: auto; }
 
   .page-archive .views-row {
     width: 97.5%;

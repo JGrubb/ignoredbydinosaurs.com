@@ -520,7 +520,7 @@ a
   .page-archive .views-row
     @include grid(6)
  
-@media screen and (max-width: 650px)
+@media screen and (max-width: 650px) and (min-width: 481px)
   #footer .block
     height: 420px
   
@@ -528,5 +528,6 @@ a
 @media screen and (max-width: 480px)
   #footer .block
     @include grid(12)
+    height: auto
   .page-archive .views-row
     @include grid(12)
