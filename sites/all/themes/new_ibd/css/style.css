@@ -11,6 +11,12 @@ body {
   font: 16px "lucida grande", helvetica, arial, sans-serif;
   background: #0f2b4d; }
 
+hr {
+  margin: 30px;
+  height: 2px;
+  border: none;
+  background: #cccccc; }
+
 p {
   margin: 1.5em 0;
   line-height: 24px;
@@ -22,7 +28,12 @@ h1 {
 h2, .prose h2 {
   font-size: 1.75em;
   line-height: 1.75em;
-  font-weight: normal; }
+  font-weight: normal;
+  font-family: georgia;
+  text-align: center;
+  font-style: italic;
+  border-top: 1px solid #cccccc;
+  border-bottom: 1px solid #cccccc; }
 
 blockquote {
   font-style: italic;
@@ -35,10 +46,12 @@ blockquote {
 
 .page-title {
   font-size: 24px;
-  font-weight: normal; }
+  font-weight: normal;
+  line-height: 36px; }
 
 .node-submitted {
-  margin-bottom: 15px; }
+  margin-bottom: 15px;
+  font-size: 12px; }
 
 .disclaimer {
   border: 3px solid #eeeeee;
@@ -46,7 +59,8 @@ blockquote {
   -moz-border-radius: 3px;
   background: #f7f7f7;
   padding: 20px;
-  font-size: 18px; }
+  font-size: 18px;
+  text-align: center; }
 
 a {
   color: #205ba2; }
@@ -168,7 +182,8 @@ a {
     height: 80px; }
     .page-archive #main .views-row .views-field-created {
       font-size: 22px;
-      color: #888888; }
+      color: #888888;
+      font-family: georgia; }
 
 #page {
   background: white;
