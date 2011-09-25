@@ -192,8 +192,9 @@ a {
 .home-copy {
   text-align: justify; }
   .home-copy h1 {
-    font-size: 2em;
-    font-weight: 100; }
+    font-size: 30px;
+    line-height: 45px;
+    font-weight: normal; }
 
 #block-views-home_slideshow-block_1 {
   margin: 0 auto;
@@ -450,13 +451,11 @@ a {
     margin: 0.75%;
     padding: 0.75%;
     background: #dddddd;
-    float: left;
-    min-width: 230px; }
+    float: left; }
 
 .node-type-portfolio .page-title {
   font-size: 34px;
-  color: #888888;
-  margin-top: -20px; }
+  color: #888888; }
 .node-type-portfolio .field-field-client, .node-type-portfolio .field-field-solution {
   padding: 30px 20px;
   border-bottom: 3px solid #eeeeee;
@@ -502,6 +501,11 @@ a {
     .node-type-portfolio #block-views-sidebar_content-block_1 li:hover {
       background: #e1ecf9; }
 
+.page-portfolio h1.page-title {
+  text-align: center;
+  color: #cccccc;
+  font-weight: 100;
+  border-bottom: 1px solid #dddddd; }
 .page-portfolio #main {
   width: 100%;
   margin: 0 auto;
@@ -520,6 +524,7 @@ a {
       background: #f2f7fd; }
   .page-portfolio #main .views-field-title {
     font-size: 1.5em;
+    font-family: georgia;
     margin-bottom: 10px;
     font-style: italic;
     text-align: center; }
@@ -540,13 +545,6 @@ a {
   .page-portfolio #main .views-row-even .views-field-field-front-page-image-fid {
     float: right;
     margin-left: 2%; }
-
-.page-portfolio h1.page-title {
-  text-align: center;
-  font-size: 4em;
-  color: #eeeeee;
-  font-weight: 100;
-  border-bottom: 3px solid #eeeeee; }
 
 @media screen and (max-width: 799px) {
   .logo {
@@ -595,6 +593,13 @@ a {
     height: auto; }
 
   .page-archive #main .views-row {
+    width: 97.5%;
+    display: inline;
+    float: left;
+    margin-left: 1.25%;
+    margin-right: 1.25%; }
+
+  #block-views-portfolio_slideshow-block_1 img {
     width: 97.5%;
     display: inline;
     float: left;

@@ -213,8 +213,9 @@ a
 .home-copy
   text-align: justify
   h1
-    font-size: 2em
-    font-weight: 100
+    font-size: 30px
+    line-height: 45px
+    font-weight: normal
 
 #block-views-home_slideshow-block_1
   margin: 0 auto
@@ -425,13 +426,11 @@ a
     padding: 0.75%
     background: #ddd
     float: left
-    min-width: 230px
 
 .node-type-portfolio
   .page-title
     font-size: 34px
     color: #888
-    margin-top: -20px
   .field-field-client, .field-field-solution
     padding: 30px 20px
     border-bottom: $fat_border
@@ -471,6 +470,11 @@ a
         background: lighten($dark_blue, 75%)
 
 .page-portfolio
+  h1.page-title
+    text-align: center
+    color: #ccc
+    font-weight: 100
+    border-bottom: 1px solid #ddd
   #main
     @include container
     .views-row
@@ -483,6 +487,7 @@ a
         background: lighten($dark_blue, 79%)
     .views-field-title
       font-size: 1.5em
+      font-family: georgia
       margin-bottom: 10px
       font-style: italic
       text-align: center
@@ -504,14 +509,6 @@ a
         float: right
         margin-left: 2%
 
-.page-portfolio
-  h1.page-title
-    text-align: center
-    font-size: 4em
-    color: #eee
-    font-weight: 100
-    border-bottom: $fat_border
-    
 @media screen and (max-width: 799px)
   .logo
     text-align: center
@@ -539,3 +536,7 @@ a
     height: auto
   .page-archive #main .views-row
     @include grid(12)
+  #block-views-portfolio_slideshow-block_1
+    img
+      @include grid(12)
+      
