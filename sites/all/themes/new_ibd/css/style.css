@@ -68,6 +68,7 @@ a {
     color: #0f2b4d; }
   a.button {
     text-decoration: none;
+    display: block;
     padding: 3px 10px 5px;
     border: 1px solid #bbbbbb;
     background: #0f2b4d;
