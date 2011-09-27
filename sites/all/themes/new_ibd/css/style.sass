@@ -126,7 +126,7 @@ a
     color: $dark_blue
   &.button
     text-decoration: none
-    display: block
+    margin: 0 auto
     @include button(#fff, $dark_blue)
     @include transition(background, 0.2s, ease)
     &:active
@@ -540,4 +540,6 @@ a
   #block-views-portfolio_slideshow-block_1
     img
       @include grid(12)
+  a.button
+    display: block
       
