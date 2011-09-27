@@ -240,7 +240,7 @@ a {
 .view-home-teasers .views-row,
 .view-recent-portfolio .views-row {
   width: 90%;
-  padding: 5%; }
+  padding: 2% 5%; }
   .view-home-teasers .views-row img,
   .view-recent-portfolio .views-row img {
     max-width: 47%;
