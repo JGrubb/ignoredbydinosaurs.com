@@ -209,7 +209,7 @@ a
 
 #page
   background: #fff
-  padding: 5em
+  padding: 3em 0
 
 .home-copy
   text-align: justify
@@ -251,25 +251,28 @@ a
     margin-bottom: 1em
 
 .view-home-teasers
+  .view-header
+    margin: 0
+    border-top: none
+    border-bottom: none
+  border: 2px solid #ccc
+  background: #eee
+  float: left
+  .view-content
+    padding: 2em
   .views-row
     @include grid(12)
-    padding-bottom: 1.5em
-    
-    img
-      max-width: 47%
-      padding: 1.5%
-      float: left
-      margin-right: 1.5%
-      @include transition(background, 0.3s, ease)
-      &:hover
-        background: #ddd
+    padding-bottom: 2em
+
 
 .view-recent-portfolio
   .views-row
     @include grid(3)
     img
-      max-width: 98%
-      padding: 1%
+      max-width: 95%
+      padding: 2.5%
+      &:hover
+        background: #ccc
 
 .view-id-archive
   .views-field-created
@@ -539,7 +542,12 @@ a
     clear: left
   .page-archive #main .views-row
     @include grid(6)
- 
+  .view-recent-portfolio
+    .views-row
+      @include grid(6)
+      img
+        display: block
+        margin: 1em auto
       
 @media screen and (max-width: 480px)
   #footer .block
@@ -552,4 +560,5 @@ a
       @include grid(12)
   a.button
     display: block
-      
+  .view-recent-portfolio .views-row
+    @include grid(12)

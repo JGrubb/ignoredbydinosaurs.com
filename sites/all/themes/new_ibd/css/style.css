@@ -188,7 +188,7 @@ a {
 
 #page {
   background: white;
-  padding: 5em; }
+  padding: 3em 0; }
 
 .home-copy {
   text-align: justify; }
@@ -241,25 +241,23 @@ a {
 .front .view-header {
   margin-bottom: 1em; }
 
-.view-home-teasers .views-row {
-  width: 97.5%;
-  display: inline;
-  float: left;
-  margin-left: 1.25%;
-  margin-right: 1.25%;
-  padding-bottom: 1.5em; }
-  .view-home-teasers .views-row img {
-    max-width: 47%;
-    padding: 1.5%;
+.view-home-teasers {
+  border: 2px solid #cccccc;
+  background: #eeeeee;
+  float: left; }
+  .view-home-teasers .view-header {
+    margin: 0;
+    border-top: none;
+    border-bottom: none; }
+  .view-home-teasers .view-content {
+    padding: 2em; }
+  .view-home-teasers .views-row {
+    width: 97.5%;
+    display: inline;
     float: left;
-    margin-right: 1.5%;
-    -webkit-transition: background 0.3s ease;
-    -moz-transition: background 0.3s ease;
-    -o-transition: background 0.3s ease;
-    -ms-transition: background 0.3s ease;
-    transition: background 0.3s ease; }
-    .view-home-teasers .views-row img:hover {
-      background: #dddddd; }
+    margin-left: 1.25%;
+    margin-right: 1.25%;
+    padding-bottom: 2em; }
 
 .view-recent-portfolio .views-row {
   width: 22.5%;
@@ -268,8 +266,10 @@ a {
   margin-left: 1.25%;
   margin-right: 1.25%; }
   .view-recent-portfolio .views-row img {
-    max-width: 98%;
-    padding: 1%; }
+    max-width: 95%;
+    padding: 2.5%; }
+    .view-recent-portfolio .views-row img:hover {
+      background: #cccccc; }
 
 .view-id-archive .views-field-created {
   font-size: 14px;
@@ -597,7 +597,17 @@ a {
     display: inline;
     float: left;
     margin-left: 1.25%;
-    margin-right: 1.25%; } }
+    margin-right: 1.25%; }
+
+  .view-recent-portfolio .views-row {
+    width: 47.5%;
+    display: inline;
+    float: left;
+    margin-left: 1.25%;
+    margin-right: 1.25%; }
+    .view-recent-portfolio .views-row img {
+      display: block;
+      margin: 1em auto; } }
 @media screen and (max-width: 480px) {
   #footer .block {
     width: 97.5%;
@@ -622,4 +632,11 @@ a {
     margin-right: 1.25%; }
 
   a.button {
-    display: block; } }
+    display: block; }
+
+  .view-recent-portfolio .views-row {
+    width: 97.5%;
+    display: inline;
+    float: left;
+    margin-left: 1.25%;
+    margin-right: 1.25%; } }
