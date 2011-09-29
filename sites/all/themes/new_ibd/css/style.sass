@@ -209,7 +209,7 @@ a
 
 #page
   background: #fff
-  padding-top: 30px
+  padding: 5em
 
 .home-copy
   text-align: justify
@@ -246,11 +246,15 @@ a
     font-size: 12px
     line-height: 18px
 
-.view-home-teasers,
-.view-recent-portfolio
+.front
+  .view-header
+    margin-bottom: 1em
+
+.view-home-teasers
   .views-row
     @include grid(12)
-    padding-top: 2em
+    padding-bottom: 1.5em
+    
     img
       max-width: 47%
       padding: 1.5%
@@ -260,6 +264,12 @@ a
       &:hover
         background: #ddd
 
+.view-recent-portfolio
+  .views-row
+    @include grid(3)
+    img
+      max-width: 98%
+      padding: 1%
 
 .view-id-archive
   .views-field-created

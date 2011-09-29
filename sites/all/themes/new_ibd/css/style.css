@@ -188,7 +188,7 @@ a {
 
 #page {
   background: white;
-  padding-top: 30px; }
+  padding: 5em; }
 
 .home-copy {
   text-align: justify; }
@@ -238,16 +238,17 @@ a {
     font-size: 12px;
     line-height: 18px; }
 
-.view-home-teasers .views-row,
-.view-recent-portfolio .views-row {
+.front .view-header {
+  margin-bottom: 1em; }
+
+.view-home-teasers .views-row {
   width: 97.5%;
   display: inline;
   float: left;
   margin-left: 1.25%;
   margin-right: 1.25%;
-  padding-top: 2em; }
-  .view-home-teasers .views-row img,
-  .view-recent-portfolio .views-row img {
+  padding-bottom: 1.5em; }
+  .view-home-teasers .views-row img {
     max-width: 47%;
     padding: 1.5%;
     float: left;
@@ -257,9 +258,18 @@ a {
     -o-transition: background 0.3s ease;
     -ms-transition: background 0.3s ease;
     transition: background 0.3s ease; }
-    .view-home-teasers .views-row img:hover,
-    .view-recent-portfolio .views-row img:hover {
+    .view-home-teasers .views-row img:hover {
       background: #dddddd; }
+
+.view-recent-portfolio .views-row {
+  width: 22.5%;
+  display: inline;
+  float: left;
+  margin-left: 1.25%;
+  margin-right: 1.25%; }
+  .view-recent-portfolio .views-row img {
+    max-width: 98%;
+    padding: 1%; }
 
 .view-id-archive .views-field-created {
   font-size: 14px;
