@@ -413,9 +413,10 @@ jQuery(document).ready(function($) {
   $("img").removeAttr("height").removeAttr("width");
 });
 
-var $allVideos = $("iframe[src^='http://www.youtube.com']"),
+var $allVideos = $("iframe[src^='http://player.vimeo.com'], iframe[src^='http://www.youtube.com']"),
+
     // The element that is fluid width
-    $fluidEl = $("article section");
+    $fluidEl = $(".node-content");
  
 // Figure out and save aspect ratio for each video
 $allVideos.each(function() {
@@ -438,3 +439,5 @@ $(window).resize(function() {
   });
 // Kick off one resize to fix all videos on page load
 }).resize();
+
+
