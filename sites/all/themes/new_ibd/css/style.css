@@ -215,7 +215,8 @@ a {
 
 .front .view-header {
   text-align: center;
-  color: #666666; }
+  color: #666666;
+  margin-bottom: 1em; }
 
 #block-views-home_teasers-block_1,
 #block-views-recent_portfolio-block_1 {
@@ -237,9 +238,6 @@ a {
   #block-views-home_teasers-block_1 p {
     font-size: 12px;
     line-height: 18px; }
-
-.front .view-header {
-  margin-bottom: 1em; }
 
 .view-home-teasers {
   border: 2px solid #cccccc;
@@ -609,6 +607,9 @@ a {
       display: block;
       margin: 1em auto; } }
 @media screen and (max-width: 480px) {
+  .logo {
+    font-size: 1.5em; }
+
   #footer .block {
     width: 97.5%;
     display: inline;
