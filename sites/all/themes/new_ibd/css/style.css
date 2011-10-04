@@ -466,6 +466,9 @@ a {
     background: #dddddd;
     float: left; }
 
+.node-type-blog .node-content {
+  padding-bottom: 2em; }
+
 .node-type-portfolio .page-title {
   font-size: 34px;
   color: #888888; }

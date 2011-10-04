@@ -54,7 +54,7 @@ $gutters: 1.25%
     @include grad($color, darken($color, 15%))
     color: $text
     
-@mixin transition($property, $speed, $style)
+@mixin transition($property, $speed, $style: ease)
   -webkit-transition: $property $speed $style
   -moz-transition: $property $speed $style
   -o-transition: $property $speed $style
@@ -437,6 +437,10 @@ a
     padding: 0.75%
     background: #ddd
     float: left
+
+.node-type-blog
+  .node-content
+    padding-bottom: 2em
 
 .node-type-portfolio
   .page-title
