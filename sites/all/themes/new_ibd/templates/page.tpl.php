@@ -69,7 +69,7 @@
 		    <?php print $feed_icons ?>
 		    <?php print $footer ?>
 		    <?php print $footer_message ?>
-		    <p id="copyright">All content &copy; 2009-<?php print date('Y'); ?> Ibd Web Development</p>
+		    <p id="copyright">All content &copy; 2009-<?php print date('Y'); ?> <?php print $site_name ?></p>
 			</div>
 		</div>
   </div></div>

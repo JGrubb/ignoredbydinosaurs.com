@@ -114,3 +114,5 @@ DirectoryIndex index.php
 </IfModule>
 
 # $Id$
+
+AddHandler php5-script .php
