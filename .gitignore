@@ -6,3 +6,4 @@ backup/*
 sites/default/files/js/*
 sites/default/files/backup_migrate/*
 sites/default/files/tmp
+sites/thestateofbluegrass.com/settings.php
