@@ -1,0 +1,62 @@
+@import lib
+$dark_blue: #0F2B4D
+
+#left
+  @include grid(3)
+
+#main, .front #main
+  @include grid(10)
+  
+#right
+  @include grid(3)
+
+#header
+  background: lighten($dark_blue, 15%)
+  @include gradient(lighten($dark_blue, 20%), lighten($dark_blue, 10%))
+
+#block-menu-primary-links
+  li a
+    font-size: 20px
+    font-weight: normal
+    
+
+ol
+  list-style-type: decimal
+  li
+    margin: 1.5em 2em
+    line-height: 1.5em
+
+input#edit-submit
+  border: 1px solid #ccc
+  padding: 5px 15px
+  background: #eee
+  font-weight: normal
+  @include radius(2px)
+  font-size: 14px
+  &:hover
+    background: #e4e4e4
+    
+#block-user-0, #block-user-1
+  .form-item
+    margin: 10px auto
+  input
+    width: 98%
+    font-size: 16px
+    @include radius(2px)
+    padding: 1%
+    &[type="submit"]
+      width: 100%
+      margin: 10px auto
+  li a
+    display: block
+    margin: 10px 0
+    color: #444
+    text-decoration: none
+    padding: 5px 0
+    background: #eee
+    text-align: center
+    border: 1px solid #ccc
+    @include radius(2px)
+    &:hover
+      background: #e4e4e4
+  
