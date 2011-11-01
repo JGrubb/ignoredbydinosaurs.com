@@ -18,7 +18,9 @@ $dark_blue: #0F2B4D
   li a
     font-size: 20px
     font-weight: normal
-    
+
+.wrap
+  @include container($max-width: 100%)
 
 ol
   list-style-type: decimal
@@ -47,16 +49,18 @@ input#edit-submit
     &[type="submit"]
       width: 100%
       margin: 10px auto
-  li a
-    display: block
-    margin: 10px 0
-    color: #444
-    text-decoration: none
-    padding: 5px 0
-    background: #eee
-    text-align: center
-    border: 1px solid #ccc
-    @include radius(2px)
-    &:hover
-      background: #e4e4e4
-  
+  li
+    margin: 0.5em 0
+    a
+      display: block
+      margin: 10px 0
+      color: #444
+      text-decoration: none
+      padding: 5px 0
+      background: #eee
+      text-align: center
+      border: 1px solid #ccc
+      @include radius(2px)
+      &:hover
+        background: #e4e4e4
+

@@ -9,9 +9,10 @@ $gutters: 1.5%
 
 // Lib
 
-@mixin container()
+@mixin container($max-width: 1140px)
   width: $width
   margin: 0 auto
+  max-width: $max-width
 
 @mixin grid($cols, $margin-left: $gutters, $margin-right: $gutters)
   width: (($width / $grid_cols) * $cols) - ($gutters * 2)

@@ -32,6 +32,11 @@
   font-size: 20px;
   font-weight: normal; }
 
+.wrap {
+  width: 100%;
+  margin: 0 auto;
+  max-width: 100%; }
+
 ol {
   list-style-type: decimal; }
   ol li {
@@ -62,17 +67,19 @@ input#edit-submit {
   #block-user-0 input[type="submit"], #block-user-1 input[type="submit"] {
     width: 100%;
     margin: 10px auto; }
-#block-user-0 li a, #block-user-1 li a {
-  display: block;
-  margin: 10px 0;
-  color: #444444;
-  text-decoration: none;
-  padding: 5px 0;
-  background: #eeeeee;
-  text-align: center;
-  border: 1px solid #cccccc;
-  -moz-border-radius: 2px;
-  -webkit-border-radius: 2px;
-  border-radius: 2px; }
-  #block-user-0 li a:hover, #block-user-1 li a:hover {
-    background: #e4e4e4; }
+#block-user-0 li, #block-user-1 li {
+  margin: 0.5em 0; }
+  #block-user-0 li a, #block-user-1 li a {
+    display: block;
+    margin: 10px 0;
+    color: #444444;
+    text-decoration: none;
+    padding: 5px 0;
+    background: #eeeeee;
+    text-align: center;
+    border: 1px solid #cccccc;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px; }
+    #block-user-0 li a:hover, #block-user-1 li a:hover {
+      background: #e4e4e4; }
