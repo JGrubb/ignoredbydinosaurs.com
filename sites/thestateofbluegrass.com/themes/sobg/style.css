@@ -32,6 +32,13 @@
   font-size: 20px;
   font-weight: normal; }
 
+.logo {
+  width: 72%;
+  display: inline;
+  float: left;
+  margin-left: 1.5%;
+  margin-right: 1.5%; }
+
 .wrap {
   width: 100%;
   margin: 0 auto;
