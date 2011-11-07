@@ -1,0 +1,51 @@
+// Define width and number of columns and gutters
+// Change to suit.
+// Pixels work just as well (ie 960 px).  I'm just on a fluid grid kick right now.
+
+
+$width: 100%
+$grid_cols: 16
+$gutters: 1.5%
+
+// Lib
+
+@mixin container($max-width: 1140px)
+  width: $width
+  margin: 0 auto
+  max-width: $max-width
+
+@mixin grid($cols, $margin-left: $gutters, $margin-right: $gutters)
+  width: (($width / $grid_cols) * $cols) - ($gutters * 2)
+  display: inline
+  float: left
+  margin-left: $margin-left
+  margin-right: $margin-right
+
+// Usage: @include grid(4)
+// If a nested grid - @include grid(4, $margin-left: 0)
+
+@mixin push($cols)
+  position: relative
+  left: (($width / $grid_cols) * $cols)
+  
+@mixin pull($cols)
+  position: relative
+  left: -(($width / $grid_cols) * $cols)
+
+// I never use the push/pull feature in 960, so it's possible that this doesn't work correctly.
+
+@mixin radius($a)
+  -moz-border-radius: $a
+  -webkit-border-radius: $a
+  border-radius: $a
+  
+@mixin shadow($a, $b, $c, $d)
+  -moz-box-shadow: $a $b $c $d
+  -webkit-box-shadow: $a $b $c $d
+  box-shadow: $a $b $c $d
+  
+@mixin gradient($color1, $color2)
+  background: -webkit-gradient(linear, left top, left bottom, from($color1), to($color2))
+  @each $browser in webkit, moz, o, ms
+    background: -#{$browser}-linear-gradient(top, $color1, $color2)
+  background: linear-gradient(top, $color1, $color2)

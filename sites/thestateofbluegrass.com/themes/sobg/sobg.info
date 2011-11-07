@@ -1,0 +1,17 @@
+name = "The State of Bluegrass"
+description = "State of Bluegrass' theme."
+base theme = "new_ibd"
+core = "6.x"
+engine = "phptemplate"
+
+regions[left] = "Left sidebar"
+regions[right] = "Right sidebar"
+regions[content_top] = "Content Top"
+regions[content] = "Content"
+regions[content_bottom] = "Content Bottom"
+regions[header] = "Header"
+regions[footer] = "Footer"
+
+stylesheets[screen][] = "style.css"
+
+scripts[] = js/scripts.js
