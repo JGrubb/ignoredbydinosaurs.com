@@ -1,0 +1,14 @@
+; $Id: gmaps_views_geo.info,v 1.1.2.1 2009/12/12 08:43:47 xmarket Exp $
+name = "GMaps Views Geo"
+description = "Geo module based point option handlers for content markers."
+core = 6.x
+dependencies[] = gmaps_views
+dependencies[] = geo_field
+package = "Google Maps Tools"
+
+; Information added by drupal.org packaging script on 2010-05-06
+version = "6.x-2.1"
+core = "6.x"
+project = "gmaps"
+datestamp = "1273160107"
+

@@ -1,0 +1,21 @@
+/* $Id: gmaps-taxonomy.css,v 1.1.2.3 2009/11/23 13:23:48 xmarket Exp $ */
+
+.gmaps-taxonomy-letter-selector {
+  margin: 0.5em 0 0;
+}
+
+.gmaps-taxonomy-letter-selector .item-list ul {
+  margin: 0.35em 0;
+  text-align: center;
+}
+
+.block .gmaps-taxonomy-letter-selector .item-list ul {
+  margin-bottom: 0;
+}
+
+.gmaps-taxonomy-letter-selector .item-list ul li {
+  background: none;
+  display: inline;
+  padding: 0 0 .2em 0;
+  margin: 0.15em 0.25em;
+}

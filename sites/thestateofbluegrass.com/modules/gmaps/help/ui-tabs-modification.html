@@ -1,0 +1,37 @@
+<h3 style="color: red;">Important for embedded tabs</h3>
+<p>The tabs widget does not support embbeded tabs (tabs in tabs) by default. If you plan to use them - in TOC maps for example -, you should add some simple changes to the ui.tabs.js file as follows. The modification is <strong>OPTIONAL</strong> because Google Maps Tools use embedded tabs only on the Embedded items demo page.</p>
+<strong>OPTIONAL MODIFICATION</strong> in ui.tabs.js (version 1.6):
+Around line 73:
+<p>Original</p>
+<pre style="overflow: auto;">
+  ...
+  _tabify: function(init) {
+
+    this.$lis = $('li:has(a[href])', this.element);
+    this.$tabs = this.$lis.map(function() { return $('a', this)[0]; });
+    this.$panels = $([]);
+
+    var self = this, o = this.options;
+
+    this.$tabs.each(function(i, a) {
+  ...
+</pre>
+<p>Modified</p>
+<pre style="overflow: auto;">
+  ...
+  _tabify: function(init) {
+
+    <strong>var self = this, o = this.options;</strong>  <em style="color: green">//moved from below</em>
+
+    <strong style="color: red;">o.tabSelector = (o.tabSelector !== undefined && o.tabSelector !== null && o.tabSelector.length) ? o.tabSelector : 'li';</strong> <em style="color: green">//added</em>
+      
+    this.$lis = $(<strong><em style="color: red;">o.tabSelector +</em></strong>':has(a[href])', this.element);  <em style="color: green">//"li" deleted, "o.tabSelector +" added</em>
+    this.$tabs = this.$lis.map(function() { return $('a', this)[0]; });
+    this.$panels = $([]);
+
+    <del>var self = this, o = this.options;</del>  <em style="color: green">//moved up</em>
+
+    this.$tabs.each(function(i, a) {  <em style="color: green">//no changes from here</em>
+ ...
+</pre>
+

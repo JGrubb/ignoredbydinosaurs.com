@@ -1,0 +1,10 @@
+<p>There are two kind of fields for length input. There is a simple textfield, where you can type the entire length value,
+and there is a textfield and unit selector version.</p>
+<p>In the case of latter you can type the "value", and you should follow the number formatting rules only.</p>
+<p>In the case of prior you should type the unit to. The unit means the well-known abbreviation of the unit, f.e.: "m" for "meter".
+You can type at most one space between the value and the unit. You can type multiple parts in one field, like "1yd  -9 ft",
+and as you can see, you're allowed to type negative values, too, but this is depends on the context, since fields can permit negative values.</p>
+<div id="available-length-units"></div>
+<script type="text/javascript">$('#available-length-units').load(Drupal.settings.basePath+'gmaps/element-help-js/length-units');</script>
+
+See <a href="&topic:gmaps/number-formatting&">number formatting</a> for more information on numeric inputs.

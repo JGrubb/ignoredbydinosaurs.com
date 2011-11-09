@@ -1,0 +1,339 @@
+<?php
+
+/*
+ * @file
+ * Install and schema for geonames module
+ */
+
+/**
+ * Implementation of hook_schema().
+ */
+function geonames_schema() {
+  $schema['geonames_countryinfo'] = array(
+    'description' => 'GeoNames.org Country Information',
+    'fields' => array(
+      'iso_alpha2' => array(
+        'type' => 'varchar',
+        'not null' => TRUE,
+        'length' => 2,
+        'description' => 'two-letter country code (ISO 3166-1-alpha-2)',
+      ),
+      'iso_alpha3' => array(
+        'type' => 'varchar',
+        'not null' => TRUE,
+        'length' => 3,
+        'description' => 'three-letter country code (ISO 3166-1 alpha-3)',
+      ),
+      'iso_numeric' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'size' => 'small',
+        'unsigned' => TRUE,
+        'description' => 'three-digit country code (ISO 3166-1 numeric)',
+      ),
+      'fips_code' => array(
+        'type' => 'varchar',
+        'not null' => TRUE,
+        'length' => 3,
+        'description' => 'Federal Information Processing Standards (FIPS) country code',
+      ),
+      'name' => array(
+        'type' => 'varchar',
+        'not null' => TRUE,
+        'length' => 60,
+        'description' => 'Country name',
+      ),
+      'capital' => array(
+        'type' => 'varchar',
+        'not null' => TRUE,
+        'length' => 60,
+        'description' => 'Capital',
+      ),
+      'areainsqkm'  => array(
+        'type' => 'varchar',
+        'not null' => TRUE,
+        'length' => 11,
+        'description' => 'Area(in sq km)',
+      ),
+      'population'  => array(
+        'type' => 'varchar',
+        'not null' => TRUE,
+        'length' => 11,
+        'description' => 'Population',
+      ),
+      'continent'   => array(
+        'type' => 'varchar',
+        'not null' => TRUE,
+        'length' => 2,
+        'description' => 'Continent, one of [AF, AS, EU, NA, OC, SA, AN]',
+      ),
+      'tld' => array(
+        'type' => 'varchar',
+        'length' => '200',
+        'not null' => FALSE,
+        'description' => 'Internet Top-Level Domain (including leading dot)',
+      ),
+      'currency'    => array(
+        'type' => 'varchar',
+        'not null' => TRUE,
+        'length' => 3,
+        'description' => 'Currency Code',
+      ),
+      'currencyname' => array(
+        'type' => 'varchar',
+        'length' => '200',
+        'not null' => FALSE,
+        'description' => 'Currency Name',
+      ),
+      'phone' => array(
+        'type' => 'varchar',
+        'length' => '200',
+        'not null' => FALSE,
+        'description' => 'IDD Phone Prefix',
+      ),
+      'postal_code_format' => array(
+        'type' => 'varchar',
+        'length' => '200',
+        'not null' => FALSE,
+        'description' => 'Postal Code Format',
+      ),
+      'postal_code_regex' => array(
+        'type' => 'varchar',
+        'length' => '200',
+        'not null' => FALSE,
+        'description' => 'Postal Code Regex',
+      ),
+      // moved down!
+      'languages'   => array(
+        'type' => 'varchar',
+        'not null' => TRUE,
+        'length' => 100,
+        'description' => 'Lists of languages spoken in a country ordered by the number of speakers',
+      ),
+      'geonameid'   => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'description' => 'Unique geonames identifier',
+      ),
+      'neighbours' => array(
+        'type' => 'varchar',
+        'length' => '200',
+        'not null' => FALSE,
+        'description' => 'two-letter codes for countries that border this country',
+      ),
+      'equivalentfipscode' => array(
+        'type' => 'varchar',
+        'length' => '200',
+        'not null' => FALSE,
+        'description' => 'Equivalent Fips Code',
+      ),
+    ),
+    'indexes' => array(
+      'iso_alpha3' => array('iso_alpha3'),
+      'iso_numeric' => array('iso_numeric'),
+      'fips_code' => array('fips_code'),
+      'continent' => array('continent'),
+      'currency' => array('currency'),
+      'iso_alpha2' => array('iso_alpha2'),
+    ),
+    'primary key' => array('geonameid'),
+  );
+
+  $schema['geonames_featurecodes'] = array(
+    'description' => 'List of feature-codes in geonames - see http://www.geonames.org/export/codes.html',
+    'fields' => array(
+      'class' => array(
+        'type' => 'varchar',
+        'length' => 1,
+        'not null' => TRUE,
+        'description' => 'One-letter category: A, H, L, P, R, S, T, U, V',
+      ),
+      'code' => array(
+        'type' => 'varchar',
+        'length' => 10,
+        'not null' => TRUE,
+        'description' => 'Feature code',
+      ),
+      'name' => array(
+        'type' => 'varchar',
+        'not null' => TRUE,
+        'length' => 64,
+        'description' => 'Short name of feature',
+      ),
+      'description' => array(
+        'type' => 'varchar',
+        'not null' => TRUE,
+        'length' => 255,
+        'description' => 'Description of feature',
+      ),
+    ),
+    'primary key' => array('class', 'code'),
+  );
+
+  $schema['cache_geonames'] = drupal_get_schema_unprocessed('system', 'cache');
+  $schema['cache_geonames']['description'] = 'Cache table for the Geonames module to store results from the geonames webservice.';
+
+  return $schema;
+}
+
+/**
+ * Implementation of hook_install().
+  */
+function geonames_install() {
+  drupal_install_schema('geonames');
+}
+
+/**
+ * Implementation of hook_uninstall().
+  */
+function geonames_uninstall() {
+  drupal_uninstall_schema('geonames');
+  variable_del('geonames_metadata_updated');
+  variable_del('geonames_commercial_credits');
+  variable_del('geonames_commercial_credits_since');
+  // TODO: remove settings
+}
+
+/**
+ * Implementation of hook_requirements().
+ *
+ * Determine whether geonames has current metadata, and emit a warning if not.
+ */
+function geonames_requirements($phase) {
+  $requirements = array();
+  $t = get_t();
+
+  // Check for SimpleXML
+  if (!class_exists('SimpleXMLElement')) {
+    $requirements['geonames_simplexml'] = array(
+      'title' => $t('SimpleXML'),
+      'value' => $t('Not found'),
+      'severity' => REQUIREMENT_ERROR,
+      'description' => $t('Geonames requires the PHP <a href="!simplexml_url">SimpleXML</a> library.', array('!simplexml_url' => 'http://php.net/manual/en/simplexml.setup.php')),
+    );
+  }
+
+  // Check for metadata
+  if ($phase == 'runtime') {
+    // Determine status of geonames metadata
+    $updated = variable_get('geonames_metadata_updated', 0);
+    $values = array(
+      '!numcountries' => db_result(db_query('SELECT COUNT(*) FROM {geonames_countryinfo}')),
+      '!numfeaturecodes' => db_result(db_query('SELECT COUNT(*) FROM {geonames_featurecodes}')),
+      '!updated' => $updated ? $t('Last run !interval ago', array('!interval' => format_interval(time() - $updated))) : $t('Never updated'),
+    );
+
+    // Produce suitable message
+    $requirements['geonames_metadata'] = array(
+      'title' => $t('Geonames Metadata'),
+      'value' => $t('!updated (!numcountries countries and !numfeaturecodes feature codes)', $values),
+    );
+    if ($updated == 0 || $values['!numcountries'] == 0 || $values['!numfeaturecodes'] == 0) {
+      $requirements['geonames_metadata']['description'] = $t('Metadata is incomplete. Please check the !link to manually refresh.', array('!link' => l('geonames settings', 'admin/settings/geonames')));
+      $requirements['geonames_metadata']['severity'] = REQUIREMENT_WARNING;
+    }
+  }
+  return $requirements;
+}
+
+function geonames_update_6001() {
+  $ret = array();
+
+  // Add the new columns to geonames_countryinfo
+  db_add_field($ret, 'geonames_countryinfo', 'tld', array('type' => 'varchar', 'length' => 200, 'not null' => FALSE));
+  db_add_field($ret, 'geonames_countryinfo', 'currencyname', array('type' => 'varchar', 'length' => 200, 'not null' => FALSE));
+  db_add_field($ret, 'geonames_countryinfo', 'phone', array('type' => 'varchar', 'length' => 200, 'not null' => FALSE));
+  db_add_field($ret, 'geonames_countryinfo', 'postal_code_format', array('type' => 'varchar', 'length' => 200, 'not null' => FALSE));
+  db_add_field($ret, 'geonames_countryinfo', 'postal_code_regex', array('type' => 'varchar', 'length' => 200, 'not null' => FALSE));
+  db_add_field($ret, 'geonames_countryinfo', 'neighbours', array('type' => 'varchar', 'length' => 200, 'not null' => FALSE));
+  db_add_field($ret, 'geonames_countryinfo', 'equivalentfipscode', array('type' => 'varchar', 'length' => 200, 'not null' => FALSE));
+
+  // Update the column widths of geonames_featurecodes
+  db_change_field($ret, 'geonames_featurecodes', 'code', 'code', array('type' => 'varchar', 'length' => 10, 'not null' => TRUE));
+  db_change_field($ret, 'geonames_featurecodes', 'name', 'name', array('type' => 'varchar', 'length' => 64, 'not null' => TRUE));
+
+  // Fix the primary key of geonames_featurecodes
+  db_drop_primary_key($ret, 'geonames_featurecodes');
+  db_add_primary_key($ret, 'geonames_featurecodes', array('class', 'code'));
+
+  return $ret;
+}
+
+function geonames_update_6002() {
+  $ret = array();
+
+  // Update all the geonames cache entries to geonames_OLDNAME. By the time this
+  // runs, geonames_config() will already contain the geonames_ prefix
+  include_once(drupal_get_path('module', 'geonames') .'/geonames_config.inc');
+  $service_prefixes = array('result_cache_prefix', 'data_cache_prefix');
+  $cache = variable_get('geonames_cache_table', 'cache');
+  $prefix = 'geonames_';
+  foreach (geonames_config() as $service) {
+    foreach ($service_prefixes as $key) {
+      $oldprefix = substr($service[$key], strlen($prefix));
+      $result = db_query("SELECT cid FROM {". $cache ."} WHERE cid LIKE '%s%%'", $oldprefix);
+      while ($row = db_fetch_object($result)) {
+        db_query("UPDATE {". $cache ."} SET cid = '%s' WHERE cid = '%s'", $prefix . $row->cid, $row->cid);
+        // don't update $ret using update_sql() because there may be MANY queries here
+      }
+    }
+  }
+
+  return $ret;
+}
+
+function geonames_update_6003() {
+  $ret = array();
+
+  // Create a cache table just for geonames
+  $table = drupal_get_schema_unprocessed('system', 'cache');
+  $table['description'] = 'Cache table for the Geonames module to store results from the geonames webservice.';
+  db_create_table($ret, 'cache_geonames', $table);
+
+  // If geonames is currently configured to use the default 'cache', then switch
+  // it to using this table
+  $cache = variable_get('geonames_cache_table', 'cache');
+  if ($cache == 'cache') {
+    variable_set('geonames_cache_table', 'cache_geonames');
+    // Don't bother moving data from {cache} to {cache_geonames} - update.php
+    // flushes the caches anyway.
+  }
+
+  return $ret;
+}
+
+function geonames_update_6004() {
+  $ret = array();
+  // Change the geonames_countryinfo.iso_numeric to be small-int not tiny-int (values don't fit)
+  db_change_field($ret, 'geonames_countryinfo', 'iso_numeric', 'iso_numeric', array('type' => 'int', 'not null' => TRUE, 'size' => 'small', 'unsigned' => TRUE));
+  return $ret;
+}
+
+function geonames_update_6005() {
+  $ret = array();
+
+  // The configuration relating to the commercial web-service has been
+  // simplified.  Now there are just explicit settings for the URL to use,
+  // whether to count credits, and which username to use. For the new
+  // servers at api.geonames.org username is *required*.
+
+  $commercial_active = variable_get('geonames_commercial_active', FALSE);
+  $server = $commercial_active ? variable_get('geonames_commercial_server', '') : GEONAMES_FREE_SERVER_URL;
+  $username = variable_get('geonames_commercial_username', '');
+  if ($username === '') {
+    $link = l('GeoNames settings', 'admin/settings/geonames');
+    drupal_set_message('Geonames server username is not set. Please configure this at '. $link, 'warning');
+  }
+
+  variable_set('geonames_server', $server);
+  variable_set('geonames_count_credits', $commercial_active);
+  variable_set('geonames_username', $username);
+
+  variable_del('geonames_commercial_active');
+  variable_del('geonames_commercial_server');
+  variable_del('geonames_commercial_username');
+
+
+  return $ret;
+}

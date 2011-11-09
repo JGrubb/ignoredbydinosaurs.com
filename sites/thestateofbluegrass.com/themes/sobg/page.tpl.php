@@ -29,7 +29,7 @@
   <div id='branding'><div class='limiter clear-block'>
 		<div class="wrap">
 			<div>
-    <?php if ($site_name): ?><div class='logo'><a href="<?php print $base_path ?>"><?php print $site_name ?></a></div><?php endif; ?>
+    <?php if ($site_name): ?><div class='logo'><a href="<?php print $base_path ?>"><img src="/sites/thestateofbluegrass.com/themes/sobg/logo.png"></a></div><?php endif; ?>
 			</div>
 			<div id="nav">
 				<?php if ($primary_links): print theme('links', $primary_links, array()); endif;?>

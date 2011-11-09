@@ -1,0 +1,18 @@
+<?php
+// $Id: gmaps_devel.install,v 1.1.2.3 2009/09/14 07:58:00 xmarket Exp $
+
+
+/**
+ * Implementation of hook_install().
+ */
+function gmaps_devel_install() {
+  $t = get_t();
+  db_query("INSERT INTO {menu_custom} (menu_name, title, description) VALUES ('%s', '%s', '%s')", 'gmaps_devel', $t('GMaps development'), $t('GMaps development links.'));
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function gmaps_devel_uninstall() {
+  db_query("DELETE FROM {menu_custom} WHERE menu_name = 'gmaps_devel'");
+}

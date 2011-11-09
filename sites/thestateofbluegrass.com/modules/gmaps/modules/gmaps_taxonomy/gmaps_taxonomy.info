@@ -1,0 +1,15 @@
+; $Id: gmaps_taxonomy.info,v 1.1.2.3 2009/09/14 07:57:59 xmarket Exp $
+name = "GMaps Taxonomy"
+description = "GMaps Content Taxonomy integration."
+core = 6.x
+dependencies[] = gmaps_content
+dependencies[] = taxonomy
+dependencies[] = menu
+package = "Google Maps Tools"
+
+; Information added by drupal.org packaging script on 2010-05-06
+version = "6.x-2.1"
+core = "6.x"
+project = "gmaps"
+datestamp = "1273160107"
+

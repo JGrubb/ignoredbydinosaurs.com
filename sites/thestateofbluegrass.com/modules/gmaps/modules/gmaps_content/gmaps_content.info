@@ -1,0 +1,14 @@
+; $Id: gmaps_content.info,v 1.1.2.6 2009/09/14 07:58:00 xmarket Exp $
+name = "GMaps Content"
+description = "Distance, address, point and address 'n' point CCK Fields with Views and Token integration."
+core = 6.x
+dependencies[] = gmaps
+dependencies[] = content
+package = "Google Maps Tools"
+
+; Information added by drupal.org packaging script on 2010-05-06
+version = "6.x-2.1"
+core = "6.x"
+project = "gmaps"
+datestamp = "1273160107"
+

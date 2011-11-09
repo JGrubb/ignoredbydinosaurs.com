@@ -1,0 +1,285 @@
+<?php
+// $Id: gmaps_user.install,v 1.1.2.1 2010/02/26 14:13:03 xmarket Exp $
+
+/**
+ * Implementation of hook_schema().
+ */
+function gmaps_user_schema() {
+  drupal_load('module', 'gmaps');
+  drupal_load('module', 'gmaps_user');
+  
+  $schema = array();
+  $schema['gmaps_user_address'] = array(
+    'description' => 'Stores address values for users.',
+    'fields' => array(
+      'uid' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'default' => 0,
+        'description' => 'Reference to {users}.uid',
+      ),
+      'country' => array(
+        'type' => 'char',
+        'length' => 2,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'ISO 2 country code',
+      ),
+      'adminarea' => array(
+        'type' => 'varchar',
+        'length' => GMAPS_ADDRESS_PART_MAXLENGTH,
+        'not null' => FALSE,
+        'description' => 'Administrative area. State, province, etc',
+      ),
+      'subadminarea' => array(
+        'type' => 'varchar',
+        'length' => GMAPS_ADDRESS_PART_MAXLENGTH,
+        'not null' => FALSE,
+        'description' => 'Sub-administrative area',
+      ),
+      'locality' => array(
+        'type' => 'varchar',
+        'length' => GMAPS_ADDRESS_PART_MAXLENGTH,
+        'not null' => FALSE,
+        'description' => 'City, town, village',
+      ),
+      'deplocality' => array(
+        'type' => 'varchar',
+        'length' => GMAPS_ADDRESS_PART_MAXLENGTH,
+        'not null' => FALSE,
+      ),
+      'postalcode' => array(
+        'type' => 'varchar',
+        'length' => 16,
+        'not null' => FALSE,
+      ),
+      'thoroughfare' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+        'description' => 'Street, address',
+      ),
+      'privacy' => array(
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'default' => 0,
+        'description' => 'Privacy level',
+      ),
+      'search' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+        'description' => 'Geocoder search value',
+      ),
+      'u_adminarea' => array(
+        'type' => 'varchar',
+        'length' => GMAPS_ADDRESS_PART_MAXLENGTH,
+        'not null' => FALSE,
+        'description' => 'UPPERCASE',
+      ),
+      'u_subadminarea' => array(
+        'type' => 'varchar',
+        'length' => GMAPS_ADDRESS_PART_MAXLENGTH,
+        'not null' => FALSE,
+        'description' => 'UPPERCASE',
+      ),
+      'u_locality' => array(
+        'type' => 'varchar',
+        'length' => GMAPS_ADDRESS_PART_MAXLENGTH,
+        'not null' => FALSE,
+        'description' => 'UPPERCASE',
+      ),
+      'u_deplocality' => array(
+        'type' => 'varchar',
+        'length' => GMAPS_ADDRESS_PART_MAXLENGTH,
+        'not null' => FALSE,
+        'description' => 'UPPERCASE',
+      ),
+      'u_postalcode' => array(
+        'type' => 'varchar',
+        'length' => 16,
+        'not null' => FALSE,
+        'description' => 'UPPERCASE',
+      ),
+      'u_thoroughfare' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+        'description' => 'UPPERCASE',
+      ),
+    ),
+    'primary key' => array('uid'),
+    'indexes' => array(
+      'filter' => array(
+        'country',
+        array('u_adminarea', 32),
+        array('u_subadminarea', 32),
+        array('u_locality', 32),
+        array('u_deplocality', 32),
+        'u_postalcode',
+        array('u_thoroughfare', 32),
+      ),
+      'fast_filter' => array(
+        'country',
+        'u_locality',
+      ),
+    ),
+  );
+  $schema['gmaps_user_point'] = array(
+    'description' => 'Stores point values for users.',
+    'fields' => array(
+      'uid' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'default' => 0,
+        'description' => 'Reference to {users}.uid',
+      ),
+      'map_type' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => GMAPS_MAP_EARTH,
+        'description' => 'GMaps map type the coordinates belong to',
+      ),
+      'latitude' => array(
+        'type' => 'numeric',
+        'not null' => TRUE,
+        'default' => 0.0,
+        'precision' => 8,
+        'scale' => 6,
+      ),
+      'longitude' => array(
+        'type' => 'numeric',
+        'not null' => TRUE,
+        'default' => 0.0,
+        'precision' => 9,
+        'scale' => 6,
+      ),
+      'elevation' => array(
+        'type' => 'numeric',
+        'not null' => FALSE,
+        'precision' => 7,
+        'scale' => 2,
+      ),
+      'x' => array(
+        'type' => 'float',
+        'not null' => FALSE,
+      ),
+      'y' => array(
+        'type' => 'float',
+        'not null' => FALSE,
+      ),
+      'z' => array(
+        'type' => 'float',
+        'not null' => FALSE,
+      ),
+      'privacy' => array(
+        'type' => 'text',
+        'size' => 'normal',
+        'not null' => FALSE,
+        'serialize' => TRUE,
+      ),
+      'bounds' => array(
+        'type' => 'text',
+        'size' => 'normal',
+        'not null' => FALSE,
+        'serialize' => TRUE,
+      ),
+      'pov' => array(
+        'type' => 'text',
+        'size' => 'normal',
+        'not null' => FALSE,
+        'serialize' => TRUE,
+      ),
+      'search' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+        'description' => 'Geocoder search value',
+      ),
+    ),
+    'primary key' => array('uid'),
+    'indexes' => array(
+      'bounds' => array(
+        'map_type', 'latitude', 'longitude'
+      ),
+    ),
+  );
+  
+  $schema['gmaps_user_marker_option'] = array(
+    'description' => 'Stores marker option values for users.',
+    'fields' => array(
+      'uid' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'default' => 0,
+        'description' => 'Reference to {users}.uid',
+      ),
+      'icon' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'unsigned' => FALSE,
+        'default' => -1,
+        'description' => 'Reference to {gmaps_icons}.icid',
+      ),
+      'protected_icon' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'unsigned' => FALSE,
+        'default' => -1,
+        'description' => 'Reference to {gmaps_icons}.icid',
+      ),
+      'static_icon' => array(
+        'type' => 'text',
+        'size' => 'normal',
+        'not null' => TRUE,
+        'serialize' => TRUE,
+        'default' => '',
+        'description' => 'Serialized settings for static icons',
+      ),
+      'protected_static_icon' => array(
+        'type' => 'text',
+        'size' => 'normal',
+        'not null' => TRUE,
+        'serialize' => TRUE,
+        'default' => '',
+        'description' => 'Serialized settings for static icons',
+      ),
+    ),
+    'primary key' => array('uid'),
+    'indexes' => array(
+      'icon' => array('icon'),
+      'protected_icon' => array('protected_icon'),
+    ),
+  );
+  
+  $schema[GMAPS_USER_CACHE_TABLE_MAP] = drupal_get_schema_unprocessed('system', 'cache');
+  $schema[GMAPS_USER_CACHE_TABLE_MAP]['description'] = 'Cache table for interactive user display maps.';
+
+  $schema[GMAPS_USER_CACHE_TABLE_STATIC_MAP] = $schema[GMAPS_USER_CACHE_TABLE_MAP];
+  $schema[GMAPS_USER_CACHE_TABLE_STATIC_MAP]['description'] = 'Cache table for static user display maps.';
+  
+  return $schema;
+}
+
+/**
+ * Implementation of hook_install().
+ */
+function gmaps_user_install() {
+  drupal_install_schema('gmaps_user');
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function gmaps_user_uninstall() {
+  drupal_uninstall_schema('gmaps_user');
+  
+  variable_del('gmaps_user_geo_data');
+  variable_del('gmaps_user_marker_option');
+}

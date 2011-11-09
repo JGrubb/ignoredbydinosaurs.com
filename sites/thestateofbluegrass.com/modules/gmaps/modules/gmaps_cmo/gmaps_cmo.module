@@ -1,0 +1,69 @@
+<?php
+// $Id: gmaps_cmo.module,v 1.1.2.2 2010/05/06 15:15:07 xmarket Exp $
+
+/**
+ * @file
+ * GMaps Content marker options.
+ */
+
+/**
+ * Implementation of hook_form_hook_alter().
+ */
+function gmaps_cmo_form_node_type_form_alter(&$form, &$form_state) {
+  _gmaps_call_func('gmaps_cmo', 'admin', '_gmaps_cmo_form_node_type_form_alter', array(&$form, &$form_state));
+}
+
+/**
+ * Implementation of hook_views_api().
+ */
+function gmaps_cmo_views_api() {
+  return array(
+    'api' => 2,
+    'path' => drupal_get_path('module', 'gmaps_cmo') .'/includes'
+  );
+}
+
+/**
+ * Implementation of hook_views_data_alter().
+ */
+function gmaps_cmo_views_data_alter(&$data) {
+  return _gmaps_call_func('gmaps_cmo', 'views-admin', '_gmaps_cmo_views_data_alter', array(&$data));
+}
+
+/**
+ * Implementation of hook_gmaps_references().
+ */
+function gmaps_cmo_gmaps_references($type, $object) {
+  if($type == 'icon') {
+    $refs = array();
+    $icon = $protected_icon = array();
+    $icid = $object->icid;
+    
+    $types = node_get_types('names');
+    foreach($types as $node_type => $node_type_name) {
+      $mo_data = variable_get('gmaps_cmo_'. $node_type, new stdClass());
+      $type_url_str = str_replace('_', '-', $node_type);
+      if ($mo_data->icon == $icid) {
+        $icon['icon_'. $node_type] = array(
+          'title' => t($node_type_name),
+          'href' => 'admin/content/node-type/'. $type_url_str,
+        );
+      }
+      if ($mo_data->protected_icon == $icid) {
+        $protected_icon['protected_icon_'. $node_type] = array(
+          'title' => t($node_type_name),
+          'href' => 'admin/content/node-type/'. $type_url_str,
+        );
+      }
+    }
+    if (!empty($icon)) {
+      $refs[t('GMaps Content marker options - icons')] = $icon;
+    }
+    if (!empty($protected_icon)) {
+      $refs[t('GMaps Content marker option - protected icons')] = $protected_icon;
+    }
+    
+    if (!empty($refs)) { return $refs; }
+  }
+}
+

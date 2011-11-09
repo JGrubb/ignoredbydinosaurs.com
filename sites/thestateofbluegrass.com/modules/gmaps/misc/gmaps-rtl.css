@@ -1,0 +1,18 @@
+/* $Id: gmaps-rtl.css,v 1.1.2.2 2009/09/14 07:57:59 xmarket Exp $ */
+
+html.js .form-gmaps-geocoder input.form-gmaps-geocoder-query {
+  background-position: 0% 2px;
+}
+
+html.js .form-gmaps-point .gmaps-point-elevation-autocomplete {
+  background-position: 100% 2px;
+}
+
+
+html.js .form-gmaps-geocoder input.throbbing {
+  background-position: 0% -18px;
+}
+
+html.js .form-gmaps-point input.throbbing {
+  background-position: 100% -18px;
+}

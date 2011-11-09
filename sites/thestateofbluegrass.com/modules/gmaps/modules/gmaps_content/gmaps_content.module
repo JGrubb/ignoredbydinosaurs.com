@@ -1,0 +1,1080 @@
+<?php
+// $Id: gmaps_content.module,v 1.1.2.11 2010/03/10 13:52:18 xmarket Exp $
+
+/**
+ * @file
+ * CCK Fields with Views and Token Integration.
+ */
+
+/**
+ * Use only the locality field in fast filters.
+ */
+define('GMAPS_CONTENT_FAST_FILTER_LOC', 01000);
+/**
+ * Use only the neighborhood(dependent locality) field in fast filters.
+ */
+define('GMAPS_CONTENT_FAST_FILTER_NH', 00100);
+/**
+ * Use only the zip(postalcode) field in fast filters.
+ */
+define('GMAPS_CONTENT_FAST_FILTER_ZIP', 00010);
+/**
+ * Use only the street, number(thoroughfare) field in fast filters.
+ */
+define('GMAPS_CONTENT_FAST_FILTER_ST', 00001);
+
+define('GMAPS_CONTENT_FAST_FILTER_LOC_NH', 01100);
+define('GMAPS_CONTENT_FAST_FILTER_LOC_ZIP', 01010);
+define('GMAPS_CONTENT_FAST_FILTER_LOC_ST', 01001);
+define('GMAPS_CONTENT_FAST_FILTER_NH_ZIP', 00110);
+define('GMAPS_CONTENT_FAST_FILTER_NH_ST', 00101);
+define('GMAPS_CONTENT_FAST_FILTER_ZIP_ST', 00011);
+
+define('GMAPS_CONTENT_FAST_FILTER_LOC_NH_ZIP', 01110);
+define('GMAPS_CONTENT_FAST_FILTER_LOC_NH_ST', 01101);
+define('GMAPS_CONTENT_FAST_FILTER_LOC_ZIP_ST', 01011);
+define('GMAPS_CONTENT_FAST_FILTER_NH_ZIP_ST', 00111);
+
+define('GMAPS_CONTENT_FAST_FILTER_ALL', 01111);
+
+define('GMAPS_CONTENT_CACHE_TABLE_MAP', 'cache_gc_map');
+define('GMAPS_CONTENT_CACHE_TABLE_STATIC_MAP', 'cache_gc_smap');
+
+/**
+ * Implementation of hook_field_info().
+ */
+function gmaps_content_field_info() {
+  return array(
+    'gmaps_distance' => array(
+      'label' => t('GMaps Distance'),
+      'description' => t('Store distance in database.'),
+    ),
+    'gmaps_address' => array(
+      'label' => t('GMaps Address'),
+      'description' => t('Store address in database.'),
+    ),
+    'gmaps_point' => array(
+      'label' => t('GMaps Point'),
+      'description' => t('Store coordinates in database.'),
+    ),
+    'gmaps_anp' => array(
+      'label' => t('GMaps Address and Point'),
+      'description' => t('Store address and coordinates in database.'),
+    ),
+  );
+}
+
+/**
+ * Implementation of hook_widget_info().
+ */
+function gmaps_content_widget_info() {
+  return array(
+    'gmaps_user_distance' => array(
+      'label' => t('User selected distance element'),
+      'field types' => array('gmaps_distance'),
+      'multiple values' => CONTENT_HANDLE_CORE,
+      'callbacks' => array(
+        'default value' => CONTENT_CALLBACK_DEFAULT,
+      ),
+    ),
+    'gmaps_distance' => array(
+      'label' => t('GMaps Distance element'),
+      'field types' => array('gmaps_distance'),
+      'multiple values' => CONTENT_HANDLE_CORE,
+      'callbacks' => array(
+        'default value' => CONTENT_CALLBACK_DEFAULT,
+      ),
+    ),
+    'gmaps_distancefield' => array(
+      'label' => t('GMaps Distancefield element'),
+      'field types' => array('gmaps_distance'),
+      'multiple values' => CONTENT_HANDLE_CORE,
+      'callbacks' => array(
+        'default value' => CONTENT_CALLBACK_DEFAULT,
+      ),
+    ),
+    'gmaps_content_address' => array(
+      'label' => t('GMaps content Address element'),
+      'field types' => array('gmaps_address'),
+      'multiple values' => CONTENT_HANDLE_CORE,
+      'callbacks' => array(
+        'default value' => CONTENT_CALLBACK_DEFAULT,
+      ),
+    ),
+    'gmaps_content_point' => array(
+      'label' => t('GMaps content Point element'),
+      'field types' => array('gmaps_point'),
+      'multiple values' => CONTENT_HANDLE_CORE,
+      'callbacks' => array(
+        'default value' => CONTENT_CALLBACK_DEFAULT,
+      ),
+    ),
+    'gmaps_content_anp' => array(
+      'label' => t('GMaps content AnP element'),
+      'field types' => array('gmaps_anp'),
+      'multiple values' => CONTENT_HANDLE_CORE,
+      'callbacks' => array(
+        'default value' => CONTENT_CALLBACK_DEFAULT,
+      ),
+    ),
+  );
+}
+
+/**
+ * Implementation of hook_field_formatter_info().
+ */
+function gmaps_content_field_formatter_info() {
+  return array(
+    'default' => array(
+      'label' => t('Default (User/site render)'),
+      'field types' => array('gmaps_distance', 'gmaps_address', 'gmaps_point', 'gmaps_anp'),
+      'multiple values' => CONTENT_HANDLE_CORE,
+    ),
+    'plain' => array(
+      'label' => t('Plain text'),
+      'field types' => array('gmaps_distance', 'gmaps_address', 'gmaps_point', 'gmaps_anp'),
+      'multiple values' => CONTENT_HANDLE_CORE,
+    ),
+    'themed' => array(
+      'label' => t('Themed'),
+      'field types' => array('gmaps_distance', 'gmaps_address', 'gmaps_point', 'gmaps_anp'),
+      'multiple values' => CONTENT_HANDLE_CORE,
+    ),
+    'map' => array(
+      'label' => t('GMaps Map'),
+      'field types' => array('gmaps_point', 'gmaps_anp'),
+      'multiple values' => CONTENT_HANDLE_MODULE,
+    ),
+    'static_map' => array(
+      'label' => t('GMaps Static map'),
+      'field types' => array('gmaps_point', 'gmaps_anp'),
+      'multiple values' => CONTENT_HANDLE_MODULE,
+    ),
+  );
+}
+
+/**
+ * Implementation of hook_field_settings().
+ */
+function gmaps_content_field_settings($op, $field) {
+  if ($op == 'views data') {
+    return _gmaps_call_func('gmaps_content', 'views-admin', '_gmaps_content_field_views_data', array($field));
+  }
+  else {
+    return _gmaps_call_func('gmaps_content', 'admin', '_gmaps_content_field_settings', array($op, $field));
+  }
+}
+
+/**
+ * Implementation of hook_widget_settings().
+ */
+function gmaps_content_widget_settings($op, $widget) {
+  return _gmaps_call_func('gmaps_content', 'admin', '_gmaps_content_widget_settings', array($op, $widget));
+}
+
+/**
+ * Implementation of hook_content_is_empty().
+ */
+function gmaps_content_content_is_empty($item, $field) {
+  if ($field['type'] == 'gmaps_distance') {
+    return gmaps_length_empty($item);
+  }
+  else if ($field['type'] == 'gmaps_point') {
+    return gmaps_point_empty($item['value']->point);
+  }
+  else if ($field['type'] == 'gmaps_address') {
+    return gmaps_address_empty($item['value']->address);
+  }
+  else if ($field['type'] == 'gmaps_anp') {
+    return gmaps_anp_empty($item['value']);
+  }
+  return TRUE;
+}
+
+/**
+ * Implementation of hook_field().
+ */
+function gmaps_content_field($op, &$node, $field, &$items, $teaser, $page) {
+  if ($op == 'load') {
+    if ($field['type'] == 'gmaps_distance') {
+      return;
+    }
+    $additions = array();
+    $result = array();
+    if ($field['type'] == 'gmaps_address') {
+      $result = gmaps_content_address_field_load($node, $field, FALSE, TRUE);
+    }
+    else if ($field['type'] == 'gmaps_point') {
+      $result = gmaps_content_point_field_load($node, $field, FALSE, TRUE);
+    }
+    else if ($field['type'] == 'gmaps_anp') {
+      $result = gmaps_content_anp_field_load($node, $field, FALSE, TRUE);
+    }
+    $additions[$field['field_name']] = $result;
+    return $additions;
+  }
+  else if ($op == 'sanitize') {
+    return;
+  }
+  else {
+    return _gmaps_call_func('gmaps_content', 'node-form', '_gmaps_content_field', array($op, &$node, $field, &$items, $teaser, $page));
+  }
+}
+
+/**
+ * Implementation of hook_widget().
+ */
+function gmaps_content_widget(&$form, &$form_state, $field, $items, $delta = 0) {
+  return _gmaps_call_func('gmaps_content', 'node-form', '_gmaps_content_widget', array(&$form, &$form_state, $field, $items, $delta));
+}
+
+/**
+ * Implementation of hook_content_generate().
+ */
+function gmaps_content_content_generate(&$node, $field) {
+  return _gmaps_call_func('gmaps_content', 'admin', '_gmaps_content_content_generate', array(&$node, $field));
+}
+
+/**
+ * Implementation of hook_content_fieldapi().
+ */
+function gmaps_content_content_fieldapi($op, $field) {
+  if ($op == 'update instance' && in_array($field['type'], array('gmaps_point', 'gmaps_anp'))) {
+    gmaps_content_field_cache_clear_all('%:'. $field['field_name'] .':');
+  }
+  else if ($op == 'delete instance' && in_array($field['type'], array('gmaps_address', 'gmaps_point', 'gmaps_anp'))) {
+    db_query("DELETE FROM {gmaps_content_address} WHERE field_name = '%s'", $field['field_name']);
+    db_query("DELETE FROM {gmaps_content_point} WHERE field_name = '%s'", $field['field_name']);
+
+    gmaps_content_field_cache_clear_all('%:'. $field['field_name'] .':');
+  }
+}
+
+/**
+ * Implementation of hook_elements().
+ */
+function gmaps_content_elements() {
+  $elements = array();
+
+  //For CCK compatibility object shoulb be wrapped in an array. ('value' used as key)
+  //Address anp point wrapped in a partial anp object, too.
+  $elements['gmaps_content_address'] = array(
+    '#input' => TRUE,
+    '#process' => array('_gmaps_content_address_expand'),
+    '#element_validate' => array('_gmaps_content_address_validate'),
+  );
+  $elements['gmaps_content_point'] = array(
+    '#input' => TRUE,
+    '#process' => array('_gmaps_content_point_expand'),
+    '#element_validate' => array('_gmaps_content_point_validate'),
+  );
+  $elements['gmaps_content_anp'] = array(
+    '#input' => TRUE,
+    '#process' => array('_gmaps_content_anp_expand'),
+    '#element_validate' => array('_gmaps_content_anp_validate'),
+  );
+  
+  return $elements;
+}
+
+/**
+ * Implementation of form_type_hook_value().
+ */
+function form_type_gmaps_content_address_value($element, $edit = FALSE) {
+  return _gmaps_call_func('gmaps_content', 'node-form', '_gmaps_content_address_value', array($element, $edit));
+}
+
+/**
+ * Implementation of form_type_hook_value().
+ */
+function form_type_gmaps_content_point_value($element, $edit = FALSE) {
+  return _gmaps_call_func('gmaps_content', 'node-form', '_gmaps_content_point_value', array($element, $edit));
+}
+
+/**
+ * Implementation of form_type_hook_value().
+ */
+function form_type_gmaps_content_anp_value($element, $edit = FALSE) {
+  return _gmaps_call_func('gmaps_content', 'node-form', '_gmaps_content_anp_value', array($element, $edit));
+}
+
+/**
+ * Implementation of hook_theme().
+ */
+function gmaps_content_theme($existing, $type, $theme, $path) {
+  $path .= '/theme';
+  $themes = array(
+    'gmaps_content_formatter_default' => array(
+      'arguments' => array('element' => NULL),
+      'file' => 'theme.inc',
+      'path' => $path,
+    ),
+    'gmaps_content_formatter_plain' => array(
+      'arguments' => array('element' => NULL),
+      'file' => 'theme.inc',
+      'path' => $path,
+    ),
+    'gmaps_content_formatter_themed' => array(
+      'arguments' => array('element' => NULL),
+      'file' => 'theme.inc',
+      'path' => $path,
+    ),
+    'gmaps_content_formatter_map' => array(
+      'arguments' => array('element' => NULL),
+      'file' => 'theme.inc',
+      'path' => $path,
+    ),
+    'gmaps_content_formatter_static_map' => array(
+      'arguments' => array('element' => NULL),
+      'file' => 'theme.inc',
+      'path' => $path,
+    ),
+    'gmaps_content_address' => array(
+      'arguments' => array('element' => NULL),
+    ),
+    'gmaps_content_point' => array(
+      'arguments' => array('element' => NULL),
+    ),
+    'gmaps_content_anp' => array(
+      'arguments' => array('element' => NULL),
+    ),
+  );
+
+  return $themes;
+}
+
+/**
+ * Implementation of hook_form_alter().
+ */
+function gmaps_content_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'content_display_overview_form') {
+    $form['#submit'][] = '_gmaps_content_content_display_overview_form_submit';
+  }
+  else if ($form_id == 'content_field_edit_form') {
+    if (in_array($form['#field']['type'], array('gmaps_address', 'gmaps_anp'))) {
+      $form['field']['required']['#type'] = 'select';
+      $form['field']['required']['#options'] = gmaps_address_accuracy_levels();
+    }
+    if (in_array($form['#field']['type'], array('gmaps_point', 'gmaps_anp'))) {
+      $form['#submit'][] = '_gmaps_content_content_field_edit_form_submit';
+    }
+  }
+  else if (isset($form['type']) && isset($form['#node']) && $form['type']['#value'] .'_node_form' == $form_id) {
+    $type = content_types($form['#node']->type);
+    if (!empty($type['fields'])) {
+      $remove = array();
+      foreach ($type['fields'] as $field_name => $field) {
+        if (in_array($field['type'], array('gmaps_address', 'gmaps_point', 'gmaps_anp')) && $field['multiple']) {
+          $remove[] = $field_name;
+        }
+      }
+      //in later releases we can replace the client code to deal with js dependencies (like Drupal.settings),
+      //but now we only remove the bogus "Add more" button of multiple gmaps_* fields.
+      foreach($remove as $field_name) {
+        $form[$field_name][$field_name .'_add_more']['#access'] = FALSE;
+      }
+    }
+  }
+}
+
+/**
+ * Implementation of hook_nodeapi().
+ */
+function gmaps_content_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL) {
+  if ($op == 'rss item') {
+    return _gmaps_call_func('gmaps_content', 'pages', '_gmaps_content_nodeapi_rss_item', array(&$node));
+  }
+  else if ($op == 'search result') {
+    return _gmaps_call_func('gmaps_content', 'pages', '_gmaps_content_nodeapi_search_result', array(&$node));
+  }
+  else if ($op == 'update index') {
+    return _gmaps_call_func('gmaps_content', 'pages', '_gmaps_content_nodeapi_update_index', array(&$node));
+  }
+}
+
+/**
+* Implementation of hook_link().
+*/
+function gmaps_content_link($type, $object = NULL, $teaser = FALSE) {
+  if ($type == 'node') {
+    return _gmaps_call_func('gmaps_content', 'pages', '_gmaps_content_link_node', array($object, $teaser));
+  }
+}
+
+/**
+ * Implementation of hook_gmaps_references().
+ */
+function gmaps_content_gmaps_references($type, $object) {
+  if ($type == 'map' || $type == 'static_map') {
+    $refs = array();
+    
+    foreach (content_types() as $type_name => $node_type) {
+      if (!empty($node_type['fields'])) {
+        foreach ($node_type['fields'] as $field_name => $field) {
+          if (in_array($field['type'], array('gmaps_point', 'gmaps_anp'))) {
+            $gmaps = &$field['gmaps']['formatter']['map'];
+            if (($type == 'map' && $gmaps['map'] == $object->mid) || ($type == 'static_map' && !empty($gmaps['static_map']) && $gmaps['static_map'] == $object->mid)) {
+              $refs[($type == 'map' ? '' : 'static_') .'map_formatter_'. $type_name .'_'. $field_name] = array(
+                'title' => t($node_type['name']) .' - '. t($field['widget']['label']),
+                'href' => 'admin/content/node-type/'. $node_type['url_str']. '/fields/'. $field_name,
+              );
+            }
+          }
+        }
+      }
+    }
+    
+    if (!empty($refs)) {
+      return array(($type == 'map' ? t('GMaps content - map formatters') : t('GMaps content - static map formatters')) => $refs);
+    }
+  }
+}
+
+/**
+ * Implementation of hook_token_list()
+ */
+function gmaps_content_token_list($type = 'all') {
+  if ($type == 'node' || $type == 'all') {
+    return _gmaps_call_func('gmaps_content', 'token', '_gmaps_content_token_list', array($type));
+  }
+  return array();
+}
+
+/**
+ * Implementation of hook_token_values()
+ */
+function gmaps_content_token_values($type, $object = NULL, $options = array()) {
+  if ($type == 'node' && $object) {
+    return _gmaps_call_func('gmaps_content', 'token', '_gmaps_content_token_values', array($type, $object, $options));
+  }
+  return array();
+}
+
+/**
+ * Implementation of hook_gmaps_map_info().
+ */
+function gmaps_content_gmaps_map_info($op, $type = NULL) {
+  if ($op == 'default_maps') {
+    $types = gmaps_map_get_types('type', $type['type']);
+    $defaults = array();
+    
+    $display = gmaps_extend(array(), $type);
+    
+    $display['name'] = 'Field display '. $types->name;
+    
+    $defaults['field_display_'. $display['type']] = $display;
+    
+    return $defaults;
+  }
+}
+
+/**
+ * Implementation of hook_gmaps_static_map_info().
+ */
+function gmaps_content_gmaps_static_map_info($op) {
+  if ($op == 'default_maps') {
+    $defaults = array();
+    
+    $display = array('name' => 'Field display');
+    
+    $defaults['field_display'] = $display;
+    
+    return $defaults;
+  }
+}
+
+/**
+ * Implementation of hook_views_api().
+ */
+function gmaps_content_views_api() {
+  return array(
+    'api' => 2,
+    'path' => drupal_get_path('module', 'gmaps_content') .'/includes'
+  );
+}
+
+/**
+ * Implementation of hook_views_data().
+ */
+function gmaps_content_views_data() {
+  return _gmaps_call_func('gmaps_content', 'views-admin', '_gmaps_content_views_data');
+}
+
+/**
+ * Implementation of hook_views_data_alter().
+ */
+function gmaps_content_views_data_alter(&$data) {
+  return _gmaps_call_func('gmaps_content', 'views-admin', '_gmaps_content_views_data_alter', array(&$data));
+}
+
+/**
+ * Implementation of hook_gmaps_caches().
+ */
+function gmaps_content_gmaps_caches($type) {
+  switch($type) {
+    case 'map':
+      return array(GMAPS_CONTENT_CACHE_TABLE_MAP);
+      
+    case 'static_map':
+      return array(GMAPS_CONTENT_CACHE_TABLE_STATIC_MAP);
+  }
+}
+
+
+function gmaps_content_address_field_load(&$node, $field, $reversed = FALSE, $unserialize = FALSE, $delta = NULL) {
+  static $columns, $serialize;
+  
+  if (is_null($columns)) {
+    $columns = $serialize = array();
+    $schema = drupal_get_schema('gmaps_content_address');
+    foreach ($schema['fields'] as $column => $info) {
+      if ($info['serialize']) {
+        $serialize[] = $column;
+      }
+      if (substr($column, 0, 2) != 'u_') {
+        $columns[] = $column;
+      }
+    }
+    $columns = implode(', ', $columns);
+  }
+  
+  $sql = "SELECT $columns FROM {gmaps_content_address} WHERE vid = %d AND field_name = '%s'";
+  $args = array($node->vid, $field['field_name']);
+  
+  if (!is_null($delta)) {
+    $sql .= ' AND delta = %d';
+    $args[] = $delta;
+  }
+  else {
+    $sql .= ' ORDER BY delta '. ($reverse ? 'DESC' : 'ASC');
+  }
+  
+  $items = array();
+  $result = db_query($sql, $args);
+  while($adr = db_fetch_object($result)) {
+    $adr->uid = $node->uid;
+    
+    if ($unserialize) {
+      foreach($serialize as $column) {
+        if (!empty($adr->$column)) {
+          $adr->$column = unserialize($adr->$column);
+        }
+      }
+    }
+    
+    $items[] = array('value' => (object)array('address' => $adr));
+  }
+  
+  return $items;
+}
+
+function gmaps_content_point_field_load(&$node, $field, $reversed = FALSE, $unserialize = FALSE, $delta = NULL) {
+  static $serialize;
+  
+  if ($unserialize && is_null($serialize)) {
+    $serialize = array();
+    $schema = drupal_get_schema('gmaps_content_point');
+    foreach ($schema['fields'] as $column => $info) {
+      if ($info['serialize']) {
+        $serialize[] = $column;
+      }
+    }
+  }
+  
+  $sql = "SELECT * FROM {gmaps_content_point} WHERE vid = %d AND field_name = '%s'";
+  $args = array($node->vid, $field['field_name']);
+  
+  if (!is_null($delta)) {
+    $sql .= ' AND delta = %d';
+    $args[] = $delta;
+  }
+  else {
+    $sql .= ' ORDER BY delta '. ($reverse ? 'DESC' : 'ASC');
+  }
+    
+  $items = array();
+  $result = db_query($sql, $args);
+  while($point = db_fetch_object($result)) {
+    $point->uid = $node->uid;
+    
+    if ($unserialize) {
+      foreach($serialize as $column) {
+        if (!empty($point->$column)) {
+          $point->$column = unserialize($point->$column);
+        }
+      }
+
+      $point->privacy = empty($point->privacy) ? array() : $point->privacy;
+      $point->bounds = empty($point->bounds) ? array() : $point->bounds;
+      $point->pov = empty($point->pov) ? array() : $point->pov;
+    }
+    
+    $items[] = array('value' => (object)array('point' => $point));
+  }
+  
+  return $items;
+}
+
+function gmaps_content_anp_field_load(&$node, $field, $reversed = FALSE, $unserialize = FALSE, $delta = NULL) {
+  $a = gmaps_content_address_field_load($node, $field, $reversed, $unserialize, $delta);
+  $p = gmaps_content_point_field_load($node, $field, $reversed, $unserialize, $delta);
+  
+  $items = array();
+  if (count($a) != count($p)) {
+    return $items;
+  }
+  
+  foreach($a as $delta => $item) {
+    $item['value']->point = $p[$delta]['value']->point;
+    $item['value']->uid = $node->uid;
+    $item['value']->search = $p[$delta]['value']->point->search;
+    $items[] = $item;
+  }
+  return $items;
+}
+
+function gmaps_content_field_map_cid(&$node, &$field) {
+  return implode(':', array($node->vid, $field['field_name'], $node->nid, $node->type));
+}
+
+function gmaps_content_field_cache_clear_all($cid = NULL, $wildcard = TRUE) {
+  gmaps_map_cache_clear_all($cid, GMAPS_CONTENT_CACHE_TABLE_MAP, $wildcard);
+  gmaps_static_map_cache_clear_all($cid, GMAPS_CONTENT_CACHE_TABLE_STATIC_MAP, $wildcard);
+  
+  cache_clear_all();
+}
+
+function gmaps_content_preprocess_page(&$vars) {
+  //handle newer nodewords module
+  if (module_exists('nodewords') && !function_exists('nodewords_get_tags')) {
+    return;
+  }
+  
+  if (($arg = arg()) && $arg[0] == 'node' && is_numeric($arg[1]) && empty($arg[2]) && ($node = node_load($arg[1]))) {
+    _gmaps_call_func('gmaps_content', 'pages', '_gmaps_content_preprocess_page', array(&$vars, &$node));
+  }
+}
+
+function gmaps_content_nodewords_tags_alter(&$tags, $options) {
+  if ($options['type'] == NODEWORDS_TYPE_NODE && ($node = node_load($options['id']))) {
+    $point_tags = (empty($tags['location:geo.position']) && empty($tags['location:icbm']));
+    $output = _gmaps_call_func('gmaps_content', 'pages', '_gmaps_content_meta_tags', array(&$node, $point_tags));
+    _gmaps_content_nodewords_tags_output_helper($output);
+  }
+}
+
+function gmaps_content_nodewords_tags_output_alter(&$output, $options) {
+  if ($options['type'] == NODEWORDS_TYPE_NODE && ($tags = _gmaps_content_nodewords_tags_output_helper())) {
+    $output .= "\n$tags";
+  }
+}
+
+function _gmaps_content_nodewords_tags_output_helper($output = NULL) {
+  static $tags;
+  
+  if (is_null($tags)) {
+    $tags = empty($output) ? '' : $output;
+  }
+  else if ($tags !== FALSE) {
+    $result = $tags;
+    $tags = FALSE;
+    return $result;
+  }
+}
+
+/**
+ * content_format() overwrite, which passes the entire field definition to the theme function, too.
+ */
+function gmaps_content_format($field, $item, $formatter_name = 'default', $node = NULL) {
+  if (!is_array($field)) {
+    if ($node && is_object($node)) {
+      $field = content_fields($field, $node->type);
+    }
+    else {
+      $field = content_fields($field);
+    }
+  }
+
+  if (content_access('view', $field, NULL, $node) && $formatter = _content_get_formatter($formatter_name, $field['type'])) {
+    $theme = $formatter['module'] .'_formatter_'. $formatter_name;
+
+    $element = array(
+      '#theme' => $theme,
+      '#field' => $field,
+      '#field_name' => $field['field_name'],
+      '#type_name' => isset($node->type) ? $node->type :'',
+      '#formatter' => $formatter_name,
+      '#node' => $node,
+      '#delta' => isset($item['#delta']) ? $item['#delta'] : NULL,
+    );
+
+    if (content_handle('formatter', 'multiple values', $formatter) == CONTENT_HANDLE_CORE) {
+      // Single value formatter.
+
+      // hook_field('sanitize') expects an array of items, so we build one.
+      $items = array($item);
+      $function = $field['module'] .'_field';
+      if (function_exists($function)) {
+        $function('sanitize', $node, $field, $items, FALSE, FALSE);
+      }
+
+      $element['#item'] = $items[0];
+    }
+    else {
+      // Multiple values formatter.
+      $items = $item;
+      $function = $field['module'] .'_field';
+      if (function_exists($function)) {
+        $function('sanitize', $node, $field, $items, FALSE, FALSE);
+      }
+
+      foreach ($items as $delta => $item) {
+        $element[$delta] = array(
+          '#item' => $item,
+          '#weight' => $delta,
+        );
+      }
+    }
+
+    return theme($theme, $element);
+  }
+}
+
+function gmaps_content_address_sql_filter($address, $alias = 'gca', $last = NULL, $strict = TRUE, $not = FALSE) {
+  $parts = _gmaps_address_get_parts();
+  
+  $query = $args = array();
+  
+  $adr = drupal_clone($address);
+  gmaps_address_prepare_record($adr);
+  
+  foreach($parts as $part => $label) {
+    if (!empty($adr->$part)) {
+      if ($not) {
+        $query[] = $part == 'country' ? "$alias.$part != '%s'" : "$alias.u_$part != '%s'";
+      }
+      else {
+        $query[] = $part == 'country' ? "$alias.$part = '%s'" : "$alias.u_$part = '%s'";
+      }
+      $args[] = $part == 'country' ? $adr->$part : $adr->{'u_'. $part};
+    }
+    else if (empty($last) || ($last != $part && gmaps_address_has_subpart($adr, $part))) {
+      //country is always strict
+      if ($part == 'country') {
+        $query[] = $not ? "$alias.$part != ''" : "$alias.$part = ''";
+      }
+      else if ($strict) {
+        $query[] = $not ? "$alias.u_$part IS NOT NULL" : "$alias.u_$part IS NULL";
+      }
+    }
+    if ($part == $last) {
+      break;
+    }
+  }
+  
+  if (!empty($query)) {
+    return array(implode($not ? ' OR ' : ' AND ', $query), $args);
+  }
+  
+  return NULL;
+}
+
+function gmaps_content_address_sql_filter_fast($address, $alias = 'gca', $strict = TRUE, $fields = GMAPS_CONTENT_FAST_FILTER_LOC) {
+  $query = $args = array();
+  
+  $adr = drupal_clone($address);
+  gmaps_address_prepare_record($adr);
+  
+  if (empty($adr->country)) {
+    $query[] = "$alias.country = ''";
+  }
+  else {
+    $query[] = "$alias.country = '%s'";
+    $args[] = $adr->country;
+  }
+  
+  if ($strict || !empty($adr->adminarea)) {
+    if (empty($adr->adminarea)) {
+      $query[] = "$alias.u_adminarea IS NULL";
+    }
+    else {
+      $query[] = "$alias.u_adminarea = '%s'";
+      $args[] = $adr->u_adminarea;
+    }
+  }
+  
+  if ($strict || !empty($adr->locality)) {
+    $filters = array();
+    if (empty($adr->locality)) {
+      if (gmaps_content_fast_filter_check_field('locality', $fields)) {
+        $filters[] = "$alias.u_locality IS NULL";
+      }
+      if (gmaps_content_fast_filter_check_field('deplocality', $fields)) {
+        $filters[] = "$alias.u_deplocality IS NULL";
+      }
+      if (gmaps_content_fast_filter_check_field('postalcode', $fields)) {
+        $filters[] = "$alias.u_postalcode IS NULL";
+      }
+      if (gmaps_content_fast_filter_check_field('thoroughfare', $fields)) {
+        $filters[] = "$alias.u_thoroughfare IS NULL";
+      }
+    }
+    else {
+      if (gmaps_content_fast_filter_check_field('locality', $fields)) {
+        $filters[] = "$alias.u_locality = '%s'";
+        $args[] = $adr->u_locality;
+      }
+      if (gmaps_content_fast_filter_check_field('deplocality', $fields)) {
+        $filters[] = "$alias.u_deplocality = '%s'";
+        $args[] = $adr->u_locality;
+      }
+      if (gmaps_content_fast_filter_check_field('postalcode', $fields)) {
+        $filters[] = "$alias.u_postalcode = '%s'";
+        $args[] = $adr->u_locality;
+      }
+      if (gmaps_content_fast_filter_check_field('thoroughfare', $fields)) {
+        $filters[] = "$alias.u_thoroughfare = '%s'";
+        $args[] = $adr->u_locality;
+      }
+    }
+    $query[] = '('. implode(' OR ', $filters) .')';
+  }
+  
+  return array(implode(' AND ', $query), $args);
+}
+
+function gmaps_content_fast_filter_check_field($field, $const) {
+  $test = 00000;
+  
+  switch($field) {
+    case 'locality':
+      $test = 01000;
+      break;
+
+    case 'deplocality':
+      $test = 00100;
+      break;
+
+    case 'postalcode':
+      $test = 00010;
+      break;
+
+    case 'thoroughfare':
+      $test = 00001;
+      break;
+
+  }
+  
+  return (bool)($test & $const);
+}
+
+function gmaps_content_point_sql_filter_bounds($coords, $operator, $alias = 'gcp', $bounds = NULL) {
+  $bounds = empty($bounds) ? $coords->bounds : $bounds;
+  if (empty($bounds) || in_array($operator, array('=', '!='))) {
+    return;
+  }
+  
+  $filters = $args = array();
+
+  if (in_array($operator, array('>', '>='))) {
+    _gmaps_content_point_sql_filter_bounds_not($bounds, $operator, $alias, $filters, $args);
+  }
+  else {
+    _gmaps_content_point_sql_filter_bounds($bounds, $operator, $alias, $filters, $args);
+  }
+  
+  if (!empty($filters)) {
+    return array(implode(' AND ', array_merge(array("$alias.map_type = '%s'"), $filters)), array_merge(array($coords->map_type), $args));
+  }
+}
+
+function gmaps_content_point_sql_filter_distance($coords, $operator, $dist, $maxdist = NULL, $alias = 'gcp', $rounded = FALSE) {
+  if (in_array($operator, array('=', '!='))) {
+    return;
+  }
+  if (empty($dist) || gmaps_length_empty($dist)) {
+    return;
+  }
+  
+  $range = in_array($operator, array('between', 'not between'));
+  if ($range && (empty($maxdist) || gmaps_length_empty($maxdist))) {
+    return;
+  }
+  
+  $not = $range ? (strpos($operator, 'not') === 0) : in_array($operator, array('>', '>='));
+  
+  $filters = $args = array();
+    
+  if (!$range) {
+    $minbounds = gmaps_coords_bounds($coords, $dist, !$not);
+    if (empty($minbounds)) {
+      return;
+    }
+    if ($not) {
+      _gmaps_content_point_sql_filter_bounds_not($minbounds, $operator, $alias, $filters, $args);
+    }
+    else {
+      _gmaps_content_point_sql_filter_bounds($minbounds, $operator, $alias, $filters, $args);
+    }
+  }
+  else {
+    $minbounds = gmaps_coords_bounds($coords, $dist, $not);
+    if (empty($minbounds)) {
+      return;
+    }
+    $maxbounds = gmaps_coords_bounds($coords, $maxdist, !$not);
+    if (empty($maxbounds)) {
+      return;
+    }
+    
+    if ($not) {
+      _gmaps_content_point_sql_filter_bounds($minbounds, '<', $alias, $filters, $args);
+      _gmaps_content_point_sql_filter_bounds_not($maxbounds, '>', $alias, $filters, $args);
+    }
+    else {
+      _gmaps_content_point_sql_filter_bounds_not($minbounds, '>=', $alias, $filters, $args);
+      _gmaps_content_point_sql_filter_bounds($maxbounds, '<=', $alias, $filters, $args);
+    }
+  }
+  
+  if (!empty($filters)) {
+    if ($rounded) {
+      _gmaps_content_point_sql_filter_rounded($coords, $operator, $dist, $maxdist, $alias, $filters, $args);
+    }
+    
+    return array(implode(' AND ', array_merge(array("$alias.map_type = '%s'"), $filters)), array_merge(array($coords->map_type), $args));
+  }
+
+}
+
+function gmaps_content_point_sql_sort($coords, $alias = 'gcp', $order = NULL) {
+  if ($cart = gmaps_coords_convert_latlng_to_cart($coords)) {
+    $sql = "SQRT(POWER($alias.x - ". (float)$cart['x'] .", 2) + POWER($alias.y - ". (float)$cart['y'] .", 2) + POWER($alias.z - ". (float)$cart['z'] .", 2))";
+  }
+  else {
+    $lat = deg2rad($coords->latitude);
+    $lng = deg2rad($coords->longitude);
+    $r = gmaps_coords_map_radius($coords);
+    
+    if ($r) {
+      $sinlat = sin($lat);
+      $sinlng = sin($lng);
+      $coslat = cos($lat);
+      $coslng = cos($lng);
+      $sql = "(IFNULL(ACOS($coslat*COS(RADIANS($alias.latitude))*($coslng*COS(RADIANS($alias.longitude)) + $sinlng*SIN(RADIANS($alias.longitude))) + $sinlat*SIN(RADIANS($alias.latitude))), 0.00000)*$r)";
+    }
+  }
+  if ($sql) {
+    $sql .= ($order ? ' '. strtoupper($order) : '');
+  }
+  
+  return $sql;
+}
+
+function _gmaps_content_point_sql_filter_bounds($bounds, $op, $alias = 'gcp', &$filters, &$args) {
+  if (!in_array($op, array('<', '<='))) {
+    return;
+  }
+  
+  //northeast
+  $filters[] = "$alias.latitude $op %f";
+  $args[] = $bounds['northeast']->latitude;
+  $filters[] = "$alias.longitude $op %f";
+  $args[] = $bounds['northeast']->longitude;
+
+  //northeast
+  $op = ($op == '<') ? '>' : '>=';
+  $filters[] = "$alias.latitude $op %f";
+  $args[] = $bounds['southwest']->latitude;
+  $filters[] = "$alias.longitude $op %f";
+  $args[] = $bounds['southwest']->longitude;
+}
+
+function _gmaps_content_point_sql_filter_bounds_not($bounds, $op, $alias = 'gcp', &$filters, &$args) {
+  if (!in_array($op, array('>', '>='))) {
+    return;
+  }
+  $query = array();
+  
+  //northeast
+  $query[] = "$alias.latitude $op %f";
+  $args[] = $bounds['northeast']->latitude;
+  $query[] = "$alias.longitude $op %f";
+  $args[] = $bounds['northeast']->longitude;
+  
+  //southwest
+  $op = ($op == '>') ? '<' : '<=';
+  $query[] = "$alias.latitude $op %f";
+  $args[] = $bounds['southwest']->latitude;
+  $query[] = "$alias.longitude $op %f";
+  $args[] = $bounds['southwest']->longitude;
+  
+  $filters[] = implode(' OR ', $query);
+}
+
+function _gmaps_content_point_sql_filter_rounded($coords, $operator, $dist, $maxdist = NULL, $alias = 'gcp', &$filters, &$args) {
+  $dist = gmaps_length_convert($dist, GMAPS_DEFAULT_LENGTH_UNIT);
+  if (empty($dist)) {
+    return;
+  }
+  
+  if (in_array($operator, array('between', 'not between'))) {
+    $maxdist = gmaps_length_convert($maxdist, GMAPS_DEFAULT_LENGTH_UNIT);
+    if (empty($maxdist)) {
+      return;
+    }
+    
+    if ($dist <= GMAPS_MAX_FAST_FILTER_DISTANCE && $maxdist <= GMAPS_MAX_FAST_FILTER_DISTANCE && ($cart = gmaps_coords_convert_latlng_to_cart($coords))) {
+      if ($operator == 'between') {
+        _gmaps_content_point_sql_distance_cart($cart, '>', $dist, $alias, $filters, $args);
+        _gmaps_content_point_sql_distance_cart($cart, '<', $maxdist, $alias, $filters, $args);
+      }
+      else {
+        _gmaps_content_point_sql_distance_cart($cart, '<', $dist, $alias, $filters, $args);
+        _gmaps_content_point_sql_distance_cart($cart, '>', $maxdist, $alias, $filters, $args);
+      }
+    }
+    else if ($operator == 'between') {
+      _gmaps_content_point_sql_distance($coords, '>', $dist, $alias, $filters, $args);
+      _gmaps_content_point_sql_distance($coords, '<', $maxdist, $alias, $filters, $args);
+    }
+    else {
+      _gmaps_content_point_sql_distance($coords, '<', $dist, $alias, $filters, $args);
+      _gmaps_content_point_sql_distance($coords, '>', $maxdist, $alias, $filters, $args);
+    }
+  }
+  else {
+    //fast filter
+    if ($dist <= GMAPS_MAX_FAST_FILTER_DISTANCE && ($cart = gmaps_coords_convert_latlng_to_cart($coords))) {
+      _gmaps_content_point_sql_distance_cart($cart, $operator, $dist, $alias, $filters, $args);
+    }
+    else {
+      _gmaps_content_point_sql_distance($coords, $operator, $dist, $alias, $filters, $args);
+    }
+  }
+}
+
+function _gmaps_content_point_sql_distance_cart($cart, $operator, $dist, $alias = 'gcp', &$filters, &$args) {
+  $filters[] = "SQRT(POWER($alias.x - %f, 2) + POWER($alias.y - %f, 2) + POWER($alias.z - %f, 2)) $operator %f";
+  $args = array_merge($args, $cart);
+  $args[] = $dist;
+}
+
+function _gmaps_content_point_sql_distance($coords, $operator, $dist, $alias = 'gcp', &$filters, &$args) {
+  $lat = deg2rad($coords->latitude);
+  $lng = deg2rad($coords->longitude);
+  $r = gmaps_coords_map_radius($coords);
+  
+  if ($r) {
+    $sinlat = sin($lat);
+    $sinlng = sin($lng);
+    $coslat = cos($lat);
+    $coslng = cos($lng);
+    $filters[] = "(IFNULL(ACOS($coslat*COS(RADIANS($alias.latitude))*($coslng*COS(RADIANS($alias.longitude)) + $sinlng*SIN(RADIANS($alias.longitude))) + $sinlat*SIN(RADIANS($alias.latitude))), 0.00000)*$r) $operator %f";
+    $args[] = $dist;
+  }
+}
+
+function _gmaps_content_content_display_overview_form_submit($form, &$form_state) {
+  gmaps_content_field_cache_clear_all('%:%:%:'. $form['#type_name']);
+}

@@ -1,0 +1,132 @@
+<?php
+// $Id: gmaps_views.install,v 1.1.2.4 2009/12/10 11:44:29 xmarket Exp $
+
+/**
+ * Implementation of hook_schema().
+ */
+function gmaps_views_schema() {
+  $schema = array();
+  $schema['cache_gv_map'] = drupal_get_schema_unprocessed('system', 'cache');
+  $schema['cache_gv_map']['description'] = 'Cache table used to store gmaps views maps.';
+
+  $schema['cache_gv_smap'] = $schema['cache_gv_map'];
+  $schema['cache_gv_smap']['description'] = 'Cache table used to store gmaps views static maps.';
+  
+  $schema['cache_gv_map_result'] = $schema['cache_gv_map'];
+  $schema['cache_gv_map_result']['description'] = 'Cache table used to store gmaps views map results.';
+  
+  $schema['cache_gv_smap_result'] = $schema['cache_gv_map'];
+  $schema['cache_gv_smap_result']['description'] = 'Cache table used to store gmaps views static map results.';
+  
+  return $schema;
+}
+
+/**
+ * Implementation of hook_install().
+ */
+function gmaps_views_install() {
+  drupal_install_schema('gmaps_views');
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function gmaps_views_uninstall() {
+  drupal_uninstall_schema('gmaps_views');
+}
+
+/**
+ * Implementation of hook_update_6000().
+ */
+function gmaps_views_update_6000() {
+  $ret = array();
+  
+  if (db_table_exists(db_prefix_tables('{gmaps_views}'))) {
+    db_drop_table($ret, 'gmaps_views');
+  }
+  
+  $ret['#finished'] = 1;
+  return $ret;
+}
+
+function gmaps_views_update_6001() {
+  $ret = array();
+  
+  if (!db_table_exists(db_prefix_tables('{cache_gv_map}'))) {
+    $ret = _gmaps_views_install_schema_6000();
+    foreach($ret as $i => $result) {
+      if (is_numeric($i) && !$result['success']) {
+        $ret['#abort'] = $result;
+        return $ret;
+      }
+    }
+  }
+  
+  $ret['#finished'] = 1;
+  return $ret;
+}
+
+function _gmaps_views_install_schema_6000() {
+  $schema = _gmaps_views_schema_6000();
+  _drupal_initialize_schema('gmaps_views', $schema);
+
+  $ret = array();
+  foreach ($schema as $name => $table) {
+    db_create_table($ret, $name, $table);
+  }
+  return $ret;
+}
+
+function _gmaps_views_schema_6000() {
+  $schema = array();
+  
+  $schema['cache_gv_map'] = array(
+    'description' => 'Cache table used to store gmaps views maps.',
+    'fields' => array(
+      'cid' => array(
+        'description' => 'Primary Key: Unique cache ID.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => ''),
+      'data' => array(
+        'description' => 'A collection of data to cache.',
+        'type' => 'blob',
+        'not null' => FALSE,
+        'size' => 'big'),
+      'expire' => array(
+        'description' => 'A Unix timestamp indicating when the cache entry should expire, or 0 for never.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0),
+      'created' => array(
+        'description' => 'A Unix timestamp indicating when the cache entry was created.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0),
+      'headers' => array(
+        'description' => 'Any custom HTTP headers to be added to cached data.',
+        'type' => 'text',
+        'not null' => FALSE),
+      'serialized' => array(
+        'description' => 'A flag to indicate whether content is serialized (1) or not (0).',
+        'type' => 'int',
+        'size' => 'small',
+        'not null' => TRUE,
+        'default' => 0)
+      ),
+    'indexes' => array('expire' => array('expire')),
+    'primary key' => array('cid'),
+  );
+  
+  $schema['cache_gv_smap'] = $schema['cache_gv_map'];
+  $schema['cache_gv_smap']['description'] = 'Cache table used to store gmaps views static maps.';
+  
+  $schema['cache_gv_map_result'] = $schema['cache_gv_map'];
+  $schema['cache_gv_map_result']['description'] = 'Cache table used to store gmaps views map results.';
+  
+  $schema['cache_gv_smap_result'] = $schema['cache_gv_map'];
+  $schema['cache_gv_smap_result']['description'] = 'Cache table used to store gmaps views static map results.';
+  
+  return $schema;
+}

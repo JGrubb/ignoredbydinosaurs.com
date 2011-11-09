@@ -1,0 +1,11 @@
+<?php
+// $Id: gmaps_cmo.install,v 1.1.2.1 2010/02/18 16:36:22 xmarket Exp $
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function gmaps_cmo_uninstall() {
+  foreach(node_get_types('names') as $type => $name) {
+    variable_del('gmaps_cmo_'. $type);
+  }
+}

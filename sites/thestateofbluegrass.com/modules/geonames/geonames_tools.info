@@ -1,0 +1,14 @@
+name = Tools
+description = Various tools that depend on the Geonames Services
+dependencies[] = geonames
+package = Geonames
+core = 6.x
+version = 
+
+
+; Information added by drupal.org packaging script on 2011-05-07
+version = "6.x-1.5"
+core = "6.x"
+project = "geonames"
+datestamp = "1304740315"
+

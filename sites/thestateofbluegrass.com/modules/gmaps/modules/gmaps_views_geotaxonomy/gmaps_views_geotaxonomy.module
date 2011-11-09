@@ -1,0 +1,17 @@
+<?php
+// $Id: gmaps_views_geotaxonomy.module,v 1.1.2.1 2009/12/12 08:43:48 xmarket Exp $
+
+/**
+ * @file
+ * Geo Taxonomy module based point option handlers for term markers
+ */
+
+/**
+ * Implementation of hook_views_api().
+ */
+function gmaps_views_geotaxonomy_views_api() {
+  return array(
+    'api' => 2,
+    'path' => drupal_get_path('module', 'gmaps_views_geotaxonomy') .'/includes'
+  );
+}

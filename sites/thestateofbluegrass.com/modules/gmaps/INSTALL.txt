@@ -1,0 +1,40 @@
+// $Id: INSTALL.txt,v 1.1.2.1 2009/10/16 11:17:00 xmarket Exp $
+
+===============================================================================
+Requirements
+===============================================================================
+The project depends on the geonames.module (http://drupal.org/project/geonames)
+and the jquery_ui.module (http://drupal.org/project/jquery_ui).
+
+Some modules are depend on CCK, Views and Taxonomy modules. You must install
+them for full functionality.
+
+The project also requires the jquery.ui *version 1.6* package to be installed.
+
+Optionally the following modules are supported:
+ * Token
+ * Pathauto
+ * GeoIP
+ * Nodewords (previously Meta Tags)
+ * Keys API
+ * Format Number API
+ * Advanced Help
+
+
+===============================================================================
+Install
+===============================================================================
+Copy the code to the appropriate sites/*/modules directory.
+
+Go to Administer >> Site Building >> Modules and enable the modules you prefer.
+
+Visit
+ * Administer >> Site configuration >> Google Maps Tools and set your API key,
+ * Administer >> Google Maps Tools >> Icons to install predefined icons,
+ * Administer >> Google Maps Tools >> Map presets to install predefined maps,
+ * Administer >> Google Maps Tools >> Static map presets to install predefined
+    static maps.
+    
+Alter the jquery_ui/jquery.ui/ui/ui.tabs.js file as discribed in the
+  "jQuery UI (1.6) ui.tabs.js modification" help topic.
+

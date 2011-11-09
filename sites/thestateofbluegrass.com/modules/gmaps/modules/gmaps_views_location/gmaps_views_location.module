@@ -1,0 +1,17 @@
+<?php
+// $Id: gmaps_views_location.module,v 1.1.2.1 2009/12/12 08:43:48 xmarket Exp $
+
+/**
+ * @file
+ * Location module based point option handlers for content and user markers
+ */
+
+/**
+ * Implementation of hook_views_api().
+ */
+function gmaps_views_location_views_api() {
+  return array(
+    'api' => 2,
+    'path' => drupal_get_path('module', 'gmaps_views_location') .'/includes'
+  );
+}

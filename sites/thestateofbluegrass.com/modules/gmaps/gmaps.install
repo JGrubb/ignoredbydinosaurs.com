@@ -1,0 +1,1724 @@
+<?php
+// $Id: gmaps.install,v 1.1.4.11 2010/03/18 10:52:17 xmarket Exp $
+
+
+/*
+ * Implementation of hook_requirements().
+ *
+ * Libraries will be implemented in 7.x-3.x.
+ */
+/*
+function gmaps_requirements($phase) {
+  $requirements = array();
+  $t = get_t();
+
+  $old_state = variable_get('gmaps_archive_tar', FALSE);
+  $tar_library = @file_get_contents('Archive/Tar.php', TRUE);
+  $tar_available = !empty($tar_library);
+  $requirements['gmaps_archive_tar'] = array(
+    'title' => $t('Icon library compression'),
+    'value' => $t('Archive/Tar.php available'),
+    'description' => $t('Any time you install/unistall the package, you should visit this page to take changes effect.'),
+  );
+  if (!$tar_available) {
+    $requirements['gmaps_archive_tar']['description'] .= '<p>'. $t('The PEAR library Archive/Tar.php is missing. Please <a href="@pear">obtain PEAR</a> or a copy of <a href="@tar">the file</a> and put it on the include path.', array('@pear' => 'http://pear.php.net/', '@tar' => 'http://pear.php.net/package/Archive_Tar/download')) .'</p>';
+    $requirements['gmaps_archive_tar']['severity'] = REQUIREMENT_WARNING;
+    $requirements['gmaps_archive_tar']['value'] = $t('Archive/Tar.php not available');
+  }
+  //if the state changed we should rebuild the menu to add/remove dependant items.
+  variable_set('gmaps_archive_tar', $tar_available);
+  if ($phase != 'install' && $old_state != $tar_available) {
+    menu_rebuild();
+  }
+
+  return $requirements;
+}
+*/
+
+/**
+ * Implementation of hook_schema().
+ */
+function gmaps_schema() {
+  drupal_load('module', 'gmaps');
+  
+  $schema = array();
+  $schema['gmaps_user_settings'] = array(
+    'description' => 'Stores setttings for users.',
+    'fields' => array(
+      'uid' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'description' => 'Primary Key: Unique user ID. Reference to {users}.uid',
+      ),
+      'length' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'serialize' => true,
+        'description' => 'Length display settings. Serialized array.',
+      ),
+      'address' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'serialize' => true,
+        'description' => 'Address display settings. Serialized array.',
+      ),
+      'coordinate' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'serialize' => true,
+        'description' => 'Coordinate display settings. Serialized array.',
+      ),
+    ),
+    'primary key' => array('uid'),
+  );
+  $schema['gmaps_icons'] = array(
+    'description' => 'Stores icon configurations.',
+    'fields' => array(
+      'icid' => array(
+        'type' => 'serial',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'description' => 'Primary Key: Unique icon ID.',
+      ),
+      'default_id' => array(
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Unique Key: Default icon ID for predefined maps.',
+      ),
+      'type' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Input type of the configuration. custom, labeled, etc.',
+      ),
+      'name' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Unique Key: Human-readable name/title of the icon.',
+      ),
+      'throttle_support' => array(
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'default' => 1,
+        'description' => 'Throttle support enabled(1) or not(0).',
+      ),
+      'sticky' => array(
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'default' => 0,
+        'description' => 'Sticky(1) or normal(0) icon.',
+      ),
+      'sticky_id' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'default' => 0,
+        'description' => 'Sticky counterpart. Self reference to icid.',
+      ),
+      'base_id' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'default' => 0,
+        'description' => 'Base icon for dynamic ones. Self reference to icid.',
+      ),
+      'label' => array(
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'The label of this icon.',
+      ),
+      'label_length' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'Maximum length for the label.',
+      ),
+      'icon' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Path of the foreground image of the icon relative to Drupal root.',
+      ),
+      'icon_size' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'serialize' => TRUE,
+        'description' => 'The pixel size of the foreground image of the icon. Serialized array of width and height values.',
+      ),
+      'shadow' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'description' => 'Path of the shadow image of the icon relative to Drupal root.',
+      ),
+      'shadow_size' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'serialize' => TRUE,
+        'description' => 'The pixel size of the shadow image. Serialized array of width and height values.',
+      ),
+      'icon_anchor' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'serialize' => TRUE,
+        'description' => 'The pixel coordinates relative to the top left corner of the icon image at which this icon is anchored to the map. Serialized array of x and y values.',
+      ),
+      'info_window_anchor' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'serialize' => TRUE,
+        'description' => 'The pixel coordinates relative to the top left corner of the icon image at which the info window is anchored to this icon. Serialized array of x and y values.',
+      ),
+      'print_image' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'description' => 'Path of the printable foreground icon image relative to Drupal root.',
+      ),
+      'moz_print_image' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'description' => 'Path of the Firefox/Mozilla version of the printable foreground icon image relative to Drupal root.',
+      ),
+      'print_shadow' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'description' => 'Path of the printable shadow image relative to Drupal root.',
+      ),
+      'transparent' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'description' => 'Path of the virtually transparent version of the foreground icon image relative to Drupal root.',
+      ),
+      'imagemap' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'description' => 'A comma separated list of integers representing the clickable part of the icon.',
+      ),
+      'maxheight' => array(
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'default' => 0,
+        'description' => 'Specifies the distance in pixels in which a marker will visually "rise" vertically when dragged.',
+      ),
+      'drag_cross_image' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'description' => 'Path of the cross image relative to Drupal root.',
+      ),
+      'drag_cross_size' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'serialize' => TRUE,
+        'description' => 'The pixel size of the cross image. Serialized array of width and height values.',
+      ),
+      'drag_cross_anchor' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'serialize' => TRUE,
+        'description' => 'The pixel coordinates relative to the icon anchor. Serialized array of x and y values.',
+      ),
+      'modified' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'size' => 'tiny',
+        'description' => 'A boolean indicating that a dynamic icon has been modified.',
+      ),
+      'locked' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'size' => 'tiny',
+        'description' => 'A boolean indicating that an icon is predefined.',
+      ),
+      'data' => array(
+        'type' => 'text',
+        'size' => 'big',
+        'serialize' => TRUE,
+        'description' => 'Serialized array of form values needed by input forms.',
+      ),
+    ),
+    'primary key' => array('icid'),
+    'unique keys' => array(
+      'default_id' => array('default_id'),
+      'name' => array('name'),
+    ),
+    'indexes' => array(
+      'dynamic' => array('base_id', 'label'),
+      'filter' => array('type', 'sticky', 'base_id', 'label'),
+    ),
+  );
+
+  $schema['gmaps_maps'] = array(
+    'description' => 'Stores map configurations.',
+    'fields' => array(
+      'mid' => array(
+        'type' => 'serial',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'description' => 'Primary Key: Unique map ID.',
+      ),
+      'default_id' => array(
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Unique Key: Default map ID for predefined maps.',
+      ),
+      'type' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Input type of the configuration. Factory, custom, etc.',
+      ),
+      'name' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Unique Key: Human-readable name/title of the icon.',
+      ),
+      'throttle_support' => array(
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'default' => 1,
+        'description' => 'Throttle support enabled(1) or not(0).',
+      ),
+      'throttle_lifetime' => array(
+        'type' => 'int',
+        'size' => 'medium',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'default' => 3600,
+        'description' => 'Minimum cache lifetime when throttle is active.',
+      ),
+      'size' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'serialize' => TRUE,
+        'description' => 'Width and height of the map in pixels.',
+      ),
+      'maptypes' => array(
+        'type' => 'text',
+        'size' => 'normal',
+        'not null' => TRUE,
+        'serialize' => TRUE,
+        'description' => 'Allowed map types.',
+      ),
+      'default_maptype' => array(
+        'type' => 'varchar',
+        'length' => 64,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Default map type.',
+      ),
+      'center' => array(
+        'type' => 'text',
+        'size' => 'normal',
+        'not null' => TRUE,
+        'serialize' => TRUE,
+        'description' => 'Coordinates and bounds of the default center.',
+      ),
+      'zoom' => array(
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'default' => -1,
+        'description' => 'Default zoom level',
+      ),
+      'map_data' => array(
+        'type' => 'text',
+        'size' => 'medium',
+        'not null' => TRUE,
+        'serialize' => TRUE,
+        'description' => 'Generic storage for miscellaneous options.',
+      ),
+      'methods' => array(
+        'type' => 'text',
+        'size' => 'normal',
+        'not null' => TRUE,
+        'serialize' => TRUE,
+        'description' => 'Enabled methods.',
+      ),
+      'method_data' => array(
+        'type' => 'text',
+        'size' => 'medium',
+        'not null' => TRUE,
+        'serialize' => TRUE,
+        'description' => 'Additional settings for methods.',
+      ),
+      'iw_data' => array(
+        'type' => 'text',
+        'size' => 'medium',
+        'not null' => TRUE,
+        'serialize' => TRUE,
+        'description' => 'Additional settings for info windows.',
+      ),
+      'controls' => array(
+        'type' => 'text',
+        'size' => 'medium',
+        'not null' => TRUE,
+        'serialize' => TRUE,
+        'description' => 'Configured controls by type.',
+      ),
+      'control_data' => array(
+        'type' => 'text',
+        'size' => 'medium',
+        'not null' => TRUE,
+        'serialize' => TRUE,
+        'description' => 'Additional settings for controls.',
+      ),
+      'ov_data' => array(
+        'type' => 'text',
+        'size' => 'medium',
+        'not null' => TRUE,
+        'serialize' => TRUE,
+        'description' => 'Additional settings for overlays.',
+      ),
+      'modified' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'size' => 'tiny',
+        'description' => 'A boolean indicating that a default map has been modified.',
+      ),
+      'locked' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'size' => 'tiny',
+        'description' => 'A boolean indicating that a map is predefined.',
+      ),
+    ),
+    'primary key' => array('mid'),
+    'unique keys' => array(
+      'default_id' => array('default_id'),
+      'name' => array('name'),
+    ),
+    'indexes' => array(
+      'filter' => array('type'),
+    ),
+  );
+  
+  $schema['gmaps_static_maps'] = array(
+    'description' => 'Stores static map configurations.',
+    'fields' => array(
+      'mid' => array(
+        'type' => 'serial',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'description' => 'Primary Key: Unique map ID.',
+      ),
+      'default_id' => array(
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Unique Key: Default map ID for predefined maps.',
+      ),
+      'name' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Unique Key: Human-readable name/title of the icon.',
+      ),
+      'throttle_support' => array(
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'default' => 1,
+        'description' => 'Throttle support enabled(1) or not(0).',
+      ),
+      'throttle_lifetime' => array(
+        'type' => 'int',
+        'size' => 'medium',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'default' => 3600,
+        'description' => 'Minimum cache lifetime when throttle is active.',
+      ),
+      'se_support' => array(
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'default' => 1,
+        'description' => 'Search engine support enabled(1) or not(0).',
+      ),
+      'size' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'serialize' => TRUE,
+        'description' => 'Width and height of the map in pixels.',
+      ),
+      'maptype' => array(
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Default map type.',
+      ),
+      'center' => array(
+        'type' => 'text',
+        'size' => 'normal',
+        'not null' => TRUE,
+        'serialize' => TRUE,
+        'description' => 'Coordinates and bounds of the default center.',
+      ),
+      'zoom' => array(
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'default' => -1,
+        'description' => 'Default zoom level',
+      ),
+      'format' => array(
+        'type' => 'varchar',
+        'length' => 16,
+        'not null' => TRUE,
+        'default' => 'gif',
+        'description' => 'File format.',
+      ),
+      'fix_viewport' => array(
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'default' => 0,
+        'description' => 'Viewport based on content bounds(0) or on center bounds(1).',
+      ),
+      'frame' => array(
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'default' => 0,
+        'description' => 'Draw frame(1) or not(0).',
+      ),
+      'content' => array(
+        'type' => 'text',
+        'size' => 'medium',
+        'not null' => TRUE,
+        'serialize' => TRUE,
+        'description' => 'Content display settings.',
+      ),
+      'ov_data' => array(
+        'type' => 'text',
+        'size' => 'medium',
+        'not null' => TRUE,
+        'serialize' => TRUE,
+        'description' => 'Overlay settings.',
+      ),
+      'modified' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'size' => 'tiny',
+        'description' => 'A boolean indicating that a default map has been modified.',
+      ),
+      'locked' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'size' => 'tiny',
+        'description' => 'A boolean indicating that a map is predefined.',
+      ),
+    ),
+    'primary key' => array('mid'),
+    'unique keys' => array(
+      'default_id' => array('default_id'),
+      'name' => array('name'),
+    ),
+    'indexes' => array(
+      'filter' => array('maptype', 'format', 'name'),
+    ),
+  );
+  
+  $schema['cache_gmaps_geocode'] = drupal_get_schema_unprocessed('system', 'cache');
+  $schema['cache_gmaps_geocode']['description'] = 'Cache table used to store geocode results.';
+
+  $schema[GMAPS_CACHE_TABLE_MAP] = $schema['cache_gmaps_geocode'];
+  $schema[GMAPS_CACHE_TABLE_MAP]['description'] = 'Cache table used to store maps.';
+  
+  $schema[GMAPS_CACHE_TABLE_STATIC_MAP] = $schema['cache_gmaps_geocode'];
+  $schema[GMAPS_CACHE_TABLE_STATIC_MAP]['description'] = 'Cache table used to store static maps.';
+  
+  return $schema;
+}
+
+/**
+ * Implementation of hook_install().
+ */
+function gmaps_install() {
+  drupal_install_schema('gmaps');
+}
+
+/**
+* Implementation of hook_enable().
+*/
+function gmaps_enable() {
+  //Check existence of required directories instead of checking them everywhere.
+  $settings = gmaps_get_settings('gmaps_path_settings');
+  $settings['base'] = file_create_path($settings['base']);
+  if (file_check_directory($settings['base'], FILE_CREATE_DIRECTORY)) {
+    $settings['icon'] = file_create_path($settings['base'] .'/'. $settings['icon']);
+    $settings['library'] = file_create_path($settings['base'] .'/'. $settings['library']);
+    $settings['smcache'] = file_create_path($settings['base'] .'/'. $settings['smcache']);
+    file_check_directory($settings['icon'], FILE_CREATE_DIRECTORY);
+    file_check_directory($settings['library'], FILE_CREATE_DIRECTORY);
+    file_check_directory($settings['smcache'], FILE_CREATE_DIRECTORY);
+  }
+  //Build or rebuild the unit cache
+  _gmaps_call_func('gmaps', 'admin', '_gmaps_length_get_units');
+}
+
+/**
+* Implementation of hook_disable().
+*/
+function gmaps_disable() {
+  cache_clear_all('*', 'cache_gmaps_geocode', TRUE);
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function gmaps_uninstall() {
+  global $conf;
+
+  module_load_include('inc', 'gmaps', 'includes/gmaps.icon-admin');
+
+  $result = db_query('SELECT * FROM {gmaps_icons}');
+  while($rec = db_fetch_object($result)) {
+    _gmaps_icon_delete($rec, TRUE);
+  }
+
+  $base = gmaps_get_path('base');
+  file_scan_directory($base, '.+', array('.', '..'), 'file_delete');
+  @rmdir(gmaps_get_path('icon'));
+  @rmdir(gmaps_get_path('library'));
+  $smcache = gmaps_get_path('smcache');
+  foreach(array_merge(array(GMAPS_CACHE_TABLE_STATIC_MAP), module_invoke_all('gmaps_caches', 'static_map')) as $cache) {
+    $cache = "$smcache/". strtr($cache, '_', '-');
+    if (is_dir($cache)) {
+      @rmdir($cache);
+    }
+  }
+  @rmdir($smcache);
+  @rmdir($base);
+
+  drupal_uninstall_schema('gmaps');
+
+  //remove variables
+  $vars = array('gmaps_api_key', 'gmaps_api_settings', 'gmaps_path_settings', 'gmaps_address_part_labels',
+    'gmaps_enable_user_settings', 'gmaps_throttle_support', 'gmaps_length_settings', 'gmaps_length_converter_block_settings', 'gmaps_archive_tar',
+    'gmaps_icon_settings', 'gmaps_address_settings', 'gmaps_coordinate_settings', 'gmaps_elevation_service', 'gmaps_se_cache_lifetime',
+    'gmaps_se_track_access', 'gmaps_external_js_compression', 'gmaps_api_autoload', 'gmaps_address_allowed_countries', 'gmaps_sm_api_last_access',
+    'gmaps_sm_api_last_access_day', 'gmaps_sm_api_daily_count', 'gmaps_reference_location_block_settings',
+    'gmaps_map_cache', 'gmaps_static_map_cache', 'gmaps_static_map_cache_image'
+  );
+  foreach ($vars as $var) {
+    db_query("DELETE FROM {variable} WHERE name = '%s'", $var);
+    unset($conf[$var]);
+  }
+  cache_clear_all('variables', 'cache');
+}
+
+/**
+ * Implementation of hook_update_N().
+ */
+function gmaps_form_update_script_selection_form_alter(&$form, &$form_state) {
+  if (drupal_get_installed_schema_version('gmaps') < 6000) {
+    $t = get_t();
+    
+    $items = array();
+    $items[] = $t('Read carefully the UPGRADE.txt before you run the update, to avoid deleting your data by the clean-up operations!');
+    $items[] = $t('Both GMaps and GMaps Content modules must be enabled BEFORE the update!');
+    $items[] = $t('The GMaps Content module will run long-running (depending on the ammount of data) data clean-up and consistency check operations, whose will reset the progress bar to the state where the module update started.');
+    $form['gmaps_upgrade_notes'] = array('#type' => 'item',
+      '#title' => $t('GMaps upgrade notes'),
+      '#prefix' => '<div class="error">',
+      '#suffix' => '</div>',
+      '#value' => theme('item_list', $items),
+      '#weight' => -10,
+    );
+  }
+}
+
+/**
+ * Implementation of hook_update_N().
+ */
+function gmaps_update_6000(&$sandbox = NULL) {
+  if (!db_table_exists(db_prefix_tables('{gmaps_icon_config}'))) {
+    return array('#finished' => 1);
+  }
+  
+  $t = get_t();
+  
+  if (!module_exists('gmaps')) {
+    $message = $t('GMaps module must be enabled before the update.');
+    drupal_set_message($message,'error');
+    return array('#abort' => array('success' => FALSE, 'query' => $message));
+  }
+  
+  drupal_load('module', 'gmaps');
+  $ret = array();
+  
+  if (empty($sandbox) || is_null($sandbox['progress'])) {
+    $ret = _gmaps_install_schema_6000();
+    foreach($ret as $i => $result) {
+      if (is_numeric($i) && !$result['success']) {
+        return array('#abort' => $result);
+      }
+    }
+    
+    gmaps_enable();
+    $settings = gmaps_get_settings('gmaps_path_settings');
+    $settings['base'] = file_create_path($settings['base']);
+    if (is_dir($settings['base'])) {
+      $ret[] = array('success' => TRUE, 'query' => $t('GMaps base directory: @dir has been successfully created.', array('@dir' => $settings['base'])));
+      $settings['icon'] = file_create_path($settings['base'] .'/'. $settings['icon']);
+      if (is_dir($settings['icon'])) {
+         $ret[] = array('success' => TRUE, 'query' => $t('GMaps icon directory: @dir has been successfully created.', array('@dir' => $settings['icon'])));
+      }
+      else {
+        $ret['#abort'] = array('success' => FALSE, 'query' => $t('Unable to create GMaps icon directory: @dir.', array('@dir' => $settings['icon'])));
+        return $ret;
+      }
+      $settings['smcache'] = file_create_path($settings['base'] .'/'. $settings['smcache']);
+      if (is_dir($settings['smcache'])) {
+         $ret[] = array('success' => TRUE, 'query' => $t('GMaps smcache directory: @dir has been successfully created.', array('@dir' => $settings['smcache'])));
+      }
+      else {
+        $ret['#abort'] = array('success' => FALSE, 'query' => $t('Unable to create GMaps smcache directory: @dir.', array('@dir' => $settings['smcache'])));
+        return $ret;
+      }
+    }
+    else {
+      $ret['#abort'] = array('success' => FALSE, 'query' => $t('Unable to create GMaps base directory: @dir.', array('@dir' => $settings['base'])));
+      return $ret;
+    }
+    
+    if (cache_get('gmaps_length_units', 'cache')) {
+      $ret[] = array('success' => TRUE, 'query' => $t('Length units have been successfully installed.'));
+    }
+    else {
+      $ret['#abort'] = array('success' => FALSE, 'query' => $t('Unable to install length units.'));
+      return $ret;
+    }
+    
+    $sandbox['progress'] = 0;
+    
+    $ret['#finished'] = 0;
+    return $ret;
+  }
+  
+  if ($sandbox['progress'] < 1) {
+    _gmaps_update_6000_icons($ret, $sandbox);
+    return $ret;
+  }
+
+  if ($sandbox['progress'] < 2) {
+    _gmaps_update_6000_maps($ret, $sandbox);
+    return $ret;
+  }
+  
+  _gmaps_update_6000_finish($ret, $sandbox);
+  $ret['#finished'] = 1;
+  return $ret;
+}
+
+function _gmaps_update_6000_icons(&$ret, &$sandbox) {
+  module_load_include('inc', 'gmaps', 'includes/gmaps.icon-admin');
+  $t = get_t();
+  
+  $icons = _gmaps_icon_install_default_icons(_gmaps_5x_icon_info());
+  
+  if ($icons) {
+    db_query("UPDATE {gmaps_icons} SET locked = 0 WHERE default_id LIKE 'gmaps-upgrade-%%'");
+    
+    $sandbox['progress'] = 1;
+  
+    $ret[] = array('success' => TRUE, 'query' => $t('Icons have been upgraded.'));
+    $ret['#finished'] = 1/3;
+  }
+}
+
+function _gmaps_update_6000_maps(&$ret, &$sandbox) {
+  module_load_include('inc', 'gmaps', 'includes/gmaps.map-admin');
+  $t = get_t();
+
+  $maps = _gmaps_map_install_default_maps(_gmaps_upgrade_get_default_maps());
+  
+  if ($maps) {
+    db_query("UPDATE {gmaps_maps} SET locked = 0 WHERE default_id LIKE 'gmaps-upgrade-%%'");
+    
+    $sandbox['progress'] = 2;
+  
+    $ret[] = array('success' => TRUE, 'query' => $t('Maps have been upgraded.'));
+    $ret['#finished'] = 2/3;
+  }
+}
+
+function _gmaps_update_6000_finish(&$ret, &$sandbox) {
+  $t = get_t();
+
+  $path = file_create_path(variable_get('gmaps_icon_path', 'gmaps_icons'));
+  file_scan_directory($path, '.+', array('.', '..'), 'file_delete');
+  @rmdir($path);
+  variable_del('gmaps_icon_path');
+  
+  variable_del('gmaps_debug_map_config');
+  
+  $old = db_result(db_query('SELECT COUNT(*) FROM {gmaps_map_config}'));
+  $new = db_result(db_query("SELECT COUNT(*) FROM {gmaps_maps} WHERE default_id LIKE 'gmaps-upgrade-%%'"));
+  if ($old == $new) {
+    db_drop_table($ret, 'gmaps_map_config');
+    db_query("DELETE FROM {sequences} WHERE name = '{gmaps_map_config}_mcid'");
+  }
+  else {
+    $ret[] = array('success' => FALSE, 'query' => $t('Unable to drop table gmaps_map_config due to map configuration upgrade problems!'));
+  }
+  
+  $old = db_result(db_query('SELECT COUNT(*) FROM {gmaps_icon_config}'));
+  $new = db_result(db_query("SELECT COUNT(*) FROM {gmaps_icons} WHERE default_id LIKE 'gmaps-upgrade-%%'"));
+  if ($old == $new) {
+    db_drop_table($ret, 'gmaps_icon_config');
+    db_query("DELETE FROM {sequences} WHERE name = '{gmaps_icon_config}_icid'");
+  }
+  else {
+    $ret[] = array('success' => FALSE, 'query' => $t('Unable to drop table gmaps_icon_config due to icon configuration upgrade problems!'));
+  }
+  
+  $sandbox['progress'] = 3;
+
+  $ret[] = array('success' => TRUE, 'query' => $t('Variables and file system have been upgraded.'));
+  $ret['#finished'] = 1;
+}
+
+function _gmaps_5x_icon_info() {
+  $icons = array();
+  
+  module_load_include('inc', 'gmaps', 'includes/gmaps-builtin-icons');
+  module_load_include('inc', 'gmaps', 'includes/gmaps.icon-admin-marker');
+  $images = _gmaps_bultin_icon_images();
+  $imap = '9,0,6,1,4,2,2,4,0,8,0,12,1,14,2,16,5,19,7,23,8,26,9,30,9,34,11,34,11,30,12,26,13,24,14,21,16,18,18,16,20,12,20,8,18,4,16,2,15,1,13,0';
+  
+  $result = db_query('SELECT * FROM {gmaps_icon_config}');
+  while ($old = db_fetch_object($result)) {
+    if ($old->type == 'builtin') {
+      $icons['gmaps-upgrade-'. $old->icid] = array(
+        'type' => 'custom',
+        'name' => $old->name,
+        'icon' => $images[$old->builtinid],
+        'icon_size' => gmaps_pixels_parse('20x34', 'wh'),
+        'icon_anchor' => gmaps_pixels_parse('9x34', 'xy'),
+        'info_window_anchor' => gmaps_pixels_parse('9x2', 'xy'),
+        'imagemap' => $imap,
+      );
+    }
+    else {
+      $i = array(
+        'type' => 'marker',
+        'name' => $old->name,
+        'icon_size' => array('width' => $old->icon_width, 'height' => $old->icon_height),
+        'data' => array(
+          'cache' => 0,
+          'corner_color' => $old->cornercolor,
+          'primary_color' => $old->primarycolor,
+          'stroke_color' => $old->strokecolor,
+        ),
+      );
+      $gicon = _gmaps_create_marker_gicon($i['icon_size'], $i['data']);
+      
+      if ($filename = _gmaps_icon_data_save($gicon['icon'])) {
+        if ($file = _gmaps_icon_file_save('icon', $filename)) {
+          $i['icon'] = $file->filepath;
+          $icons['gmaps-upgrade-'. $old->icid] = $i;
+        }
+      }
+    }
+  }
+  
+  $types = gmaps_icon_get_types();
+  $defaults = array('custom' => gmaps_icon_invoke('custom', 'defaults', $types['custom']));
+  
+  foreach($icons as $default_id => $icon) {
+    if (isset($types[$icon['type']])) {
+      if (!isset($defaults[$icon['type']])) {
+        $defaults[$icon['type']] = ($defs = gmaps_icon_invoke($icon['type'], 'defaults', $types[$icon['type']])) ? $defs : array();
+      }
+      //fill default values
+      $icon = array_merge($defaults['custom'], $icon);
+      if ($icon['type'] != 'custom') {
+        $icon = array_merge($defaults[$icon['type']], $icon);
+      }
+  
+      $icon['icid'] = 0;
+      $icon['default_id'] = $default_id;
+      $icon['base_id'] = 0;
+      $icon['modified'] = 0;
+      $icon['locked'] = 1;
+  
+      $icons[$default_id] = $icon;
+    }
+  }
+  
+  return $icons;
+}
+
+function _gmaps_upgrade_get_default_maps() {
+  $types = gmaps_map_get_types();
+  $infos = array();
+  $defaults = array();
+  $maps = array();
+  
+  foreach ($types as $type) {
+    if (!isset($infos[$type->type])) {
+      $infos[$type->type] = gmaps_map_get_info($type->type);
+    }
+    if (!isset($defaults[$type->type])) {
+      $defaults[$type->type] = _gmaps_map_get_defaults($infos[$type->type], $type);
+    }
+    
+    $result = _gmaps_5x_map_info($defaults[$type->type]);
+    if ($result) {
+      foreach($result as $default_id => $map) {
+        $map['mid'] = 0;
+        $map['type'] = $type->type;
+        $map['default_id'] = $default_id;
+        $map['modified'] = 0;
+        $map['locked'] = 1;
+        
+        if ($map['type'] != GMAPS_MAP_EARTH) {
+          unset($map['svu']);
+        }
+
+        $maps[$default_id] = $map;
+      }
+    }
+  }
+  
+  return $maps;
+}
+
+function _gmaps_5x_map_info($type = NULL) {
+  $defaults = array();
+  
+  $mt_map = array(
+    'G_NORMAL_MAP' => 'normal',
+    'G_SATELLITE_MAP' => 'satellite',
+    'G_HYBRID_MAP' => 'hybrid',
+    'G_PHYSICAL_MAP' => 'physical',
+    'G_MOON_ELEVATION_MAP' => 'moon_elevation',
+    'G_MOON_VISIBLE_MAP' => 'moon_visible',
+    'G_MARS_ELEVATION_MAP' => 'mars_elevation',
+    'G_MARS_VISIBLE_MAP' => 'mars_visible',
+    'G_MARS_INFRARED_MAP' => 'mars_infrared',
+    'G_SKY_VISIBLE_MAP' => 'sky_visible',
+  );
+  $method_map = array(
+    'dragging' => 'dragging',
+    'infowindow' => 'infowindow',
+    'doubleclickzoom' => 'dblclickzoom',
+    'continuouszoom' => 'continuouszoom',
+    'scrollwheelzoom' => 'scrollwheelzoom',
+    'googlebar' => 'googlebar',
+    'auto_center_zoom' => 'auto_center_zoom',
+    'keyboardhandler' => 'keyboardhandler',
+    'resize' => 'resize',
+  );
+  $glt_map = array(
+    'G_GOOGLEBAR_LINK_TARGET_BLANK' => '_blank',
+    'G_GOOGLEBAR_LINK_TARGET_SELF' => '_self',
+    'G_GOOGLEBAR_LINK_TARGET_PARENT' => '_parent',
+    'G_GOOGLEBAR_LINK_TARGET_TOP' => '_top',
+  );
+  $grl_map = array(
+    'G_GOOGLEBAR_RESULT_LIST_INLINE' => 'inline',
+    'G_GOOGLEBAR_RESULT_LIST_SUPPRESS' => 'suppress',
+    'element' => 'bb',
+  );
+  $mtctrl_map = array(
+    0 => '',
+    1 => 'maptype',
+    2 => 'hierarchical_maptype',
+    3 => 'menumaptype',
+  );
+  $navctrl_map = array(
+    0 => '',
+    1 => 'smallzoom',
+    2 => 'smallmap',
+    3 => 'largemap',
+  );
+  $result = db_query("SELECT * FROM {gmaps_map_config} WHERE type = '%s'", $type['type']);
+  while ($old = db_fetch_object($result)) {
+    $map = gmaps_extend(array(), $type);
+    
+    $map['name'] = $old->name;
+    $map['size'] = array('width' => (int)$old->width, 'height' => (int)$old->height);
+    
+    $map['maptypes'] = array();
+    $old->allowed_tiles = array_filter((array)unserialize($old->allowed_tiles));
+    foreach($old->allowed_tiles as $tile) {
+      $map['maptypes'][] = $mt_map[$tile];
+    }
+    $map['default_maptype'] = $mt_map[$old->default_tile];
+    $map['center'] = (object)array(
+      'latitude' => $old->latitude,
+      'longitude' => $old->longitude,
+      'map_type' => $type['type'],
+    );
+    $map['zoom'] = $old->default_zoom;
+    $map['methods'] = array();
+    $old->methods = array_filter((array)unserialize($old->methods));
+    foreach((array)$old->methods as $method => $method_set) {
+      if ($method != 'googlebar' || $map['type'] == GMAPS_MAP_EARTH) {
+        $map['methods'][$method_map[$method]] = $method_map[$method];
+      }
+    }
+    if ($map['type'] == GMAPS_MAP_EARTH) {
+      $old->googlebar_options = unserialize($old->googlebar_options);
+      $map['method_data']['googlebar']['showonload'] = $old->googlebar_options['showonload'];
+      $map['method_data']['googlebar']['link_target'] = $glt_map[$old->googlebar_options['linktarget']];
+      $map['method_data']['googlebar']['result_list'] = $grl_map[$old->googlebar_options['resultlist']];
+      $map['method_data']['googlebar']['suppress_selection'] = $old->googlebar_options['suppress_selection'];
+      $map['method_data']['googlebar']['suppress_zoom'] = $old->googlebar_options['suppress_zoom'];
+    }
+    
+    $map['controls']['maptype']['control'] = $mtctrl_map[$old->type_control];
+    $map['controls']['navigation']['control'] = $navctrl_map[$old->map_control];
+    $map['controls']['scale']['control'] = $old->scale_control ? 'scale' : '';
+    $map['controls']['overview']['control'] = $old->overview_control ? 'overview' : '';
+    $map['control_data']['maptype']['shortnames'] = $old->type_control_shortnames;
+    $map['control_data']['menumaptype']['shortnames'] = $old->type_control_shortnames;
+    
+    $marker = &$map['ov_data']['marker'];
+    $old->marker_options = unserialize($old->marker_options);
+    $old->marker_manager_options = unserialize($old->marker_manager_options);
+    
+    $marker['basic']['icon'] = $old->marker_options['default_icon'] == 0 ? GMAPS_ICON_API_DEFAULT : gmaps_icon_get_icid_for_default('gmaps-upgrade-'. $old->marker_options['default_icon']);
+    $marker['misc']['ajaxcontent'] = $old->marker_options['delayed_iw_content'];
+    $marker['misc']['link_target'] = $old->marker_options['linktarget'];
+    
+    $map['iw_data']['google']['maxwidth'] = $old->marker_options['iw_maxwidth'];
+    $map['iw_data']['google']['nocloseonclick'] = $old->marker_options['iw_nocloseonclick'];
+    
+    $marker['manager']['manager'] = $old->marker_options['marker_manager'] ? 'google' : '';
+    $marker['manager']['mm']['padding'] = $old->marker_manager_options['borderpadding'];
+    $marker['manager']['mm']['maxzoom'] = $old->marker_manager_options['maxzoom'];
+    $marker['manager']['mm']['trackmarkers'] = $old->marker_manager_options['trackmarkers'];
+    
+    $defaults['gmaps-upgrade-'. $old->mcid] = $map;
+  }
+
+  return $defaults;
+}
+
+function _gmaps_install_schema_6000() {
+  $schema = _gmaps_schema_6000();
+  _drupal_initialize_schema('gmaps', $schema);
+
+  $ret = array();
+  foreach ($schema as $name => $table) {
+    db_create_table($ret, $name, $table);
+  }
+  return $ret;
+}
+
+function _gmaps_schema_6000() {
+  drupal_load('module', 'gmaps');
+  
+  $schema = array();
+  $schema['gmaps_user_settings'] = array(
+    'description' => 'Stores setttings for users.',
+    'fields' => array(
+      'uid' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'description' => 'Primary Key: Unique user ID. Reference to {users}.uid',
+      ),
+      'length' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'serialize' => true,
+        'description' => 'Length display settings. Serialized array.',
+      ),
+      'address' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'serialize' => true,
+        'description' => 'Address display settings. Serialized array.',
+      ),
+      'coordinate' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'serialize' => true,
+        'description' => 'Coordinate display settings. Serialized array.',
+      ),
+    ),
+    'primary key' => array('uid'),
+  );
+  $schema['gmaps_icons'] = array(
+    'description' => 'Stores icon configurations.',
+    'fields' => array(
+      'icid' => array(
+        'type' => 'serial',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'description' => 'Primary Key: Unique icon ID.',
+      ),
+      'default_id' => array(
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Unique Key: Default icon ID for predefined maps.',
+      ),
+      'type' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Input type of the configuration. custom, labeled, etc.',
+      ),
+      'name' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Unique Key: Human-readable name/title of the icon.',
+      ),
+      'throttle_support' => array(
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'default' => 1,
+        'description' => 'Throttle support enabled(1) or not(0).',
+      ),
+      'sticky' => array(
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'default' => 0,
+        'description' => 'Sticky(1) or normal(0) icon.',
+      ),
+      'sticky_id' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'default' => 0,
+        'description' => 'Sticky counterpart. Self reference to icid.',
+      ),
+      'base_id' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'default' => 0,
+        'description' => 'Base icon for dynamic ones. Self reference to icid.',
+      ),
+      'label' => array(
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'The label of this icon.',
+      ),
+      'label_length' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'Maximum length for the label.',
+      ),
+      'icon' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Path of the foreground image of the icon relative to Drupal root.',
+      ),
+      'icon_size' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'serialize' => TRUE,
+        'description' => 'The pixel size of the foreground image of the icon. Serialized array of width and height values.',
+      ),
+      'shadow' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'description' => 'Path of the shadow image of the icon relative to Drupal root.',
+      ),
+      'shadow_size' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'serialize' => TRUE,
+        'description' => 'The pixel size of the shadow image. Serialized array of width and height values.',
+      ),
+      'icon_anchor' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'serialize' => TRUE,
+        'description' => 'The pixel coordinates relative to the top left corner of the icon image at which this icon is anchored to the map. Serialized array of x and y values.',
+      ),
+      'info_window_anchor' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'serialize' => TRUE,
+        'description' => 'The pixel coordinates relative to the top left corner of the icon image at which the info window is anchored to this icon. Serialized array of x and y values.',
+      ),
+      'print_image' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'description' => 'Path of the printable foreground icon image relative to Drupal root.',
+      ),
+      'moz_print_image' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'description' => 'Path of the Firefox/Mozilla version of the printable foreground icon image relative to Drupal root.',
+      ),
+      'print_shadow' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'description' => 'Path of the printable shadow image relative to Drupal root.',
+      ),
+      'transparent' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'description' => 'Path of the virtually transparent version of the foreground icon image relative to Drupal root.',
+      ),
+      'imagemap' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'description' => 'A comma separated list of integers representing the clickable part of the icon.',
+      ),
+      'maxheight' => array(
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'default' => 0,
+        'description' => 'Specifies the distance in pixels in which a marker will visually "rise" vertically when dragged.',
+      ),
+      'drag_cross_image' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'description' => 'Path of the cross image relative to Drupal root.',
+      ),
+      'drag_cross_size' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'serialize' => TRUE,
+        'description' => 'The pixel size of the cross image. Serialized array of width and height values.',
+      ),
+      'drag_cross_anchor' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'serialize' => TRUE,
+        'description' => 'The pixel coordinates relative to the icon anchor. Serialized array of x and y values.',
+      ),
+      'modified' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'size' => 'tiny',
+        'description' => 'A boolean indicating that a dynamic icon has been modified.',
+      ),
+      'locked' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'size' => 'tiny',
+        'description' => 'A boolean indicating that an icon is predefined.',
+      ),
+      'data' => array(
+        'type' => 'text',
+        'size' => 'big',
+        'serialize' => TRUE,
+        'description' => 'Serialized array of form values needed by input forms.',
+      ),
+    ),
+    'primary key' => array('icid'),
+    'unique keys' => array(
+      'default_id' => array('default_id'),
+      'name' => array('name'),
+    ),
+    'indexes' => array(
+      'dynamic' => array('base_id', 'label'),
+      'filter' => array('type', 'sticky', 'base_id', 'label'),
+    ),
+  );
+
+  $schema['gmaps_maps'] = array(
+    'description' => 'Stores map configurations.',
+    'fields' => array(
+      'mid' => array(
+        'type' => 'serial',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'description' => 'Primary Key: Unique map ID.',
+      ),
+      'default_id' => array(
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Unique Key: Default map ID for predefined maps.',
+      ),
+      'type' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Input type of the configuration. Factory, custom, etc.',
+      ),
+      'name' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Unique Key: Human-readable name/title of the icon.',
+      ),
+      'throttle_support' => array(
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'default' => 1,
+        'description' => 'Throttle support enabled(1) or not(0).',
+      ),
+      'throttle_lifetime' => array(
+        'type' => 'int',
+        'size' => 'medium',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'default' => 3600,
+        'description' => 'Minimum cache lifetime when throttle is active.',
+      ),
+      'size' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'serialize' => TRUE,
+        'description' => 'Width and height of the map in pixels.',
+      ),
+      'maptypes' => array(
+        'type' => 'text',
+        'size' => 'normal',
+        'not null' => TRUE,
+        'serialize' => TRUE,
+        'description' => 'Allowed map types.',
+      ),
+      'default_maptype' => array(
+        'type' => 'varchar',
+        'length' => 64,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Default map type.',
+      ),
+      'center' => array(
+        'type' => 'text',
+        'size' => 'normal',
+        'not null' => TRUE,
+        'serialize' => TRUE,
+        'description' => 'Coordinates and bounds of the default center.',
+      ),
+      'zoom' => array(
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'default' => -1,
+        'description' => 'Default zoom level',
+      ),
+      'map_data' => array(
+        'type' => 'text',
+        'size' => 'medium',
+        'not null' => TRUE,
+        'serialize' => TRUE,
+        'description' => 'Generic storage for miscellaneous options.',
+      ),
+      'methods' => array(
+        'type' => 'text',
+        'size' => 'normal',
+        'not null' => TRUE,
+        'serialize' => TRUE,
+        'description' => 'Enabled methods.',
+      ),
+      'method_data' => array(
+        'type' => 'text',
+        'size' => 'medium',
+        'not null' => TRUE,
+        'serialize' => TRUE,
+        'description' => 'Additional settings for methods.',
+      ),
+      'iw_data' => array(
+        'type' => 'text',
+        'size' => 'medium',
+        'not null' => TRUE,
+        'serialize' => TRUE,
+        'description' => 'Additional settings for info windows.',
+      ),
+      'controls' => array(
+        'type' => 'text',
+        'size' => 'medium',
+        'not null' => TRUE,
+        'serialize' => TRUE,
+        'description' => 'Configured controls by type.',
+      ),
+      'control_data' => array(
+        'type' => 'text',
+        'size' => 'medium',
+        'not null' => TRUE,
+        'serialize' => TRUE,
+        'description' => 'Additional settings for controls.',
+      ),
+      'ov_data' => array(
+        'type' => 'text',
+        'size' => 'medium',
+        'not null' => TRUE,
+        'serialize' => TRUE,
+        'description' => 'Additional settings for overlays.',
+      ),
+      'modified' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'size' => 'tiny',
+        'description' => 'A boolean indicating that a default map has been modified.',
+      ),
+      'locked' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'size' => 'tiny',
+        'description' => 'A boolean indicating that a map is predefined.',
+      ),
+    ),
+    'primary key' => array('mid'),
+    'unique keys' => array(
+      'default_id' => array('default_id'),
+      'name' => array('name'),
+    ),
+    'indexes' => array(
+      'filter' => array('type'),
+    ),
+  );
+  
+  $schema['gmaps_static_maps'] = array(
+    'description' => 'Stores static map configurations.',
+    'fields' => array(
+      'mid' => array(
+        'type' => 'serial',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'description' => 'Primary Key: Unique map ID.',
+      ),
+      'default_id' => array(
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Unique Key: Default map ID for predefined maps.',
+      ),
+      'name' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Unique Key: Human-readable name/title of the icon.',
+      ),
+      'throttle_support' => array(
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'default' => 1,
+        'description' => 'Throttle support enabled(1) or not(0).',
+      ),
+      'throttle_lifetime' => array(
+        'type' => 'int',
+        'size' => 'medium',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'default' => 3600,
+        'description' => 'Minimum cache lifetime when throttle is active.',
+      ),
+      'se_support' => array(
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'default' => 1,
+        'description' => 'Search engine support enabled(1) or not(0).',
+      ),
+      'size' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'serialize' => TRUE,
+        'description' => 'Width and height of the map in pixels.',
+      ),
+      'maptype' => array(
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Default map type.',
+      ),
+      'center' => array(
+        'type' => 'text',
+        'size' => 'normal',
+        'not null' => TRUE,
+        'serialize' => TRUE,
+        'description' => 'Coordinates and bounds of the default center.',
+      ),
+      'zoom' => array(
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'default' => -1,
+        'description' => 'Default zoom level',
+      ),
+      'format' => array(
+        'type' => 'varchar',
+        'length' => 16,
+        'not null' => TRUE,
+        'default' => 'gif',
+        'description' => 'File format.',
+      ),
+      'fix_viewport' => array(
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'default' => 0,
+        'description' => 'Viewport based on content bounds(0) or on center bounds(1).',
+      ),
+      'frame' => array(
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'default' => 0,
+        'description' => 'Draw frame(1) or not(0).',
+      ),
+      'content' => array(
+        'type' => 'text',
+        'size' => 'medium',
+        'not null' => TRUE,
+        'serialize' => TRUE,
+        'description' => 'Content display settings.',
+      ),
+      'ov_data' => array(
+        'type' => 'text',
+        'size' => 'medium',
+        'not null' => TRUE,
+        'serialize' => TRUE,
+        'description' => 'Overlay settings.',
+      ),
+      'modified' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'size' => 'tiny',
+        'description' => 'A boolean indicating that a default map has been modified.',
+      ),
+      'locked' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'size' => 'tiny',
+        'description' => 'A boolean indicating that a map is predefined.',
+      ),
+    ),
+    'primary key' => array('mid'),
+    'unique keys' => array(
+      'default_id' => array('default_id'),
+      'name' => array('name'),
+    ),
+    'indexes' => array(
+      'filter' => array('maptype', 'format', 'name'),
+    ),
+  );
+  
+  $schema['cache_gmaps_geocode'] = drupal_get_schema_unprocessed('system', 'cache');
+  $schema['cache_gmaps_geocode']['description'] = 'Cache table used to store geocode results.';
+
+  $schema[GMAPS_CACHE_TABLE_MAP] = $schema['cache_gmaps_geocode'];
+  $schema[GMAPS_CACHE_TABLE_MAP]['description'] = 'Cache table used to store maps.';
+  
+  $schema[GMAPS_CACHE_TABLE_STATIC_MAP] = $schema['cache_gmaps_geocode'];
+  $schema[GMAPS_CACHE_TABLE_STATIC_MAP]['description'] = 'Cache table used to store static maps.';
+  
+  return $schema;
+}
+
+/**
+ * Implementation of hook_update_N().
+ * 
+ * Add new option values to map and static map presets.
+ */
+function gmaps_update_6200(&$sandbox = NULL) {
+  $t = get_t();
+  $ret = array();
+  
+  $serialize = array();
+  $schema = drupal_get_schema('gmaps_maps');
+  foreach($schema['fields'] as $key => $info) {
+    if ($info['serialize']) {
+      $serialize[] = $key;
+    }
+  }
+  
+  $result = db_query('SELECT * FROM {gmaps_maps}');
+  while($map = db_fetch_object($result)) {
+    foreach($serialize as $field) {
+      if (!empty($map->$field) && is_string($map->$field)) {
+        $map->$field = unserialize($map->$field);
+      }
+    }
+    
+    if ($map->type == GMAPS_MAP_EARTH) {
+      if (!isset($map->map_data['svu']['fullscreen'])) {
+        $map->map_data['svu']['fullscreen'] = 1;
+        $map->map_data['svu']['userphotos'] = 0;
+        $map->map_data['svu']['photorepos'] = array();
+      }
+      
+      if (!isset($map->method_data['adsmanager']['position'])) {
+        $map->method_data['adsmanager']['position'] = array(
+          'anchor' => GMAPS_CONTROL_POSITION_DEFAULT,
+        );
+      }
+      
+      if (!isset($map->method_data['layers']['youtube'])) {
+        $map->method_data['layers']['youtube'] = 0;
+      }
+      if (!isset($map->method_data['layers']['webcams'])) {
+        $map->method_data['layers']['webcams'] = 0;
+      }
+      
+      if (!isset($map->contol_data['extmaptype']['more'])) {
+        $map->contol_data['extmaptype']['more'] = 1;
+        $map->contol_data['extmaptype']['save'] = 0;
+        $map->contol_data['extmaptype']['pos_right'] = 0;
+        $map->contol_data['extmaptype']['maptype'] = 'extmaptype';
+      }
+      
+      if (!isset($map->contol_data['breadcrumb'])) {
+        $map->contol_data['breadcrumb'] = array(
+          'level' => 0,
+        );
+      }
+    }
+    else {
+      unset($map->contol_data['extmaptype']);
+      if ($map->controls['maptype']['control'] == 'extmaptype') {
+        $map->controls['maptype']['control'] = 'maptype';
+      }
+    }
+    
+    if (!isset($map->method_data['keydragzoom'])) {
+      $map->method_data['keydragzoom'] = array(
+        'key' => 'shift',
+        'border' => 'thin solid #FF0000',
+      );
+    }
+    
+    if (!isset($map->method_data['auto_center_zoom'])) {
+      $map->method_data['auto_center_zoom'] = array(
+        'mode' => GMAPS_MAP_ACZ_MODE_BOTH,
+      );
+    }
+    
+    if (!isset($map->iw_data['bb']['maximized'])) {
+      $map->iw_data['bb']['maximized'] = 0;
+      $map->iw_data['bb']['tabs_state'] = 'max';
+    }
+    
+    if (!isset($map->iw_data['extended']['max_panning'])) {
+      $map->iw_data['extended']['max_panning'] = 500;
+    }
+    if (!isset($map->iw_data['extended']['nocloseonclick'])) {
+      $map->iw_data['extended']['nocloseonclick'] = 0;
+    }
+    if (!isset($map->iw_data['extended']['tabs_state'])) {
+      $map->iw_data['extended']['tabs_state'] = 'max';
+    }
+    
+    if (!isset($map->ov_data['marker']['misc']['center_first'])) {
+      $map->ov_data['marker']['misc']['center_first'] = 0;
+      $map->ov_data['marker']['misc']['zoom_first'] = 0;
+    }
+    
+    drupal_write_record('gmaps_maps', $map, array('mid'));
+  }
+  
+  $serialize = array();
+  $schema = drupal_get_schema('gmaps_static_maps');
+  foreach($schema['fields'] as $key => $info) {
+    if ($info['serialize']) {
+      $serialize[] = $key;
+    }
+  }
+  
+  $result = db_query('SELECT * FROM {gmaps_static_maps}');
+  while($map = db_fetch_object($result)) {
+    foreach($serialize as $field) {
+      if (!empty($map->$field) && is_string($map->$field)) {
+        $map->$field = unserialize($map->$field);
+      }
+    }
+    
+    if (!isset($map->ov_data['marker']['center_first'])) {
+      $map->ov_data['marker']['center_first'] = 0;
+    }
+    
+    drupal_write_record('gmaps_static_maps', $map, array('mid'));
+  }
+  
+  $ret[] = array('success' => TRUE, 'query' => $t('Maps and static maps have been successfully updated.'));
+  $ret['#finished'] = 1;
+  return $ret;
+}
+

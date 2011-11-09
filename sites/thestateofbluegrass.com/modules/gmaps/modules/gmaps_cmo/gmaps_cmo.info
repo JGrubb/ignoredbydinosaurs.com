@@ -1,0 +1,14 @@
+; $Id: gmaps_cmo.info,v 1.1.2.1 2010/02/18 16:36:22 xmarket Exp $
+name = "GMaps Content marker options"
+description = "Content-type based marker options for content markers."
+core = 6.x
+dependencies[] = gmaps
+dependencies[] = gmaps_views
+package = "Google Maps Tools"
+
+; Information added by drupal.org packaging script on 2010-05-06
+version = "6.x-2.1"
+core = "6.x"
+project = "gmaps"
+datestamp = "1273160107"
+

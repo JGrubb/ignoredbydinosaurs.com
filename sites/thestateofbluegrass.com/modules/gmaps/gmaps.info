@@ -1,0 +1,14 @@
+; $Id: gmaps.info,v 1.2.2.3 2009/08/20 06:15:11 xmarket Exp $
+name = GMaps
+description = "Google Maps API integration."
+core = 6.x
+dependencies[] = geonames
+dependencies[] = jquery_ui
+package = "Google Maps Tools"
+
+; Information added by drupal.org packaging script on 2010-05-06
+version = "6.x-2.1"
+core = "6.x"
+project = "gmaps"
+datestamp = "1273160107"
+

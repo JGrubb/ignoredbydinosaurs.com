@@ -1,0 +1,13 @@
+; $Id: gmaps_user.info,v 1.1.2.1 2010/02/26 14:13:03 xmarket Exp $
+name = "GMaps User"
+description = "Geodesical data and marker options for users with Views integration."
+core = 6.x
+dependencies[] = gmaps
+package = "Google Maps Tools"
+
+; Information added by drupal.org packaging script on 2010-05-06
+version = "6.x-2.1"
+core = "6.x"
+project = "gmaps"
+datestamp = "1273160107"
+

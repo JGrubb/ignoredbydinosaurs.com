@@ -1,0 +1,76 @@
+<?php
+// $Id: gmaps_content_devel.module,v 1.1.2.3 2009/09/14 07:58:00 xmarket Exp $
+
+/**
+ * @file
+ * GMaps Content development
+ */
+
+/************************
+ * hook implementations *
+ ************************/
+
+/**
+ * Implementation of hook_help().
+ */
+function gmaps_content_devel_help($path, $arg) {
+  $output = '';
+
+  switch ($path) {
+    case 'admin/help#gmaps_content_devel' :
+      $output = '<p>'. t("CCK widget testing pages for developers.") .'</p>';
+      break;
+  }
+
+  return $output;
+}
+
+/**
+* Implementation of hook_menu().
+*/
+function gmaps_content_devel_menu() {
+  $items = array();
+
+  //forms
+  $items['devel/gmaps/forms/widgets'] = array(
+    'title' => 'Content widgets',
+    'description' => 'CCK widget tester pages',
+    'page callback' => 'system_admin_menu_block_page',
+    'access arguments' => array('access gmaps devel pages'),
+    'file' => 'system.admin.inc',
+    'file path' => drupal_get_path('module', 'system'),
+    'menu_name' => 'gmaps_devel',
+  );
+  $items['devel/gmaps/forms/widgets/address'] = array(
+    'title' => 'Address',
+    'description' => 'Test the CCK address widget',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('gmaps_content_devel_address_widget'),
+    'access arguments' => array('access gmaps devel pages'),
+    'file' => 'includes/gmaps_content_devel.address-widget.inc',
+    'file path' => drupal_get_path('module', 'gmaps_content_devel'),
+    'menu_name' => 'gmaps_devel',
+  );
+  $items['devel/gmaps/forms/widgets/point'] = array(
+    'title' => 'Point',
+    'description' => 'Test the CCK point widget',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('gmaps_content_devel_point_widget'),
+    'access arguments' => array('access gmaps devel pages'),
+    'file' => 'includes/gmaps_content_devel.point-widget.inc',
+    'file path' => drupal_get_path('module', 'gmaps_content_devel'),
+    'menu_name' => 'gmaps_devel',
+  );
+  $items['devel/gmaps/forms/widgets/anp'] = array(
+    'title' => 'AnP',
+    'description' => 'Test the CCK anp widget',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('gmaps_content_devel_anp_widget'),
+    'access arguments' => array('access gmaps devel pages'),
+    'file' => 'includes/gmaps_content_devel.anp-widget.inc',
+    'file path' => drupal_get_path('module', 'gmaps_content_devel'),
+    'menu_name' => 'gmaps_devel',
+  );
+  
+  return $items;
+}

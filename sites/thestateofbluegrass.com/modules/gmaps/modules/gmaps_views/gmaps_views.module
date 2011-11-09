@@ -1,0 +1,177 @@
+<?php
+// $Id: gmaps_views.module,v 1.1.2.3 2009/12/03 12:29:46 xmarket Exp $
+
+/**
+ * @file
+ * Tabs, Accordion, Interactive and static map style plugins for Views
+ */
+
+/**
+* Implementation of hook_menu().
+*/
+function gmaps_views_menu() {
+  $items = array();
+  
+  $items['gmaps/views/node-marker/autocomplete'] = array(
+    'title' => 'Autocomplete callback for node marker content',
+    'page callback' => 'gmaps_views_node_marker_autocomplete',
+    'access arguments' => array('access content'),
+    'file' => 'gmaps_views.views.inc',
+    'file path' => drupal_get_path('module', 'gmaps_views') .'/includes',
+    'type' => MENU_CALLBACK,
+  );
+  
+  return $items;
+}
+
+/**
+ * Implementation of hook_views_api().
+ */
+function gmaps_views_views_api() {
+  return array(
+    'api' => 2,
+    'path' => drupal_get_path('module', 'gmaps_views') .'/includes'
+  );
+}
+
+function gmaps_views_theme($existing, $type, $theme, $path) {
+  $path .= '/theme';
+  $themes = array();
+  $themes['gmaps_views_view_fields'] = array(
+    'arguments' => array('view' => NULL, 'options' => NULL, 'row' => NULL, 'field_alias' => NULL),
+    'file' => 'theme.inc',
+    'path' => $path,
+    'template' => 'gmaps-views-view-fields',
+    'pattern' => 'gmaps_views_view_fields__',
+  );
+  return $themes;
+}
+
+/**
+ * Implementation of hook_gmaps_map_info().
+ */
+function gmaps_views_gmaps_map_info($op, $type = NULL) {
+  if ($op == 'default_maps') {
+    $types = gmaps_map_get_types('type', $type['type']);
+    $defaults = array();
+    
+    $display = gmaps_extend(array(), $type);
+    
+    $display['name'] = 'View style '. $types->name;
+    
+    $defaults['view_style_'. $display['type']] = $display;
+    
+    return $defaults;
+  }
+}
+
+/**
+ * Implementation of hook_gmaps_static_map_info().
+ */
+function gmaps_views_gmaps_static_map_info($op) {
+  if ($op == 'default_maps') {
+    $defaults = array();
+    
+    $display = array('name' => 'View style');
+    
+    $defaults['view_style'] = $display;
+    
+    return $defaults;
+  }
+}
+
+/**
+ * Implementation of hook_gmaps_references().
+ */
+function gmaps_views_gmaps_references($type, $object) {
+  if ($type == 'map' || $type == 'static_map') {
+    $refs = array();
+    $style_interface = ($type == 'static_map') ? 'gmaps_views_static_map' : 'gmaps_views_map';
+    $mid_func = ($type == 'static_map') ? 'get_static_map_reference_mid' : 'get_map_reference_mid';
+    
+    foreach (views_get_all_views() as $view) {
+      foreach($view->display as $display) {
+        $view->set_display($display->id);
+        $style_plugin = $view->display_handler->get_plugin('style');
+        if ($style_plugin instanceof $style_interface && ($mid = $style_plugin->$mid_func()) && $mid == $object->mid) {
+          $refs[($type == 'map' ? '' : 'static_') .'view_style_'. $view->name] = array(
+            'title' => t('<em>@type</em> @base view: <strong>@view</strong>', array('@type' => $view->type, '@view' => $view->name, '@base' => $view->base)),
+            'href' => "admin/build/views/edit/$view->name",
+            'html' => TRUE,
+          );
+          break;
+        }
+      }
+    }
+    
+    if (!empty($refs)) {
+      return array(($type == 'map' ? t('GMaps views - map style plugin') : t('GMaps views - static map style plugins')) => $refs);
+    }
+  }
+}
+
+/**
+ * Implementation of hook_flush_caches().
+ */
+function gmaps_views_flush_caches() {
+  return array('cache_gv_map_result', 'cache_gv_smap_result');
+}
+
+/**
+ * Implementation of hook_gmaps_caches().
+ */
+function gmaps_views_gmaps_caches($type) {
+  switch($type) {
+    case 'map':
+      return array('cache_gv_map');
+      
+    case 'static_map':
+      return array('cache_gv_smap');
+  }
+}
+
+/**
+ * Copied from Views.
+ * A theme preprocess function to automatically allow view-based node
+ * templates if called from a view.
+ *
+ * The 'modules/node.views.inc' file is a better place for this, but
+ * we haven't got a chance to load that file before Drupal builds the
+ * node portion of the theme registry.
+ */
+function gmaps_views_preprocess_node(&$vars) {
+  // The 'view' attribute of the node is added in template_preprocess_views_view_row_node()
+  if (!empty($vars['node']->gmaps) && !empty($vars['node']->gmaps->view->name)) {
+    $view = &$vars['node']->gmaps->view;
+    $context = $view->gmaps_context ? $view->gmaps_context : 'min';
+    
+    $vars['view'] = &$view;
+    $vars['template_files'][] = 'node-view-' . $view->name;
+    $vars['template_files'][] = 'node-view-' . $view->name .'-'. $context;
+    if(!empty($view->current_display)) {
+      $vars['template_files'][] = 'node-view-' . $view->name . '-' . $view->current_display;
+      $vars['template_files'][] = 'node-view-' . $view->name . '-' . $view->current_display .'-'. $context;
+    }
+  }
+}
+
+/**
+ * Copied from Views.
+ * A theme preprocess function to automatically allow view-based node
+ * templates if called from a view.
+ */
+function gmaps_views_preprocess_comment(&$vars) {
+  // The 'view' attribute of the node is added in template_preprocess_views_view_row_comment()
+  if (!empty($vars['node']->gmaps) && !empty($vars['node']->gmaps->view->name)) {
+    $view = &$vars['node']->gmaps->view;
+    $context = $view->gmaps_context ? $view->gmaps_context : 'min';
+        
+    $vars['view'] = &$view;
+    $vars['template_files'][] = 'comment-view-' . $view->name;
+    $vars['template_files'][] = 'comment-view-' . $view->name .'-'. $context;
+    if(!empty($view->current_display)) {
+      $vars['template_files'][] = 'comment-view-' . $view->name . '-' . $view->current_display;
+      $vars['template_files'][] = 'comment-view-' . $view->name . '-' . $view->current_display .'-'. $context;
+    }
+  }
+}

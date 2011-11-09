@@ -1,0 +1,75 @@
+<?php
+// $Id: gmaps_taxonomy.install,v 1.1.2.7 2009/12/03 12:29:47 xmarket Exp $
+
+/**
+ * Implementation of hook_schema().
+ */
+function gmaps_taxonomy_schema() {
+  drupal_load('module', 'gmaps_taxonomy');
+  $schema = array();
+  
+  $schema[GMAPS_TAXONOMY_CACHE_TABLE_LINKS] = drupal_get_schema_unprocessed('system', 'cache');
+  $schema[GMAPS_TAXONOMY_CACHE_TABLE_LINKS]['description'] = 'Cache table used to store gmaps location term links.';
+
+  $schema[GMAPS_TAXONOMY_CACHE_TABLE_PAGE] = $schema[GMAPS_TAXONOMY_CACHE_TABLE_LINKS];
+  $schema[GMAPS_TAXONOMY_CACHE_TABLE_PAGE]['description'] = 'Cache table used to store taxonomy/location page output.';
+
+  $schema[GMAPS_TAXONOMY_CACHE_TABLE_RESULT] = $schema[GMAPS_TAXONOMY_CACHE_TABLE_LINKS];
+  $schema[GMAPS_TAXONOMY_CACHE_TABLE_RESULT]['description'] = 'Cache table used to store database query results of taxonomy/location pages and feeds.';
+
+  return $schema;
+}
+
+/**
+ * Implementation of hook_install().
+ */
+function gmaps_taxonomy_install() {
+  drupal_install_schema('gmaps_taxonomy');
+  drupal_load('module', 'gmaps_taxonomy');
+  
+  $t = get_t();
+  db_query("INSERT INTO {menu_custom} (menu_name, title, description) VALUES ('%s', '%s', '%s')", GMAPS_TAXONOMY_MENU_NAME, $t('Location navigation'), $t('The location navigation menu contains automatically generated links with possible addresses (arguments) to the location based content listing page.'));
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function gmaps_taxonomy_uninstall() {
+  global $conf;
+
+  drupal_uninstall_schema('gmaps_taxonomy');
+
+  db_query("DELETE FROM {menu_custom} WHERE menu_name = '%s'", GMAPS_TAXONOMY_MENU_NAME);
+  db_query("DELETE FROM {menu_links} WHERE menu_name = '%s'", GMAPS_TAXONOMY_MENU_NAME);
+  
+  //delete vocabularies
+  foreach(variable_get('gmaps_taxonomy_location_vids', array()) as $vid) {
+    taxonomy_del_vocabulary($vid);
+  }
+  if ($vid = variable_get('gmaps_taxonomy_letter_vid', 0)) {
+    taxonomy_del_vocabulary($vid);
+  }
+  
+  //remove variables
+  $vars = array('gmaps_taxonomy_location_terms', 'gmaps_taxonomy_location_vocabulary', 'gmaps_taxonomy_location_vids',
+    'gmaps_taxonomy_location_continent_term', 'gmaps_taxonomy_location_term_view', 'gmaps_taxonomy_location_handler',
+    'gmaps_taxonomy_location_continent_view', 'gmaps_taxonomy_letter_terms', 'gmaps_taxonomy_letter_vid', 'gmaps_taxonomy_letter_term_view',
+    'gmaps_taxonomy_page', 'gmaps_taxonomy_page_cache', 'gmaps_taxonomy_menu', 'gmaps_taxonomy_menu_rebuild_needed',
+    'gmaps_taxonomy_menu_last_rebuild', 'gmaps_taxonomy_menu_skipped', 'gmaps_taxonomy_links_cache', 'gmaps_taxonomy_location_term_last',
+    'gmaps_taxonomy_location_term_view_country', 'gmaps_taxonomy_disallow_robots', 'gmaps_taxonomy_subpart_counter',
+    'gmaps_taxonomy_location_cron', 'gmaps_taxonomy_letter_cron', 'gmaps_taxonomy_location_cron_last_nid', 'gmaps_taxonomy_letter_cron_last_nid',
+    'gmaps_taxonomy_letter_term_show', 'gmaps_taxonomy_term_page_overwrite', 'gmaps_taxonomy_term_views_overwrite'
+  );
+  foreach ($vars as $var) {
+    db_query("DELETE FROM {variable} WHERE name = '%s'", $var);
+    unset($conf[$var]);
+  }
+  cache_clear_all('variables', 'cache');
+}
+
+/**
+ * Implementation of hook_update_6000().
+ */
+function gmaps_taxonomy_update_6000() {
+  return array();
+}

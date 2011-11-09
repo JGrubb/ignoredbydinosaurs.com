@@ -1,0 +1,14 @@
+; $Id: gmaps_views_geotaxonomy.info,v 1.1.2.1 2009/12/12 08:43:48 xmarket Exp $
+name = "GMaps Views Geo Taxonomy"
+description = "Geo Taxonomy module based point option handlers for term markers."
+core = 6.x
+dependencies[] = gmaps_views
+dependencies[] = geotaxonomy
+package = "Google Maps Tools"
+
+; Information added by drupal.org packaging script on 2010-05-06
+version = "6.x-2.1"
+core = "6.x"
+project = "gmaps"
+datestamp = "1273160107"
+

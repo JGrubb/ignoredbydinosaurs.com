@@ -1,0 +1,70 @@
+// $Id: UPGRADE.txt,v 1.1.2.1 2009/10/16 11:17:00 xmarket Exp $
+
+===============================================================================
+UPDATE NOTES
+===============================================================================
+GMaps 6.x CCK fields are NOT FULLY COMPATIBLE with GMaps 5.x CCK fields.
+Missing features are marker content and marker URL.
+
+THESE ARE NOT PART OF THE UPDATE PATH.
+
+If you have this kind of data in your database and you need an "official"
+update module, please contact me at http://drupal.org/user/231445/contact
+
+If nobody will contact me for an update module, then the above features
+won't have any update path. 
+
+===============================================================================
+UPDATING FROM VERSION 5.x to 6.x
+===============================================================================
+
+YOU MUST RUN ALL POSSIBLE UPDATES TO YOUR DATABASE IN 5.x USING
+THE LATEST 5.x CODE, BEFORE UPGRADING FROM 5.x to 6.x.
+
+ALWAYS BACKUP YOUR DATABASE AND FILES DIRECTORY BEFORE UPGRADING!
+
+1) Check you existing data for consistency. The update process will delete
+   empty (gmaps_*_empty()) records and partial (either part is missing) AnP
+   records. See sample SELECT statements below.
+   
+2) Update Drupal and CCK to their latest 6.x version.
+
+3) Install or update new GMaps dependencies (Geonames and jQuery UI).
+
+4) BACKUP YOUR DATABASE AND FILES DIRECTORY AGAIN.
+
+5) Copy gmaps code to your sites directory, enable both GMaps and GMaps Content
+   modules and run update.php.
+
+6) (OPTIONAL) Update marker content and marker URL data.
+
+7) Drop gmaps_points and gmaps_marker_content tables.
+   DO NOT FORGET ABOUT TABLE PREFICES.
+
+
+
+
+===============================================================================
+SAMPLE SELECT STATEMENTS FOR DATA CONSISTENCY CHECKING
+===============================================================================
+1) Empty address:
+SELECT r.*, ga.*
+FROM node_revisions r INNER JOIN gmaps_addresses ga ON r.vid = ga.vid
+WHERE ga.country IS NULL OR ga.country = ''
+
+2) Empty point:
+SELECT r.*, gc.*
+FROM node_revisions r INNER JOIN gmaps_coordinates gc ON r.vid = gc.vid
+WHERE gc.map_type = '' OR gc.latitude = 0 OR gc.longitude = 0
+
+3) Partial AnP, missing point part:
+SELECT r.*, ga.*
+FROM node_revisions r INNER JOIN gmaps_addresses ga ON r.vid = ga.vid
+  LEFT JOIN gmaps_coordinates gc ON ga.vid = gc.vid AND ga.nid = gc.nid AND ga.field_name = gc.field_name AND ga.delta = gc.delta
+WHERE gc.vid IS NULL
+
+4) Partial AnP, missing address part:
+SELECT r.*, gc.*
+FROM node_revisions r INNER JOIN gmaps_coordinates gc ON r.vid = gc.vid
+  LEFT JOIN gmaps_addresses ga ON gc.vid = ga.vid AND gc.nid = ga.nid AND gc.field_name = ga.field_name AND gc.delta = ga.delta
+WHERE ga.vid IS NULL

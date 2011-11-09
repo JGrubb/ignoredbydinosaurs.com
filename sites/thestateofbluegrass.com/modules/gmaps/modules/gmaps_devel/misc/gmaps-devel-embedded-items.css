@@ -1,0 +1,69 @@
+/* $Id: gmaps-devel-embedded-items.css,v 1.1.2.2 2009/09/14 07:58:00 xmarket Exp $ */
+
+/*
+ * Tabs
+ */
+#tabs-sub .gmaps-tabs ul.gmaps-tabs-nav li.gmaps-tabs-tab a {
+  padding: 4px 1em;
+  margin: 0 0 0 1px;
+  position: relative;
+  top: -1px;
+  white-space: nowrap;
+  text-decoration: none;
+  height: auto;
+  background: transparent;
+  border: 0;
+}
+
+#tabs-sub .gmaps-tabs ul.gmaps-tabs-nav li.ui-tabs-selected a,
+#tabs-sub .gmaps-tabs ul.gmaps-tabs-nav li.gmaps-tabs-tab a:active,
+#tabs-sub .gmaps-tabs ul.gmaps-tabs-nav li.gmaps-tabs-tab a:hover {
+  background: #a6cee7 url(bg-blue.png) repeat-x scroll 0 100%;
+  color: #fff;
+}
+
+#tabs-sub .gmaps-tabs ul.gmaps-tabs-nav li.ui-tabs-selected a {
+  font-weight: bold;
+}
+
+
+#tabs-sub .gmaps-tabs .gmaps-tabs-panel {
+  border: 1px solid #d9eaf5;
+  padding: 1em;
+  margin: 0;
+  height: auto;
+  overflow: visible;
+}
+
+/*
+ * Top, bottom nav
+ */
+#tabs-sub ul.gmaps-tabs-nav,
+#tabs-subsub ul.gmaps-tabs-nav {
+  float: none;
+  width: auto;
+}
+
+
+#tabs-sub.gmaps-tabs-nav-top .gmaps-tabs ul.gmaps-tabs-nav li.gmaps-tabs-tab,
+#tabs-subsub.gmaps-tabs-nav-bottom .gmaps-tabs ul.gmaps-tabs-nav li.gmaps-tabs-tab,
+#tabs-sub.gmaps-tabs-nav-top .gmaps-tabs ul.gmaps-tabs-nav li.gmaps-tabs-tab a,
+#tabs-subsub.gmaps-tabs-nav-bottom .gmaps-tabs ul.gmaps-tabs-nav li.gmaps-tabs-tab a {
+  display: inline;
+  float: none;
+}
+
+#tabs-sub.gmaps-tabs-nav-top .gmaps-tabs .gmaps-tabs-panel {
+  margin: .25em 0 0;
+  overflow: visible;
+}
+
+#tabs-subsub.gmaps-tabs-nav-bottom .gmaps-tabs .gmaps-tabs-nav {
+  padding: 0.3em 0 0;
+}
+
+#tabs-subsub.gmaps-tabs-nav-bottom .gmaps-tabs .gmaps-tabs-panel {
+  margin: 0 0 .25em;
+  height: 100px;
+  overflow: auto;
+}

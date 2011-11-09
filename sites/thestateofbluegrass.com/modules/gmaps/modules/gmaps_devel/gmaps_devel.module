@@ -1,0 +1,325 @@
+<?php
+
+// $Id: gmaps_devel.module,v 1.1.2.6 2009/09/14 07:58:00 xmarket Exp $
+
+/**
+ * @file
+ * GMaps development
+ */
+
+/************************
+ * hook implementations *
+ ************************/
+
+/**
+ * Implementation of hook_help().
+ */
+function gmaps_devel_help($path, $arg) {
+  $output = '';
+
+  switch ($path) {
+    case 'admin/help#gmaps_devel' :
+      $output = '<p>'. t("Various pages for developers.") .'</p>';
+      break;
+    case 'devel/gmaps/forms/embedded-items' :
+      $output = '<p class="error">'. t('Table of contents maps possibly require to modify the ui.tabs.js file.') .' ';
+      if (module_exists('advanced_help')) {
+        $output .= t('For more information read the !topic help page.', array('!topic' => theme('advanced_help_topic', 'gmaps', 'ui-tabs-modification', 'title')));
+      }
+      else {
+        $output .= t('For more information install the <a href="!link">Advanced help module</a>.', array('!link' => 'http://drupal.org/project/advanced_help'));
+      }
+      $output .= '</p>';
+      break;
+  }
+
+  return $output;
+}
+
+/**
+* Implementation of hook_perm().
+*/
+function gmaps_devel_perm() {
+  return array(
+    'access gmaps devel pages',
+  );
+}
+
+/**
+* Implementation of hook_menu().
+*/
+function gmaps_devel_menu() {
+  $items = array();
+
+  //forms
+  $items['devel/gmaps/forms'] = array(
+    'title' => 'Forms',
+    'description' => 'Form element tester pages',
+    'weight' => -9,
+    'page callback' => 'system_admin_menu_block_page',
+    'access arguments' => array('access gmaps devel pages'),
+    'file' => 'system.admin.inc',
+    'file path' => drupal_get_path('module', 'system'),
+    'menu_name' => 'gmaps_devel',
+  );
+  $items['devel/gmaps/forms/geocoder'] = array(
+    'title' => 'Geocoder',
+    'description' => 'Test the geocoder element',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('gmaps_devel_geocoder_form'),
+    'access arguments' => array('access gmaps devel pages'),
+    'file' => 'includes/gmaps_devel.geocoder-form.inc',
+    'file path' => drupal_get_path('module', 'gmaps_devel'),
+    'menu_name' => 'gmaps_devel',
+  );
+  $items['devel/gmaps/forms/address'] = array(
+    'title' => 'Address',
+    'description' => 'Test the address element',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('gmaps_devel_address_form'),
+    'access arguments' => array('access gmaps devel pages'),
+    'file' => 'includes/gmaps_devel.address-form.inc',
+    'file path' => drupal_get_path('module', 'gmaps_devel'),
+    'menu_name' => 'gmaps_devel',
+  );
+  $items['devel/gmaps/forms/point'] = array(
+    'title' => 'Point',
+    'description' => 'Test the point element',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('gmaps_devel_point_form'),
+    'access arguments' => array('access gmaps devel pages'),
+    'file' => 'includes/gmaps_devel.point-form.inc',
+    'file path' => drupal_get_path('module', 'gmaps_devel'),
+    'menu_name' => 'gmaps_devel',
+  );
+  $items['devel/gmaps/forms/anp'] = array(
+    'title' => 'AnP',
+    'description' => 'Test the anp (address and point) element',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('gmaps_devel_anp_form'),
+    'access arguments' => array('access gmaps devel pages'),
+    'file' => 'includes/gmaps_devel.anp-form.inc',
+    'file path' => drupal_get_path('module', 'gmaps_devel'),
+    'menu_name' => 'gmaps_devel',
+  );
+  $items['devel/gmaps/forms/accordion'] = array(
+    'title' => 'Accordion',
+    'description' => 'Accordion test page',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('gmaps_devel_accordion_form'),
+    'access arguments' => array('access gmaps devel pages'),
+    'file' => 'includes/gmaps_devel.accordion-form.inc',
+    'file path' => drupal_get_path('module', 'gmaps_devel'),
+    'menu_name' => 'gmaps_devel',
+  );
+  $items['devel/gmaps/forms/tabs'] = array(
+    'title' => 'Tabs',
+    'description' => 'Tabs test page',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('gmaps_devel_tabs_form'),
+    'access arguments' => array('access gmaps devel pages'),
+    'file' => 'includes/gmaps_devel.tabs-form.inc',
+    'file path' => drupal_get_path('module', 'gmaps_devel'),
+    'menu_name' => 'gmaps_devel',
+  );
+  $items['devel/gmaps/forms/embedded-items'] = array(
+    'title' => 'Embedded items',
+    'description' => 'Embedded item, behavior and lazy init testing page',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('gmaps_devel_embedded_items_form'),
+    'access arguments' => array('access gmaps devel pages'),
+    'file' => 'includes/gmaps_devel.embedded-items-form.inc',
+    'file path' => drupal_get_path('module', 'gmaps_devel'),
+    'menu_name' => 'gmaps_devel',
+  );
+  $items['devel/gmaps/ahah-content'] = array(
+    'title' => 'Simple AHAH content handler',
+    'page callback' => 'gmaps_devel_ahah_content',
+    'access arguments' => array('access gmaps devel pages'),
+    'type' => MENU_CALLBACK,
+  );
+  $items['devel/gmaps/ajax-content'] = array(
+    'title' => 'Simple AJAX content handler',
+    'page callback' => 'gmaps_devel_ajax_content',
+    'access arguments' => array('access gmaps devel pages'),
+    'type' => MENU_CALLBACK,
+  );
+  
+  //maps
+  $items['devel/gmaps/maps'] = array(
+    'title' => 'Maps',
+    'description' => 'Map tester pages',
+    'weight' => -8,
+    'page callback' => 'system_admin_menu_block_page',
+    'access arguments' => array('access gmaps devel pages'),
+    'file' => 'system.admin.inc',
+    'file path' => drupal_get_path('module', 'system'),
+    'menu_name' => 'gmaps_devel',
+  );
+  $items['devel/gmaps/maps/simple'] = array(
+    'title' => 'Simple map with marker',
+    'description' => 'Basic render tester',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('gmaps_devel_map_form'),
+    'access arguments' => array('access gmaps devel pages'),
+    'file' => 'includes/gmaps_devel.map-form.inc',
+    'file path' => drupal_get_path('module', 'gmaps_devel'),
+    'menu_name' => 'gmaps_devel',
+  );
+  $items['devel/gmaps/maps/simple-content'] = array(
+    'title' => 'Simple map content handler',
+    'page callback' => 'gmaps_devel_map_form_gmi_content',
+    'access arguments' => array('access gmaps devel pages'),
+    'file' => 'includes/gmaps_devel.map-form.inc',
+    'file path' => drupal_get_path('module', 'gmaps_devel'),
+    'type' => MENU_CALLBACK,
+  );
+  $items['devel/gmaps/maps/markers'] = array(
+    'title' => 'Multiple markers',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('gmaps_devel_markers_form'),
+    'access arguments' => array('access gmaps devel pages'),
+    'file' => 'includes/gmaps_devel.markers-form.inc',
+    'file path' => drupal_get_path('module', 'gmaps_devel'),
+    'menu_name' => 'gmaps_devel',
+  );
+  $items['devel/gmaps/maps/marker-content'] = array(
+    'title' => 'Marker content callback',
+    'page callback' => 'gmaps_devel_marker_content',
+    'access arguments' => array('access gmaps devel pages'),
+    'type' => MENU_CALLBACK,
+  );
+  $items['devel/gmaps/maps/static'] = array(
+    'title' => 'Static map',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('gmaps_devel_static_map_form'),
+    'access arguments' => array('access gmaps devel pages'),
+    'file' => 'includes/gmaps_devel.static-map-form.inc',
+    'file path' => drupal_get_path('module', 'gmaps_devel'),
+    'menu_name' => 'gmaps_devel',
+  );
+  
+  return $items;
+}
+
+function _gmaps_devel_get_jquery_event_options() {
+  return array(
+    'mouseover' => t('Mouse over'),
+    'click' => t('Click'),
+    'dblclick' => t('Double click'),
+  );
+}
+
+function gmaps_devel_ahah_content() {
+  $gmaps = drupal_http_request('http://drupal.org/project/gmaps');
+  print $gmaps->data;
+  exit();
+}
+
+function gmaps_devel_ajax_content() {
+  module_load_include('inc', 'gmaps_devel', 'includes/gmaps_devel.map-form');
+  $fieldset = array('#type' => 'fieldset',
+    '#title' => t('AJAX loaded map example'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+    '#value' => gmaps_map_item_render(gmaps_map_get_mid_for_default('input_earth')),
+  );
+  gmaps_ajax_json(array('status' => TRUE, 'data' => drupal_render($fieldset)));
+  exit();
+}
+
+function _gmaps_devel_create_marker_point($last, $map_type) {
+  if ($last) {
+    $p = drupal_clone($last);
+    $bearing = mt_rand(45, 135);
+    $length = array('value' => mt_rand(1, 500), 'unit' => 'kilometer');
+
+    $end = _gmaps_call_func('gmaps', 'coords', '_gmaps_coords_get_line_end', array($p, $bearing, $length));
+  
+    if ($end) {
+      $p->latitude = $end['latitude'];
+      $p->longitude = $end['longitude'];
+    }
+  }
+  else {
+    $p = (object)array(
+      'latitude' => mt_rand(-80000, 80000) / 1000,
+      'longitude' => mt_rand(-180000, 180000) / 1000,
+      'elevation' => 0,
+      'map_type' => $map_type,
+    );
+  }
+  
+  return $p;
+}
+
+function _gmaps_devel_create_marker_content() {
+  static $content, $tab_labels;
+  
+  if (!$content) {
+    $content = 'Li Europan lingues es membres del sam familie. Lor separat existentie es un myth. Por scientie, musica, sport etc., li tot Europa usa li sam vocabularium. Li lingues differe solmen in li grammatica, li pronunciation e li plu commun vocabules. Omnicos directe al desirabilit de un nov lingua franca: on refusa continuar payar custosi traductores. It solmen va esser necessi far uniform grammatica, pronunciation e plu sommun paroles. Li Europan lingues es membres del sam familie. Lor separat existentie es un myth. Por scientie, musica, sport etc., li tot Europa usa li sam vocabularium. Li lingues differe solmen in li';
+    $content .= ' Ma quande lingues coalesce, li grammatica del resultant lingue es plu simplic e regulari quam ti del coalescent lingues. Li nov lingua franca va esser plu simplic e regulari quam li existent Europan lingues. It va esser tam simplic quam Occidental: in fact, it va esser Occidental. A un Angleso it va semblar un simplificat Angles, quam un skeptic Cambridge amico dit me que Occidental es. Ma quande lingues coalesce, li grammatica del resultant lingue es plu simplic e regulari quam ti del coalescent lingues. Li nov lingua franca va esser plu simplic e regulari quam li existent Europan lingues.';
+    $content .= ' Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet';
+    $tab_labels = array();
+    for ($i = 0; $i < GMAPS_IW_MAX_TABS; $i++) {
+      $tab_labels[$i] = t('Tab !n', array('!n' => $i+1));
+    }
+  }
+  $len = 1870;
+  $c = array();
+  if (mt_rand(0, 1)) {
+    $from = mt_rand(0, $len);
+    $c['min'] = '<p>'. substr($content, $from, mt_rand(1, $len - $from)) .'</p>';
+  }
+  if (mt_rand(0, 1)) {
+    $from = mt_rand(0, $len);
+    $c['max'] = '<p>'. substr($content, $from, mt_rand(1, $len - $from)) .'</p>';
+  }
+  $tabs = mt_rand(0, GMAPS_IW_MAX_TABS);
+  if ($tabs) {
+    $c['tabs'] = array();
+    for ($i = 0; $i < $tabs; $i++) {
+      $from = mt_rand(0, $len);
+      $c['tabs'][$tab_labels[$i]] = '<p>'. substr($content, $from, mt_rand(1, $len - $from)) .'</p>';
+    }
+  }
+  return $c;
+}
+
+function gmaps_devel_marker_content() {
+  $status = FALSE;
+  $data = array();
+  if (!empty($_POST)) {
+    if (isset($_POST['#accordion'])) {
+      $post = $_POST['#accordion']['data'];
+    }
+    else if (isset($_POST['#tabs'])) {
+      $post = $_POST['#tabs']['data'];
+    }
+    else {
+      $post = $_POST;
+    }
+    if (isset($post['gmi'])) {
+      $map = $post['gmi'];
+      $item = $post['marker'];
+      $gmi = TRUE;
+    }
+    else {
+      $map = $post['smi'];
+      if (isset($post['marker'])) {
+        $item = $post['marker'];
+      }
+      else {
+        $item = $post['path'];
+      }
+    }
+    $data = _gmaps_devel_create_marker_content();
+    if (!$gmi || $map['base']['map_data']['toc_map']['enabled']) {
+      $style = $gmi ? $map['base']['map_data']['toc_map']['content'] : $map['base']['content']['content'];
+      $data = gmaps_overlay_render_content($data, $style, $map['id'] .'-'. $item['id']);
+    }
+    $status = TRUE;
+  }
+  gmaps_ajax_json(array('status' => TRUE, 'data' => $data));
+  exit();
+}

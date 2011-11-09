@@ -1,0 +1,980 @@
+/* $Id: gmaps.css,v 1.1.4.17 2010/04/01 07:42:10 xmarket Exp $ */
+
+/*Length units*/
+span.gmaps-length {
+  white-space: nowrap;
+}
+
+span.gmaps-length abbr {
+  text-decoration: none;
+  margin-left: 0.25em;
+  border: 0px none;
+}
+
+span.gmaps-length abbr[title] {
+  cursor: help;
+}
+
+/*Converter page and block*/
+#block-gmaps-0 .content {
+  text-align: center;
+}
+
+#block-gmaps-0 .content div.item-list {
+  overflow: hidden;
+  clear: both;
+}
+
+#block-gmaps-0 .content .result-list {
+  text-align: left;
+  margin: 1em 0px;
+}
+
+.gmaps-length-converter-box .result-list {
+  text-align: left;
+  margin: 0px 1em;
+}
+
+#block-gmaps-0 .content .result-list li, .gmaps-length-converter-box .result-list li {
+  background: transparent;
+  list-style-image: none;
+  list-style-type: none;
+  font-weight: bold;
+  padding:0px 0px 0.2em 0px;
+  margin:0.15em 0px 0.15em 0px;
+}
+
+/* Form elements */
+.form-gmaps-distance .form-item {
+  display: inline;
+}
+
+.form-gmaps-distance .form-item .progress-disabled {
+  float: none;
+}
+
+.form-gmaps-distance .form-item .ahah-progress-throbber {
+  float: none;
+  display: inline;
+}
+
+.form-gmaps-distance .form-item .ahah-progress .throbber {
+  float: none;
+  display: inline;
+  padding-left: 15px;
+}
+
+.form-gmaps-distance-value {
+  text-align: right;
+}
+
+.form-gmaps-image-file .form-item {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.form-gmaps-image-file .form-item label {
+  font-weight: normal;
+}
+
+.gmaps-image-file-error .form-item label {
+  color: #C52020;
+  font-weight: bold;
+}
+
+.form-gmaps-image-file-preview {
+  clear: right;
+  float: right;
+  padding-left: 1em;
+}
+
+.gmaps-image-file-clear-preview {
+  clear: both;
+  height: 0px;
+  margin: 0px;
+  padding: 0px;
+  border: 0px solid transparent;
+}
+
+label a.gmaps-element-help {
+  display: inline-block;
+  margin-right: 3px;
+  float: none;
+}
+
+div.messages a.gmaps-element-help {
+  display: none;
+}
+
+.gis-preview-wrapper {
+  display: inline;
+}
+
+.gis-preview-wrapper .gis-preview {
+  margin: 0 0 0 3px;
+  padding: 0px;
+}
+
+.form-gmaps-geocoder .form-item {
+  display: inline;
+  margin: 0px;
+}
+
+.form-gmaps-geocoder .form-button {
+  margin: 0px;
+}
+
+.gmaps-geocoder-popup {
+  position: absolute;
+  border: 1px solid;
+  overflow: hidden;
+  z-index: 100;
+}
+.gmaps-geocoder-popup ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.gmaps-geocoder-popup li {
+  background: #fff;
+  color: #000;
+  white-space: pre;
+  cursor: default;
+  padding: 2px;
+  margin: 0;
+}
+.gmaps-geocoder-popup li.selected {
+  background: #0072b9;
+  color: #fff;
+}
+
+.gmaps-geocoder-options {
+  margin-left: 1em;
+}
+
+.gmaps-geocoder-options .form-item {
+  margin: 0 1em 0.5em 0;
+  display: inline-block;
+}
+
+/* Animated throbber */
+html.js .form-gmaps-geocoder input.form-gmaps-geocoder-query,
+html.js .form-gmaps-point .gmaps-point-elevation-autocomplete {
+  background-image: url(../../../../../misc/throbber.gif);
+  background-repeat: no-repeat;
+  background-position: 100% 2px; /* LTR */
+}
+
+html.js .form-gmaps-point .gmaps-point-elevation-autocomplete {
+  background-position: 2px 3px; /* LTR */
+}
+
+html.js .form-gmaps-point input.throbbing {
+  background-position: 2px -17px; /* LTR */
+}
+
+html.js .form-gmaps-geocoder input.throbbing {
+  background-position: 100% -18px; /* LTR */
+}
+
+/*
+ * Settings elements
+ */
+.gmaps-collapsible-element {
+  padding-bottom: 0.25em;
+  padding-top: 0.5em;
+}
+
+.gmaps-collapsible-element .form-item {
+  margin: 0.25em auto;
+}
+
+.gmaps-collapsible-element .form-item .form-item {
+  margin: 0.25em auto;
+}
+
+.gmaps-collapsible-element .form-item .form-item label {
+  display: inline;
+}
+
+/*
+ * Address and point elements
+ */
+.form-gmaps-address .form-gmaps-geocoder,
+.form-gmaps-point .form-gmaps-geocoder {
+  margin-left: 0.5em;
+}
+
+.form-gmaps-address .form-item,
+.form-gmaps-point .form-item {
+  margin: 0.25em auto;
+}
+
+.form-gmaps-address .form-item label {
+  display: inline-block !important;
+  font-weight: normal;
+}
+
+.node-form .form-gmaps-address .form-text {
+  display: inline;
+  width: auto;
+}
+
+.gmaps-address-map-wrapper .gmaps-address-parts-wrapper {
+  float: left;
+  width: 59%;
+}
+
+.gmaps-address-map-wrapper .gmaps-address-parts-wrapper .form-item label,
+.gmaps-point-map-wrapper .gmaps-point-parts-wrapper .form-item label,
+.gmaps-point-parts-wrapper .gmaps-point-2d-wrapper .form-item label {
+  display: block;
+  width: auto;
+}
+
+.gmaps-address-map-wrapper{
+  height: 24em;
+  margin-top: 0.5em;
+  margin-bottom: 1em;
+}
+
+.gmaps-address-map-wrapper .gmaps-address-gmi {
+  margin-left: 60%;
+  padding-top: 0.3em;
+  height: 100%;
+}
+
+.gmaps-address-clear-map-wrapper,
+.gmaps-point-clear-2d-wrapper {
+  clear: both;
+}
+
+.form-gmaps-address .gmaps-address-parts-wrapper .form-item label {
+  width: 15em;
+  font-size: 0.9em;
+}
+
+.gmaps-address-country-hu .gmaps-address-part-subadminarea {
+  display: none;
+}
+
+.form-gmaps-point .form-gmaps-tabs {
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
+
+.form-gmaps-point .form-gmaps-tabs .gmaps-tabs-panel {
+  padding: 0 0.5em;
+  height: 150px;
+}
+
+.form-gmaps-point .form-item label {
+  font-size: 0.9em;
+  display: inline-block;
+  font-weight: normal;
+}
+
+.form-gmaps-point .gmaps-point-parts-wrapper .form-item label {
+  width: 9em;
+}
+
+.gmaps-point-2d-wrapper .gmaps-point-part-latitude,
+.gmaps-point-2d-wrapper .gmaps-point-part-longitude {
+  float: left;
+  margin-right: 1em;
+}
+
+.form-gmaps-point-latitude, .form-gmaps-point-longitude, .form-gmaps-point-elevation {
+  text-align: right;
+}
+
+.form-gmaps-point .form-gmaps-point-bounds {
+  margin: 0.3em 0 0.5em;
+  padding: 0.3em;
+  background-image: none;
+}
+
+.form-gmaps-point .form-gmaps-point-bounds .form-item {
+  margin-top: 0;
+}
+
+.form-gmaps-point .form-gmaps-point-bounds .form-item label {
+  font-size: 0.9em;
+  font-weight: bold;
+  display: block;
+}
+
+.form-gmaps-point .form-gmaps-point-bounds .form-gmaps-point label {
+  font-weight: normal;
+}
+
+.form-gmaps-point .form-gmaps-point-privacy {
+  display: inline-block;
+}
+
+.node-form .form-gmaps-point .form-text {
+  display: inline;
+  width: auto;
+}
+
+/*
+ * Address
+ */
+.gmaps-adr .gmaps-adr-row:after {
+  content: ", ";
+}
+
+.gmaps-adr .gmaps-adr-row-last:after {
+  content: "";
+}
+
+.gmaps-coords abbr {
+  border-width: 0px;
+  text-decoration: none;
+}
+
+.gmaps-coords abbr, .gmaps-coords-cart span {
+  white-space: nowrap;
+}
+
+.gmaps-coords-cart .gmaps-coords {
+  display: none;
+}
+
+.gmaps-directions label:after {
+  content: ": ";
+}
+
+.gmaps-directions span {
+  white-space: nowrap;
+}
+
+.gmaps-directions .gmaps-directions-from {
+  margin-right: 0.5em;
+}
+
+/*
+ * AnP
+ */
+.form-gmaps-anp .gmaps-anp-part-tabs {
+  margin-top: 0.5em;
+}
+
+.form-gmaps-anp .gmaps-anp-part-tabs .form-gmaps-point .form-gmaps-tabs {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.form-gmaps-anp .gmaps-anp-part-tabs .gmaps-tabs-panel {
+  padding: 0.25em;
+}
+
+.form-gmaps-anp .gmaps-anp-part-tabs .form-gmaps-point .form-gmaps-tabs .gmaps-tabs-panel {
+  padding: 0 0.5em;
+}
+
+/*
+ * Accordion
+ */
+.form-gmaps-accordion {
+  margin-top: .25em;
+  margin-bottom: .25em;
+  display: block;
+}
+
+.gmaps-accordion {
+  border-width: 0 0 1px 0;
+  border-style: solid;
+  border-color: #d9eaf5;
+}
+
+.gmaps-accordion, .gmaps-accordion h3.gmaps-accordion-header {
+  display: block;
+}
+
+.gmaps-tabs-nav-left .form-gmaps-accordion,
+.gmaps-tabs-nav-left .gmaps-accordion,
+.gmaps-tabs-nav-left .gmaps-accordion h3.gmaps-accordion-header,
+.gmaps-tabs-nav-right .form-gmaps-accordion,
+.gmaps-tabs-nav-right .gmaps-accordion,
+.gmaps-tabs-nav-right .gmaps-accordion h3.gmaps-accordion-header {
+  clear: none;
+}
+
+.gmaps-accordion h3.gmaps-accordion-header {
+  background: transparent;
+  border-width: 1px 1px 0 1px;
+  border-style: solid;
+  border-color: #d9eaf5;
+  font-size: 1em;
+}
+
+.gmaps-accordion h3.ui-state-active {
+  background: #d9eaf5;
+}
+
+.gmaps-accordion h3.gmaps-accordion-header a {
+  display: block;
+  padding: 3px 1em 3px 2.5em;
+  background: transparent url(../../../../../misc/menu-collapsed.png) no-repeat 0.85em .55em; /* LTR */
+  font-family: Verdana,sans-serif;
+}
+
+.gmaps-accordion h3.ui-state-active a {
+  background: transparent url(../../../../../misc/menu-expanded.png) no-repeat 0.85em .55em; /* LTR */
+}
+
+.gmaps-accordion h3.gmaps-accordion-loading a {
+  display: inline;
+}
+
+.gmaps-accordion h3.gmaps-accordion-loading .ahah-progress {
+  float: none;
+  display: inline-block;
+}
+
+.gmaps-accordion h3.gmaps-accordion-loading .ahah-progress-bar {
+  width: auto;
+  padding: 1px .25em 2px;
+}
+
+.gmaps-accordion h3.gmaps-accordion-loading .ahah-progress-bar .bar {
+  width: 16em;
+  float: left;
+}
+
+.gmaps-accordion h3.gmaps-accordion-loading .ahah-progress .throbber {
+  float: none;
+  display: inline-block;
+}
+
+.gmaps-accordion h3.gmaps-accordion-loading .ahah-progress .message {
+  display: inline;
+  font-weight: bold;
+}
+
+.gmaps-accordion h3.gmaps-accordion-loading .ahah-progress-bar .message {
+  margin-right: 1em;
+}
+
+* html .gmaps-accordion h3.gmaps-accordion-loading a {
+  float: left;
+}
+
+* html .gmaps-accordion h3.gmaps-accordion-loading .ahah-progress {
+  display: inline;
+}
+
+* html .gmaps-accordion h3.gmaps-accordion-loading .ahah-progress .throbber {
+  display: inline;
+}
+
+.form-gmaps-accordion .gmaps-accordion h3.error {
+  background-color: #fcc;
+}
+
+.form-gmaps-accordion .gmaps-accordion h3.error a {
+  color: #a30000;
+}
+
+.gmaps-accordion .gmaps-accordion-panel {
+  border-width: 0px 1px;
+  border-style: solid;
+  border-color: #d9eaf5;
+  margin: 0px;
+  padding: 0 1em;
+}
+
+* html .gmaps-accordion .gmaps-accordion-panel {
+  padding-bottom: 1em;
+  margin-bottom: -1em;
+}
+
+.gmaps-accordion .ui-accordion-content-active {
+  display: block;
+  padding: 0.5em 1em;
+}
+
+.gmaps-accordion .gmaps-accordion-content-loading {
+  height: 0px;
+  padding: 0px;
+  border: 0px;
+}
+
+/*
+ * Tabs
+ */
+.form-gmaps-tabs {
+  margin-top: .25em;
+  margin-bottom: .25em;
+  display: block;
+}
+
+.gmaps-tabs ul.gmaps-tabs-nav {
+  margin: 0px;
+  padding: 0 0 0.3em;
+  background: none;
+  border: 0;
+}
+
+.gmaps-tabs ul.gmaps-tabs-nav li.gmaps-tabs-tab {
+  background: none;
+  border: 0px;
+  margin: 0px;
+  padding: 0px;
+}
+
+.gmaps-tabs ul.gmaps-tabs-nav li.gmaps-tabs-tab a {
+  padding: 4px 1em;
+  margin: 0 0 0 1px;
+  position: relative;
+  top: -1px;
+  white-space: nowrap;
+  text-decoration: none;
+  height: auto;
+  background: transparent;
+  border: 0;
+}
+
+.gmaps-tabs ul.gmaps-tabs-nav li.ui-tabs-selected a,
+.gmaps-tabs ul.gmaps-tabs-nav li.gmaps-tabs-tab a:active,
+.gmaps-tabs ul.gmaps-tabs-nav li.gmaps-tabs-tab a:hover {
+  background: #a6cee7 url(bg-blue.png) repeat-x scroll 0 100%;
+  color: #fff;
+}
+
+.gmaps-tabs ul.gmaps-tabs-nav li.ui-tabs-selected a {
+  font-weight: bold;
+}
+
+
+.gmaps-tabs .gmaps-tabs-panel {
+  border: 1px solid #d9eaf5;
+  padding: 1em;
+  margin: 0;
+  height: auto;
+  overflow: visible;
+}
+
+.form-gmaps-tabs .gmaps-tabs-clear-nav-left {
+  clear: left;
+}
+
+.form-gmaps-tabs .gmaps-tabs-clear-nav-right {
+  clear: right;
+}
+
+/*
+ * Top, bottom nav
+ */
+.gmaps-tabs-nav-top .gmaps-tabs ul.gmaps-tabs-nav li.gmaps-tabs-tab,
+.gmaps-tabs-nav-bottom .gmaps-tabs ul.gmaps-tabs-nav li.gmaps-tabs-tab {
+  display: inline;
+  float: none;
+}
+
+.gmaps-tabs-nav-top .gmaps-tabs .gmaps-tabs-panel {
+  margin: .25em 0 0;
+  overflow: visible;
+}
+
+.gmaps-tabs-nav-bottom .gmaps-tabs .gmaps-tabs-nav {
+  padding: 0.3em 0 0;
+}
+
+.gmaps-tabs-nav-bottom .gmaps-tabs .gmaps-tabs-panel {
+  margin: 0 0 .25em;
+  height: 200px;
+  overflow: auto;
+}
+
+/*
+ * Left, right nav
+ */
+.gmaps-tabs-nav-left .gmaps-tabs ul.gmaps-tabs-nav,
+.gmaps-tabs-nav-right .gmaps-tabs ul.gmaps-tabs-nav {
+  width: 150px;
+  display: block;
+}
+
+.gmaps-tabs-nav-left .gmaps-tabs ul.gmaps-tabs-nav {
+  float: left;
+}
+
+.gmaps-tabs-nav-right .gmaps-tabs ul.gmaps-tabs-nav {
+  float: right;
+}
+
+.gmaps-tabs-nav-left .gmaps-tabs ul.gmaps-tabs-nav li.gmaps-tabs-tab,
+.gmaps-tabs-nav-right .gmaps-tabs ul.gmaps-tabs-nav li.gmaps-tabs-tab {
+  margin-bottom: 2px;
+  display: block;
+}
+
+.gmaps-tabs-nav-left .gmaps-tabs ul.gmaps-tabs-nav li.gmaps-tabs-tab a,
+.gmaps-tabs-nav-right .gmaps-tabs ul.gmaps-tabs-nav li.gmaps-tabs-tab a {
+  display: block;
+  padding: 2px .75em;
+  white-space: normal;
+  top: 0;
+}
+
+.gmaps-tabs-nav-left .gmaps-tabs .gmaps-tabs-panel {
+  margin: 0 0 0 155px;
+}
+
+.gmaps-tabs-nav-right .gmaps-tabs .gmaps-tabs-panel {
+  margin: 0 155px 0 0;
+}
+
+/*
+ * Error, disabled
+ */
+.gmaps-tabs ul.gmaps-tabs-nav li.gmaps-tabs-tab a.error,
+.gmaps-tabs ul.gmaps-tabs-nav li.ui-tabs-selected a.error,
+.gmaps-tabs ul.gmaps-tabs-nav li.gmaps-tabs-tab a.error:active,
+.gmaps-tabs ul.gmaps-tabs-nav li.gmaps-tabs-tab a.error:hover {
+  background: #fcc;
+  color: #a30000;
+}
+
+.gmaps-tabs ul.gmaps-tabs-nav li.ui-tabs-disabled a,
+.gmaps-tabs ul.gmaps-tabs-nav li.ui-tabs-disabled a:visited,
+.gmaps-tabs ul.gmaps-tabs-nav li.ui-tabs-disabled a_active,
+.gmaps-tabs ul.gmaps-tabs-nav li.ui-tabs-disabled a:hover,
+.gmaps-tabs-nav-bottom .gmaps-tabs ul.gmaps-tabs-nav li.ui-tabs-disabled a,
+.gmaps-tabs-nav-bottom .gmaps-tabs ul.gmaps-tabs-nav li.ui-tabs-disabled a:visited,
+.gmaps-tabs-nav-bottom .gmaps-tabs ul.gmaps-tabs-nav li.ui-tabs-disabled a_active,
+.gmaps-tabs-nav-bottom .gmaps-tabs ul.gmaps-tabs-nav li.ui-tabs-disabled a:hover {
+  background: #eee;
+  color: #aaa;
+  font-style: italic;
+  font-weight: normal;
+}
+
+/*
+ * AHAH/AJAX loading
+ */
+.gmaps-tabs .gmaps-tabs-content-loading .ahah-progress {
+  float: none;
+}
+
+.gmaps-tabs .gmaps-tabs-content-loading .ahah-progress .clear-throbber {
+  clear: both;
+}
+
+.gmaps-tabs .gmaps-tabs-content-loading .ahah-progress .message {
+  font-weight: bold;
+}
+
+/*
+ * Maps
+ */
+.resizable-gmaps-map-container .grippie, .resizable-gmaps-svu-container .grippie {
+  background: #EEEEEE url(../../../../../misc/grippie.png) no-repeat scroll center 2px;
+  border-color: #DDDDDD;
+  border-style: solid;
+  border-width: 0 1px 1px;
+  cursor: s-resize;
+  height: 9px;
+  overflow: hidden;
+}
+
+.gmaps-map-container span.loading {
+  display: none;
+}
+
+.gmaps-map-svu-wrapper {
+  display: none;
+}
+
+.gmaps-map-control-extdragzoom-starting {
+  width: 52px;
+  border: 1px solid blue;
+  padding: 2px;
+  text-align: center;
+}
+
+.gmaps-map-control-extdragzoom-button {
+  background: #fff;
+}
+
+.gmaps-map-control-extdragzoom-back {
+  background: #fff;
+  display: none;
+}
+
+.gmaps-map-control-extdragzoom-zooming {
+  background: #ff0;
+}
+
+.gmaps-map-item .gmaps-map-bb {
+  position: relative;
+  padding-top: 0.25em;
+}
+
+.gmaps-map-item .gmaps-map-bb .gmaps-info-window-title,
+.gmaps-map-item .gmaps-map-bb .gmaps-info-window-content {
+  margin-top: 1em;
+}
+
+.gmaps-map-item .gmaps-map-bb .gmaps-map-bb-close {
+  width: 12px;
+  height: 12px;
+  background: transparent url(extiw_buttons.png) no-repeat scroll -24px 0;
+  cursor: pointer;
+  margin: 0 0 0.35em 0.35em;
+  position: absolute;
+  top: 2px;
+  right: 0px;
+  z-index: 100;
+}
+
+.gmaps-map-item .gmaps-map-bb .gmaps-bbinfowindow-minimize,
+.gmaps-map-item .gmaps-map-bb .gmaps-bbinfowindow-maximize {
+  width: 12px;
+  height: 12px;
+  background: transparent none no-repeat scroll 0 0;
+  cursor: pointer;
+  margin: 0 0 0.35em 0.35em;
+  position: absolute;
+  top: 2px;
+  right: 14px;
+  z-index: 100;
+}
+
+.gmaps-map-item .gmaps-map-bb .gmaps-bbinfowindow-minimize {
+  background: transparent url(extiw_buttons.png) no-repeat scroll 0 0;
+}
+
+.gmaps-map-item .gmaps-map-bb .gmaps-bbinfowindow-maximize {
+  background: transparent url(extiw_buttons.png) no-repeat scroll -12px 0;
+}
+
+/*
+ * Extended Info window
+ */
+.gmaps-extinfowindow {
+  width: 450px;
+}
+
+.gmaps-extinfowindow-tl,
+.gmaps-extinfowindow-tr,
+.gmaps-extinfowindow-t,
+.gmaps-extinfowindow-l,
+.gmaps-extinfowindow-r,
+.gmaps-extinfowindow-bl,
+.gmaps-extinfowindow-br,
+.gmaps-extinfowindow-b {
+  background: #fff;
+  border-style: solid;
+  border-color: #027ac6;
+}
+
+
+.gmaps-extinfowindow-tl,
+.gmaps-extinfowindow-tr {
+  width: 1em;
+  height: 1em;
+}
+
+.gmaps-extinfowindow-tl {
+  border-width: 1px 0 0 1px;
+}
+
+.gmaps-extinfowindow-tr {
+  border-width: 1px 1px 0 0;
+}
+
+.gmaps-extinfowindow-t {
+  width: 450px;
+  height: 1em;
+  border-width: 1px 0 0;
+}
+
+.gmaps-extinfowindow-bl,
+.gmaps-extinfowindow-br {
+  width: 1em;
+  height: 1em;
+}
+
+.gmaps-extinfowindow-bl {
+  border-width: 0 0 1px 1px;
+}
+
+.gmaps-extinfowindow-br {
+  border-width: 0 1px 1px 0;
+}
+
+.gmaps-extinfowindow-b {
+  height: 1em;
+  width: 450px;
+  border-width: 0 0 1px;
+}
+
+.gmaps-extinfowindow-l,
+.gmaps-extinfowindow-r {
+  width: 1em;
+}
+
+.gmaps-extinfowindow-l {
+  border-width: 0 0 0 1px;
+}
+
+.gmaps-extinfowindow-r {
+  border-width: 0 1px 0 0;
+}
+
+.gmaps-extinfowindow-contents {
+  background: #fff;
+}
+
+.gmaps-extinfowindow-close {
+  width: 12px;
+  height: 12px;
+  background: transparent url(extiw_buttons.png) no-repeat scroll -24px 0;
+  margin-top: 2px;
+  cursor: pointer;
+}
+
+.gmaps-extinfowindow-min,
+.gmaps-extinfowindow-max {
+  width: 12px;
+  height: 12px;
+  background: transparent none no-repeat scroll center center;
+  display: none;
+  margin-top: 2px;
+  cursor: pointer;
+}
+
+.gmaps-extinfowindow-min {
+  background: transparent url(extiw_buttons.png) no-repeat scroll 0 0;
+}
+
+.gmaps-extinfowindow-max {
+  background: transparent url(extiw_buttons.png) no-repeat scroll -12px 0;
+}
+/*
+ * Tabbed Max Content Info window
+ */
+.gmaps-tmcinfowindow-tabbar {
+  margin: 0 1em 0 0;
+  padding: 0 0 0.3em;
+  background: none;
+  border: 0;
+  white-space: nowrap;
+  vertical-align: bottom;
+}
+
+.gmaps-tmcinfowindow-tableft {
+}
+
+.gmaps-tmcinfowindow-tabright {
+}
+
+.gmaps-tmcinfowindow-taboff {
+  padding: 4px 1em;
+  margin: 0 0 0 1px;
+  position: relative;
+  text-decoration: none;
+  background: transparent;
+  border: 0;
+  color: #027ac6;
+  font-weight: normal;
+  cursor: pointer;
+}
+
+.gmaps-tmcinfowindow-tabon {
+  background: #a6cee7 url(bg-blue.png) repeat-x scroll 0 100%;
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.gmaps-tmcinfowindow-content {
+  border: 1px solid #d9eaf5;
+  padding: 1em;
+  overflow: auto;
+  margin: .25em 1em 0 0;
+}
+
+.gmaps-tmcinfowindow-summary {
+  overflow: auto;
+  margin: 0 1em 1em 0;
+}
+
+.gmaps-labeled-marker-label {
+  color: red;
+}
+
+.gmaps-labeled-marker-protected-label {
+  font-size: 2em;
+  font-weight: bold;
+  color: red;
+}
+
+/*
+ * Map content
+ */
+.gmaps-map-content .box {
+  margin-top: 0.5em;
+  margin-bottom: 1.5em;
+}
+
+html.js .gmaps-map-content fieldset.collapsible legend a * {
+  display: inline;
+}
+
+/*
+ * Reference location block
+ */
+#block-gmaps-1 .gmaps-reference-location span.gmaps-adr-plain,
+#block-gmaps-1 .gmaps-reference-location span.gmaps-coords-plain {
+  display: block;
+}
+
+#block-gmaps-1 .form-gmaps-address-country {
+  width: 200px;
+}
+
+#block-gmaps-1 .gmaps-geocoder-options {
+  margin-left: 0;
+}
+
+#block-gmaps-1 .gmaps-geocoder-options label.option {
+  font-size: 90%;
+}
+
+#block-gmaps-1 .form-gmaps-address label,
+#block-gmaps-1 .form-gmaps-point label,
+#block-gmaps-1 .form-gmaps-point-bounds .form-gmaps-point label {
+  display: none;
+}
+
+#block-gmaps-1 .form-gmaps-point-bounds label {
+  display: block;
+}
+
+#block-gmaps-1 .form-gmaps-point-pov label {
+  display: inline;
+}
+
+#block-gmaps-1 .form-gmaps-point .form-gmaps-tabs .gmaps-tabs-panel {
+  height: auto;
+}
+
+
+/*
+ * Reference location block
+ */
+.node-form .form-gmaps-geocoder .form-text {
+  display: inline;
+  width: auto;
+}
+
+/*
+ * Grid
+ */
+.gmaps-grid tbody {
+  border-top: none;
+}

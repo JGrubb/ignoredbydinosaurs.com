@@ -1,0 +1,14 @@
+; $Id: gmaps_views_location.info,v 1.1.2.1 2009/12/12 08:43:48 xmarket Exp $
+name = "GMaps Views Location"
+description = "Location module based point option handlers for content and user markers."
+core = 6.x
+dependencies[] = gmaps_views
+dependencies[] = location
+package = "Google Maps Tools"
+
+; Information added by drupal.org packaging script on 2010-05-06
+version = "6.x-2.1"
+core = "6.x"
+project = "gmaps"
+datestamp = "1273160107"
+

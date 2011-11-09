@@ -1,0 +1,82 @@
+
+Geonames API Documentation
+
+Defining new services: Service Definitions (Service Modules)
+--------------------------------------------------------------------------------
+The geonames_MODULENAME_geoconfig function must return configuration data. 
+The configuration is an array with the following set of properties defined
+in an associative array (see below the list for explanations):
+
+ - service_name             string               name to refer to in code
+ - service_full_name        string               Human Readable Name
+ - description              string               Human Readable Description
+ - service_path             string               Geonames Service Location (path)
+ - credit_cost              int                  Commercial Services Credit Price
+ - result_cache_prefix      string               Unique cache prefix (end with :)
+ - data_cache_prefix        string               Unique cache prefix (end with :)
+ - allowed_parameters       associative array    see below
+ - array_parameters         array of strings     optional, see below
+ - required_parameters      array of strings     optional, see below
+                            or array of array   
+ - required_parameters_type string               mandatory if required_parameters
+ - query_defaults           associative array    optional, see below
+ - columns                  array of strings     mandatory if no style is set
+ - pager                    boolean              optional, see below
+ - detect_style             boolean              optional, see below
+
+Parameter: allowed_parameters (associative array) 
+This array defines which parameters are allowed in queries, all other parameters
+will be omitted from the query. The array must be associative, where the key is 
+"our" parameter name (Drupal style, lowercase) and the value is GeoNames style 
+(mixedCase). 
+All services that support the style parameter (short/medium/full/long) should
+have the parameter detect_style set to TRUE, unless the query default value 
+for style allways is to be used.
+This structure allows the GeoNames API to use other parameter names than the 
+actual GeoNames Service -- for instance GeoNames' "q" parameter should allways
+be named "query" when we refer to it in Drupal. This will prevent Drupal's
+q=node/x parameter to be added to the array if the query is passed by URL.
+
+Parameter: array_parameters (array of strings)
+Any parameter specified here will allow the parameter to be an array. Some of
+the GeoNames Services allow several equally named parameters to be sent -- for
+instance the Fulltext Search service. You may for instance specify several
+Countries to restrict your query to. The result is several equally named 
+parameters in the query URL passed to Geonames (i.e. &country=NO&country=SE)
+
+Parameter: required_parameters (array of strings OR array with arrays of strings)
+Some services have several sets of requirements, therefore we may specify this
+parameter as an array with arrays of strings.
+Each subset (or just the single set) will be used to verify if the query 
+contains the required parameters. In this way, we prevent requests to GeoNames
+that will just return error messages.
+
+Parameter: required_parameters_type (string)
+The string may be either 'single' or 'all'. This parameter is required if the
+parameter "required_parameters" is set.
+Single: One of the parameters in required_parameters is mandatory
+All: All of the parameters defined in required_parameters are mandatory
+
+Parameter: query_defaults (associative array)
+This associative array is optional. When set, the key/value pairs will be added
+as default query parameters to a request. The values may be overridden by the 
+user-specified query (if $columns is passed in the geonames_query).
+
+Parameter: columns (array of strings)
+This parameter is mandatory if the query parameter 'style' is not available, or
+set, in the required_parameters. If style is set, columns is optional. The field
+names specified here will be added to your results (and all others will be 
+ignored). The parameter may be overridden by the user-specified query (if 
+$columns is passed in the geonames_query)
+
+Parameter: detect_style (boolean)
+This optional parameter may be set to TRUE if the service supports the 
+short/medium/long/full styles. The API will (based on the $columns passed in the
+geonames_query) automatically detect the style that should be requested. The 
+purpose of the detection is to minimize the amount of data requested from the 
+GeoNames server.
+
+Parameter: pager (boolean)
+This optional parameter may be set to TRUE if you want/need to calculate pager 
+data for the results. The result object will get an extra property $result->pager
+which contains everything you need to set up a set of pages.

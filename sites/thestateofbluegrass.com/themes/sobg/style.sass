@@ -1,5 +1,9 @@
 @import lib
 $dark_blue: #0F2B4D
+$brown: #55310b
+
+body
+  background: $brown
 
 #left
   @include grid(3)
@@ -20,7 +24,9 @@ $dark_blue: #0F2B4D
     font-weight: normal
 
 .logo
-  @include grid(12)
+  @include grid(3)
+  img
+    max-width: 100%
 
 .wrap
   @include container($max-width: 100%)
@@ -72,3 +78,6 @@ input#edit-submit
 
 #autocomplete
   background: #fff
+  
+#footer
+  @include gradient(lighten($brown, 5%), $brown)

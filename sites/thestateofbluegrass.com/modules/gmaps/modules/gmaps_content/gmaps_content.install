@@ -1,0 +1,1190 @@
+<?php
+// $Id: gmaps_content.install,v 1.1.2.11 2010/02/26 14:13:03 xmarket Exp $
+
+/**
+ * Implementation of hook_schema().
+ */
+function gmaps_content_schema() {
+  drupal_load('module', 'gmaps');
+  drupal_load('module', 'gmaps_content');
+  
+  $schema = array();
+  $schema['gmaps_content_address'] = array(
+    'description' => 'Stores address values.',
+    'fields' => array(
+      'vid' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'default' => 0,
+        'description' => 'Reference to {node}.vid',
+      ),
+      'nid' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'default' => 0,
+        'description' => 'Reference to {node}.nid',
+      ),
+      'field_name' => array(
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Name of the field instance',
+      ),
+      'delta' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'default' => 0,
+        'description' => 'Linear index for multiple values',
+      ),
+      'country' => array(
+        'type' => 'char',
+        'length' => 2,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'ISO 2 country code',
+      ),
+      'adminarea' => array(
+        'type' => 'varchar',
+        'length' => GMAPS_ADDRESS_PART_MAXLENGTH,
+        'not null' => FALSE,
+        'description' => 'Administrative area. State, province, etc',
+      ),
+      'subadminarea' => array(
+        'type' => 'varchar',
+        'length' => GMAPS_ADDRESS_PART_MAXLENGTH,
+        'not null' => FALSE,
+        'description' => 'Sub-administrative area',
+      ),
+      'locality' => array(
+        'type' => 'varchar',
+        'length' => GMAPS_ADDRESS_PART_MAXLENGTH,
+        'not null' => FALSE,
+        'description' => 'City, town, village',
+      ),
+      'deplocality' => array(
+        'type' => 'varchar',
+        'length' => GMAPS_ADDRESS_PART_MAXLENGTH,
+        'not null' => FALSE,
+      ),
+      'postalcode' => array(
+        'type' => 'varchar',
+        'length' => 16,
+        'not null' => FALSE,
+      ),
+      'thoroughfare' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+        'description' => 'Street, address',
+      ),
+      'privacy' => array(
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'default' => 0,
+        'description' => 'Privacy level',
+      ),
+      'search' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+        'description' => 'Geocoder search value',
+      ),
+      'u_adminarea' => array(
+        'type' => 'varchar',
+        'length' => GMAPS_ADDRESS_PART_MAXLENGTH,
+        'not null' => FALSE,
+        'description' => 'UPPERCASE',
+      ),
+      'u_subadminarea' => array(
+        'type' => 'varchar',
+        'length' => GMAPS_ADDRESS_PART_MAXLENGTH,
+        'not null' => FALSE,
+        'description' => 'UPPERCASE',
+      ),
+      'u_locality' => array(
+        'type' => 'varchar',
+        'length' => GMAPS_ADDRESS_PART_MAXLENGTH,
+        'not null' => FALSE,
+        'description' => 'UPPERCASE',
+      ),
+      'u_deplocality' => array(
+        'type' => 'varchar',
+        'length' => GMAPS_ADDRESS_PART_MAXLENGTH,
+        'not null' => FALSE,
+        'description' => 'UPPERCASE',
+      ),
+      'u_postalcode' => array(
+        'type' => 'varchar',
+        'length' => 16,
+        'not null' => FALSE,
+        'description' => 'UPPERCASE',
+      ),
+      'u_thoroughfare' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+        'description' => 'UPPERCASE',
+      ),
+    ),
+    'primary key' => array('vid', 'field_name', 'delta'),
+    'indexes' => array(
+      'filter' => array(
+        'country',
+        array('u_adminarea', 32),
+        array('u_subadminarea', 32),
+        array('u_locality', 32),
+        array('u_deplocality', 32),
+        'u_postalcode',
+        array('u_thoroughfare', 32),
+      ),
+      'fast_filter' => array(
+        'country',
+        'u_locality',
+      ),
+    ),
+  );
+  $schema['gmaps_content_point'] = array(
+    'description' => 'Stores point values.',
+    'fields' => array(
+      'vid' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'default' => 0,
+        'description' => 'Reference to {node}.vid',
+      ),
+      'nid' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'default' => 0,
+        'description' => 'Reference to {node}.nid',
+      ),
+      'field_name' => array(
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Name of the field instance',
+      ),
+      'delta' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'default' => 0,
+        'description' => 'Linear index for multiple values',
+      ),
+      'map_type' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => GMAPS_MAP_EARTH,
+        'description' => 'GMaps map type the coordinates belong to',
+      ),
+      'latitude' => array(
+        'type' => 'numeric',
+        'not null' => TRUE,
+        'default' => 0.0,
+        'precision' => 8,
+        'scale' => 6,
+      ),
+      'longitude' => array(
+        'type' => 'numeric',
+        'not null' => TRUE,
+        'default' => 0.0,
+        'precision' => 9,
+        'scale' => 6,
+      ),
+      'elevation' => array(
+        'type' => 'numeric',
+        'not null' => FALSE,
+        'precision' => 7,
+        'scale' => 2,
+      ),
+      'x' => array(
+        'type' => 'float',
+        'not null' => FALSE,
+      ),
+      'y' => array(
+        'type' => 'float',
+        'not null' => FALSE,
+      ),
+      'z' => array(
+        'type' => 'float',
+        'not null' => FALSE,
+      ),
+      'privacy' => array(
+        'type' => 'text',
+        'size' => 'normal',
+        'not null' => FALSE,
+        'serialize' => TRUE,
+      ),
+      'bounds' => array(
+        'type' => 'text',
+        'size' => 'normal',
+        'not null' => FALSE,
+        'serialize' => TRUE,
+      ),
+      'pov' => array(
+        'type' => 'text',
+        'size' => 'normal',
+        'not null' => FALSE,
+        'serialize' => TRUE,
+      ),
+      'search' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+        'description' => 'Geocoder search value',
+      ),
+    ),
+    'primary key' => array('vid', 'field_name', 'delta'),
+    'indexes' => array(
+      'bounds' => array(
+        'map_type', 'latitude', 'longitude'
+      ),
+    ),
+  );
+  
+  $schema[GMAPS_CONTENT_CACHE_TABLE_MAP] = drupal_get_schema_unprocessed('system', 'cache');
+  $schema[GMAPS_CONTENT_CACHE_TABLE_MAP]['description'] = 'Cache table for interactive node display maps.';
+
+  $schema[GMAPS_CONTENT_CACHE_TABLE_STATIC_MAP] = $schema[GMAPS_CONTENT_CACHE_TABLE_MAP];
+  $schema[GMAPS_CONTENT_CACHE_TABLE_STATIC_MAP]['description'] = 'Cache table for static node display maps.';
+  
+  return $schema;
+}
+
+/**
+ * Implementation of hook_install().
+ */
+function gmaps_content_install() {
+  drupal_install_schema('gmaps_content');
+  
+  drupal_load('module', 'content');
+  content_notify('install', 'gmaps_content');
+}
+
+/**
+* Implementation of hook_enable().
+*/
+function gmaps_content_enable() {
+  drupal_load('module', 'content');
+  content_notify('enable', 'gmaps_content');
+}
+
+/**
+* Implementation of hook_disable().
+*/
+function gmaps_content_disable() {
+  drupal_load('module', 'content');
+  content_notify('disable', 'gmaps_content');
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function gmaps_content_uninstall() {
+  drupal_uninstall_schema('gmaps_content');
+
+  drupal_load('module', 'content');
+  content_notify('unistall', 'gmaps_content');
+}
+
+/**
+ * Implementation of hook_update_6000().
+ */
+function gmaps_content_update_6000(&$sandbox = NULL) {
+  if (is_null(variable_get('gmaps_content_sm_cache', NULL))) {
+    return array('#finished' => 1);
+  }
+  
+  if ($abort = content_check_update('gmaps_content')) {
+    return $abort;
+  }
+  
+  $t = get_t();
+  $ret = array();
+  
+  drupal_load('module', 'gmaps_content');
+  
+  if (empty($sandbox) || is_null($sandbox['progress'])) {
+    if (empty($sandbox)) {
+      $sandbox = array('progress' => 0);
+    }
+    $ret['#finished'] = 0;
+    _gmaps_content_update_6000_tables($ret, $sandbox);
+    return $ret;
+  }
+  
+  if ($sandbox['progress'] < 2) {
+    _gmaps_content_update_6000_address($ret, $sandbox);
+    return $ret;
+  }
+  
+  if ($sandbox['progress'] < 3) {
+    _gmaps_content_update_6000_point($ret, $sandbox);
+    return $ret;
+  }
+  
+  if ($sandbox['progress'] < 4) {
+    _gmaps_content_update_6000_anp($ret, $sandbox);
+    return $ret;
+  }
+  
+  _gmaps_content_update_6000_finish($ret, $sandbox);
+    
+  $ret['#finished'] = 1;
+  return $ret;
+}
+
+function _gmaps_content_update_6000_tables(&$ret, &$sandbox) {
+  $t = get_t();
+  
+  //content data
+  drupal_load('module', 'content');
+  module_load_include('inc', 'gmaps_content', 'includes/gmaps_content.admin');
+  
+  $field_types = array(
+    'gmaps_address' => 'gmaps_address',
+    'gmaps_gaddress' => 'gmaps_anp',
+    'gmaps_gaddress_marker' => 'gmaps_anp',
+    'gmaps_point' => 'gmaps_point',
+    'gmaps_marker' => 'gmaps_point',
+  );
+  $widget_types = array(
+    'gmaps_address' => 'gmaps_content_address',
+    'gmaps_gaddress' => 'gmaps_content_anp',
+    'gmaps_gaddress_marker' => 'gmaps_content_anp',
+    'gmaps_point' => 'gmaps_content_point',
+    'gmaps_marker' => 'gmaps_content_point',
+  );
+  
+  $field_gs = array();
+  
+  $result = db_query("SELECT * FROM {". content_field_tablename() ."} WHERE type IN (". db_placeholders($field_types, 'varchar') .")", array_keys($field_types));
+  while ($field = db_fetch_array($result)) {
+    $field['type'] = $field_types[$field['type']];
+
+    $address = ($field['type'] == 'gmaps_address' || $field['type'] == 'gmaps_anp');
+    $point = ($field['type'] == 'gmaps_point' || $field['type'] == 'gmaps_anp');
+
+    $global_settings = unserialize($field['global_settings']);
+    $gs = _gmaps_content_field_default_settings($field);
+
+    if ($address) {
+      $field['required'] = $global_settings['address_required_accuracy'];
+      $gs['allowed_countries'] = $global_settings['address_allowed_countries'];
+      if (!$point) {
+        $gs['enable_privacy'] = $global_settings['address_privacy'];
+      }
+    }
+    
+    if ($point) {
+      $gs['map_type'] = $global_settings['point_map_type'];
+      if (!$address) {
+        $gs['enable_privacy'] = $global_settings['point_privacy'];
+      }
+    }
+    
+    if ($address && $point) {
+      $gs['enable_privacy'] = ($global_settings['address_privacy'] || $global_settings['point_privacy']) ? 1 : 0;
+    }
+    
+    $field_gs[$field['field_name']] = $gs;
+    
+    $field['global_settings'] = serialize(array('gmaps' => $gs));
+    
+    $ur = db_query("UPDATE {". content_field_tablename() ."} SET module = 'gmaps_content', type = '%s', global_settings = '%s' WHERE field_name = '%s'", $field['type'], $field['global_settings'], $field['field_name']);
+    $ret[] = array('success' => $ur !== FALSE, 'query' => "UPDATE {". content_field_tablename() ."} SET module = 'gmaps', type = '". $field['type'] ."', global_settings = '". $field['global_settings'] ."' WHERE field_name = '{$field['field_name']}'");
+  }
+  
+  $result = db_query("SELECT * FROM {". content_instance_tablename() ."} WHERE widget_type IN (". db_placeholders($widget_types, 'varchar') .")", array_keys($widget_types));
+  while ($widget = db_fetch_array($result)) {
+    $widget['widget_type'] = $widget_types[$widget['widget_type']];
+    
+    $gs = $field_gs[$widget['field_name']];
+    $widget['widget_settings'] = unserialize($widget['widget_settings']);
+    
+    $w = array(
+      'type' => $widget['widget_type'],
+      'gmaps' => $gs,
+    );
+    
+    $gs = array_merge($gs, _gmaps_content_widget_default_settings($w));
+    
+    $gs['meta']['taxonomy']['location'] = $widget['widget_settings']['address_location_terms'];
+    $widget['widget_settings'] = serialize(array('gmaps' => $gs));
+    
+    $widget['display_settings'] = unserialize($widget['display_settings']);
+    foreach ($widget['display_settings'] as $context => $display_setting) {
+      if (is_array($display_setting)) {
+        $widget['display_settings'][$context]['format'] = $display_setting['format'] == 'hidden' ? $display_setting['format'] : 'default';
+      }
+    }
+    $widget['display_settings'] = serialize($widget['display_settings']);
+    
+    $ur = db_query("UPDATE {". content_instance_tablename() ."} SET widget_module = 'gmaps_content', widget_type = '%s', widget_settings = '%s', display_settings = '%s' WHERE field_name = '%s' AND type_name = '%s'", $widget['widget_type'], $widget['widget_settings'], $widget['display_settings'], $widget['field_name'], $widget['type_name']);
+    $ret[] = array('success' => $ur !== FALSE, 'query' => "UPDATE {". content_instance_tablename() ."} SET widget_module = 'gmaps', widget_type = '". $widget['widget_type'] ."', widget_settings = '". $widget['widget_settings'] ."', display_settings = '". $widget['display_settings'] ."' WHERE field_name = '{$widget['field_name']}' AND type_name = '{$widget['type_name']}'");
+    
+    $ur = db_query("UPDATE {". content_field_tablename() ."} SET global_settings = '%s' WHERE field_name = '%s'", $widget['widget_settings'], $widget['field_name']);
+    $ret[] = array('success' => $ur !== FALSE, 'query' => "UPDATE {". content_field_tablename() ."} SET global_settings = '". $widget['widget_settings'] ."' WHERE field_name = '{$widget['field_name']}'");
+  }
+  
+  content_associate_fields('gmaps_content');
+  
+  //new tables
+  if ($table = _gmaps_content_update_6000_get_schema(GMAPS_CONTENT_CACHE_TABLE_MAP)) {
+    db_create_table($ret, GMAPS_CONTENT_CACHE_TABLE_MAP, $table);
+  }
+  if ($table = _gmaps_content_update_6000_get_schema(GMAPS_CONTENT_CACHE_TABLE_STATIC_MAP)) {
+    db_create_table($ret, GMAPS_CONTENT_CACHE_TABLE_STATIC_MAP, $table);
+  }
+  if (empty($ret)) {
+    return array('#abort' => array('success' => FALSE, 'query' => $t('Unable to create cache tables.')));
+  }
+  else {
+    foreach($ret as $i => $result) {
+      if (is_numeric($i) && !$result['success']) {
+        return array('#abort' => $ret);
+      }
+    }
+  }
+  
+  //changed gmaps_addresses
+  $table_name = 'gmaps_content_address';
+  if ($table = _gmaps_content_update_6000_get_schema($table_name)) {
+    $table_ret = array();
+    db_rename_table($table_ret, 'gmaps_addresses', $table_name);
+    db_drop_index($table_ret, $table_name, 'location');
+    db_drop_primary_key($table_ret, $table_name);
+    foreach($table_ret as $i => $result) {
+      if (is_numeric($i) && !$result['success']) {
+        $ret['#abort'] = $result;
+        return;
+      }
+    }
+    $ret = array_merge($ret, $table_ret);
+    
+    $fields = $table['fields'];
+    //not changed
+    unset($fields['vid'], $fields['nid'], $fields['delta'], $fields['country']);
+    
+    //changed
+    $changed = _gmaps_address_get_parts();
+    unset($changed['country']);
+    $changed = array_keys($changed);
+    $changed[] = 'field_name';
+    $changed[] = 'privacy';
+    foreach($changed as $field) {
+      db_change_field($ret, $table_name, $field, $field, $fields[$field]);
+      unset($fields[$field]);
+    }
+    
+    //new
+    foreach($fields as $name => $field) {
+      db_add_field($ret, $table_name, $name, $field);
+    }
+    
+    //new keys, indexes
+    db_add_primary_key($ret, $table_name, $table['primary key']);
+    foreach($table['indexes'] as $name => $fields) {
+      db_add_index($ret, $table_name, $name, $fields);
+    }
+    
+    foreach($ret as $i => $result) {
+      if (is_numeric($i) && !$result['success']) {
+        $ret['#abort'] = $result;
+        return;
+      }
+    }
+  }
+  else {
+    $ret['#abort'] = array('success' => FALSE, 'query' => $t('Missing gmaps_content_address definition.'));
+    return;
+  }
+  
+  //changed gmaps_coordinates
+  $table_name = 'gmaps_content_point';
+  if ($table = _gmaps_content_update_6000_get_schema($table_name)) {
+    $table_ret = array();
+    db_rename_table($table_ret, 'gmaps_coordinates', $table_name);
+    db_drop_index($table_ret, $table_name, 'coordinates');
+    db_drop_primary_key($table_ret, $table_name);
+    foreach($table_ret as $i => $result) {
+      if (is_numeric($i) && !$result['success']) {
+        $ret['#abort'] = $result;
+        return;
+      }
+    }
+    $ret = array_merge($ret, $table_ret);
+    
+    $fields = $table['fields'];
+    //not changed
+    unset($fields['vid'], $fields['nid'], $fields['delta'], $fields['map_type']);
+    
+    //dropped
+    db_drop_field($ret, $table_name, 'subdelta');
+    db_drop_field($ret, $table_name, 'height');
+    
+    //changed
+    $changed = array(
+      'field_name' => 'field_name',
+      'latitude' => 'latitude',
+      'longitude' => 'longitude',
+      'height_m' => 'elevation',
+      'x' => 'x',
+      'y' => 'y',
+      'z' => 'z',
+    );
+    foreach($changed as $old_name => $field) {
+      db_change_field($ret, $table_name, $old_name, $field, $fields[$field]);
+      unset($fields[$field]);
+    }
+    
+    //new
+    foreach($fields as $name => $field) {
+      db_add_field($ret, $table_name, $name, $field);
+    }
+    
+    //new keys, indexes
+    db_add_primary_key($ret, $table_name, $table['primary key']);
+    foreach($table['indexes'] as $name => $fields) {
+      db_add_index($ret, $table_name, $name, $fields);
+    }
+    
+    foreach($ret as $i => $result) {
+      if (is_numeric($i) && !$result['success']) {
+        $ret['#abort'] = $result;
+        return;
+      }
+    }
+  }
+  else {
+    $ret['#abort'] = array('success' => FALSE, 'query' => $t('Missing gmaps_content_point definition.'));
+    return;
+  }
+  
+  $sandbox['progress'] = 1;
+  $ret['#finished'] = 1/5;
+}
+
+function _gmaps_content_update_6000_address(&$ret, &$sandbox) {
+  $t = get_t();
+  
+  if (is_null($sandbox['address'])) {
+    $sandbox['address'] = array(
+      'last' => 0,
+      'subtotal' => 0,
+      'sum' => db_result(db_query('SELECT COUNT(DISTINCT(vid)) FROM {gmaps_content_address}')),
+      'deletes' => 0,
+      'updates' => 0,
+    );
+  }
+  $i = 0;
+  $a = &$sandbox['address'];
+  
+  $result = db_query_range('SELECT DISTINCT(vid) FROM {gmaps_content_address} WHERE vid > %d ORDER BY vid ASC', $a['last'], 0, 100);
+  while($row = db_fetch_object($result)) {
+    $field_result = db_query("SELECT * FROM {gmaps_content_address} WHERE vid = %d", $row->vid);
+    while($adr = db_fetch_object($field_result)) {
+      if (gmaps_address_empty($adr)) {
+        db_query("DELETE FROM {gmaps_content_address} WHERE vid = %d AND field_name = '%s' AND delta = %d", $adr->vid, $adr->field_name, $adr->delta);
+        $a['deletes']++;
+      }
+      else {
+        gmaps_address_prepare_record($adr);
+        
+        _gmaps_content_update_6000_write_record('gmaps_content_address', $adr, array('vid', 'field_name', 'delta'));
+        $a['updates']++;
+      }
+    }
+    $a['last'] = $row->vid;
+    $a['subtotal']++;
+    $i++;
+  }
+  
+  if ($i < 100) {
+    $ret[] = array('success' => TRUE, 'query' => $t('@count addresses have been deleted', array('@count' => $a['deletes'])));
+    $ret[] = array('success' => TRUE, 'query' => $t('@count addresses have been updated', array('@count' => $a['updates'])));
+    $sandbox['progress'] = 2;
+    $ret['#finished'] = 2/5;
+  }
+  else {
+    $ret['#finished'] = $a['subtotal']/$a['sum'];
+  }
+}
+
+function _gmaps_content_update_6000_point(&$ret, &$sandbox) {
+  $t = get_t();
+  
+  if (is_null($sandbox['point'])) {
+    $sandbox['point'] = array(
+      'last' => 0,
+      'subtotal' => 0,
+      'sum' => db_result(db_query('SELECT COUNT(DISTINCT(vid)) FROM {gmaps_content_point}')),
+      'deletes' => 0,
+      'updates' => 0,
+    );
+  }
+  $i = 0;
+  $a = &$sandbox['point'];
+  
+  $units = array(
+    'km' => 'kilometer',
+    'm' => 'meter',
+    'cm' => 'centimeter',
+    'mi' => 'en_mile',
+    'yd' => 'en_yard',
+    'ft' => 'en_foot',
+    'in' => 'en_inch',
+  );
+  
+  $result = db_query_range('SELECT DISTINCT(vid) FROM {gmaps_content_point} WHERE vid > %d ORDER BY vid ASC', $a['last'], 0, 100);
+  while($row = db_fetch_object($result)) {
+    $field_result = db_query("SELECT gcp.*, gp.privacy old_privacy FROM {gmaps_content_point} gcp LEFT JOIN {gmaps_points} gp ON gcp.vid = gp.vid AND gcp.field_name = gp.field_name AND gcp.delta = gp.delta WHERE gcp.vid = %d", $row->vid);
+    while($point = db_fetch_object($field_result)) {
+      if (gmaps_point_empty($point)) {
+        db_query("DELETE FROM {gmaps_content_point} WHERE vid = %d AND field_name = '%s' AND delta = %d", $point->vid, $point->field_name, $point->delta);
+        $a['deletes']++;
+      }
+      else {
+        $old_privacy = unserialize($point->old_privacy);
+        unset($point->old_privacy);
+        if (!empty($old_privacy)) {
+          $point->privacy = array(
+            'value' => $old_privacy['distance'],
+            'unit' => $units[$old_privacy['unit']],
+          );
+        }
+        
+        if (empty($point->x) || empty($point->y) || empty($point->z)) {
+          gmaps_coords_add_cart($point);
+        }
+        
+        _gmaps_content_update_6000_write_record('gmaps_content_point', $point, array('vid', 'field_name', 'delta'));
+        $a['updates']++;
+      }
+    }
+    $a['last'] = $row->vid;
+    $a['subtotal']++;
+    $i++;
+  }
+  
+  if ($i < 100) {
+    $ret[] = array('success' => TRUE, 'query' => $t('@count points have been deleted', array('@count' => $a['deletes'])));
+    $ret[] = array('success' => TRUE, 'query' => $t('@count points have been updated', array('@count' => $a['updates'])));
+    $sandbox['progress'] = 3;
+    $ret['#finished'] = 3/5;
+  }
+  else {
+    $ret['#finished'] = $a['subtotal']/$a['sum'];
+  }
+}
+
+function _gmaps_content_update_6000_anp(&$ret, &$sandbox) {
+  $t = get_t();
+  
+  if (is_null($sandbox['anp'])) {
+    drupal_load('module', 'content');
+    $sandbox['anp'] = array(
+      'last' => 0,
+      'max' => db_result(db_query('SELECT MAX(vid) FROM {node_revisions}')),
+      'ap' => FALSE,
+      'fields' => array(),
+      'addresses' => 0,
+      'points' => 0,
+    );
+    $result = db_query("SELECT field_name FROM {". content_field_tablename() ."} WHERE type = 'gmaps_anp'");
+    while($row = db_fetch_object($result)) {
+      $sandbox['anp']['fields'][] = $row->field_name;
+    }
+    
+    if (empty($sandbox['anp']['max']) || empty($sandbox['anp']['fields'])) {
+      $sandbox['progress'] = 4;
+      $ret['#finished'] = 4/5;
+      return;
+    }
+  }
+  
+  $i = 0;
+  $a = &$sandbox['anp'];
+  $args = array_merge(array($a['last']), $a['fields']);
+  
+  //address without point counterpart
+  if (!$a['ap']) {
+    $result = db_query_range("SELECT gca.* FROM {node_revisions} n INNER JOIN {gmaps_content_address} gca ON n.vid = gca.vid LEFT JOIN {gmaps_content_point} gcp ON gca.vid = gcp.vid AND gca.field_name = gcp.field_name AND gca.delta = gcp.delta WHERE n.vid > %d AND gca.field_name IN (". db_placeholders($a['fields'], 'varchar') .") AND gcp.vid IS NULL ORDER BY n.vid ASC", $args, 0, 200);
+    while($adr = db_fetch_object($result)) {
+      db_query("DELETE FROM {gmaps_content_address} WHERE vid = %d AND field_name = '%s' AND delta = %d", $adr->vid, $adr->field_name, $adr->delta);
+      $i++;
+      $a['addresses']++;
+      $a['last'] = $adr->vid;
+    }
+    if ($i < 200) {
+      $a['ap'] = TRUE;
+      $a['last'] = 0;
+      $i = 200;
+    }
+  }
+  //point without address counterpart
+  else {
+    $result = db_query_range("SELECT gcp.* FROM {node_revisions} n INNER JOIN {gmaps_content_point} gcp ON n.vid = gcp.vid LEFT JOIN {gmaps_content_address} gca ON gca.vid = gcp.vid AND gca.field_name = gcp.field_name AND gca.delta = gcp.delta WHERE n.vid > %d AND gcp.field_name IN (". db_placeholders($a['fields'], 'varchar') .") AND gca.vid IS NULL ORDER BY n.vid ASC", $args, 0, 200);
+    while($point = db_fetch_object($result)) {
+      db_query("DELETE FROM {gmaps_content_point} WHERE vid = %d AND field_name = '%s' AND delta = %d", $point->vid, $point->field_name, $point->delta);
+      $i++;
+      $a['points']++;
+      $a['last'] = $point->vid;
+    }
+  }
+  
+  if ($a['ap'] && $i < 200) {
+    $ret[] = array('success' => TRUE, 'query' => $t('@count AnP addresses have been deleted', array('@count' => $a['addresses'])));
+    $ret[] = array('success' => TRUE, 'query' => $t('@count AnP points have been deleted', array('@count' => $a['points'])));
+    $sandbox['progress'] = 4;
+    $ret['#finished'] = 4/5;
+  }
+  else {
+    $ret['#finished'] = $a['last']/$a['max'];
+  }
+}  
+
+function _gmaps_content_update_6000_finish(&$ret, &$sandbox) {
+  $t = get_t();
+  
+  variable_set('gmaps_taxonomy_page', array(
+    'page' => variable_get('gmaps_content_location_page_length', 10),
+    'feed' => variable_get('gmaps_content_location_feed_length', 10),
+    'order' => '',
+    'strict' => 0,
+  ));
+  variable_set('gmaps_taxonomy_menu', array(
+    'enabled' => variable_get('gmaps_content_menu', 0),
+    'levels' => variable_get('gmaps_content_menu_levels', array('country', 'adminarea', 'locality')),
+    'countries' => variable_get('gmaps_content_menu_countries', array()),
+    'delay' => 86400,
+  ));
+  
+  $dir = file_create_path(variable_get('gmaps_content_sm_image_path', 'gmaps_content_sm_images'));
+  if (is_dir($dir)) {
+    file_scan_directory($dir, '.+', array('.', '..'), 'file_delete');
+    @rmdir($dir);
+  }
+  
+  $vars = array('gmaps_content_sm_cache', 'gmaps_content_sm_image_path', 'gmaps_content_sm_cache_limit_day', 'gmaps_content_sm_cache_limit_count',
+    'gmaps_content_location_page_length', 'gmaps_content_location_feed_length', 'gmaps_content_location_subcolumns',
+    'gmaps_content_location_subcategories', 'gmaps_content_menu', 'gmaps_content_menu_countries', 'gmaps_content_menu_levels',
+    'gmaps_content_menu_dhtml', 'gmaps_content_menu_dhtml_skip', 'gmaps_content_country_term_t', 'gmaps_content_adminarea_term_t',
+    'gmaps_content_subadminarea_term_t', 'gmaps_content_locality_term_t', 'gmaps_content_deplocality_term_t',
+    'gmaps_content_postalcode_term_t'
+  );
+  foreach ($vars as $var) {
+    db_query("DELETE FROM {variable} WHERE name = '%s'", $var);
+    unset($conf[$var]);
+  }
+  cache_clear_all('variables', 'cache');
+
+  $ret['#finished'] = 1;
+}
+
+/**
+ * NULL value enabled replacement of drupal_write_record().
+ */
+function _gmaps_content_update_6000_write_record($table, &$object, $update = array()) {
+  // Standardize $update to an array.
+  if (is_string($update)) {
+    $update = array($update);
+  }
+
+  $schema = _gmaps_content_schema_6000();
+  $schema = $schema[$table];
+  if (empty($schema)) {
+    return FALSE;
+  }
+
+  // Convert to an object if needed.
+  if (is_array($object)) {
+    $a = $object;
+    $object = (object) $object;
+    $array = TRUE;
+  }
+  else {
+    $a = (array)$object;
+    $array = FALSE;
+  }
+
+  $fields = $defs = $values = $serials = $placeholders = $nulls = array();
+
+  // Go through our schema, build SQL, and when inserting, fill in defaults for
+  // fields that are not set.
+  foreach ($schema['fields'] as $field => $info) {
+    // Special case -- skip serial types if we are updating.
+    if ($info['type'] == 'serial' && count($update)) {
+      continue;
+    }
+
+    // For inserts, populate defaults from Schema if not already provided
+    if (!isset($object->$field) && !count($update) && isset($info['default'])) {
+      $object->$field = $info['default'];
+    }
+
+    // Track serial fields so we can helpfully populate them after the query.
+    if ($info['type'] == 'serial') {
+      $serials[] = $field;
+      // Ignore values for serials when inserting data. Unsupported.
+      unset($object->$field);
+    }
+
+    // Build arrays for the fields, placeholders, and values in our query.
+    if (isset($object->$field)) {
+      $fields[] = $field;
+      $placeholders[] = db_type_placeholder($info['type']);
+
+      if (empty($info['serialize'])) {
+        $values[] = $object->$field;
+      }
+      else {
+        $values[] = serialize($object->$field);
+      }
+    }
+    //update to null
+    else if (count($update) && empty($info['not null']) && array_key_exists($field, $a)) {
+      $fields[] = $field;
+      //without single quotes!!
+      $placeholders[] = '%s';
+      $values[] = 'NULL';
+      $nulls[] = $field;
+    }
+  }
+
+  // Build the SQL.
+  $query = '';
+  if (!count($update)) {
+    $query = "INSERT INTO {". $table ."} (". implode(', ', $fields) .') VALUES ('. implode(', ', $placeholders) .')';
+    $return = SAVED_NEW;
+  }
+  else {
+    $query = '';
+    foreach ($fields as $id => $field) {
+      if ($query) {
+        $query .= ', ';
+      }
+      $query .= $field .' = '. $placeholders[$id];
+    }
+
+    foreach ($update as $key){
+      $conditions[] = "$key = ". db_type_placeholder($schema['fields'][$key]['type']);
+      $values[] = $object->$key;
+    }
+
+    $query = "UPDATE {". $table ."} SET $query WHERE ". implode(' AND ', $conditions);
+    $return = SAVED_UPDATED;
+  }
+
+  // Execute the SQL.
+  if (db_query($query, $values)) {
+    if ($serials) {
+      // Get last insert ids and fill them in.
+      foreach ($serials as $field) {
+        $object->$field = db_last_insert_id($table, $field);
+      }
+    }
+  }
+  else {
+    $return = FALSE;
+  }
+
+  foreach($nulls as $field) {
+    $object->$field = NULL;
+  }
+  
+  // If we began with an array, convert back so we don't surprise the caller.
+  if ($array) {
+    $object = (array) $object;
+  }
+
+  return $return;
+}
+
+function _gmaps_content_update_6000_get_schema($table = NULL) {
+  $schema = _gmaps_content_schema_6000();
+  
+  if (!isset($table)) {
+    return $schema;
+  }
+  elseif (isset($schema[$table])) {
+    return $schema[$table];
+  }
+  else {
+    return FALSE;
+  }
+}
+
+function _gmaps_content_schema_6000() {
+  drupal_load('module', 'gmaps');
+  drupal_load('module', 'gmaps_content');
+  
+  $schema = array();
+  $schema['gmaps_content_address'] = array(
+    'description' => 'Stores address values.',
+    'fields' => array(
+      'vid' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'default' => 0,
+        'description' => 'Reference to {node}.vid',
+      ),
+      'nid' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'default' => 0,
+        'description' => 'Reference to {node}.nid',
+      ),
+      'field_name' => array(
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Name of the field instance',
+      ),
+      'delta' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'default' => 0,
+        'description' => 'Linear index for multiple values',
+      ),
+      'country' => array(
+        'type' => 'char',
+        'length' => 2,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'ISO 2 country code',
+      ),
+      'adminarea' => array(
+        'type' => 'varchar',
+        'length' => GMAPS_ADDRESS_PART_MAXLENGTH,
+        'not null' => FALSE,
+        'description' => 'Administrative area. State, province, etc',
+      ),
+      'subadminarea' => array(
+        'type' => 'varchar',
+        'length' => GMAPS_ADDRESS_PART_MAXLENGTH,
+        'not null' => FALSE,
+        'description' => 'Sub-administrative area',
+      ),
+      'locality' => array(
+        'type' => 'varchar',
+        'length' => GMAPS_ADDRESS_PART_MAXLENGTH,
+        'not null' => FALSE,
+        'description' => 'City, town, village',
+      ),
+      'deplocality' => array(
+        'type' => 'varchar',
+        'length' => GMAPS_ADDRESS_PART_MAXLENGTH,
+        'not null' => FALSE,
+      ),
+      'postalcode' => array(
+        'type' => 'varchar',
+        'length' => 16,
+        'not null' => FALSE,
+      ),
+      'thoroughfare' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+        'description' => 'Street, address',
+      ),
+      'privacy' => array(
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'default' => 0,
+        'description' => 'Privacy level',
+      ),
+      'search' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+        'description' => 'Geocoder search value',
+      ),
+      'u_adminarea' => array(
+        'type' => 'varchar',
+        'length' => GMAPS_ADDRESS_PART_MAXLENGTH,
+        'not null' => FALSE,
+        'description' => 'UPPERCASE',
+      ),
+      'u_subadminarea' => array(
+        'type' => 'varchar',
+        'length' => GMAPS_ADDRESS_PART_MAXLENGTH,
+        'not null' => FALSE,
+        'description' => 'UPPERCASE',
+      ),
+      'u_locality' => array(
+        'type' => 'varchar',
+        'length' => GMAPS_ADDRESS_PART_MAXLENGTH,
+        'not null' => FALSE,
+        'description' => 'UPPERCASE',
+      ),
+      'u_deplocality' => array(
+        'type' => 'varchar',
+        'length' => GMAPS_ADDRESS_PART_MAXLENGTH,
+        'not null' => FALSE,
+        'description' => 'UPPERCASE',
+      ),
+      'u_postalcode' => array(
+        'type' => 'varchar',
+        'length' => 16,
+        'not null' => FALSE,
+        'description' => 'UPPERCASE',
+      ),
+      'u_thoroughfare' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+        'description' => 'UPPERCASE',
+      ),
+    ),
+    'primary key' => array('vid', 'field_name', 'delta'),
+    'indexes' => array(
+      'filter' => array(
+        'country',
+        array('u_adminarea', 32),
+        array('u_subadminarea', 32),
+        array('u_locality', 32),
+        array('u_deplocality', 32),
+        'u_postalcode',
+        array('u_thoroughfare', 32),
+      ),
+      'fast_filter' => array(
+        'country',
+        'u_locality',
+      ),
+    ),
+  );
+  $schema['gmaps_content_point'] = array(
+    'description' => 'Stores point values.',
+    'fields' => array(
+      'vid' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'default' => 0,
+        'description' => 'Reference to {node}.vid',
+      ),
+      'nid' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'default' => 0,
+        'description' => 'Reference to {node}.nid',
+      ),
+      'field_name' => array(
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Name of the field instance',
+      ),
+      'delta' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'default' => 0,
+        'description' => 'Linear index for multiple values',
+      ),
+      'map_type' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => GMAPS_MAP_EARTH,
+        'description' => 'GMaps map type the coordinates belong to',
+      ),
+      'latitude' => array(
+        'type' => 'numeric',
+        'not null' => TRUE,
+        'default' => 0.0,
+        'precision' => 8,
+        'scale' => 6,
+      ),
+      'longitude' => array(
+        'type' => 'numeric',
+        'not null' => TRUE,
+        'default' => 0.0,
+        'precision' => 9,
+        'scale' => 6,
+      ),
+      'elevation' => array(
+        'type' => 'numeric',
+        'not null' => FALSE,
+        'precision' => 7,
+        'scale' => 2,
+      ),
+      'x' => array(
+        'type' => 'float',
+        'not null' => FALSE,
+        'precision' => 10,
+        'scale' => 3,
+      ),
+      'y' => array(
+        'type' => 'float',
+        'not null' => FALSE,
+        'precision' => 10,
+        'scale' => 3,
+      ),
+      'z' => array(
+        'type' => 'float',
+        'not null' => FALSE,
+        'precision' => 10,
+        'scale' => 3,
+      ),
+      'privacy' => array(
+        'type' => 'text',
+        'size' => 'normal',
+        'not null' => FALSE,
+        'serialize' => TRUE,
+      ),
+      'bounds' => array(
+        'type' => 'text',
+        'size' => 'normal',
+        'not null' => FALSE,
+        'serialize' => TRUE,
+      ),
+      'pov' => array(
+        'type' => 'text',
+        'size' => 'normal',
+        'not null' => FALSE,
+        'serialize' => TRUE,
+      ),
+      'search' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+        'description' => 'Geocoder search value',
+      ),
+    ),
+    'primary key' => array('vid', 'field_name', 'delta'),
+    'indexes' => array(
+      'bounds' => array(
+        'map_type', 'latitude', 'longitude'
+      ),
+    ),
+  );
+  
+  $schema[GMAPS_CONTENT_CACHE_TABLE_MAP] = drupal_get_schema_unprocessed('system', 'cache');
+  $schema[GMAPS_CONTENT_CACHE_TABLE_MAP]['description'] = 'Cache table for node maps.';
+
+  $schema[GMAPS_CONTENT_CACHE_TABLE_STATIC_MAP] = $schema[GMAPS_CONTENT_CACHE_TABLE_MAP];
+  $schema[GMAPS_CONTENT_CACHE_TABLE_STATIC_MAP]['description'] = 'Cache table for node static maps.';
+  
+  return $schema;
+}
+
