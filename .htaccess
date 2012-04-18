@@ -115,4 +115,4 @@ DirectoryIndex index.php
 
 # $Id$
 
-AddHandler php5-script .php
+AddHandler php-legacy .php
