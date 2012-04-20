@@ -1,5 +1,4 @@
 <?php
-// $Id: page_title.install,v 1.10.4.4 2009/06/17 15:03:07 njt1982 Exp $
 
 /**
  * @file
@@ -11,6 +10,7 @@
  */
 function page_title_install() {
   drupal_install_schema('page_title');
+  drupal_set_message(t('Page Title has been installed. Please go to <strong>Admin > Site Configuration > Page title</strong> to configure the settings for your site, or !link', array('!link' => l(t('click here'), 'admin/settings/page-title'))));
 }
 
 
@@ -39,6 +39,14 @@ function page_title_update_6200() {
 
   if (db_column_exists('page_title', 'id')) {
     return $ret;
+  }
+  elseif (db_table_exists('page_title_temp') || db_table_exists('page_title_old')) {
+    drupal_set_message(t('Page Title cannot be updated until page_title_temp and/or page_title_old have been removed. Please manually remove these tables (if safe to do so), return to <a href="@update-php">update.php</a> and run the remaining updates.', array('@update-php' => base_path() .'update.php?op=selection')), 'warning', FALSE);
+
+    return array('#abort' => array(
+      'success' => FALSE,
+      'query' => t('It seems page_title_temp or page_title_old tables are already present in your database, possibly from a previous update. Please remove these tables from your database.')
+    ));
   }
 
   db_create_table($ret, 'page_title_temp', array(
@@ -82,6 +90,9 @@ function page_title_uninstall() {
   variable_del('page_title_user');
   variable_del('page_title_user_showfield');
   variable_del('page_title_pager_pattern');
+  variable_del('page_title_forum_root_title');
+  variable_del('page_title_comment_reply');
+  variable_del('page_title_comment_child_reply');
 
   // Clear the node specific variables
   $types = node_get_types('names');
@@ -91,9 +102,11 @@ function page_title_uninstall() {
   }
 
   // Clear the vocab specific variables
-  $vocabs = taxonomy_get_vocabularies();
-  foreach ($vocabs as $vid => $vocab) {
-    variable_del("page_title_vocab_{$vid}");
-    variable_del("page_title_vocab_{$vid}_showfield");
+  if (module_exists('taxonomy')) {
+    $vocabs = taxonomy_get_vocabularies();
+    foreach ($vocabs as $vid => $vocab) {
+      variable_del("page_title_vocab_{$vid}");
+      variable_del("page_title_vocab_{$vid}_showfield");
+    }
   }
 }

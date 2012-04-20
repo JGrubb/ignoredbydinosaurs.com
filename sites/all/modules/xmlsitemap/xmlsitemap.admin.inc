@@ -247,7 +247,7 @@ function xmlsitemap_sitemap_delete_form(array &$form_state, stdClass $sitemap) {
 
   $count = (int) db_result(db_query("SELECT COUNT(smid) FROM {xmlsitemap_sitemap}"));
   if ($count === 1 && empty($_POST)) {
-    drupal_set_message('It is not recommended to delete the only XML sitemap.', 'error');
+    drupal_set_message(t('It is not recommended to delete the only XML sitemap.'), 'error');
   }
 
   $form['#sitemap'] = $sitemap;

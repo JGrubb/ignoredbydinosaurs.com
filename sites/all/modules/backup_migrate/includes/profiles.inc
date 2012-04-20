@@ -1,5 +1,4 @@
 <?php
-// $Id: profiles.inc,v 1.1.2.1.2.25 2010/09/13 02:36:49 ronan Exp $
 
 
 /**
@@ -100,7 +99,7 @@ function _backup_migrate_ui_backup_settings_form($profile) {
       '#collapsed' => TRUE,
     );
     $form['file']['token_help']['help'] = array(
-      '#value' => theme('token_help', ''),
+      '#value' => theme('token_help', 'global'),
     );
     $form['file']['filename']['#description'] = t('You can use tokens in the file name.');
   }
@@ -160,7 +159,6 @@ function _backup_migrate_profile_default_profile() {
     'filename' => _backup_migrate_default_filename(),
     'append_timestamp' => 1,
     'timestamp_format' => 'Y-m-d\TH-i-s',
-    'compression' => "none",
     'filters' => backup_migrate_filters_settings_default('backup'),
   );
 }

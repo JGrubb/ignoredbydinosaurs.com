@@ -1,5 +1,4 @@
 <?php
-// $Id: views_slideshow.views.inc,v 1.1.2.1.2.1 2010/02/23 22:21:44 psynaptic Exp $
 
 /**
  * @file
@@ -19,6 +18,7 @@ function views_slideshow_views_plugins() {
         'theme' => 'views_slideshow',
         'uses options' => TRUE,
         'uses row plugin' => TRUE,
+        'uses grouping' => FALSE,
         'type' => 'normal',
         'parent' => 'list',
       ),

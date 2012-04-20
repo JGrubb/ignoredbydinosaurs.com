@@ -1,13 +1,13 @@
+; $Id$
 name = Nodewords
-description = Implement an API that other modules can use to add meta tags.
+description = Implement an API that other modules can use to implement meta tags.
 package = Meta tags
+core = 6.x
 recommends[] = checkall
 recommends[] = vertical_tabs
-core = 6.x
-
-; Information added by drupal.org packaging script on 2011-04-14
-version = "6.x-1.12-rc1"
+; Information added by drupal.org packaging script on 2011-12-31
+version = "6.x-1.13"
 core = "6.x"
 project = "nodewords"
-datestamp = "1302748016"
+datestamp = "1325335847"
 

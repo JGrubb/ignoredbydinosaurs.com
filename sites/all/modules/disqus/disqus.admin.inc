@@ -80,8 +80,9 @@ function disqus_admin_settings() {
     '#title' => t('Advanced'),
     '#collapsed' => TRUE,
     '#collapsible' => TRUE,
-    '#description' => t('Use these settings to configure the more advanced uses of Disqus. You can find ore information about these in the <a href="@applications">Applications</a> section of Disqus.', array(
+    '#description' => t('Use these settings to configure the more advanced uses of Disqus. You can find ore information about these in the <a href="@applications">Applications</a> section of Disqus. To enable some of these features, you will require a <a href="@addons">Disqus Add-on Package</a>.', array(
       '@applications' => 'http://disqus.com/api/applications/',
+      '@addons' => 'http://disqus.com/addons/',
     )),
   );
   $form['advanced']['disqus_publickey'] = array(

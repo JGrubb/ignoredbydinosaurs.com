@@ -1,5 +1,4 @@
 <?php
-// $Id: views_slideshow_singleframe.views_slideshow.inc,v 1.1.2.1.2.29 2010/07/13 04:02:08 redndahead Exp $
 
 /**
  * @file
@@ -81,7 +80,7 @@ function views_slideshow_singleframe_views_slideshow_options_form(&$form, &$form
   $form['views_slideshow_singleframe']['fixed_height'] = array(
     '#type' => 'select',
     '#title' => t('Make the slide window height fit the largest slide'),
-    '#options' => array(1 => t('Yes'),0 => t('No')),
+    '#options' => array(1 => t('Yes'), 0 => t('No')),
     '#default_value' => $view->options['views_slideshow_singleframe']['fixed_height'],
     '#description' => t('If this is set to no then if the slides are different sizes the height of the slide area will change as the slides change.'),
   );
@@ -95,7 +94,7 @@ function views_slideshow_singleframe_views_slideshow_options_form(&$form, &$form
   $form['views_slideshow_singleframe']['pause'] = array(
     '#type' => 'radios',
     '#title' => t('Pause'),
-    '#options' => array(1 => t('Yes'),2 => t('No')),
+    '#options' => array(1 => t('Yes'), 2 => t('No')),
     '#default_value' => $view->options['views_slideshow_singleframe']['pause'],
     '#description' => t('Pause when hovering on the slideshow image.'),
   );
@@ -161,21 +160,21 @@ function views_slideshow_singleframe_views_slideshow_options_form(&$form, &$form
   $form['views_slideshow_singleframe']['controls'] = array(
     '#type' => 'select',
     '#title' => t('Controls'),
-    '#options' => array(0 => t('None'),1 => t('Top'),2 => t('Bottom')),
+    '#options' => array(0 => t('None'), 1 => t('Top'), 2 => t('Bottom')),
     '#default_value' => $view->options['views_slideshow_singleframe']['controls'],
     '#description' => t('Determine if controls for the slideshow (start/stop/next/previous) should appear, and if so whether they should appear before or after the slideshow.'),
   );
   $form['views_slideshow_singleframe']['pager'] = array(
     '#type' => 'select',
     '#title' => t('Pager'),
-    '#options' => array(0 => t('None'),1 => t('Top'),2 => t('Bottom')),
+    '#options' => array(0 => t('None'), 1 => t('Top'), 2 => t('Bottom')),
     '#default_value' => $view->options['views_slideshow_singleframe']['pager'],
     '#description' => t('Determine if a pager for the slideshow (1|2|3) should appear, and if so whether they should appear before or after the slideshow.'),
   );
   $form['views_slideshow_singleframe']['pager_type'] = array(
     '#type' => 'select',
     '#title' => t('Pager Type'),
-    '#options' => array('Numbered' => t('Numbered'),'Thumbnails' => t('Thumbnails')),
+    '#options' => array('Numbered' => t('Numbered'), 'Thumbnails' => t('Thumbnails')),
     '#default_value' => $view->options['views_slideshow_singleframe']['pager_type'],
     '#description' => t('What the pager should look like.  Thumbnails grabs the first image in each slideshow item.'),
     '#process' => array('views_process_dependency'),
@@ -184,7 +183,7 @@ function views_slideshow_singleframe_views_slideshow_options_form(&$form, &$form
   $form['views_slideshow_singleframe']['pager_hover'] = array(
     '#type' => 'select',
     '#title' => t('Activate Slide and Pause on Pager Hover'),
-    '#options' => array(1 => t('Yes'),2 => t('No')),
+    '#options' => array(1 => t('Yes'), 2 => t('No')),
     '#default_value' => $view->options['views_slideshow_singleframe']['pager_hover'],
     '#description' => t('Should the slide be activated and paused when hovering over a pager item.'),
     '#process' => array('views_process_dependency'),
@@ -201,7 +200,7 @@ function views_slideshow_singleframe_views_slideshow_options_form(&$form, &$form
   $form['views_slideshow_singleframe']['image_count'] = array(
     '#type' => 'select',
     '#title' => t('Image Counter'),
-    '#options' => array(0 => t('None'),1 => t('Top'),2 => t('Bottom')),
+    '#options' => array(0 => t('None'), 1 => t('Top'), 2 => t('Bottom')),
     '#default_value' => $view->options['views_slideshow_singleframe']['image_count'],
     '#description' => t('Determine if the Image Counter (1 of 4) should be displayed and if so whether they should appear before or after the slideshow.'),
   );
@@ -247,7 +246,7 @@ function views_slideshow_singleframe_views_slideshow_options_form(&$form, &$form
     '#title' => t('Effect'),
     '#options' => $options,
     '#default_value' => $view->options['views_slideshow_singleframe']['effect'],
-    '#description' => t('The transition effect that will be used to change between images. Not all options below may be relevant depending on the effect.'),
+    '#description' => t('The transition effect that will be used to change between images. Not all options below may be relevant depending on the effect. ' . l('Follow this link to see examples of each effect.', 'http://jquery.malsup.com/cycle/browser.html', array('attributes' => array('target' => '_blank')))),
   );
   $form['views_slideshow_singleframe']['sync'] = array(
     '#type' => 'radios',

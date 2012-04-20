@@ -1,5 +1,4 @@
 <?php
-// $Id: filters.compression.inc,v 1.1.2.5 2010/03/24 04:02:58 ronan Exp $
 
 
 /**
@@ -33,7 +32,8 @@ class backup_migrate_filter_compression extends backup_migrate_filter {
    * Get the form for the settings for this filter.
    */
   function backup_settings_default() {
-    return array('compression' => 'none');
+    $options = $this->_backup_migrate_get_compression_form_item_options();
+    return array('compression' => isset($options['gzip']) ? 'gzip' : 'none');
   }
 
   /**
@@ -64,6 +64,12 @@ class backup_migrate_filter_compression extends backup_migrate_filter {
       ),
       "bzip" => array(
         "extension" => "bz",
+        "filemime" => "application/x-bzip",
+        "backup" => TRUE,
+        "restore" => TRUE,
+      ),
+      "bzip2" => array(
+        "extension" => "bz2",
         "filemime" => "application/x-bzip",
         "backup" => TRUE,
         "restore" => TRUE,
@@ -224,7 +230,7 @@ class backup_migrate_filter_compression extends backup_migrate_filter {
         break;
 
       case "bzip":
-        $from = $file->push_type('bzip');
+        $from = $file->push_type('bzip2');
         if (!$success = $this->_backup_migrate_bzip_encode($from, $file->filepath())) {
           $file = NULL;
         }
@@ -259,6 +265,7 @@ class backup_migrate_filter_compression extends backup_migrate_filter {
         break;
 
       case "bzip":
+      case "bzip2":
         $from = $file->pop_type();
         $success = $this->_backup_migrate_bzip_decode($from->filepath(), $file->filepath());
         break;

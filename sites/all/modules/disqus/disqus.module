@@ -25,6 +25,7 @@ function disqus_perm() {
     'administer disqus',
     'view disqus comments',
     'display disqus comments on profile',
+    'toggle disqus comments',
   );
 }
 
@@ -50,7 +51,7 @@ function disqus_menu() {
   $items['disqus/closewindow'] = array(
     'title' => 'Please wait',
     'description' => 'Once the user logs in through the Disqus login workflow, they are redirected here to automatically close the popup window.',
-    'access arguments' => array('access content'),
+    'access arguments' => array('view disqus comments'),
     'page callback' => 'disqus_closewindow',
     'file' => 'disqus.admin.inc',
     'type' => MENU_CALLBACK,
@@ -86,7 +87,6 @@ function disqus_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL) {
 
             // Build the absolute URL without the alias for the disqus_url flag.
             $node->disqus['url'] = url("node/$node->nid", array(
-              'alias' => TRUE,
               'absolute' => TRUE,
             ));
 
@@ -111,7 +111,7 @@ function disqus_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL) {
       case 'insert':
         $data = array(
           'nid' => $node->nid,
-          'status' => $node->disqus['status'],
+          'status' => isset($node->disqus['status']) ? $node->disqus['status'] : TRUE,
         );
         drupal_write_record('disqus', $data);
         break;
@@ -120,7 +120,7 @@ function disqus_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL) {
         db_query('DELETE FROM {disqus} WHERE nid = %d', $node->nid);
         $data = array(
           'nid' => $node->nid,
-          'status' => $node->disqus['status'],
+          'status' => isset($node->disqus['status']) ? $node->disqus['status'] : TRUE,
         );
         drupal_write_record('disqus', $data);
         break;
@@ -157,12 +157,18 @@ function disqus_form_alter(&$form, $form_state, $form_id) {
     if (!isset($form['comment_settings'])) {
       $form['comment_settings'] = array(
         '#type' => 'fieldset',
-        '#access' => user_access('view disqus comments'),
+        '#access' => user_access('toggle disqus comments'),
         '#title' => t('Comment settings'),
         '#collapsible' => TRUE,
         '#collapsed' => TRUE,
         '#weight' => 30,
       );
+    }
+    else {
+      if (isset($form['comment_settings']['comment'])) {
+        $form['comment_settings']['comment']['#access'] = $form['comment_settings']['#access'];
+        $form['comment_settings']['#access'] = true;
+      }
     }
     $node = $form['#node'];
     $form['comment_settings']['disqus'] = array(
@@ -171,6 +177,7 @@ function disqus_form_alter(&$form, $form_state, $form_id) {
         '#type' => 'checkbox',
         '#title' => t('Enable Disqus comments'),
         '#default_value' => isset($node->disqus['status']) ? $node->disqus['status'] : TRUE,
+        '#access' => user_access('toggle disqus comments'),
       ),
     );
   }
@@ -193,7 +200,6 @@ function disqus_user($op, &$edit, &$account, $category = NULL) {
 
         // Build the absolute URL without the alias for the disqus_url flag.
         $account->disqus['url'] = url("user/$account->uid", array(
-          'alias' => TRUE,
           'absolute' => TRUE,
         ));
 
@@ -443,7 +449,9 @@ function disqus_footer($main = 0, $options = NULL) {
           $data['id'] = $user->uid;
           $data['username'] = $user->name;
           $data['email'] = $user->mail;
-          $data['url'] = url('user/' . $user->uid, array('absolute' => TRUE));
+          $data['url'] = url('user/' . $user->uid, array(
+            'absolute' => TRUE,
+          ));
 
           // Load the user's avatar.
           $user_picture_default = variable_get('user_picture_default', '');

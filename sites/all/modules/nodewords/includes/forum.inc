@@ -1,8 +1,14 @@
 <?php
+// $Id$
 
 /**
  * @file
  * Integration file for forum.module.
+ */
+
+/**
+ * @addtogroup nodewords
+ * @{
  */
 
 /**
@@ -21,3 +27,7 @@ function forum_nodewords_type_id(&$result, $arg) {
     }
   }
 }
+
+/**
+ * @} End of "addtogroup nodewords".
+ */

@@ -1,5 +1,11 @@
 <?php
-// $Id: views_slideshow.theme.inc,v 1.1.2.2.2.6 2010/04/13 06:21:51 redndahead Exp $
+
+/**
+ * @file
+ * The theme system, which controls the output of views slideshow.
+ *
+ * This just adds a wrapper div to the slideshow.
+ */
 
 /**
  * The current element of the slideshow.

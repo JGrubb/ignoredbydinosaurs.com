@@ -1,5 +1,4 @@
 <?php
-// $Id: views_slideshow_plugin_style_slideshow.inc,v 1.1.2.1.2.11 2010/06/06 04:28:42 redndahead Exp $
 
 /**
  * @file
@@ -26,8 +25,8 @@ class views_slideshow_plugin_style_slideshow extends views_plugin_style_list {
     }
 
     // Eveything below here is what's needed for views slideshow.
-    if (in_array($options['mode'], array('singleframe', 'thumbnailhover', 'menu', 'slider', 'ddblock')) && is_array($options[$options['mode']])) {
-      foreach($options[$options['mode']] as $index => $value) {
+    if (!empty($options['mode']) && in_array($options['mode'], array('singleframe', 'thumbnailhover', 'menu', 'slider', 'ddblock')) && is_array($options[$options['mode']])) {
+      foreach ($options[$options['mode']] as $index => $value) {
         $this->options['views_slideshow_' . $options['mode']][$index] = $value;
       }
     }
@@ -48,7 +47,7 @@ class views_slideshow_plugin_style_slideshow extends views_plugin_style_list {
   function options_form(&$form, &$form_state) {
     module_load_all_includes('views_slideshow.inc');
     parent::options_form($form, $form_state);
-    
+
     $modules = module_invoke_all('views_slideshow_modes');
 
     if ($modules) {
@@ -89,7 +88,7 @@ class views_slideshow_plugin_style_slideshow extends views_plugin_style_list {
       );
     }
   }
-  
+
   function options_validate(&$form, &$form_state) {
     module_load_all_includes('views_slideshow.inc');
     foreach (module_implements('views_slideshow_options_form_validate') as $module) {

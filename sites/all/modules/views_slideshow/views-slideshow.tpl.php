@@ -1,5 +1,4 @@
 <?php
-// $Id: views-slideshow.tpl.php,v 1.1.2.2.2.4 2010/02/23 22:49:57 psynaptic Exp $
 
 /**
  * @file

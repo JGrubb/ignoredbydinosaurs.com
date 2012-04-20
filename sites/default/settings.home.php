@@ -89,7 +89,7 @@
  *   $db_url = 'mysqli://username:password@localhost/databasename';
  *   $db_url = 'pgsql://username:password@localhost/databasename';
  */
-$db_url = 'mysql://root:root@localhost/new_ibd';
+$db_url = 'mysql://root:root@localhost/ibd';
 $db_prefix = '';
 
 /**

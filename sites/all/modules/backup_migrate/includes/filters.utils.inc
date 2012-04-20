@@ -1,5 +1,4 @@
 <?php
-// $Id: filters.utils.inc,v 1.1.2.7 2010/01/09 20:49:24 ronan Exp $
 
 
 /**
