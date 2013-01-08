@@ -248,7 +248,7 @@ function globalredirect_goto($path = '', $query = NULL, $fragment = NULL, $http_
  */
 function globalredirect_url_is_external($path) {
   $colonpos = strpos($path, ':');
-  return $colonpos !== FALSE && !preg_match('![/?#]!', substr($path, 0, $colonpos));
+  return $colonpos !== FALSE && !preg_match('![/?#]!', drupal_substr($path, 0, $colonpos));
 }
 
 /**
@@ -330,6 +330,15 @@ function _globalredirect_is_active($settings) {
   }
 
   /**
+   * If we're going to ignore the admin path, return false.
+   * This is added to allow people to continue to get to the 'admin*' and 'batch*' paths,
+   * even if the module is misbehaving.
+   */
+  if ($settings['ignore_admin_path'] && (arg(0) == 'admin' || arg(0) == 'batch')) {
+    return FALSE;
+  }
+
+  /**
    * We seem to have passed all the tests - let say we're active
    */
   return TRUE;
@@ -350,6 +359,7 @@ function _globalredirect_get_settings($default_only = FALSE) {
     'content_location_header' => 0,
     'term_path_handler' => 1,
     'frontpage_redirect' => 1,
+    'ignore_admin_path' => 1,
   );
 
   if ($default_only) {

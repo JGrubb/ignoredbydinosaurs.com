@@ -46,6 +46,7 @@ function comment_page_title_pattern_alter(&$pattern, &$types) {
     // passed as a token.
     // TODO: Handle multiple terms? Only pass specific terms per content type?
     if (!empty($types['node']->taxonomy)) {
+      reset($types['node']->taxonomy);
       $types['taxonomy'] = current($types['node']->taxonomy);
     }
 

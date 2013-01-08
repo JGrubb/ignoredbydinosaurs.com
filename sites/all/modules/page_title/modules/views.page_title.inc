@@ -30,7 +30,8 @@ function views_page_title_pattern_alter(&$pattern, &$types) {
       $h = $view->handlers['argument'];
 
       // Splice the arguments and get the key for the current arg.
-      $h = array_shift(array_splice($h, count($args)-1, 1));
+      $hh = array_splice($h, count($args)-1, 1);
+      $h = array_shift($hh);
 
       // Get the Page Title Pattern from the options array for this handler
       $pattern = isset($h->options['page_title_pattern']) ? $h->options['page_title_pattern'] : $pattern;
@@ -45,7 +46,7 @@ function views_page_title_pattern_alter(&$pattern, &$types) {
       }
     }
     // This is a view with no args provided, or the specific arg has no title - lets use the base display title
-    elseif ($view->display->display_plugin == 'page_with_page_title') {
+    elseif (isset($view->display) && $view->display->display_plugin == 'page_with_page_title') {
       $pattern = $view->display->handler->get_option('page_title_pattern');
     }
   }

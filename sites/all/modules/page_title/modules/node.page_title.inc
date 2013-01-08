@@ -39,6 +39,7 @@ function node_page_title_pattern_alter(&$pattern, &$types) {
     // If the node has any taxonomy, grab the first term for user in tokens.
     // TODO: Handle multiple terms? Only pass specific terms per content type?
     if (!empty($types['node']->taxonomy)) {
+      reset($types['node']->taxonomy);
       $types['taxonomy'] = current($types['node']->taxonomy);
     }
 

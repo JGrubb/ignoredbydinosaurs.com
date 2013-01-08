@@ -61,5 +61,5 @@ function page_title_admin_settings() {
 
 
 function _page_title_scope_t($item) {
-  return t(ucfirst($item));
+  return t(drupal_ucfirst($item));
 }

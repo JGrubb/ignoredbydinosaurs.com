@@ -1,7 +1,8 @@
 <?php
 
-define('ERROR_MESSAGE',     'ERROR<br />Expected Path: !expected_path<br />Expected Status Code: !expected_status<br />Location: !location<br />Status: !status');
+define('ERROR_MESSAGE',   'ERROR<br />Expected Path: !expected_path<br />Expected Status Code: !expected_status<br />Location: !location<br />Status: !status');
 define('SUCCESS_MESSAGE', 'SUCCESS<br />Expected Path: !expected_path<br />Expected Status Code: !expected_status<br />Location: !location<br />Status: !status');
+define('INFO_MESSAGE',    'Running Test: !id<br />Requesting URL: !url');
 
 /**
  * @file
@@ -23,6 +24,7 @@ class GlobalRedirectTestCase extends DrupalWebTestCase {
       'access content',
       'create page content',
       'create url aliases',
+      'access administration pages', // For the 'ignore admin path' test
     ));
     $this->drupalLogin($user);
 
@@ -38,6 +40,9 @@ class GlobalRedirectTestCase extends DrupalWebTestCase {
 
     // Create an alias for the create story path - this is used in the "redirect with permissions testing" test.
     path_set_alias('node/add/story', 'add-node-story');
+
+    // Create an alias for the admin URL - this is used in the "ignore admin path" test.
+    path_set_alias('admin', 'administration');
 
 
     // The forum vocab should already be created - should be term 1?
@@ -201,18 +206,39 @@ class GlobalRedirectTestCase extends DrupalWebTestCase {
         'expected-path' => $settings['trailing_zero'] > 0 ? 'taxonomy/term/10' : 'taxonomy/term/10/0',
       ),
 
+      // Regression test for http://drupal.org/node/867654 - term 10 does not exist
+      array(
+        'request' => 'admin',
+        'return-code' => $settings['ignore_admin_path'] > 0 ? 200 : 301, // Ignoring the admin path means no src=>alias redirecting.
+        'expected-path' => $settings['ignore_admin_path'] > 0 ? 'admin' : 'administration',
+      ),
     );
 
 
     // Foreach of the above, lets check they redirect correctly
-    foreach ($test_paths as $path) {
-      $path['options'] = isset($path['options']) ? $path['options'] + array('absolute' => TRUE) : array('absolute' => TRUE);
+    foreach ($test_paths as $id => $path) {
+      // Overlay some defaults onto the path. This ensures 'options' is set as an array.
+      $path += array(
+        'options' => array(),
+      );
 
-      $request_path = url($path['request'], $path['options'] + array('alias' => TRUE));
+      // If the path doesn't have an absolute or alias setting, set them to TRUE.
+      $path['options'] += array(
+        'absolute' => TRUE,
+        'alias' => TRUE,
+      );
+
+      // Build a URL from the path
+      $request_path = url($path['request'], $path['options']);
 
 
-      // Display a message tellingthe user what we're testing
-      $this->pass(t('Requesting: !path', array('!path' => $request_path)));
+      // Display a message telling the user what we're testing
+      $info = array(
+        '!id' => $id,
+        '!url' => $request_path,
+      );
+      $this->pass(t(INFO_MESSAGE, $info), 'GlobalRedirect');
+
 
       // Do a HEAD request (don't care about the body). The alias=>TRUE is to tell Drupal not to lookup the alias - this is a raw request.
       $this->drupalHead($request_path, array('alias' => TRUE));
@@ -297,6 +323,7 @@ class GlobalRedirectTestCaseDefault extends GlobalRedirectTestCase {
       'term_path_handler' => 0,
       'frontpage_redirect' => 1,
       'trailing_zero' => 0,
+      'ignore_admin_path' => 1,
     ));
     $this->_globalredirect_batch_test();
   }
@@ -320,6 +347,7 @@ class GlobalRedirectTestCaseConfigAlpha extends GlobalRedirectTestCase {
       'term_path_handler' => 1,
       'frontpage_redirect' => 0,
       'trailing_zero' => 1,
+      'ignore_admin_path' => 0,
     ));
 
     $this->_globalredirect_batch_test();

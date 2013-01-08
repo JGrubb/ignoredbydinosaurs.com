@@ -397,7 +397,8 @@ function page_title_nodeapi(&$node, $op, $teaser = NULL, $page = NULL) {
       break;
 
     case 'load':
-      return array('page_title' => page_title_load_title($node->nid, 'node'));
+      $enabled = (bool)variable_get('page_title_type_'. $node->type .'_showfield', FALSE);
+      return array('page_title' => ($enabled ? page_title_load_title($node->nid, 'node') : ''));
   }
 }
 
@@ -765,9 +766,13 @@ function page_title_get_settings($flush = FALSE) {
     return $cache->data;
   }
 
+  // Ensure that the page title inc files are included before invoking
+  // This helps avoid the issues in #1567790
+  page_title_include_api_files();
+
   // Get the settings from hook_page_title_settings().
   $settings = module_invoke_all('page_title_settings');
-  
+
   // For each setting, apply a "default" mask (this makes it easier to use
   // later as we can assume presence)
   foreach ($settings as $k => $v) {
@@ -811,12 +816,29 @@ function page_title_init() {
     drupal_add_css(drupal_get_path('module', 'page_title') .'/page_title.admin.css');
   }
 
-  // Include relevant page_title.inc's
+  page_title_include_api_files();
+}
+
+
+/**
+ * Function to ensure API files are included.
+ * We use a static variable so we can use include, which is faster than include_one
+ */
+function page_title_include_api_files() {
+  // Using $runonce, we can ensure the include code below only gets run once.
+  static $runonce = FALSE;
+  if ($runonce) return;
+
+  // Include relevant page_title.inc's. We cannot use drupal_load() here due to the folder structure.
+  // We also avoice using include_once due to its performance hit on the Filesystem
   foreach (page_title_get_module_apis() as $module => $info) {
-    if (file_exists("./{$info['path']}/{$module}.page_title.inc")) {
-      include "./{$info['path']}/{$module}.page_title.inc";
+    $path = "./{$info['path']}/{$module}.page_title.inc";
+    if (file_exists($path)) {
+      include $path;
     }
   }
+
+  $runonce = TRUE;
 }
 
 
@@ -863,6 +885,7 @@ function comment_page_title_api() { return page_title_page_title_api(); }
 function forum_page_title_api() { return page_title_page_title_api(); }
 function user_page_title_api() { return page_title_page_title_api(); }
 function views_page_title_api() { return page_title_page_title_api(); }
+function uc_catalog_page_title_api() { return page_title_page_title_api(); }
 
 
 /**

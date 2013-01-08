@@ -11,7 +11,7 @@
  */
 function user_page_title_alter(&$title) {
   // If we're looking at either a user profile page, get the user title
-  if ( ($user = menu_get_object('user')) &&
+  if ( ($user = menu_get_object('user')) || ($user = menu_get_object('user_uid_optional')) &&
        variable_get('page_title_user_showfield', 0) &&
        ($user_title = page_title_load_title($user->uid, 'user')) ) {
     $title = $user_title;
@@ -24,7 +24,7 @@ function user_page_title_alter(&$title) {
  */
 function user_page_title_pattern_alter(&$pattern, &$types) {
   // User Page Pattern
-  if ($user = menu_get_object('user')) {
+  if ( ($user = menu_get_object('user')) || ($user = menu_get_object('user_uid_optional'))) {
     $types['user'] = $user;
     $pattern = variable_get('page_title_user', '');
   }

@@ -10,23 +10,24 @@
  * This is a copy from views_handler_field_node.inc in the Views module.
  * Additions are commented inline.
  */
-class views_handler_field_node_page_title extends views_handler_field {
+
+// TODO this is a dirty hack to get around Page Title seeming to load before Node/Views?!
+// Without it, you get the following error:
+// Fatal error: Class 'views_handler_field_node' not found in......
+module_load_include('inc', 'views', 'modules/node/views_handler_field_node');
+
+class views_handler_field_node_page_title extends views_handler_field_node {
   /**
    * Constructor to provide additional fields to add.
    */
   function construct() {
     parent::construct();
-    $this->additional_fields['nid'] = array('table' => 'node', 'field' => 'nid');
     // Page Title: Load the node title for later.
     $this->additional_fields['title'] = array('table' => 'node', 'field' => 'title');
-    if (module_exists('translation')) {
-      $this->additional_fields['language'] = array('table' => 'node', 'field' => 'language');
-    }
   }
 
   function option_definition() {
     $options = parent::option_definition();
-    $options['link_to_node'] = array('default' => FALSE);
     // Page Title: Adding the node title fallback option and default value.
     $options['use_node_title'] = array('default' => FALSE);
     return $options;
@@ -37,12 +38,6 @@ class views_handler_field_node_page_title extends views_handler_field {
    */
   function options_form(&$form, &$form_state) {
     parent::options_form($form, $form_state);
-    $form['link_to_node'] = array(
-      '#title' => t('Link this field to its node'),
-      '#description' => t('This will override any other link you have set.'),
-      '#type' => 'checkbox',
-      '#default_value' => !empty($this->options['link_to_node']),
-    );
     // Page Title: Adding the form field for the node title fallback option.
     $form['use_node_title'] = array(
       '#title' => t('Fall back on to Node: Title'),
