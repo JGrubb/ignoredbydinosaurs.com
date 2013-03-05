@@ -411,6 +411,7 @@ jQuery(document).ready(function($) {
     loading_text: "loading tweets..."
   });
   $("img").removeAttr("height").removeAttr("width");
+  $('a.imagecache-portfolio_slide_image').fancybox();
 });
 
 var $allVideos = $("iframe[src^='http://player.vimeo.com'], iframe[src^='http://www.youtube.com']"),

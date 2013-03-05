@@ -31,8 +31,14 @@ class views_handler_field_node_link extends views_handler_field {
   }
 
   function render($values) {
+    $value = $this->get_value($values, 'nid');
+    return $this->render_link($this->sanitize_value($value), $values);
+  }
+
+  function render_link($data, $values) {
+    $this->options['alter']['make_link'] = TRUE;
+    $this->options['alter']['path'] = "node/$data";
     $text = !empty($this->options['text']) ? $this->options['text'] : t('view');
-    $nid = $values->{$this->aliases['nid']};
-    return l($text, "node/$nid");
+    return $text;
   }
 }

@@ -96,7 +96,7 @@ class views_handler_field_numeric extends views_handler_field {
   }
 
   function render($values) {
-    $value = $values->{$this->field_alias};
+    $value = $this->get_value($values);
     if (!empty($this->options['set_precision'])) {
       $value = number_format($value, $this->options['precision'], $this->options['decimal'], $this->options['separator']);
     }
@@ -120,6 +120,8 @@ class views_handler_field_numeric extends views_handler_field {
       $value = format_plural($value, $this->options['format_plural_singular'], $this->options['format_plural_plural']);
     }
 
-    return filter_xss($this->options['prefix']) . check_plain($value) . filter_xss($this->options['suffix']);
+    return $this->sanitize_value($this->options['prefix'], 'xss')
+      . $this->sanitize_value($value)
+      . $this->sanitize_value($this->options['suffix'], 'xss');
   }
 }

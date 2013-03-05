@@ -190,6 +190,7 @@ function views_schema_6000() {
         'serialized default' => 'a:0:{}',
       ),
     ),
+    // Added primary keys in views_schema_6008()
     'indexes' => array('vid' => array('vid', 'position')),
   );
 
@@ -486,7 +487,37 @@ function views_update_6011() {
 
   // There is only one simple query to run.
   $ret[] = update_sql("UPDATE {blocks} SET cache = " . BLOCK_NO_CACHE . " WHERE module = 'views' AND delta LIKE '-exp-%'");
-  
+
+  return $ret;
+}
+
+
+/**
+ * Add a human readable name.
+ */
+function views_schema_6012() {
+  $schema = views_schema(__FUNCTION__);
+  $schema['views_view']['fields']['human_name'] = array(
+    'type' => 'varchar',
+    'length' => '255',
+    'default' => '',
+    'description' => 'A human readable name used to be displayed in the admin interface',
+  );
+  return $schema;
+}
+
+function views_update_6012() {
+  $ret = array();
+
+  $new_field = array(
+    'type' => 'varchar',
+    'length' => '255',
+    'default' => '',
+    'description' => 'A human readable name used to be displayed in the admin interface',
+  );
+
+  db_add_field($ret, 'views_view', 'human_name', $new_field);
+
   return $ret;
 }
 
@@ -516,3 +547,22 @@ function views_update_6013() {
   return $ret;
 }
 
+function views_schema_6300() {
+  return views_schema_6013();
+}
+/**
+ * Take sure the human_name field is added to the views_view table.
+ *
+ * If you updated from 6.x-2.x-dev to 6.x-3.x you had already schema
+ * version 6013, so the update 6012 isn't runned, and never was.
+ * As a result the human_name field is missing in the database.
+ *
+ * Add the human_name field if it doesn't exist before.
+ */
+function views_update_6300() {
+  $ret = array();
+  if (!db_column_exists('views_view', 'human_name')) {
+    $ret += views_update_6012();
+  }
+  return $ret;
+}

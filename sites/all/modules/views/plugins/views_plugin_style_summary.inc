@@ -14,8 +14,8 @@ class views_plugin_style_summary extends views_plugin_style {
     $options = parent::option_definition();
 
     $options['base_path'] = array('default' => '');
-    $options['count'] = array('default' => TRUE);
-    $options['override'] = array('default' => FALSE);
+    $options['count'] = array('default' => TRUE, 'bool' => TRUE);
+    $options['override'] = array('default' => FALSE, 'bool' => TRUE);
     $options['items_per_page'] = array('default' => 25);
 
     return $options;
@@ -66,4 +66,3 @@ class views_plugin_style_summary extends views_plugin_style {
     return theme($this->theme_functions(), $this->view, $this->options, $rows);
   }
 }
-

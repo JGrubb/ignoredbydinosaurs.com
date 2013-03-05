@@ -44,9 +44,9 @@ class views_handler_field_comment_node_link extends views_handler_field {
   function render($values) {
     // Build fake $node.
     $node = new stdClass();
-    $node->nid      = $values->{$this->aliases['nid']};
-    $node->type     = $values->{$this->aliases['type']};
-    $node->comment  = $values->{$this->aliases['comment']};
+    $node->nid      = $this->get_value($values, 'nid');
+    $node->type     = $this->get_value($values, 'type');
+    $node->comment  = $this->get_value($values, 'comment');
 
     // Call comment.module's hook_link: comment_link($type, $node = NULL, $teaser = FALSE)
     $links = comment_link('node', $node, $this->options['teaser']);
@@ -56,4 +56,3 @@ class views_handler_field_comment_node_link extends views_handler_field {
     return !empty($links) ? theme('links', $links, array('class' => 'links inline')) : '';
   }
 }
-

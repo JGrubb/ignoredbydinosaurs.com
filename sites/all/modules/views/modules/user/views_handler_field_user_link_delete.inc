@@ -8,10 +8,14 @@ class views_handler_field_user_link_delete extends views_handler_field_user_link
     return user_access('administer users');
   }
 
-  function render($values) {
+  function render_link($data, $values) {
+    $this->options['alter']['make_link'] = TRUE;
+
     $text = !empty($this->options['text']) ? $this->options['text'] : t('delete');
-    $uid = $values->{$this->aliases['uid']};
-    return l($text, "user/$uid/delete", array('query' => drupal_get_destination()));
+
+    $this->options['alter']['path'] = "user/$data/delete";
+    $this->options['alter']['query'] = drupal_get_destination();
+
+    return $text;
   }
 }
-

@@ -10,14 +10,15 @@
  * - link_to_node default: Should this field have the checkbox "link to node" enabled by default.
  */
 class views_handler_field_node extends views_handler_field {
-  /**
-   * Constructor to provide additional field to add.
-   */
-  function construct() {
-    parent::construct();
-    $this->additional_fields['nid'] = array('table' => 'node', 'field' => 'nid');
-    if (module_exists('translation')) {
-      $this->additional_fields['language'] = array('table' => 'node', 'field' => 'language');
+
+  function init(&$view, $options) {
+    parent::init($view, $options);
+    // Don't add the additional fields to groupby
+    if (!empty($this->options['link_to_node'])) {
+      $this->additional_fields['nid'] = array('table' => 'node', 'field' => 'nid');
+      if (module_exists('translation')) {
+        $this->additional_fields['language'] = array('table' => 'node', 'field' => 'language');
+      }
     }
   }
 
@@ -46,14 +47,15 @@ class views_handler_field_node extends views_handler_field {
    * Data should be made XSS safe prior to calling this function.
    */
   function render_link($data, $values) {
-    if (!empty($this->options['link_to_node'])) {
+    if (!empty($this->options['link_to_node']) && !empty($this->additional_fields['nid'])) {
       if ($data !== NULL && $data !== '') {
         $this->options['alter']['make_link'] = TRUE;
-        $this->options['alter']['path'] = "node/" . $values->{$this->aliases['nid']};
+        $this->options['alter']['path'] = "node/" . $this->get_value($values, 'nid');
         if (isset($this->aliases['language'])) {
           $languages = language_list();
-          if (isset($languages[$values->{$this->aliases['language']}])) {
-            $this->options['alter']['language'] = $languages[$values->{$this->aliases['language']}];
+          $language = $this->get_value($values, 'language');
+          if (isset($languages[$language])) {
+            $this->options['alter']['language'] = $languages[$language];
           }
           else {
             unset($this->options['alter']['language']);
@@ -62,12 +64,13 @@ class views_handler_field_node extends views_handler_field {
       }
       else {
         $this->options['alter']['make_link'] = FALSE;
-      } 
+      }
     }
     return $data;
   }
 
   function render($values) {
-    return $this->render_link(check_plain($values->{$this->field_alias}), $values);
+    $value = $this->get_value($values);
+    return $this->render_link($this->sanitize_value($value), $values);
   }
 }

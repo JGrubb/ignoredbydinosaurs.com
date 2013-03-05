@@ -13,6 +13,7 @@ function search_views_default_views() {
   $view->description = 'Displays a list of nodes that link to the node, using the search backlinks table.';
   $view->tag = 'default';
   $view->base_table = 'node';
+  $view->human_name = 'Backlinks';
   $view->api_version = 2;
   $view->disabled = TRUE; /* Edit this to true to make a default view disabled initially */
   $handler = $view->new_display('default', 'Defaults', 'default');
@@ -93,7 +94,7 @@ function search_views_default_views() {
     'title' => '',
     'weight' => 0,
   ));
-  $handler = $view->new_display('block', 'Block', 'block');
+  $handler = $view->new_display('block', 'What links here', 'block');
   $handler->override_option('arguments', array(
     'nid' => array(
       'id' => 'nid',
@@ -142,7 +143,6 @@ function search_views_default_views() {
   $handler->override_option('style_options', array(
     'type' => 'ul',
   ));
-  $handler->override_option('block_description', 'What links here');
   $views[$view->name] = $view;
 
   return $views;

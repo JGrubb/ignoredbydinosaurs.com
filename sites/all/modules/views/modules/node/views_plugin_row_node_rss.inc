@@ -91,7 +91,7 @@ class views_plugin_row_node_rss extends views_plugin_row {
 
     $item = new stdClass();
     $item->title = $node->title;
-    $item->link = url("node/$row->nid", array('absolute' => TRUE));
+    $item->link = url("node/$node->nid", array('absolute' => TRUE));
     $item->nid = $node->nid;
     $item->readmore = $node->readmore;
 
@@ -138,4 +138,3 @@ class views_plugin_row_node_rss extends views_plugin_row {
     return theme($this->theme_functions(), $this->view, $this->options, $item);
   }
 }
-
