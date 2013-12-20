@@ -1,5 +1,4 @@
 <?php
-// $Id: boost.install,v 1.2.2.1.2.3.2.88 2010/01/24 18:25:46 mikeytown2 Exp $
 
 /**
  * @file
@@ -57,6 +56,15 @@ function boost_uninstall() {
   cache_clear_all('variables', 'cache');
   // Delete tables.
   drupal_uninstall_schema('boost');
+
+  module_load_include('inc', 'boost', 'boost.admin');
+  if (is_writable('robots.txt') && variable_get('boost_autoupdate_robots_txt', FALSE)) {
+    boost_update_robots_txt(FALSE);
+  }
+  if (is_writable('.htaccess') && variable_get('boost_autoupdate_htaccess', FALSE)) {
+    boost_update_htaccess(FALSE);
+  }
+  drupal_set_message(t('Be sure to remove the boost rules from your .htaccess file.'), 'warning');
 }
 
 /**
@@ -64,6 +72,7 @@ function boost_uninstall() {
  */
 function boost_requirements($phase) {
   global $base_root;
+  Global $base_path;
   $requirements = array();
   $t = get_t();
   switch ($phase) {
@@ -89,10 +98,11 @@ function boost_requirements($phase) {
       }
 
       $cache_directories = array_unique($cache_directories);
-      $htaccess = stristr($_SERVER["SERVER_SOFTWARE"], 'apache') ? file_get_contents(dirname($_SERVER["SCRIPT_FILENAME"]) . '/.htaccess') : FALSE;
+      $htaccess = (stristr($_SERVER["SERVER_SOFTWARE"], 'apache') && file_exists(dirname($_SERVER["SCRIPT_FILENAME"]) . '/.htaccess')) ? file_get_contents(dirname($_SERVER["SCRIPT_FILENAME"]) . '/.htaccess') : FALSE;
       if (BOOST_CRAWL_ON_CRON) {
-        $crawler_response = drupal_http_request(BOOST_CRAWLER_SELF . '&test=1');
-        $crawler_response = $crawler_response->code;
+        $crawler_response = drupal_http_request(BOOST_CRAWLER_SELF . '&test=1', array(), 'GET', NULL, 10);
+        $crawler_code = $crawler_response->code;
+        $crawler_error = $crawler_response->error;
       }
       $robots = drupal_http_request('http://' . check_plain($_SERVER['HTTP_HOST']) . '/robots.txt');
       if ($robots->code == 200) {
@@ -101,7 +111,7 @@ function boost_requirements($phase) {
       else {
         $robots = FALSE;
       }
-
+      boost_htaccess_cache_dir_put();
       foreach ($cache_directories as $cache_directory) {
         if (_boost_mkdir_p($cache_directory)) {
           $root_file = file_put_contents($cache_directory . '/' . variable_get('boost_root_file', '.boost'), $cache_directory);
@@ -171,18 +181,18 @@ function boost_requirements($phase) {
           'value'       => $t('Boost Crawler Key Not Found.'),
         );
       }
-      elseif (isset($crawler_response) && $crawler_response != 200) {
-        switch ($crawler_response) {
+      elseif (isset($crawler_code) && $crawler_code != 200) {
+        switch ($crawler_code) {
           case 503:
-            $description = t('Your site is in maintenance mode, crawler will not work with your site in this state. Take site out of maintenance mode if you wish to use the crawler. Running cron if your site is not in maintenance mode might make this error eventually clear.');
+            $description = $t('Your site is in maintenance mode, crawler will not work with your site in this state. Take site out of maintenance mode if you wish to use the crawler. Running cron if your site is not in maintenance mode might make this error eventually clear.');
             $severity = REQUIREMENT_WARNING;
             break;
           case 403:
-            $description = t('Menu item for crawler is not there. You need to "Clear cached data" at the bottom of the <a href="!url">performance page</a>', array('!url' => url('admin/settings/performance')));
+            $description = $t('Menu item for crawler is not there. You need to "Clear cached data" at the bottom of the <a href="!url">performance page</a>', array('!url' => url('admin/settings/performance')));
             $severity = REQUIREMENT_ERROR;
             break;
           default:
-            $description = t('<a href="!url">Clear cached data</a> & run cron; if error priests <a href="@link">open an issue</a> on the Boost issue queue.', array('!url' => url('admin/settings/performance'), '@link' => 'http://drupal.org/node/add/project-issue/boost'));
+            $description = $t('<a href="!url">Clear cached data</a> & run cron; if error priests <a href="@link">open an issue</a> on the Boost issue queue. Got a %num response from the URL.', array('!url' => url('admin/settings/performance'), '@link' => 'http://drupal.org/node/add/project-issue/boost', '%num' => $crawler_code));
             $severity = REQUIREMENT_ERROR;
             break;
         }
@@ -190,10 +200,10 @@ function boost_requirements($phase) {
           'title'       => $t('Boost'),
           'description' => $description,
           'severity'    => $severity,
-          'value'       => $t('Boost crawler did not get a 200 response; @number returned instead.', array('@number' => $crawler_response)),
+          'value'       => $t('Boost crawler did not get a 200 response; @number returned instead. @error', array('@number' => $crawler_code, '@error' => $crawler_error)),
         );
       }
-      if (!BOOST_ENABLED) {
+      if (!variable_get('boost_enabled', CACHE_NORMAL)) {
         $requirements['boost_is_enabled'] = array(
           'title'       => $t('Boost'),
           'description' => $t('Boost is disabled. <a href="@performance">Enable</a> it.', array('@performance' => url('admin/settings/performance/boost'))),
@@ -233,13 +243,24 @@ function boost_requirements($phase) {
           'value'       => $t('File system sub directory limit.'),
         );
       }
-      if ($robots && !stristr($robots, 'Disallow: /boost_stats.php')) {
+      if ($robots && !stristr($robots, 'Disallow: ' . $base_path . 'boost_stats.php')) {
         $requirements['boost_robots'] = array(
           'title'       => $t('Boost'),
-          'description' => $t('Your robots.txt file does not contain "Disallow: /boost_stats.php". This is needed in order to prevent the output of this from accidentally getting indexed by search engines.'),
+          'description' => $t('Your root robots.txt file does not contain "Disallow: !stats". This is needed in order to prevent the output of this from accidentally getting indexed by search engines.', array('!stats' => $base_path . 'boost_stats.php')),
           'severity'    => REQUIREMENT_WARNING,
-          'value'       => $t('"Disallow: /boost_stats.php" entry missing in robots.txt'),
+          'value'       => $t('"Disallow: !stats" entry missing in robots.txt', array('!stats' => $base_path . 'boost_stats.php')),
         );
+      }
+      if (variable_get('boost_crawl_on_cron', FALSE) && module_exists('securepages')) {
+        $ignore = variable_get('securepages_ignore', '');
+        if (! preg_match('/boost-crawler/', $ignore)) {
+          $requirements['boost_securepages'] = array(
+            'title'       => $t('Boost'),
+            'description' => $t('You are using the securepages module and the Boost crawler. You must add "boost-crawler" to the <a href="@url">list of ignored pages</a> of securepages.', array('@url' => url('admin/build/securepages'))),
+            'severity'    => REQUIREMENT_ERROR,
+            'value'       => $t('Add boost-crawler to the list of ignored pages from securepages.'),
+          );
+        }
       }
       // if the apache_get_modules function doesn't exist, skip this entirely
       if (function_exists('apache_get_modules')) {
@@ -248,7 +269,7 @@ function boost_requirements($phase) {
         if (!in_array('mod_headers', $modules)) {
           $requirements['boost_apache_headers'] = array(
             'title'       => $t('Boost'),
-            'description' => $t('The Apache module "mod_headers" is not available.  You must enable <a href="!link">mod_headers</a> for Apache.', array('!link' => 'http://httpd.apache.org/docs/trunk/mod/mod_headers.html')),
+            'description' => $t('The Apache module "mod_headers" is not available. Enable <a href="!link">mod_headers</a> for Apache if at all possible.', array('!link' => 'http://httpd.apache.org/docs/trunk/mod/mod_headers.html')),
             'severity'    => REQUIREMENT_WARNING,
             'value'       => $t('Apache module "mod_headers" is not installed.'),
           );
@@ -274,7 +295,7 @@ function boost_requirements($phase) {
         $requirements['boost'] = array(
           'title'       => $t('Boost'),
           'severity'    => REQUIREMENT_OK,
-          'value'       => t('Boost installed correctly, should be working if properly <a href="@settings">configured</a>.', array('@settings' => url('admin/settings/performance/boost'))),
+          'value'       => $t('Boost installed correctly, should be working if properly <a href="@settings">configured</a>.', array('@settings' => url('admin/settings/performance/boost'))),
         );
       }
       break;
@@ -340,7 +361,7 @@ function boost_chk_htaccess_doc($htaccess) {
     }
   }
   if (BOOST_GZIP && BOOST_AGGRESSIVE_GZIP) {
-    if (!strstr($htaccess, "RewriteRule boost-gzip-cookie-test\.")) {
+    if (!strstr($htaccess, "RewriteRule ^(.*)boost-gzip-cookie-test\.")) {
       return FALSE;
     }
     $rules = 1;
@@ -375,6 +396,7 @@ function boost_tree_directory($dir, $limit = 31000) {
   $files = scandir($dir);
 
   // Only keep directories
+  $dirs = array();
   foreach ($files as $file) {
     if (is_dir($dir . '/' . $file) && $file != '.' && $file != '..') {
       $dirs[] = $file;
@@ -492,7 +514,7 @@ function boost_schema() {
       'page_id' => array(
         'description' => 'The ID of the page.',
         'type' => 'varchar',
-        'length' => 64,
+        'length' => 255,
         'not null' => TRUE,
         'default' => ''
       ),
@@ -576,7 +598,7 @@ function boost_schema() {
       'page_id' => array(
         'description' => 'The ID of the page.',
         'type' => 'varchar',
-        'length' => 64,
+        'length' => 255,
         'not null' => TRUE,
         'default' => ''
       ),
@@ -634,7 +656,7 @@ function boost_schema() {
       ),
     ),
     'primary key' => array('id'),
-    'unique keys' => array(
+    'indexes' => array(
       'hash' => array('hash'),
     ),
   );
@@ -672,7 +694,7 @@ function boost_schema() {
       'page_id' => array(
         'description' => 'The ID of the parent page.',
         'type' => 'varchar',
-        'length' => 64,
+        'length' => 255,
         'not null' => TRUE,
         'default' => ''
       ),
@@ -693,7 +715,7 @@ function boost_schema() {
       'child_page_id' => array(
         'description' => 'The ID of the child page.',
         'type' => 'varchar',
-        'length' => 64,
+        'length' => 255,
         'not null' => TRUE,
         'default' => ''
       ),
@@ -1404,6 +1426,7 @@ function boost_update_6122() {
         'size' => 'normal',
         'not null' => TRUE,
       ));
+  $ret[] = update_sql('TRUNCATE {boost_crawler}');
   db_change_field($ret, 'boost_crawler', 'url', 'url', array(
         'description' => 'URL of page',
         'type' => 'text',
@@ -1463,4 +1486,103 @@ function boost_update_6125() {
   else {
     return array(array('success' => TRUE, 'query' => t('boost-gzip-cookie-test.html.gz did not need to be reset')));
   }
+}
+
+/**
+ * Update 6126 - Reset boost-gzip-cookie-test.html.gz file
+ */
+function boost_update_6126() {
+  $ret = array();
+  // Make sure we have boost.module file loaded
+  drupal_load('module', 'boost');
+  $filename = BOOST_ROOT_CACHE_DIR . '/' . BOOST_PERM_GZ_DIR . '/boost-gzip-cookie-test.html.gz';
+  if (is_file($filename) || is_link($filename)) {
+    if (unlink($filename)) {
+      _boost_generate_gzip_test_file();
+      return array(array('success' => TRUE, 'query' => t('boost-gzip-cookie-test.html.gz file was reset')));
+    }
+    else {
+      return array(array('success' => FALSE, 'query' => t('boost-gzip-cookie-test.html.gz file was not deleted; please manually delete this file')));
+    }
+  }
+  else {
+    return array(array('success' => TRUE, 'query' => t('boost-gzip-cookie-test.html.gz did not need to be reset')));
+  }
+}
+
+/**
+ * Update 6127 - Fix spelling error in variable name
+ */
+function boost_update_6127() {
+  if (variable_get('boost_cache_url_alias_src', -10) == -10) {
+    $value = variable_get('boost_cache_url_alais_src', FALSE);
+    variable_del('boost_cache_url_alais_src');
+    variable_set('boost_cache_url_alias_src', $value);
+    return array(array('success' => TRUE, 'query' => t('boost_cache_url_alais_src renamed to boost_cache_url_alias_src')));
+  }
+  else {
+    variable_del('boost_cache_url_alais_src');
+    return array(array('success' => TRUE, 'query' => t('boost_cache_url_alais_src removed; boost_cache_url_alias_src already set')));
+  }
+}
+
+/**
+ * Update 6128 increase page_id from 64 to 255.
+ */
+function boost_update_6128() {
+  $ret = array();
+
+  db_drop_index($ret, 'boost_cache', 'page_id');
+  db_change_field($ret, 'boost_cache', 'page_id', 'page_id', array(
+        'description' => 'The ID of the page.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => ''
+      ));
+  db_add_index($ret, 'boost_cache', 'page_id', array('page_id'));
+
+  db_drop_index($ret, 'boost_cache_settings', 'page_id');
+  db_change_field($ret, 'boost_cache_settings', 'page_id', 'page_id', array(
+        'description' => 'The ID of the page.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => ''
+      ));
+  db_add_index($ret, 'boost_cache_settings', 'page_id', array('page_id'));
+
+  db_drop_index($ret, 'boost_cache_relationships', 'page_id');
+  db_change_field($ret, 'boost_cache_relationships', 'page_id', 'page_id', array(
+        'description' => 'The ID of the parent page.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => ''
+      ));
+  db_add_index($ret, 'boost_cache_relationships', 'page_id', array('page_id'));
+
+  db_drop_index($ret, 'boost_cache_relationships', 'child_page_id');
+  db_change_field($ret, 'boost_cache_relationships', 'child_page_id', 'child_page_id', array(
+        'description' => 'The ID of the child page.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => ''
+      ));
+  db_add_index($ret, 'boost_cache_relationships', 'child_page_id', array('child_page_id'));
+
+  return $ret;
+}
+
+/**
+ * Update 6129 Remove unique key on hash in boost_crawler.
+ */
+function boost_update_6129() {
+  $ret = array();
+
+  db_drop_unique_key($ret, 'boost_crawler', 'hash');
+  db_add_index($ret, 'boost_crawler', 'hash', array('hash'));
+
+  return $ret;
 }

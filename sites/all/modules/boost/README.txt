@@ -1,4 +1,3 @@
-// $Id: README.txt,v 1.2.2.1.2.5.2.12 2009/11/24 03:50:59 mikeytown2 Exp $
 
  BOOST MODULE FOR DRUPAL 6.x
  ---------------------------
@@ -138,6 +137,12 @@
      inclined, the difference between the two .htaccess templates is due
      to boosted1.txt relying on SERVER_NAME versus boosted2.txt using HTTP_HOST.
      There are valid use cases for both in more advanced multi-site installations.
+
+     Note: If you get "400 Bad Request" responses from Apache server, make sure
+     you have configured RewriteBase as documented in
+     http://drupalcode.org/viewvc/drupal/drupal/.htaccess?view=markup&pathrev=DRUPAL-6
+     For example when using VirtualHost configurations it is necessary to define as:
+     RewriteBase / 
 
   6. Goto: [Administer > Site configuration > Performance]
      Check and set the Drupal cache settings as desired.

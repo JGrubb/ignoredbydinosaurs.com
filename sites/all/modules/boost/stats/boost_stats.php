@@ -1,5 +1,4 @@
 <?php
-// $Id: boost_stats.php,v 1.1.2.15 2009/11/06 11:37:43 mikeytown2 Exp $
 
 /**
  * @file
