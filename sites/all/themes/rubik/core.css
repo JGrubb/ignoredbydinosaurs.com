@@ -325,6 +325,7 @@ select.form-select {
   background:#fff;
   color:#666;
   max-width:100%;
+  font-family: monaco, monospace;
   }
 
   input.form-autocomplete:hover,

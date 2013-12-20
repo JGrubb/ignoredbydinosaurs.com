@@ -11,3 +11,5 @@ sites/default/files/tmp
 sites/thestateofbluegrass.com/settings.php
 sites/sobg.local
 *.mysql
+sites/default/files
+cache

@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="http://www.shockenaw.com/assets/application-365fee6192d0263cf45920dc1e45de06.css" />
+  </head>
+  <body>
+    <div class="row" style="margin-top: 3em">
+      <input placeholder="Enter a destination" type="text" name="location" id="location" class="large-4 column center" />
+      <button id="test">Get me there</button>
+    </div>
+    <script>
+      var coords = "";
+      document.getElementById('test').addEventListener("click", function() {
+        navigator.geolocation.getCurrentPosition(function(pos){
+          coords = pos.coords.latitude + "," + pos.coords.longitude;
+          var dest = document.getElementById('location').value;
+          console.log(coords);
+          window.location = "http://maps.google.com/maps?saddr=" + coords + "&daddr=" + dest;
+        });
+      }, false);
+    </script>
+  </body>
+</html>

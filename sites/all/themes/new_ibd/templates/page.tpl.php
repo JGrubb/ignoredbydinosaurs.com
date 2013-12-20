@@ -11,7 +11,7 @@
         g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
         s.parentNode.insertBefore(g,s)}(document,'script'));
       </script>
-    
+    <meta name="google-site-verification" content="ZW3GBpFJ0aC-Xr6n__YokO1Yy_Mba3osaM0bOfGhGVI" />    
   </head>
   <body <?php print drupal_attributes($attr) ?>>
 
